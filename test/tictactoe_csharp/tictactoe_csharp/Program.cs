@@ -1,3 +1,5 @@
+// see pseudo-code version of MinMax, developed in the hacking session Fri 08.02.2019
+
 using System;
 using System.Collections.Generic;
 
@@ -230,8 +232,12 @@ namespace Minimax
             return new Tuple<int, int>(0,0);
         }
 
-        /*public int Minimax(GameBoard board, char counter)
+        public int Minimax(GameBoard board, char counter)
         {
+	  GameBoard board0;
+	  Move move;
+	  Score score, bestScore;
+	  
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board);
             if (Win(board, this.counter))
                 return 10;
@@ -239,12 +245,27 @@ namespace Minimax
                 return -10;
             else if (availableMoves.Count == 0)
                 return 0;
+	    // thresholding: check the level, and if too low, then return directly the resultsof the static evaluation fct
             List<int> moves = new List<int>();
-            for (int i = 0; i < availableMoves.Count; i++)
+
+	    // -----------------------------------------------------------------------------
+	    // PSEUDO CODE of the main loop over all possible moves
+            for (int i = 0; i < availableMoves.Count; i++) // alternative: implement a nextMove() method, inside the GameBoard class (check out: iteratiors in C#)
             {
-                
+              Move move = availableMoves[i];
+	      // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
+	      board[Move] = currentSymbol;              // updates board - sequential only
+	      score = -MinMax(board0, counter^1 /* swap player */);  // RECURSIVE call
+	      if (score > bestScore) {
+		bestMove = Move;
+		bestSCore = score;
+	      } else {
+	      }
+	      board[Move] = EMPTY;              // undo move - sequential only
             }
-        }*/
+	    // -----------------------------------------------------------------------------
+	    return bestScore; // also return bestMove
+        }
 
         public List<Tuple<int, int>> getAvailableMoves(GameBoard board)
         {
