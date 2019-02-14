@@ -1,0 +1,2 @@
+C:\Users\Owner\Desktop\Minimax\Minimax\obj\Debug\Minimax.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\Minimax\Minimax\obj\Debug\Minimax.csproj.CoreCompileInputs.cache
