@@ -1,0 +1,7 @@
+C:\Users\Owner\Desktop\test\tictactoe_csharp\test\bin\Debug\test.exe.config
+C:\Users\Owner\Desktop\test\tictactoe_csharp\test\bin\Debug\test.exe
+C:\Users\Owner\Desktop\test\tictactoe_csharp\test\bin\Debug\test.pdb
+C:\Users\Owner\Desktop\test\tictactoe_csharp\test\obj\Debug\test.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\test\tictactoe_csharp\test\obj\Debug\test.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\test\tictactoe_csharp\test\obj\Debug\test.exe
+C:\Users\Owner\Desktop\test\tictactoe_csharp\test\obj\Debug\test.pdb

@@ -1,0 +1,14 @@
+C:\Users\Owner\Desktop\tictactoe_csharp\malmult\obj\Debug\malmult.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\tictactoe_csharp\malmult\obj\Debug\malmult.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\tictactoe_csharp\malmult\bin\Debug\malmult.exe.config
+C:\Users\Owner\Desktop\tictactoe_csharp\malmult\bin\Debug\malmult.exe
+C:\Users\Owner\Desktop\tictactoe_csharp\malmult\bin\Debug\malmult.pdb
+C:\Users\Owner\Desktop\tictactoe_csharp\malmult\obj\Debug\malmult.exe
+C:\Users\Owner\Desktop\tictactoe_csharp\malmult\obj\Debug\malmult.pdb
+C:\Users\Owner\Desktop\test\tictactoe_csharp\malmult\bin\Debug\malmult.exe.config
+C:\Users\Owner\Desktop\test\tictactoe_csharp\malmult\bin\Debug\malmult.exe
+C:\Users\Owner\Desktop\test\tictactoe_csharp\malmult\bin\Debug\malmult.pdb
+C:\Users\Owner\Desktop\test\tictactoe_csharp\malmult\obj\Debug\malmult.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\test\tictactoe_csharp\malmult\obj\Debug\malmult.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\test\tictactoe_csharp\malmult\obj\Debug\malmult.exe
+C:\Users\Owner\Desktop\test\tictactoe_csharp\malmult\obj\Debug\malmult.pdb
