@@ -9,22 +9,21 @@ namespace Minimax
     abstract class Player
     {
         public string name;
-        public counters counter;
-        public counters otherCounter;
-        protected counters _counter;
+        public char counter;
+        public char otherCounter;
 
-        public Player(counters _counter)
+        public Player(char _counter)
         {
             counter = _counter;
-            if (counter == counters.NOUGHTS)
-                otherCounter = counters.CROSSES;
+            if (counter == 'X')
+                otherCounter = 'O';
             else
-                otherCounter = counters.NOUGHTS;
+                otherCounter = 'X';
         }
 
-                public abstract Tuple<int, int> GetMove(GameBoard board);
+        public abstract Tuple<int, int> GetMove(GameBoard board);
 
-        public bool Win(GameBoard board, counters counter)
+        public bool Win(GameBoard board, char counter)
         {
             if (
                 //HORIZONTAL
