@@ -8,7 +8,7 @@ namespace Minimax
 {
     class HumanPlayer : Player
     {
-        public HumanPlayer(string _name, counters _counter) : base(_counter)
+        public HumanPlayer(string _name, char _counter) : base(_counter)
         {
             name = _name;
         }
@@ -33,7 +33,7 @@ namespace Minimax
 
         public bool CheckValidMove(GameBoard board, int x, int y)
         {
-            if (board[x, y] == counters.EMPTY)
+            if (board[x, y] == '-')
                 return true;
             Console.WriteLine("\nThere is already a counter at ({0}, {1}). Try again.", x, y);
             // Debug.Assert();
