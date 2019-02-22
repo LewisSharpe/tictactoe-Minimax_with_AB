@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Minimax
 {
-    // GAME EXECUTION CLASS
     class Game
     {
-        GameBoard board = new GameBoard(counters.EMPTY);
+        GameBoard board = new GameBoard('-');
 
         public Game(Player _xPlayer, Player _oPlayer)
         {
@@ -19,18 +17,10 @@ namespace Minimax
 
         public void PlayGame(Player currentPlayer, Player otherPlayer)
         {
-            // Create new stopwatch.
-            Stopwatch stopwatch = new Stopwatch();
-            // Begin timing.
-            stopwatch.Start();
             board.DisplayBoard();
             Tuple<int, int> selectedMove = currentPlayer.GetMove(board);
+            //MINMAX
             board[selectedMove.Item1, selectedMove.Item2] = currentPlayer.counter;
-            // Stop timing.
-            stopwatch.Stop();
-            // Write result.
-            Console.Write("Time elapsed: {0}", stopwatch.Elapsed);
-
             if (IsOver(board, currentPlayer))
             {
                 if (currentPlayer.Win(board, currentPlayer.counter))
@@ -44,7 +34,6 @@ namespace Minimax
                     {
                         Console.WriteLine("Congratulations! {0} has won!", currentPlayer.name);
                     }
-
                     Console.ReadLine();
                     Program.Main();
                 }
