@@ -1,2 +1,7 @@
 C:\Users\Owner\Desktop\Minimax\Minimax\obj\Debug\Minimax.csprojAssemblyReference.cache
 C:\Users\Owner\Desktop\Minimax\Minimax\obj\Debug\Minimax.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\Minimax\Minimax\bin\Debug\Minimax.exe.config
+C:\Users\Owner\Desktop\Minimax\Minimax\bin\Debug\Minimax.exe
+C:\Users\Owner\Desktop\Minimax\Minimax\bin\Debug\Minimax.pdb
+C:\Users\Owner\Desktop\Minimax\Minimax\obj\Debug\Minimax.exe
+C:\Users\Owner\Desktop\Minimax\Minimax\obj\Debug\Minimax.pdb
