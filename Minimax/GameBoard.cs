@@ -6,65 +6,35 @@ using System.Threading.Tasks;
 
 namespace Minimax
 {
+    // GAME BOARD STRUCTURE CLASS
     struct GameBoard
     {
-        private char s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35, s36, s37, s38, s39, s40, s41, s42, s43, s44, s45, s46, s47, s48, s49;
-        private char filler;
+        // cell ids
+        private counters s1, s2, s3, s4, s5, s6, s7,
+                         s8, s9, s10, s11, s12, s13, s14,
+                         s15, s16, s17, s18, s19, s20, s21,
+                         s22, s23, s24, s25, s26, s27, s28,
+                         s29, s30, s31, s32, s33, s34, s35,
+                         s36, s37, s38, s39, s40, s41, s42,
+                         s43, s44, s45, s46, s47, s48, s49;
+        private counters filler; // empty filler space for cell
 
-        public GameBoard(char _filler)
+        // INITIAL BOARD SET UP
+
+        // 1 BLANK BOARD
+        public GameBoard(counters _filler)
         {
-            filler = _filler;
-            s1 = filler;
-            s2 = filler;
-            s3 = filler;
-            s4 = filler;
-            s5 = filler;
-            s6 = filler;
-            s7 = filler;
-            s8 = filler;
-            s9 = filler;
-            s10 = filler;
-            s11 = filler;
-            s12 = filler;
-            s13 = filler;
-            s14 = filler;
-            s15 = filler;
-            s16 = filler;
-            s17 = filler;
-            s18 = filler;
-            s19 = filler;
-            s20 = filler;
-            s21 = filler;
-            s22 = filler;
-            s23 = filler;
-            s24 = filler;
-            s25 = filler;
-            s26 = filler;
-            s27 = filler;
-            s28 = filler;
-            s29 = filler;
-            s30 = filler;
-            s31 = filler;
-            s32 = filler;
-            s33 = filler;
-            s34 = filler;
-            s35 = filler;
-            s36 = filler;
-            s37 = filler;
-            s38 = filler;
-            s39 = filler;
-            s40 = filler;
-            s41 = filler;
-            s42 = filler;
-            s43 = filler;
-            s44 = filler;
-            s45 = filler;
-            s46 = filler;
-            s47 = filler;
-            s48 = filler;
-            s49 = filler;
+            filler = _filler; // blank filler
+            s1 = counters.NOUGHTS; s2 = counters.EMPTY; s3 = counters.EMPTY; s4 = counters.EMPTY; s5 = counters.EMPTY; s6 = counters.EMPTY; s7 = counters.EMPTY; // row 1
+            s8 = counters.NOUGHTS; s9 = counters.EMPTY; s10 = counters.EMPTY; s11 = counters.EMPTY; s12 = counters.EMPTY; s13 = counters.EMPTY; s14 = counters.EMPTY; // row 2
+            s15 = counters.EMPTY; s16 = counters.EMPTY; s17 = counters.EMPTY; s18 = counters.EMPTY; s19 = counters.EMPTY; s20 = counters.EMPTY; s21 = counters.EMPTY; // row 3
+            s22 = counters.EMPTY; s23 = counters.EMPTY; s24 = counters.EMPTY; s25 = counters.EMPTY; s26 = counters.EMPTY; s27 = counters.EMPTY; s28 = counters.EMPTY; // row 4  
+            s29 = counters.EMPTY; s30 = counters.EMPTY; s31 = counters.EMPTY; s32 = counters.EMPTY; s33 = counters.EMPTY; s34 = counters.EMPTY; s35 = counters.EMPTY; // row 5
+            s36 = counters.EMPTY; s37 = counters.EMPTY; s38 = counters.EMPTY; s39 = counters.EMPTY; s40 = counters.EMPTY; s41 = counters.EMPTY; s42 = counters.EMPTY; // row 6
+            s43 = counters.EMPTY; s44 = counters.EMPTY; s45 = counters.EMPTY; s46 = counters.EMPTY; s47 = counters.EMPTY; s48 = counters.EMPTY; s49 = counters.EMPTY; // row 7
         }
 
+        // DISPLAY GAMEBOARD AS FOLLOWS
         public void DisplayBoard()
         {
             Console.Clear();
@@ -76,8 +46,8 @@ namespace Minimax
                 Console.Write(y + " ");
                 for (int x = 1; x <= 7; x++)
                 {
-                    if (this[x, y] == '-')
-                        Console.Write(" ");
+                    if (this[x, y] == counters.EMPTY)
+                        Console.Write(counters.EMPTY);
                     else
                         Console.Write(this[x, y]);
                     Console.Write(" | ");
@@ -88,6 +58,7 @@ namespace Minimax
             Console.WriteLine();
         }
 
+        // IF GAMEBOARD IS FULL
         public bool IsFull()
         {
             for (int x = 1; x <= 7; x++)
@@ -97,7 +68,18 @@ namespace Minimax
             return true;
         }
 
-        public char this[int x, int y]
+        // IF GAMEBOARD IS FULL
+        public bool IsEmpty()
+        {
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                    if (this[x, y] != counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // CELL ID'S AND COORDS ASSIGN
+        public counters this[int x, int y]
         {
             get
             {
@@ -199,7 +181,7 @@ namespace Minimax
                     return s48;
                 if (x == 7 && y == 7)
                     return s49;
-                return '-';
+                return counters.EMPTY;
             }
             set
             {
