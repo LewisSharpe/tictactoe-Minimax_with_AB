@@ -1,0 +1,16 @@
+  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
