@@ -6,24 +6,27 @@ using System.Threading.Tasks;
 
 namespace Minimax
 {
+    // PLAYER CLASS
     abstract class Player
     {
         public string name;
-        public char counter;
-        public char otherCounter;
-
-        public Player(char _counter)
+        public counters counter;
+        public counters otherCounter;
+        protected counters _counter;
+        
+        // COUNTER ASSIGNMENT FOR PLAYER
+        public Player(counters _counter)
         {
             counter = _counter;
-            if (counter == 'X')
-                otherCounter = 'O';
+            if (counter == counters.NOUGHTS)
+                otherCounter = counters.CROSSES;
             else
-                otherCounter = 'X';
+                otherCounter = counters.NOUGHTS;
         }
-
-        public abstract Tuple<int, int> GetMove(GameBoard board);
-
-        public bool Win(GameBoard board, char counter)
+                public abstract Tuple<int, int> GetMove(GameBoard board);
+       
+        // DETERMINE IF PLAYER HAS WON
+        public bool Win(GameBoard board, counters counter)
         {
             if (
                 //HORIZONTAL
@@ -90,6 +93,8 @@ namespace Minimax
                 (board[6, 3] == counter && board[5, 4] == counter && board[4, 5] == counter) ||
                 (board[5, 4] == counter && board[4, 5] == counter && board[3, 6] == counter) ||
                 (board[4, 5] == counter && board[3, 6] == counter && board[2, 7] == counter) ||
+                (board[5, 5] == counter && board[6, 5] == counter && board[7, 5] == counter) ||
+                (board[5, 6] == counter && board[6, 6] == counter && board[7, 6] == counter) ||
                 (board[7, 3] == counter && board[6, 4] == counter && board[5, 5] == counter) ||
                 (board[6, 4] == counter && board[5, 5] == counter && board[4, 6] == counter) ||
                 (board[5, 5] == counter && board[4, 6] == counter && board[3, 7] == counter) ||
@@ -150,5 +155,6 @@ namespace Minimax
             else
                 return false;
         }
+    
     }
 }
