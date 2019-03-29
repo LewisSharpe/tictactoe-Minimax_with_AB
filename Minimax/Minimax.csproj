@@ -55,8 +55,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sampleboards.txt" />
     <Content Include="copy.txt" />
+    <Content Include="sampleboards.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

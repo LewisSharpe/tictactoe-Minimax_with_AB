@@ -17,9 +17,9 @@ namespace Minimax
         public override Tuple<int, int> GetMove(GameBoard board)
         {
             Tuple<int, Tuple<int, int>, GameBoard> result;
-            result = Minimax(board, copy, counter, ply, new Tuple<int, int>(0, 0), true);
-            Console.WriteLine("score: " + result.Item1 + ", depth: " + maxPly + ", position:  " + result.Item2);
-          //Console.ReadLine();
+            result = Minimax(board, counter, ply, new Tuple<int, int>(0, 0), true);
+            Console.WriteLine("Minimax selects next move at " + "position " + result.Item2 + " for player " + counter + " at depth level of " + maxPly + " in the tree" + ", giving a score of " + result.Item1 + "." );
+            Console.ReadLine();
             return result.Item2;
         }
 
@@ -105,7 +105,7 @@ namespace Minimax
                             board[x, y] == board[x + xx, y + yy] &&
                             board[x, y] == board[x - xx, y - yy])
                             {
-                                System.Console.WriteLine("Centre of 3-in-a-row: {0} {1}\n", x, y);
+                        //        System.Console.WriteLine("Centre of 3-in-a-row: {0} {1}\n", x, y);
                                 return true;
                             }
                         }
@@ -138,7 +138,7 @@ namespace Minimax
             two_score = FindTwoInARow(board, us);
             one_score = FindOneInARow(board, ourindex, us);
             // if one in a row, if two in a row found, etc....
-            if (score == -1 || score == 1)
+            if (score == 1 || score == -1)
             {
                 /*      board.DisplayBoard();
                       Console.Write("three: " + score);
@@ -167,7 +167,7 @@ namespace Minimax
         }
 
         // MINIMAX FUNCTION
-        public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, GameBoard copy, counters counter, int ply, Tuple<int, int> positions, bool max)
+        public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max)
         {
             // decs
             counters us = counters.NOUGHTS;
@@ -186,9 +186,9 @@ namespace Minimax
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
 
             if (Win(board, counter))
-                return new Tuple<int, Tuple<int, int>, GameBoard>(10, positions, board);
+                return new Tuple<int, Tuple<int, int>, GameBoard>(1000, positions, board);
             else if (Win(board, this.otherCounter))
-                return new Tuple<int, Tuple<int, int>, GameBoard>(-10, positions, board);
+                return new Tuple<int, Tuple<int, int>, GameBoard>(-1000, positions, board);
             else if (availableMoves.Count == 0)
                 return new Tuple<int, Tuple<int, int>, GameBoard>(0, positions, board);
             else if (ply > maxPly)
@@ -224,19 +224,19 @@ namespace Minimax
             }
             else // else run Minimax
             {
+                copy = board.Clone();
+             
+                copy.DisplayBoard();
                 for (int i = 0; i < availableMoves.Count; i++)
                 {
                     // minimax - for everything after the first iteration
-                    Move = availableMoves[i]; // current move                        
-
-                    copy = board.Clone();
-                    Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(board, copy, Flip(counter), ply + 1, Move, max);  /* swap player */  // RECURSIVE call                    
+                    Move = availableMoves[i]; // current move  
+                    Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max);  /* swap player */  // RECURSIVE call                    
                     copy[Move.Item1, Move.Item2] = counter;
-                   //copy.DisplayBoard();
-                    // updates board - sequential only
+
+
                     // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
-                    // copy of board 
-                    // add new move
+
                     score = -result.Item1;
                     positions = result.Item2;
                     if (max)

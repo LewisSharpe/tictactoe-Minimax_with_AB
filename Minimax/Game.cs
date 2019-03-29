@@ -23,7 +23,7 @@ namespace Minimax
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing.
             stopwatch.Start();
-            board.DisplayBoard();
+          //  board.DisplayBoard();
             Tuple<int, int> selectedMove = currentPlayer.GetMove(board);
             board[selectedMove.Item1, selectedMove.Item2] = currentPlayer.counter;
             // Stop timing.
