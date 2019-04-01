@@ -16,10 +16,21 @@ namespace Minimax
         // GET MOVE
         public override Tuple<int, int> GetMove(GameBoard board)
         {
+            // Create new stopwatch.
+            Stopwatch stopwatch = new Stopwatch();
+            // Begin timing.
+            stopwatch.Start();
             Tuple<int, Tuple<int, int>, GameBoard> result;
             result = Minimax(board, counter, ply, new Tuple<int, int>(0, 0), true);
-            Console.WriteLine("Minimax selects next move at " + "position " + result.Item2 + " for player " + counter + " at depth level of " + maxPly + " in the tree" + ", giving a score of " + result.Item1 + "." );
-            Console.ReadLine();
+            // Stop timing.
+            stopwatch.Stop();
+            // Write result.
+            Console.WriteLine("========================================================================================================================" + Environment.NewLine +
+            "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
+            "position: " + result.Item2 + Environment.NewLine + "for player: " + counter + Environment.NewLine + "depth level: " + maxPly + Environment.NewLine + "score: " + result.Item1 + Environment.NewLine + "elapsed time for move:" + stopwatch.Elapsed);
+            Console.WriteLine("========================================================================================================================");
+           Console.ReadLine();
+            // Return positions
             return result.Item2;
         }
 
@@ -27,9 +38,16 @@ namespace Minimax
         public counters Flip(counters counter)
         {
             if (counter == counters.NOUGHTS)
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow;
                 return counters.CROSSES;
+            }
             else
+            {
+                Console.BackgroundColor
+                   = ConsoleColor.White;
                 return counters.NOUGHTS;
+            }
         }
 
         // SPECIFY DIRECTION
@@ -68,6 +86,7 @@ namespace Minimax
             return false;
         }
 
+        // FIND TWO CELLS OF SAME SYMBOL IN A ROW
         public bool FindTwoInARow(GameBoard board, counters us)
         {
             // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
@@ -88,6 +107,7 @@ namespace Minimax
             return false;
         }
 
+        // FIND THREE CELLS OF SAME SYMBOL IN A ROW
         public static bool FindThreeInARow(GameBoard board, counters us)
         {
             //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
@@ -113,6 +133,7 @@ namespace Minimax
             return false;
         }
 
+        // IS THERE A WINNING THREE IN A ROW?
         public int EvalForWin(GameBoard board, int ourindex, counters us)
         {
             // eval if move is win draw or loss
@@ -130,41 +151,51 @@ namespace Minimax
         {
             // score decs
             int score;
-            bool two_score;
-            bool one_score;
+            int two_score = 0;
+            int one_score = 0;
 
             // assign
             score = EvalForWin(board, ourindex, us); // 1 for win, 0 for unknown
-            two_score = FindTwoInARow(board, us);
-            one_score = FindOneInARow(board, ourindex, us);
+                                                    
+            // two score
+            if (FindTwoInARow(board, us)) // player win?
+                two_score = 100; // player win confirmed
+            if (FindTwoInARow(board, us + 1)) // opponent win?
+                two_score = -100; // opp win confirmed
+            // one score
+            if (FindOneInARow(board, ourindex, us)) // player win?
+                one_score = 10; // player win confirmed
+            if (FindOneInARow(board, ourindex, us + 1)) // opponent win?
+                one_score = -10; // opp win confirmed
             // if one in a row, if two in a row found, etc....
-            if (score == 1 || score == -1)
+            if (score == -1 || score == 1)
             {
                 /*      board.DisplayBoard();
                       Console.Write("three: " + score);
                       Console.ReadLine();
                   */
-                return Consts.MAX_SCORE;
+                return score * Consts.MAX_SCORE;
             }
-            if (two_score)
+            if (two_score != 0)
             {
-                /*  board.DisplayBoard();
+                /*   board.DisplayBoard();
                   Console.Write("two: " + two_score);
                   Console.ReadLine();
-                 */
-                return Consts.MAX_SCORE / 10;
+                */
+                return two_score;
             }
-            if (one_score)
+            if (one_score != 0)
             {
                 /*board.DisplayBoard();
                 Console.Write("one: " + one_score);
                 Console.ReadLine();
                 */
-                return Consts.MAX_SCORE / 100;
+                return one_score;
             }
             else
                 return 0;
         }
+
 
         // MINIMAX FUNCTION
         public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max)
@@ -175,20 +206,20 @@ namespace Minimax
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board);
             int bestScore = Consts.MIN_SCORE;
             int score = Consts.MIN_SCORE; // current score of move
-            Tuple<int, int> Move = new Tuple<int, int>(1, 1);
+            Tuple<int, int> Move = new Tuple<int, int>(0, 0);
             Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);  // best move with score// THRESHOLD <=============
-            List<int> moves = new List<int>();
-
             // decs for random move 
             Random rnd = new Random();
             int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 49
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 49
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
-
+            // check win
             if (Win(board, counter))
                 return new Tuple<int, Tuple<int, int>, GameBoard>(1000, positions, board);
             else if (Win(board, this.otherCounter))
                 return new Tuple<int, Tuple<int, int>, GameBoard>(-1000, positions, board);
+            // two score
+            // one score
             else if (availableMoves.Count == 0)
                 return new Tuple<int, Tuple<int, int>, GameBoard>(0, positions, board);
             else if (ply > maxPly)
@@ -199,47 +230,30 @@ namespace Minimax
             else if (ply > 0)
             {
                 score = EvalCurrentBoard(board, ourindex, us);  // is current pos a win?
-                if (score != 0)
-                {
-                    { // if draw
-                      //     Console.WriteLine(score);  /* return score, stop searching, game won */
-                    }
-                }
             }
-            else if (ply != 0)
-            {
-                //  Console.WriteLine(bestScore);
-            }
-            else
-            {
-                //  Console.WriteLine(bestMove);
-            }
-
+            // place random move
             if (board.IsEmpty()) // if board is empty then play random move
             {
                 Move = randMove;
                 positions = randMove;
-                Console.Write("I am a random move");
+                board.DisplayBoard();
+                Console.Write(Environment.NewLine + "I am a random move" + Environment.NewLine);
                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
             }
-            else // else run Minimax
+            // else run Minimax
+            else
             {
-                copy = board.Clone();
-             
-                copy.DisplayBoard();
+                copy = board.Clone(); // make copy board
+                copy.DisplayBoard(); // display copy board
                 for (int i = 0; i < availableMoves.Count; i++)
                 {
-                    // minimax - for everything after the first iteration
                     Move = availableMoves[i]; // current move  
                     Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max);  /* swap player */  // RECURSIVE call                    
-                    copy[Move.Item1, Move.Item2] = counter;
-
-
+                    copy[Move.Item1, Move.Item2] = counter; // place counter
                     // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
-
-                    score = -result.Item1;
-                    positions = result.Item2;
-                    if (max)
+                    score = -result.Item1; // assign score
+                    positions = result.Item2; // present position (x,y)
+                    if (max) // if maximising
                     {
                         if (score > bestScore)
                         {
@@ -247,7 +261,7 @@ namespace Minimax
                             bestScore = score;
                         }
                     }
-                    else
+                    else // if minimising
                     {
                         if (bestScore > score)
                         {
@@ -257,7 +271,7 @@ namespace Minimax
                     }
 
                 }
-                return new Tuple<int, Tuple<int, int>, GameBoard>(bestScore, bestMove, board);
+                return new Tuple<int, Tuple<int, int>, GameBoard>(bestScore, bestMove, board); // return
             }
         }
 
@@ -273,3 +287,11 @@ namespace Minimax
         }
     }
 }
+
+/*
+ Next steps: 
+ - fixing 10, 100 score assign
+ - address cell overwrite
+ - print results to structured file
+ - sort display board for one player
+ */

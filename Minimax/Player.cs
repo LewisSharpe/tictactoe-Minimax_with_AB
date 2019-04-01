@@ -61,6 +61,26 @@ namespace Minimax
                 (board[3, 3] == counter && board[3, 4] == counter && board[3, 5] == counter) ||
                 (board[3, 4] == counter && board[3, 5] == counter && board[3, 6] == counter) ||
                 (board[3, 5] == counter && board[3, 6] == counter && board[3, 7] == counter) ||
+                (board[4, 1] == counter && board[4, 2] == counter && board[4, 3] == counter) ||
+                (board[4, 2] == counter && board[4, 3] == counter && board[4, 4] == counter) ||
+                (board[4, 3] == counter && board[4, 4] == counter && board[4, 5] == counter) ||
+                (board[4, 4] == counter && board[4, 5] == counter && board[4, 6] == counter) ||
+                (board[4, 5] == counter && board[4, 6] == counter && board[4, 7] == counter) ||
+                (board[5, 1] == counter && board[5, 2] == counter && board[5, 3] == counter) ||
+                (board[5, 2] == counter && board[5, 3] == counter && board[5, 4] == counter) ||
+                (board[5, 3] == counter && board[5, 4] == counter && board[5, 5] == counter) ||
+                (board[5, 4] == counter && board[5, 5] == counter && board[5, 6] == counter) ||
+                (board[5, 5] == counter && board[5, 6] == counter && board[5, 7] == counter) ||
+                (board[6, 1] == counter && board[6, 2] == counter && board[6, 3] == counter) ||
+                (board[6, 2] == counter && board[6, 3] == counter && board[6, 4] == counter) ||
+                (board[6, 3] == counter && board[6, 4] == counter && board[6, 5] == counter) ||
+                (board[6, 4] == counter && board[6, 5] == counter && board[6, 6] == counter) ||
+                (board[6, 5] == counter && board[6, 6] == counter && board[6, 7] == counter) ||
+                (board[7, 1] == counter && board[7, 2] == counter && board[7, 3] == counter) ||
+                (board[7, 2] == counter && board[7, 3] == counter && board[7, 4] == counter) ||
+                (board[7, 3] == counter && board[7, 4] == counter && board[7, 5] == counter) ||
+                (board[7, 4] == counter && board[7, 5] == counter && board[7, 6] == counter) ||
+                (board[7, 5] == counter && board[7, 6] == counter && board[7, 7] == counter) ||
                 //DIAGONAL
                 (board[1, 1] == counter && board[2, 2] == counter && board[3, 3] == counter) ||
                 (board[2, 2] == counter && board[3, 3] == counter && board[4, 4] == counter) ||
