@@ -7,8 +7,8 @@ namespace Minimax
     // STATIC CONSTANTS USED TO INFORM GAMEPLAY
     static class Consts
     {
-        public const int MAX_SCORE = 1000;
-        public const int MIN_SCORE = -1000;
+        public const int MAX_SCORE = 1001;
+        public const int MIN_SCORE = -1001;
         public const int NO_OF_DIRS = 3;
         public static readonly int[] DIRECTIONS = { 1, 9, 10 };
     }

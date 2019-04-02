@@ -7,9 +7,9 @@ namespace Minimax
     class AIPlayer : Player
     {
         // PUBLIC DECS
-        public int ply = 0;
+        public int ply;
         public Tuple<int, int> positions = new Tuple<int, int>(0, 0);
-        public const int maxPly = 2;
+        public int maxPly = 2;
         GameBoard copy;
         public AIPlayer(counters _counter) : base(_counter) { }
 
@@ -20,14 +20,19 @@ namespace Minimax
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing.
             stopwatch.Start();
+            // Do work
+            Random rnd = new Random();
+            int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 49
+            int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 49
             Tuple<int, Tuple<int, int>, GameBoard> result;
-            result = Minimax(board, counter, ply, new Tuple<int, int>(0, 0), true);
+            result = Minimax(board, counter, ply, new Tuple<int, int>(randMoveX,randMoveY), true); // 0,0
+            board.DisplayBoard();
             // Stop timing.
             stopwatch.Stop();
             // Write result.
             Console.WriteLine("========================================================================================================================" + Environment.NewLine +
             "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
-            "position: " + result.Item2 + Environment.NewLine + "for player: " + counter + Environment.NewLine + "depth level: " + maxPly + Environment.NewLine + "score: " + result.Item1 + Environment.NewLine + "elapsed time for move:" + stopwatch.Elapsed);
+            "position: " + result.Item2 + Environment.NewLine + "for player: " + counter + Environment.NewLine + "depth level: " + ply + Environment.NewLine + "score: " + result.Item1 + Environment.NewLine + "elapsed time for move:" + stopwatch.Elapsed);
             Console.WriteLine("========================================================================================================================");
            Console.ReadLine();
             // Return positions
@@ -95,8 +100,8 @@ namespace Minimax
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
                     // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
-                    for (int xx = -1; xx <= 1; xx++)
-                        for (int yy = -1; yy <= 1; yy++)
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
@@ -207,7 +212,7 @@ namespace Minimax
             int bestScore = Consts.MIN_SCORE;
             int score = Consts.MIN_SCORE; // current score of move
             Tuple<int, int> Move = new Tuple<int, int>(0, 0);
-            Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);  // best move with score// THRESHOLD <=============
+            Tuple<int, int> bestMove = new Tuple<int, int>(-11,-11);  // best move with score// THRESHOLD <=============
             // decs for random move 
             Random rnd = new Random();
             int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 49
@@ -218,14 +223,12 @@ namespace Minimax
                 return new Tuple<int, Tuple<int, int>, GameBoard>(1000, positions, board);
             else if (Win(board, this.otherCounter))
                 return new Tuple<int, Tuple<int, int>, GameBoard>(-1000, positions, board);
-            // two score
-            // one score
             else if (availableMoves.Count == 0)
                 return new Tuple<int, Tuple<int, int>, GameBoard>(0, positions, board);
             else if (ply > maxPly)
             {
                 score = EvalCurrentBoard(board, ourindex, us); // call stat evaluation func - takes board and player and gives score to that player
-                return new Tuple<int, Tuple<int, int>, GameBoard>(0, positions, board);
+                return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
             }
             else if (ply > 0)
             {
@@ -247,10 +250,10 @@ namespace Minimax
                 copy.DisplayBoard(); // display copy board
                 for (int i = 0; i < availableMoves.Count; i++)
                 {
-                    Move = availableMoves[i]; // current move  
-                    Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max);  /* swap player */  // RECURSIVE call                    
+                    Move = availableMoves[i]; // current move 
+                    Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max);  /* swap player */  // RECURSIVE call    
                     copy[Move.Item1, Move.Item2] = counter; // place counter
-                    // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
+                                                            // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
                     score = -result.Item1; // assign score
                     positions = result.Item2; // present position (x,y)
                     if (max) // if maximising
@@ -269,7 +272,6 @@ namespace Minimax
                             bestScore = score;
                         }
                     }
-
                 }
                 return new Tuple<int, Tuple<int, int>, GameBoard>(bestScore, bestMove, board); // return
             }
@@ -290,8 +292,9 @@ namespace Minimax
 
 /*
  Next steps: 
- - fixing 10, 100 score assign
  - address cell overwrite
+ - fix ply
+ - fix two in a row in cases like this X-X
  - print results to structured file
  - sort display board for one player
  */
