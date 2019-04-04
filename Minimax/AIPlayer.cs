@@ -233,6 +233,7 @@ namespace Minimax
             else if (ply > 0)
             {
                 score = EvalCurrentBoard(board, ourindex, us);  // is current pos a win?
+
             }
             // place random move
             if (board.IsEmpty()) // if board is empty then play random move
