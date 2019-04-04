@@ -34,7 +34,7 @@ namespace Minimax
             "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
             "position: " + result.Item2 + Environment.NewLine + "for player: " + counter + Environment.NewLine + "depth level: " + ply + Environment.NewLine + "score: " + result.Item1 + Environment.NewLine + "elapsed time for move:" + stopwatch.Elapsed);
             Console.WriteLine("========================================================================================================================");
-           Console.ReadLine();
+            Console.ReadLine();
             // Return positions
             return result.Item2;
         }
