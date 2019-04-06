@@ -21,16 +21,15 @@ namespace Minimax
         private counters filler; // empty filler space for cell
 
         // INITIAL BOARD SET UP
-
         public GameBoard(counters _filler)
         {
             filler = _filler; // blank filler
             s1 = counters.EMPTY; s2 = counters.EMPTY; s3 = counters.EMPTY; s4 = counters.EMPTY; s5 = counters.EMPTY; s6 = counters.EMPTY; s7 = counters.EMPTY; // row 1
             s8 = counters.EMPTY; s9 = counters.EMPTY; s10 = counters.EMPTY; s11 = counters.EMPTY; s12 = counters.EMPTY; s13 = counters.EMPTY; s14 = counters.EMPTY; // row 2
             s15 = counters.EMPTY; s16 = counters.EMPTY; s17 = counters.EMPTY; s18 = counters.EMPTY; s19 = counters.EMPTY; s20 = counters.EMPTY; s21 = counters.EMPTY; // row 3
-            s22 = counters.EMPTY; s23 = counters.EMPTY; s24 = counters.EMPTY; s25 = counters.EMPTY; s26 = counters.EMPTY; s27 = counters.EMPTY; s28 = counters.EMPTY; // row 4  
+            s22 = counters.EMPTY; s23 = counters.EMPTY; s24 = counters.EMPTY; s25 = counters.NOUGHTS; s26 = counters.EMPTY; s27 = counters.EMPTY; s28 = counters.EMPTY; // row 4  
             s29 = counters.EMPTY; s30 = counters.EMPTY; s31 = counters.EMPTY; s32 = counters.EMPTY; s33 = counters.EMPTY; s34 = counters.EMPTY; s35 = counters.EMPTY; // row 5
-            s36 = counters.EMPTY; s37 = counters.EMPTY; s38 = counters.EMPTY; s39 = counters.EMPTY; s40 = counters.EMPTY; s41 = counters.EMPTY; s42 = counters.NOUGHTS; // row 6
+            s36 = counters.EMPTY; s37 = counters.EMPTY; s38 = counters.EMPTY; s39 = counters.EMPTY; s40 = counters.EMPTY; s41 = counters.EMPTY; s42 = counters.EMPTY; // row 6
             s43 = counters.EMPTY; s44 = counters.EMPTY; s45 = counters.EMPTY; s46 = counters.EMPTY; s47 = counters.EMPTY; s48 = counters.EMPTY; s49 = counters.EMPTY; // row 7
         }
 
@@ -107,6 +106,56 @@ namespace Minimax
             return true;
         }
 
+        // IS MIDDLE CELL EMPTY
+        public bool IsMiddleEmpty() {
+            for (int x = 4; x <= 4; x++)
+                for (int y = 4; y <= 4; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return true;
+            return false;
+        }
+
+        // IS TOP LEFT CELL EMPTY
+        public bool IsTopLeftEmpty()
+        {
+            for (int x = 1; x <= 1; x++)
+                for (int y = 1; y <= 1; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return true;
+            return false;
+        }
+
+        // IS TOP RIGHT CELL EMPTY
+        public bool IsTopRightEmpty()
+        {
+            for (int x = 1; x <= 1; x++)
+                for (int y = 7; y <= 7; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return true;
+            return false;
+        }
+
+        // IS BOTTOM LEFT EMPTY
+        public bool IsBottomLeftEmpty()
+        {
+            for (int x = 7; x <= 7; x++)
+                for (int y = 1; y <= 1; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return true;
+            return false;
+        }
+
+        // IS BOTTOM RIGHT EMPTY
+        public bool IsBottomRightEmpty()
+        {
+            for (int x = 7; x <= 7; x++)
+                for (int y = 7; y <= 7; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // CLONE A COPY OF THE CURRENT GAME BOARD
         public GameBoard Clone()
         {
             GameBoard g = new GameBoard();
@@ -321,7 +370,7 @@ namespace Minimax
                 if (x == 6 && y == 7)
                     s48 = value;
                 if (x == 7 && y == 7)
-                    s49 = value;
+                    s49  = value;
             }
         }
     }
