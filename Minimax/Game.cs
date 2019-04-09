@@ -19,7 +19,6 @@ namespace Minimax
 
         public void PlayGame(Player currentPlayer, Player otherPlayer)
         {
-            //  board.DisplayBoard();
             // Create new stopwatch.
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing.
