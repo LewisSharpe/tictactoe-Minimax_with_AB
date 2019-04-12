@@ -20,48 +20,63 @@ namespace Minimax
         public void PlayGame(Player currentPlayer, Player otherPlayer)
         {
             // Create new stopwatch.
-            Stopwatch stopwatch = new Stopwatch();
+            Stopwatch stopwatch_minimax = new Stopwatch();
             // Begin timing.
-            stopwatch.Start();
+            stopwatch_minimax.Start();
             Tuple<int, int> selectedMove = currentPlayer.GetMove(board);
             board[selectedMove.Item1, selectedMove.Item2] = currentPlayer.counter;
-            
+            Tuple<int, int> centreof3inarow = new Tuple<int, int> (0,0);
+
             if (IsOver(board, currentPlayer))
             {
                 if (currentPlayer.Win(board, currentPlayer.counter))
                 {
                     board.DisplayBoard();
+                 
                     if (currentPlayer.GetType() == typeof(AIPlayer))
                     {
+                        int score = 0;
+                        if (AIPlayer.FindThreeInARow(board, currentPlayer.counter) == true)
+                        {
+
+                            score = 1000;
+                           
+                        }
+
                         Console.WriteLine("========================================================================================================================"
-                          + Environment.NewLine + "GAME OVER! " + Environment.NewLine + 
+                          + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
                             "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
-                            "Winner: " + currentPlayer.counter);
+                            "Winner: " + currentPlayer.counter + Environment.NewLine + "Score: " + score + Environment.NewLine + "Centre of the winning three-in-a-row: " +
+                             AIPlayer.IsCentreOfThree(board, currentPlayer.counter));
                     }
                     else
                     {
+                        int score = 0;
+                        if (AIPlayer.FindThreeInARow(board, otherPlayer.counter) == true)
+                        {
+                            score = -1000;
+                        }
+
                         Console.WriteLine("========================================================================================================================"
                            + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
                              "------------------------------------------------------------------------------------------------------------------------" +
-                             "Winner: " + currentPlayer.counter);
+                             "Winner: " + otherPlayer.counter + Environment.NewLine + "Score: " + score + Environment.NewLine + "Centre of the winning three-in-a-row: " +
+                             AIPlayer.IsCentreOfThree(board, otherPlayer.counter));
                     }
                     // Stop timing.
-                    stopwatch.Stop();
+                    stopwatch_minimax.Stop();
                     // Write result.
-                    Console.WriteLine("Total elapsed for Minimax over full game execution: " + stopwatch.Elapsed + Environment.NewLine +
+                    Console.WriteLine("Total elapsed for Minimax over full game execution: " + stopwatch_minimax.Elapsed + Environment.NewLine +
                             "========================================================================================================================");
                     Console.ReadLine();
                     Program.Main();
                 }
                 Console.WriteLine("The game is a draw.");
-                // Stop timing.
-                stopwatch.Stop();
-                Console.WriteLine("Total elapsed game time: " + stopwatch.Elapsed);
-                Console.ReadLine();
                 Program.Main();
             }
             PlayGame(otherPlayer, currentPlayer);
-                  }
+            
+        }
 
         public bool IsOver(GameBoard board, Player currentPlayer)
         {

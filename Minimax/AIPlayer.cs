@@ -26,7 +26,7 @@ namespace Minimax
             Random rnd = new Random();
             int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 49
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 49
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board);
+            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             Tuple<int, Tuple<int, int>, GameBoard> result;
             result = Minimax(board, counter, ply, new Tuple<int, int>(randMoveX, randMoveY), true); // 0,0
             board.DisplayBoard();
@@ -37,7 +37,7 @@ namespace Minimax
             "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
             "position: " + result.Item2 + Environment.NewLine + "for player: " + counter + Environment.NewLine + "depth level: " + ply + Environment.NewLine + "score: " + result.Item1 + Environment.NewLine + "no. of remaining moves left: " + availableMoves.Count + Environment.NewLine + "elapsed time for move: " + stopwatch.Elapsed);
             Console.WriteLine("========================================================================================================================");
-            Console.ReadLine();
+           // Console.ReadLine();
             // Return positions
             return result.Item2;
         }
@@ -135,12 +135,37 @@ namespace Minimax
                             board[x, y] == board[x + xx, y + yy] &&
                             board[x, y] == board[x - xx, y - yy])
                             {
-                                //        System.Console.WriteLine("Centre of 3-in-a-row: {0} {1}\n", x, y);
+                             //   System.Console.WriteLine("Centre of 3-in-a-row: {0}{1}{2}\n", x,",",y);
                                 return true;
                             }
                         }
                 }
             return false;
+        }
+
+        public static Tuple<int,int> IsCentreOfThree(GameBoard board, counters us)
+        {
+            //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    for (int xx = 0; xx <= 1; xx++)
+                        for (int yy = 0; yy <= 1; yy++)
+                        {
+
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us &&
+                            board[x, y] == board[x + xx, y + yy] &&
+                            board[x, y] == board[x - xx, y - yy])
+                            {
+                                return new Tuple<int, int>(x, y);
+                            }
+                        }
+                }
+            return new Tuple<int, int>(0, 0);
         }
 
         // IS THERE A WINNING THREE IN A ROW?
@@ -315,7 +340,7 @@ namespace Minimax
             // decs
             counters us = counters.NOUGHTS;
             int ourindex = 1;
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board);
+            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             int bestScore = Consts.MIN_SCORE;
             int score = Consts.MIN_SCORE; // current score of move
             Tuple<int, int> Move = new Tuple<int, int>(0, 0);
@@ -355,12 +380,13 @@ namespace Minimax
             // else run Minimax
             else
             {
+            // make copy original board
                 copy = board.Clone(); // make copy board
                 copy.DisplayBoard(); // display copy board
                 for (int i = 0; i < availableMoves.Count; i++)
                 {
                     Move = availableMoves[i]; // current move
-                                              // cell priority - favour centre and corners
+           // cell priority - favour centre and corners
                     if (copy.IsMiddleEmpty() == true)
                     {
                         copy[4, 4] = counter;
@@ -379,20 +405,17 @@ namespace Minimax
                         list.Add(copy[5, 3]);
                         list.Add(copy[5, 5]);
 
-                        var comparer = Comparer<counters>.Create((x, y) => -x.CompareTo(y)); // notice negative
-                        var search = copy[1, 1];
-
-                        var find = list.BinarySearch(search, comparer);
-                        if (find < 0) find = ~find - 1; // minus 1 because ordered by descending
-
-                        if (copy[find, find] == counters.EMPTY)
+                        counters n = counters.EMPTY;
+                        for (int index = 0; index < (list.Count - 1); index++)
                         {
-                            copy[find, find] = counter;
+                            n = list[index];
+                            list[index] = counter;
+                            Console.WriteLine(list[index] + " IsMiddle"); // for debugging
+                        //    Console.ReadLine();
                             copy.DisplayBoard();
                             return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
                         }
-
-                    }
+                       }
                     else if (copy.IsTopLeftEmpty() == true)
                     {
                         copy[1, 1] = counter;
@@ -407,15 +430,13 @@ namespace Minimax
                         list.Add(copy[2, 2]);
                         list.Add(copy[2, 1]);
 
-                        var comparer = Comparer<counters>.Create((x, y) => -x.CompareTo(y)); // notice negative
-                        var search = copy[1, 1];
-
-                        var find = list.BinarySearch(search, comparer);
-                        if (find < 0) find = ~find - 1; // minus 1 because ordered by descending
-          
-                        if (copy[find,find] == counters.EMPTY)
+                        counters n = counters.EMPTY;
+                        for (int index = 0; index < (list.Count - 1); index++)
                         {
-                            copy[find, find] = counter;
+                            n = list[index];
+                            list[index] = counter;
+                         //   Console.WriteLine(list[index] + " TL"); // for debugging
+                         //   Console.ReadLine();
                             copy.DisplayBoard();
                             return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
                         }
@@ -434,15 +455,13 @@ namespace Minimax
                         list.Add(copy[6, 1]);
                         list.Add(copy[7, 1]);
 
-                        var comparer = Comparer<counters>.Create((x, y) => -x.CompareTo(y)); // notice negative
-                        var search = copy[7, 1];
-
-                        var find = list.BinarySearch(search, comparer);
-                        if (find < 0) find = ~find - 1; // minus 1 because ordered by descending
-
-                        if (copy[find, find] == counters.EMPTY)
+                        counters n = counters.EMPTY;
+                        for (int index = 0; index < (list.Count - 1); index++)
                         {
-                            copy[find, find] = counter;
+                            n = list[index];
+                            list[index] = counter;
+                            //  Console.WriteLine(list[index] + " TR"); // for debugging
+                            // Console.ReadLine(); // for debugging
                             copy.DisplayBoard();
                             return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
                         }
@@ -461,15 +480,13 @@ namespace Minimax
                         list.Add(copy[2, 6]);
                         list.Add(copy[2, 7]);
 
-                        var comparer = Comparer<counters>.Create((x, y) => -x.CompareTo(y)); // notice negative
-                        var search = copy[1, 7];
-
-                        var find = list.BinarySearch(search, comparer);
-                        if (find < 0) find = ~find - 1; // minus 1 because ordered by descending
-
-                        if (copy[find, find] == counters.EMPTY)
+                        counters n = counters.EMPTY;
+                        for (int index = 0; index < (list.Count - 1); index++)
                         {
-                            copy[find, find] = counter;
+                            n = list[index];
+                            list[index] = counter;
+                            // Console.WriteLine(list[index] + " BL"); // for debugging
+                            Console.ReadLine(); // for debugging
                             copy.DisplayBoard();
                             return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
                         }
@@ -488,15 +505,13 @@ namespace Minimax
                         list.Add(copy[6, 6]);
                         list.Add(copy[6, 7]);
 
-                        var comparer = Comparer<counters>.Create((x, y) => -x.CompareTo(y)); // notice negative
-                        var search = copy[7, 7];
-
-                        var find = list.BinarySearch(search, comparer);
-                        if (find < 0) find = ~find - 1; // minus 1 because ordered by descending
-
-                        if (copy[find, find] == counters.EMPTY)
+                        counters n = counters.EMPTY;
+                        for (int index = 0; index < (list.Count - 1); index++)
                         {
-                            copy[find, find] = counter;
+                            n = list[index];
+                            list[index] = counter;
+                         // Console.WriteLine(list[index] + " BR"); // for debugging
+                            Console.ReadLine(); // for debugging
                             copy.DisplayBoard();
                             return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
                         }
@@ -506,12 +521,25 @@ namespace Minimax
                         // ************************************************************************************************
                         // main minimax work
                         // ************************************************************************************************
-                        Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max);  /* swap player */  // RECURSIVE call    
-                        copy[Move.Item1, Move.Item2] = counter; // place counter
-                                                                // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
-                        score = -result.Item1; // assign score
-                        positions = result.Item2; // present position (x,y)
-                        if (max) // if maximising
+                        Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max);  /* swap player */  // RECURSIVE call  
+                        // trying to prevent preventing cell overwrite
+                        if (!availableMoves.Contains(result.Item2))
+                        { 
+                            copy[Move.Item1, Move.Item2] = counter; // place counter
+                                                                    // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
+                            score = -result.Item1; // assign score
+                            positions = result.Item2; // present position (x,y)
+                            Console.WriteLine("Placing move");
+                            Console.ReadLine();
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid, move taken");
+                            Console.ReadLine();
+                        }
+                        // if maximising
+                        if (max) 
                         {
                             if (score > bestScore)
                             {
@@ -519,7 +547,8 @@ namespace Minimax
                                 bestScore = score;
                             }
                         }
-                        else // if minimising
+                        // if minimising
+                        else
                         {
                             if (bestScore > score)
                             {
@@ -534,26 +563,20 @@ namespace Minimax
         }
 
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
-        public List<Tuple<int, int>> getAvailableMoves(GameBoard board)
+        public List<Tuple<int, int>> getAvailableMoves(GameBoard board, Tuple<int,int> positions)
         {
             List<Tuple<int, int>> moves = new List<Tuple<int, int>>();
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                     if (board[x, y] == counters.EMPTY)
-                        moves.Add(new Tuple<int, int>(x, y));
+                        moves.Add(positions);
             return moves;
-        }
-    }
-    public class BinarySearchComparer : IComparer<Tuple<int, int>>
-    {
-        public int Compare(Tuple<int, int> f1, Tuple<int, int> f2)
-        {
-            return Comparer<int>.Default.Compare(f1.Item1, f2.Item1);
         }
     }
 }
 
 /*
+=============================================================================================
 Next steps: 
 =============================================================================================
 1 changing scoring func in more detail - position of piece - not useful on edge in most cases
@@ -561,7 +584,8 @@ Next steps:
 3 test scoring func in isolation
 4 implement counter for nodes - not searching part of tree? missing something in search?
 5 hardwired X-X case in stat eval func - recurrences of two in a row count - nested loops -2,2
-6 extend depth level level
+6 extend depth level
 7 fix ply
 8 print results to structured file
+=============================================================================================
 */
