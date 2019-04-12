@@ -143,6 +143,33 @@ namespace Minimax
             return false;
         }
 
+        // IS CENTRE OF THREE IN A ROW
+        public static Tuple<int, int> IsLeftOfThree(GameBoard board, counters us)
+        {
+            //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    for (int xx = 0; xx <= 1; xx++)
+                        for (int yy = 0; yy <= 1; yy++)
+                        {
+
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us &&
+                            board[x, y] == board[x + xx, y + yy] &&
+                            board[x, y] == board[x - xx, y - yy])
+                            {
+                                return new Tuple<int, int>(x - xx, y - yy);
+                            }
+                        }
+                }
+            return new Tuple<int, int>(0, 0);
+        }
+
+        // IS CENTRE OF THREE IN A ROW
         public static Tuple<int,int> IsCentreOfThree(GameBoard board, counters us)
         {
             //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
@@ -162,6 +189,32 @@ namespace Minimax
                             board[x, y] == board[x - xx, y - yy])
                             {
                                 return new Tuple<int, int>(x, y);
+                            }
+                        }
+                }
+            return new Tuple<int, int>(0, 0);
+        }
+
+        // IS CENTRE OF THREE IN A ROW
+        public static Tuple<int, int> IsRightOfThree(GameBoard board, counters us)
+        {
+            //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    for (int xx = 0; xx <= 1; xx++)
+                        for (int yy = 0; yy <= 1; yy++)
+                        {
+
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us &&
+                            board[x, y] == board[x + xx, y + yy] &&
+                            board[x, y] == board[x - xx, y - yy])
+                            {
+                                return new Tuple<int, int> (x + xx, y + yy);
                             }
                         }
                 }
@@ -533,7 +586,7 @@ namespace Minimax
                             Console.ReadLine();
 
                         }
-                        else
+                        else 
                         {
                             Console.WriteLine("Invalid, move taken");
                             Console.ReadLine();

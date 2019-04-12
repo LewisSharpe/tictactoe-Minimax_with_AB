@@ -46,8 +46,12 @@ namespace Minimax
                         Console.WriteLine("========================================================================================================================"
                           + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
                             "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
-                            "Winner: " + currentPlayer.counter + Environment.NewLine + "Score: " + score + Environment.NewLine + "Centre of the winning three-in-a-row: " +
-                             AIPlayer.IsCentreOfThree(board, currentPlayer.counter));
+                            "Winner: " + currentPlayer.counter 
+                            + Environment.NewLine + "Score: " + score +
+                            Environment.NewLine + "Coordinations of winning three-in-a-row at: "
+                             + Environment.NewLine + "Cell 1: " + AIPlayer.IsLeftOfThree(board, currentPlayer.counter) 
+                             + Environment.NewLine + "Cell 2: " + AIPlayer.IsCentreOfThree(board, currentPlayer.counter) 
+                             + Environment.NewLine + "Cell 3: " + AIPlayer.IsRightOfThree(board, currentPlayer.counter));
                     }
                     else
                     {
@@ -60,8 +64,13 @@ namespace Minimax
                         Console.WriteLine("========================================================================================================================"
                            + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
                              "------------------------------------------------------------------------------------------------------------------------" +
-                             "Winner: " + otherPlayer.counter + Environment.NewLine + "Score: " + score + Environment.NewLine + "Centre of the winning three-in-a-row: " +
-                             AIPlayer.IsCentreOfThree(board, otherPlayer.counter));
+                             "Winner: " + otherPlayer.counter 
+                             + Environment.NewLine + "Score: " + score 
+                             + Environment.NewLine + "Coordinations of winning three-in-a-row at: "
+                             + Environment.NewLine
+                             + "Cell 1: " + AIPlayer.IsLeftOfThree(board, otherPlayer.counter) + Environment.NewLine 
+                             + "Cell 2: " + AIPlayer.IsCentreOfThree(board, otherPlayer.counter) + Environment.NewLine
+                             + "Cell 3: " + AIPlayer.IsRightOfThree(board, otherPlayer.counter));
                     }
                     // Stop timing.
                     stopwatch_minimax.Stop();
