@@ -12,7 +12,7 @@ namespace Minimax
         public int ply = 2;
         public int maxPly = 4; // expand
         GameBoard copy;
-        public Tuple<int,int> positions = new Tuple<int, int> (0, 0);
+        public Tuple<int,int> positions = new Tuple<int, int> (2,2);
         public AIPlayer(counters _counter) : base(_counter) { }
 
         // GET MOVE
@@ -25,14 +25,14 @@ namespace Minimax
             // Do work
             Tuple<int, Tuple<int, int>, GameBoard> result;
             result = Minimax(board, counter, ply, positions, true); // 0,0
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, result.Item2);
+          //  List<Tuple<int, int>> availableMoves = getAvailableMoves(board, result.Item2);
             board.DisplayBoard();
             // Stop timing.
             stopwatch.Stop();
             // Write result.
             Console.WriteLine("========================================================================================================================" + Environment.NewLine +
             "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
-            "position: " + result.Item2 + Environment.NewLine + "for player: " + counter + Environment.NewLine + "depth level: " + ply + Environment.NewLine + "score: " + result.Item1 + Environment.NewLine + "no. of remaining moves left: " + availableMoves.Count + Environment.NewLine + "elapsed time for move: " + stopwatch.Elapsed);
+            "position: " + result.Item2 + Environment.NewLine + "for player: " + counter + Environment.NewLine + "depth level: " + ply + Environment.NewLine + "score: " + result.Item1 + Environment.NewLine + "no. of remaining moves left: " + Environment.NewLine + "elapsed time for move: " + stopwatch.Elapsed);
             Console.WriteLine("========================================================================================================================");
             Console.ReadLine();
             // Return positions
@@ -252,7 +252,7 @@ namespace Minimax
                 one_score = 10; // player win confirmed
             if (FindOneInARow(board, ourindex, us + 1)) // opponent win?
                 one_score = -10; // opp win confirmed
-
+            /*
             // assign more weight to score with individual cell moves with prominent positioning
             if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us))
             {
@@ -354,22 +354,22 @@ namespace Minimax
                     return -two_score + 15; // opponent win confirmed
                 }
             }
-
+            */
             // if one in a row, if two in a row found, etc....
             if (score == -1 || score == 1)
             {
-                /*      board.DisplayBoard();
+                      board.DisplayBoard();
                       Console.Write("three: " + score);
-                      Console.ReadLine();
-                  */
+                    //  Console.ReadLine();
+                  
                 return score * Consts.MAX_SCORE;
             }
             if (two_score != 0)
             {
-                /*   board.DisplayBoard();
+                   board.DisplayBoard();
                   Console.Write("two: " + two_score);
-                  Console.ReadLine();
-                */
+                  //Console.ReadLine();
+                
                 return two_score;
             }
             if (one_score != 0)
@@ -439,131 +439,105 @@ namespace Minimax
                                               // cell priority - favour centre and corners
                     if (copy.IsMiddleEmpty() == true)
                     {
-                        copy[4, 4] = counter;
+                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
+                        nodelist.Add((new Tuple<int, int>(4, 4)));
+                        nodelist.Add((new Tuple<int, int>(3, 4)));
+                        nodelist.Add((new Tuple<int, int>(5, 4)));
+                        nodelist.Add((new Tuple<int, int>(4, 4)));
+                        nodelist.Add((new Tuple<int, int>(3, 3)));
+                        nodelist.Add((new Tuple<int, int>(3, 5)));
+                        nodelist.Add((new Tuple<int, int>(5, 3)));
+                        nodelist.Add((new Tuple<int, int>(5, 5)));
                         copy.DisplayBoard();
-                        return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
-                    }
-                    else if (copy.IsMiddleEmpty() == false)
-                    {
-                        List<counters> list = new List<counters>();
-                        list.Add(copy[3, 4]);
-                        list.Add(copy[5, 4]);
-                        list.Add(copy[4, 3]);
-                        list.Add(copy[4, 5]);
-                        list.Add(copy[3, 3]);
-                        list.Add(copy[3, 5]);
-                        list.Add(copy[5, 3]);
-                        list.Add(copy[5, 5]);
 
-                        counters n = counters.EMPTY;
-                        for (int index = 0; index < (list.Count - 1); index++)
+                        for (int index = 0; index < (nodelist.Count - 1); index++)
                         {
-                            n = list[index];
-                            list[index] = counter;
-                            Console.WriteLine(list[index] + " IsMiddle"); // for debugging
-                                                                          //    Console.ReadLine();
-                            copy.DisplayBoard();
-                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
+                            int x = nodelist[i].Item1;
+                            int y = nodelist[i].Item2;
+                            if (copy[x, y] == counters.EMPTY)
+                            {
+                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                            }
                         }
                     }
-                    else if (copy.IsTopLeftEmpty() == true)
-                    {
-                        copy[1, 1] = counter;
-                        copy.DisplayBoard();
-                        return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
-                    }
-                    else if (copy.IsTopLeftEmpty() == false)
-                    {
-                        List<counters> list = new List<counters>();
 
-                        list.Add(copy[1, 2]);
-                        list.Add(copy[2, 2]);
-                        list.Add(copy[2, 1]);
-
-                        counters n = counters.EMPTY;
-                        for (int index = 0; index < (list.Count - 1); index++)
-                        {
-                            n = list[index];
-                            list[index] = counter;
-                            //   Console.WriteLine(list[index] + " TL"); // for debugging
-                            //   Console.ReadLine();
-                            copy.DisplayBoard();
-                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
-                        }
-                    }
                     else if (copy.IsTopRightEmpty() == true)
                     {
-                        copy[1, 7] = counter;
+                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
+                        nodelist.Add((new Tuple<int, int>(6, 1)));
+                        nodelist.Add((new Tuple<int, int>(6, 2)));
+                        nodelist.Add((new Tuple<int, int>(7, 2)));
+                        nodelist.Add((new Tuple<int, int>(4, 4)));
+                        nodelist.Add((new Tuple<int, int>(3, 3)));
+                        nodelist.Add((new Tuple<int, int>(3, 5)));
+                        nodelist.Add((new Tuple<int, int>(5, 3)));
+                        nodelist.Add((new Tuple<int, int>(5, 5)));
                         copy.DisplayBoard();
-                        return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
-                    }
-                    else if (copy.IsTopRightEmpty() == false)
-                    {
-                        List<counters> list = new List<counters>();
 
-                        list.Add(copy[6, 1]);
-                        list.Add(copy[6, 1]);
-                        list.Add(copy[7, 1]);
-
-                        counters n = counters.EMPTY;
-                        for (int index = 0; index < (list.Count - 1); index++)
+                        for (int index = 0; index < (nodelist.Count - 1); index++)
                         {
-                            n = list[index];
-                            list[index] = counter;
-                            //  Console.WriteLine(list[index] + " TR"); // for debugging
-                            // Console.ReadLine(); // for debugging
-                            copy.DisplayBoard();
-                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
+                            int x = nodelist[i].Item1;
+                            int y = nodelist[i].Item2;
+                            if (copy[x, y] == counters.EMPTY)
+                            {
+                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                            }
                         }
                     }
+
+                    else if (copy.IsTopLeftEmpty() == true)
+                    {
+                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
+                        nodelist.Add((new Tuple<int, int>(1, 2)));
+                        nodelist.Add((new Tuple<int, int>(2, 2)));
+                        nodelist.Add((new Tuple<int, int>(2, 1)));
+                        copy.DisplayBoard();
+
+                        for (int index = 0; index < (nodelist.Count - 1); index++)
+                        {
+                            int x = nodelist[i].Item1;
+                            int y = nodelist[i].Item2;
+                            if (copy[x, y] == counters.EMPTY)
+                            {
+                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                            }
+                        }
+                    }
+                    
                     else if (copy.IsBottomLeftEmpty() == true)
                     {
-                        copy[7, 1] = counter;
+                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
+                        nodelist.Add((new Tuple<int, int>(1, 6)));
+                        nodelist.Add((new Tuple<int, int>(2, 6)));
+                        nodelist.Add((new Tuple<int, int>(2, 7)));
                         copy.DisplayBoard();
-                        return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
-                    }
-                    else if (copy.IsBottomLeftEmpty() == false)
-                    {
-                        List<counters> list = new List<counters>();
 
-                        list.Add(copy[1, 6]);
-                        list.Add(copy[2, 6]);
-                        list.Add(copy[2, 7]);
-
-                        counters n = counters.EMPTY;
-                        for (int index = 0; index < (list.Count - 1); index++)
+                        for (int index = 0; index < (nodelist.Count - 1); index++)
                         {
-                            n = list[index];
-                            list[index] = counter;
-                            // Console.WriteLine(list[index] + " BL"); // for debugging
-                            Console.ReadLine(); // for debugging
-                            copy.DisplayBoard();
-                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
+                            int x = nodelist[i].Item1;
+                            int y = nodelist[i].Item2;
+                            if (copy[x, y] == counters.EMPTY)
+                            {
+                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                            }
                         }
                     }
                     else if (copy.IsBottomRightEmpty() == true)
                     {
-                        copy[7, 7] = counter;
+                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
+                        nodelist.Add((new Tuple<int, int>(7, 6)));
+                        nodelist.Add((new Tuple<int, int>(6, 6)));
+                        nodelist.Add((new Tuple<int, int>(6, 7)));
                         copy.DisplayBoard();
-                        return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
-                    }
-                    else if (copy.IsBottomRightEmpty() == false)
-                    {
-                        List<counters> list = new List<counters>();
 
-                        list.Add(copy[7, 6]);
-                        list.Add(copy[6, 6]);
-                        list.Add(copy[6, 7]);
-
-                        counters n = counters.EMPTY;
-                        for (int index = 0; index < (list.Count - 1); index++)
+                        for (int index = 0; index < (nodelist.Count - 1); index++)
                         {
-                            n = list[index];
-                            list[index] = counter;
-                            // Console.WriteLine(list[index] + " BR"); // for debugging
-                            Console.ReadLine(); // for debugging
-                            copy.DisplayBoard();
-                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
+                            int x = nodelist[i].Item1;
+                            int y = nodelist[i].Item2;
+                            if (copy[x, y] == counters.EMPTY)
+                            {
+                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                            }
                         }
                     }
                     else
@@ -572,13 +546,13 @@ namespace Minimax
                         // main minimax work
                         // ************************************************************************************************
                         Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max);  /* swap player */  // RECURSIVE call  
-                        // trying to prevent preventing cell overwrite
-                      
-                            copy[Move.Item1, Move.Item2] = counter; // place counter
-                                                                    // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
-                            score = -result.Item1; // assign score
-                            positions = result.Item2; // present position (x,y)
-                                                                                            
+                                                                                                                                              // trying to prevent preventing cell overwrite
+
+                        copy[Move.Item1, Move.Item2] = counter; // place counter
+                                                                // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
+                        score = -result.Item1; // assign score
+                        positions = result.Item2; // present position (x,y)
+
                         // if maximising
                         if (max)
                         {
@@ -610,7 +584,11 @@ namespace Minimax
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                     if (board[x, y] == counters.EMPTY)
-                        moves.Add(positions);
+                    {
+                        Tuple<int, int> coords = new Tuple<int, int>(x, y);
+                        moves.Add(coords);
+                        //moves.Add(positions);
+                    }
             return moves;
         }
     }
