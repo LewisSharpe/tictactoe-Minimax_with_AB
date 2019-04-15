@@ -10,9 +10,9 @@ namespace Minimax
     {
         // PUBLIC DECS
         public int ply = 2;
-        public Tuple<int, int> positions = new Tuple<int, int>(0, 0);
         public int maxPly = 4; // expand
         GameBoard copy;
+        public Tuple<int,int> positions = new Tuple<int, int> (0, 0);
         public AIPlayer(counters _counter) : base(_counter) { }
 
         // GET MOVE
@@ -23,12 +23,9 @@ namespace Minimax
             // Begin timing.
             stopwatch.Start();
             // Do work
-            Random rnd = new Random();
-            int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 49
-            int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 49
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             Tuple<int, Tuple<int, int>, GameBoard> result;
-            result = Minimax(board, counter, ply, new Tuple<int, int>(randMoveX, randMoveY), true); // 0,0
+            result = Minimax(board, counter, ply, positions, true); // 0,0
+            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, result.Item2);
             board.DisplayBoard();
             // Stop timing.
             stopwatch.Stop();
@@ -37,7 +34,7 @@ namespace Minimax
             "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
             "position: " + result.Item2 + Environment.NewLine + "for player: " + counter + Environment.NewLine + "depth level: " + ply + Environment.NewLine + "score: " + result.Item1 + Environment.NewLine + "no. of remaining moves left: " + availableMoves.Count + Environment.NewLine + "elapsed time for move: " + stopwatch.Elapsed);
             Console.WriteLine("========================================================================================================================");
-           // Console.ReadLine();
+            Console.ReadLine();
             // Return positions
             return result.Item2;
         }
@@ -135,7 +132,7 @@ namespace Minimax
                             board[x, y] == board[x + xx, y + yy] &&
                             board[x, y] == board[x - xx, y - yy])
                             {
-                             //   System.Console.WriteLine("Centre of 3-in-a-row: {0}{1}{2}\n", x,",",y);
+                                //   System.Console.WriteLine("Centre of 3-in-a-row: {0}{1}{2}\n", x,",",y);
                                 return true;
                             }
                         }
@@ -170,7 +167,7 @@ namespace Minimax
         }
 
         // IS CENTRE OF THREE IN A ROW
-        public static Tuple<int,int> IsCentreOfThree(GameBoard board, counters us)
+        public static Tuple<int, int> IsCentreOfThree(GameBoard board, counters us)
         {
             //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -214,7 +211,7 @@ namespace Minimax
                             board[x, y] == board[x + xx, y + yy] &&
                             board[x, y] == board[x - xx, y - yy])
                             {
-                                return new Tuple<int, int> (x + xx, y + yy);
+                                return new Tuple<int, int>(x + xx, y + yy);
                             }
                         }
                 }
@@ -386,7 +383,7 @@ namespace Minimax
             else
                 return 0;
         }
-               
+
         // MINIMAX FUNCTION
         public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max)
         {
@@ -433,18 +430,18 @@ namespace Minimax
             // else run Minimax
             else
             {
-            // make copy original board
+                // make copy original board
                 copy = board.Clone(); // make copy board
                 copy.DisplayBoard(); // display copy board
                 for (int i = 0; i < availableMoves.Count; i++)
                 {
                     Move = availableMoves[i]; // current move
-           // cell priority - favour centre and corners
+                                              // cell priority - favour centre and corners
                     if (copy.IsMiddleEmpty() == true)
                     {
                         copy[4, 4] = counter;
                         copy.DisplayBoard();
-                        return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
+                        return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
                     }
                     else if (copy.IsMiddleEmpty() == false)
                     {
@@ -464,11 +461,11 @@ namespace Minimax
                             n = list[index];
                             list[index] = counter;
                             Console.WriteLine(list[index] + " IsMiddle"); // for debugging
-                        //    Console.ReadLine();
+                                                                          //    Console.ReadLine();
                             copy.DisplayBoard();
                             return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
                         }
-                       }
+                    }
                     else if (copy.IsTopLeftEmpty() == true)
                     {
                         copy[1, 1] = counter;
@@ -488,8 +485,8 @@ namespace Minimax
                         {
                             n = list[index];
                             list[index] = counter;
-                         //   Console.WriteLine(list[index] + " TL"); // for debugging
-                         //   Console.ReadLine();
+                            //   Console.WriteLine(list[index] + " TL"); // for debugging
+                            //   Console.ReadLine();
                             copy.DisplayBoard();
                             return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
                         }
@@ -563,7 +560,7 @@ namespace Minimax
                         {
                             n = list[index];
                             list[index] = counter;
-                         // Console.WriteLine(list[index] + " BR"); // for debugging
+                            // Console.WriteLine(list[index] + " BR"); // for debugging
                             Console.ReadLine(); // for debugging
                             copy.DisplayBoard();
                             return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
@@ -576,23 +573,14 @@ namespace Minimax
                         // ************************************************************************************************
                         Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max);  /* swap player */  // RECURSIVE call  
                         // trying to prevent preventing cell overwrite
-                        if (!availableMoves.Contains(result.Item2))
-                        { 
+                      
                             copy[Move.Item1, Move.Item2] = counter; // place counter
                                                                     // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
                             score = -result.Item1; // assign score
                             positions = result.Item2; // present position (x,y)
-                            Console.WriteLine("Placing move");
-                            Console.ReadLine();
-
-                        }
-                        else 
-                        {
-                            Console.WriteLine("Invalid, move taken");
-                            Console.ReadLine();
-                        }
+                                                                                            
                         // if maximising
-                        if (max) 
+                        if (max)
                         {
                             if (score > bestScore)
                             {
@@ -616,7 +604,7 @@ namespace Minimax
         }
 
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
-        public List<Tuple<int, int>> getAvailableMoves(GameBoard board, Tuple<int,int> positions)
+        public List<Tuple<int, int>> getAvailableMoves(GameBoard board, Tuple<int, int> positions)
         {
             List<Tuple<int, int>> moves = new List<Tuple<int, int>>();
             for (int x = 1; x <= 7; x++)
@@ -628,17 +616,34 @@ namespace Minimax
     }
 }
 
+
 /*
 =============================================================================================
-Next steps: 
+Next steps: w/c 15/3/19
 =============================================================================================
-1 changing scoring func in more detail - position of piece - not useful on edge in most cases
-2 cell overwriting 
-3 test scoring func in isolation
-4 implement counter for nodes - not searching part of tree? missing something in search?
-5 hardwired X-X case in stat eval func - recurrences of two in a row count - nested loops -2,2
-6 extend depth level
-7 fix ply
-8 print results to structured file
+1 why miss three in a row
+ - define three in a row doesnt find that config?
+ - the search never reaches this point?
+ - test three in a row in isolation
+ - XX-XX why does it miss this
+2 prevent cell overwriting 
+- assertion to prevent this
+3 two in a row tweaking - can we build on either side?
+ - left and right?
+4 add assertion if cell empty, locate error
+5 improve scoring - give higher scores to
+- connected two in a row 
+- two in a row you can build on - are both ends free?
+- location is closer to the edge - less valuable - give lower score to this config.
+5 unit test the above 
+- can we spot three in a row in one move?
+- give unit test a predefined board
+6 implement counter for nodes - not searching part of tree? missing something in search?
+ - search never gets up to this point
+ - increment counter value when you declare a move
+ - add "ref int n" to Minimax arguments
+7 add argument to Minimax for counter of nodes
+8 make checks to see if depth level and ply are correct
+9 print results to structured file
 =============================================================================================
 */
