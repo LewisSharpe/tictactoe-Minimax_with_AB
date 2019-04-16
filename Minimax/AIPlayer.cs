@@ -252,7 +252,7 @@ namespace Minimax
                 one_score = 10; // player win confirmed
             if (FindOneInARow(board, ourindex, us + 1)) // opponent win?
                 one_score = -10; // opp win confirmed
-            /*
+            
             // assign more weight to score with individual cell moves with prominent positioning
             if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us))
             {
@@ -354,12 +354,12 @@ namespace Minimax
                     return -two_score + 15; // opponent win confirmed
                 }
             }
-            */
+            
             // if one in a row, if two in a row found, etc....
             if (score == -1 || score == 1)
             {
                       board.DisplayBoard();
-                      Console.Write("three: " + score);
+             //         Console.Write("three: " + score);
                     //  Console.ReadLine();
                   
                 return score * Consts.MAX_SCORE;
@@ -367,22 +367,24 @@ namespace Minimax
             if (two_score != 0)
             {
                    board.DisplayBoard();
-                  Console.Write("two: " + two_score);
+           //       Console.Write("two: " + two_score);
                   //Console.ReadLine();
                 
                 return two_score;
             }
             if (one_score != 0)
             {
-                /*board.DisplayBoard();
-                Console.Write("one: " + one_score);
+                board.DisplayBoard();
+         //       Console.Write("one: " + one_score);
                 Console.ReadLine();
-                */
+                
                 return one_score;
             }
             else
                 return 0;
         }
+
+  
 
         // MINIMAX FUNCTION
         public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max)
@@ -443,30 +445,6 @@ namespace Minimax
                         nodelist.Add((new Tuple<int, int>(4, 4)));
                         nodelist.Add((new Tuple<int, int>(3, 4)));
                         nodelist.Add((new Tuple<int, int>(5, 4)));
-                        nodelist.Add((new Tuple<int, int>(4, 4)));
-                        nodelist.Add((new Tuple<int, int>(3, 3)));
-                        nodelist.Add((new Tuple<int, int>(3, 5)));
-                        nodelist.Add((new Tuple<int, int>(5, 3)));
-                        nodelist.Add((new Tuple<int, int>(5, 5)));
-                        copy.DisplayBoard();
-
-                        for (int index = 0; index < (nodelist.Count - 1); index++)
-                        {
-                            int x = nodelist[i].Item1;
-                            int y = nodelist[i].Item2;
-                            if (copy[x, y] == counters.EMPTY)
-                            {
-                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
-                            }
-                        }
-                    }
-
-                    else if (copy.IsTopRightEmpty() == true)
-                    {
-                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
-                        nodelist.Add((new Tuple<int, int>(6, 1)));
-                        nodelist.Add((new Tuple<int, int>(6, 2)));
-                        nodelist.Add((new Tuple<int, int>(7, 2)));
                         nodelist.Add((new Tuple<int, int>(4, 4)));
                         nodelist.Add((new Tuple<int, int>(3, 3)));
                         nodelist.Add((new Tuple<int, int>(3, 5)));
