@@ -154,6 +154,269 @@ namespace Minimax
             return true;
         }
 
+        // IS EDGES EMPTY
+        public bool IsLeftEdgesEmpty()
+        {
+            for (int x = 1; x <= 1; x++)
+                for (int y = 2; y <= 6; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS EDGES EMPTY
+        public bool IsRightEdgesEmpty()
+        {
+            for (int x = 7; x <= 7; x++)
+                for (int y = 2; y <= 6; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS EDGES EMPTY
+        public bool IsTopEdgesEmpty()
+        {
+            for (int x = 2; x <= 6; x++)
+                for (int y = 1; y <= 1; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS CENTRE BLOCK EMPTY
+        public bool IsCentreBlockEmpty()
+        {
+            for (int x = 3; x <= 6; x++)
+                for (int y = 3; y <= 6; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS EDGES EMPTY
+        public bool AreBottomEdgesEmpty()
+        {
+            for (int x = 2; x <= 6; x++)
+                for (int y = 7; y <= 7; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS EDGES EMPTY
+        public bool AreTopEdgesEmpty()
+        {
+            for (int x = 2; x <= 6; x++)
+                for (int y = 1; y <= 1; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS EDGES EMPTY
+        public bool AreLeftEdgesEmpty()
+        {
+            for (int x = 1; x <= 1; x++)
+                for (int y = 2; y <= 6; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS EDGES EMPTY
+        public bool AreRightEdgesEmpty()
+        {
+            for (int x = 7; x <= 7; x++)
+                for (int y = 2; y <= 6; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+
+        // IS EDGES EMPTY
+        public bool AreInnerBottomEdgesEmpty()
+        {
+            for (int x = 2; x <= 6; x++)
+                for (int y = 6; y <= 6; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS EDGES EMPTY
+        public bool AreInnerTopEdgesEmpty()
+        {
+            for (int x = 2; x <= 6; x++)
+                for (int y = 6; y <= 6; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS EDGES EMPTY
+        public bool AreInnerLeftEdgesEmpty()
+        {
+            for (int x = 2; x <= 6; x++)
+                for (int y = 6; y <= 6; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // IS EDGES EMPTY
+        public bool AreInnerRightEdgesEmpty()
+        {
+            for (int x = 2; x <= 6; x++)
+                for (int y = 6; y <= 6; y++)
+                    if (this[x, y] == counters.EMPTY)
+                        return false;
+            return true;
+        }
+
+        // PLACE ON EDGES
+        public int PlaceAtBottomEdges(GameBoard copy, counters counter)
+        {
+            int x = 0;
+            int y = 0;
+            for (x = 2; x <= 6; x++)
+            for (y = 7; y <= 7; y++)
+                this[x, y] = counter;
+                    if (this[x, y] == counters.EMPTY)
+                    {
+                        
+                        return -45;
+                    }
+                        return 25;
+        }
+
+        // PLACE ON EDGES
+        public int PlaceAtTopEdges(GameBoard copy, counters counter)
+        {
+            int x = 0;
+            int y = 0;
+            for (x = 2; x <= 6; x++)
+                for (y = 1; y <= 1; y++)
+                    this[x, y] = counter;
+            if (this[x, y] == counters.EMPTY)
+            {
+
+                return -45;
+            }
+            return 25;
+        }
+
+        // PLACE ON EDGES
+        public int PlaceAtLeftEdges(GameBoard copy, counters counter)
+        {
+            int x = 0;
+            int y = 0;
+            for (x = 1; x <= 1; x++)
+                for (y = 2; y <= 6; y++)
+                    this[x, y] = counter;
+            if (this[x, y] == counters.EMPTY)
+            {
+
+                return -45;
+            }
+            return 25;
+        }
+
+        // PLACE ON EDGES
+        public int PlaceAtRightEdges(GameBoard copy, counters counter)
+        {
+            int x = 0;
+            int y = 0;
+            for (x = 7; x <= 7; x++)
+                for (y = 2; y <= 6; y++)
+                    this[x, y] = counter;
+            if (this[x, y] == counters.EMPTY)
+            {
+
+                return -45;
+            }
+            return 25;
+        }
+
+        // PLACE ON EDGES
+        public int PlaceAtInnerBottomEdges(GameBoard copy, counters counter)
+        {
+            int x = 0;
+            int y = 0;
+            for (x = 2; x <= 6; x++)
+                for (y = 6; y <= 6; y++)
+                    this[x, y] = counter;
+            if (this[x, y] == counters.EMPTY)
+            {
+
+                return -15;
+            }
+            return 25;
+        }
+
+        // PLACE ON EDGES
+        public int PlaceAtInnerTopEdges(GameBoard copy, counters counter)
+        {
+            int x = 0;
+            int y = 0;
+            for (x = 2; x <= 6; x++)
+                for (y = 6; y <= 6; y++)
+                    this[x, y] = counter;
+            if (this[x, y] == counters.EMPTY)
+            {
+                return -15;
+            }
+            return 25;
+        }
+
+        // PLACE ON EDGES
+        public int PlaceAtInnerLeftEdges(GameBoard copy, counters counter)
+        {
+            int x = 0;
+            int y = 0;
+            for (x = 1; x <= 1; x++)
+                for (y = 2; y <= 6; y++)
+                    this[x, y] = counter;
+            if (this[x, y] == counters.EMPTY)
+            {
+                return -15;
+            }
+            return 25;
+        }
+
+        // PLACE ON EDGES
+        public int PlaceAtInnerRightEdges(GameBoard copy, counters counter)
+        {
+            int x = 0;
+            int y = 0;
+            for (x = 7; x <= 7; x++)
+                for (y = 2; y <= 6; y++)
+                    this[x, y] = counter;
+            if (this[x, y] == counters.EMPTY)
+            {
+
+                return -15;
+            }
+            return 25;
+        }
+
+        // PLACE ON EDGES
+        public int PlaceAtCentreBlock(GameBoard copy, counters counter)
+        {
+            int x = 0;
+            int y = 0;
+            for (x = 3; x <= 6; x++)
+                for (y = 3; y <= 6; y++)
+                    this[x, y] = counter;
+            if (this[x, y] == counters.EMPTY)
+            {
+
+                return 80;
+            }
+            return 25;
+        }
+
         // CLONE A COPY OF THE CURRENT GAME BOARD
         public GameBoard Clone()
         {

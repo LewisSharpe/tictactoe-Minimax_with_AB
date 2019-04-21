@@ -46,13 +46,21 @@ namespace Minimax
             // Stop timing.
             stopwatch.Stop();
             // Write result.
-            Console.WriteLine("========================================================================================================================" + Environment.NewLine +
-            "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
-            "position: " + result.Item2 + Environment.NewLine + "for player: " + counter + Environment.NewLine + "depth level: " + ply + Environment.NewLine + "score: " + result.Item1 + Environment.NewLine + "elapsed time for move: " + stopwatch.Elapsed + Environment.NewLine + "positions visited: " + cont + Environment.NewLine + "no. of remaining moves left: " + availableMoves.Count);
+            Console.WriteLine("========================================================================================================================" +
+            "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" +
+            "position: " + result.Item2 + Environment.NewLine +
+            "for player: " + counter + Environment.NewLine +
+            "score: " + result.Item1 + Environment.NewLine +
+            "positions visited " + cont + Environment.NewLine +
+            "depth level: " + ply + Environment.NewLine +
+            "elapsed time for move: " + stopwatch.Elapsed + Environment.NewLine +
+            "no. of remaining moves left: " + availableMoves.Count + Environment.NewLine +
+            "two in a row detected at: " + "Cell 1: " + IsLeftofTwo(board, counter) + ", " + "Cell 2: " + IsRightofTwo(board, counter));
             Console.WriteLine("========================================================================================================================");
-        //  Console.ReadLine();
+            Console.ReadLine();
             // Return positions
             return result.Item2;
+
         }
 
         // WHICH SIDE IS IN PLAY?
@@ -122,14 +130,54 @@ namespace Minimax
                             if (yy == 0 && xx == 0)
                                 continue;
                             if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
-                                // return x and y here, as well as bool value
                                 // two in a row in centre should give higher score
                                 return true;
                         }
                 }
             return false;
         }
-
+        // IS LEFT OF TWO IN A ROW
+        public static Tuple<int, int> IsLeftofTwo(GameBoard board, counters us)
+        {
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                                // two in a row in centre should give higher score
+                                return new Tuple<int, int>(x,y);
+                        }
+                }
+            return new Tuple<int, int>(0, 0);
+        }
+        // IS RIGHT OF THE TWO IN ROW
+        public static Tuple<int, int> IsRightofTwo(GameBoard board, counters us)
+        {
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                                // two in a row in centre should give higher score
+                                return new Tuple<int, int>(x + y, xx + yy);
+                        }
+                }
+            return new Tuple<int, int>(0, 0);
+        }
         // FIND THREE CELLS OF SAME SYMBOL IN A ROW
         public static bool FindThreeInARow(GameBoard board, counters us)
         {
@@ -155,7 +203,6 @@ namespace Minimax
                 }
             return false;
         }
-
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsLeftOfThree(GameBoard board, counters us)
         {
@@ -181,7 +228,6 @@ namespace Minimax
                 }
             return new Tuple<int, int>(0, 0);
         }
-
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsCentreOfThree(GameBoard board, counters us)
         {
@@ -207,7 +253,6 @@ namespace Minimax
                 }
             return new Tuple<int, int>(0, 0);
         }
-
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsRightOfThree(GameBoard board, counters us)
         {
@@ -233,146 +278,552 @@ namespace Minimax
                 }
             return new Tuple<int, int>(0, 0);
         }
-
         // IS THERE A WINNING THREE IN A ROW?
         public int EvalForWin(GameBoard board, int ourindex, counters us)
         {
             // eval if move is win draw or loss
             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             if (FindThreeInARow(board, us)) // player win?
-                return 1; // player win confirmed
+                return 1000; // player win confirmed
             if (FindThreeInARow(board, us + 1)) // opponent win?
-                return -1; // opp win confirmed
+                return -1000; // opp win confirmed
             else
-                return 0;
+                return 10;
         }
-
         // STATIC EVALUATION FUNCTION
         public int EvalCurrentBoard(GameBoard board, int ourindex, counters us)
         {
             // score decs
-            int score;
-            int two_score = 0;
-            int one_score = 0;
+            int score = 10;
+            int two_score = 10;
+            int one_score = 10;
 
             // assign
             score = EvalForWin(board, ourindex, us); // 1 for win, 0 for unknown
 
             // assign two score
             if (FindTwoInARow(board, us)) // player win?
-                two_score = 100; // player win confirmed
-            if (FindTwoInARow(board, us + 1)) // opponent win?
-                two_score = -100; // opp win confirmed   
+                score = 100; // twoinrow confirmed
+                two_score = 100;
+            if (FindTwoInARow(board, us + 1)) // twoinrow opponent?
+                score = -100; // twoinrow confirmed
             // one score
-            if (FindOneInARow(board, ourindex, us)) // player win?
-                one_score = 10; // player win confirmed
-            if (FindOneInARow(board, ourindex, us + 1)) // opponent win?
-                one_score = -10; // opp win confirmed
+            if (FindOneInARow(board, ourindex, us)) // oneinrow?
+                score = 10; // oneinrow confirmed
+                one_score = 10; 
+            if (FindOneInARow(board, ourindex, us + 1)) // oneinarow opponent?
+                score = -10; // oneinrow confirmed
+                one_score = 10; 
 
             // assign more weight to score with individual cell moves with prominent positioning
             if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us))
             {
-                two_score = 100;
+                score = 100;
                 // player win?
                 copy[4, 4] = counter;
                 if (copy[4, 4] == counter)
                 {
-                    return two_score + 25; // player win confirmed
+                    return score = 125; // player win confirmed
                 }
             }
             else if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us + 1))
             {
-                two_score = 100;
+                score = -100;
                 // player win?
                 copy[4, 4] = counter;
                 if (copy[4, 4] == counter)
                 {
-                    return -two_score + 25; // opponent win confirmed
+                    return score = -125; // opponent win confirmed
                 }
             }
             if (copy.IsTopLeftEmpty() == true & FindTwoInARow(board, us))
             {
-                two_score = 100;
+                score = 100;
                 // player win?
                 copy[1, 1] = counter;
                 if (copy[1, 1] == counter)
                 {
-                    return two_score + 15; // player win confirmed
+                    return score = 115; // player win confirmed
                 }
             }
             else if (copy.IsTopLeftEmpty() == true & FindTwoInARow(board, us + 1))
             {
-                two_score = 100;
+                score = -100;
                 // player win?
                 copy[1, 1] = counter;
                 if (copy[1, 1] == counter)
                 {
-                    return -two_score + 15; // opponent win confirmed
+                    return score = -115; // opponent win confirmed
                 }
             }
             if (copy.IsTopRightEmpty() == true & FindTwoInARow(board, us))
             {
-                two_score = 100;
+                score = 100;
                 // player win?
                 copy[7, 1] = counter;
                 if (copy[7, 1] == counter)
                 {
-                    return two_score + 15; // player win confirmed
+                    return score = 115; // player win confirmed
                 }
             }
             else if (copy.IsTopRightEmpty() == true & FindTwoInARow(board, us + 1))
             {
-                two_score = 100;
+                score = -100;
                 // player win?
                 copy[7, 1] = counter;
                 if (copy[7, 1] == counter)
                 {
-                    return -two_score + 15; // opponent win confirmed
+                    return score = -115; // opponent win confirmed
                 }
             }
             if (copy.IsBottomLeftEmpty() == true & FindTwoInARow(board, us))
             {
-                two_score = 100;
+                score = 100;
                 // player win?
                 copy[1, 7] = counter;
                 if (copy[1, 7] == counter)
                 {
-                    return two_score + 15; // player win confirmed
+                    return score = 115; // player win confirmed
                 }
             }
             else if (copy.IsBottomLeftEmpty() == true & FindTwoInARow(board, us + 1))
             {
-                two_score = 100;
+                score = -100;
                 // player win?
                 copy[1, 7] = counter;
                 if (copy[1, 7] == counter)
+                if (copy[1, 7] == counter)
                 {
-                    return -two_score + 15; // opponent win confirmed
+                    return score = -115; // opponent win confirmed
                 }
             }
-            if (copy.IsBottomLeftEmpty() == true & FindTwoInARow(board, us))
+            if (copy.IsBottomRightEmpty() == true & FindTwoInARow(board, us))
             {
-                two_score = 100;
+                score = 100;
                 // player win?
                 copy[7, 7] = counter;
                 if (copy[7, 7] == counter)
                 {
-                    return two_score + 15;
+                    return score = 115;
                 }
             }
             else if (copy.IsBottomRightEmpty() == true & FindTwoInARow(board, us + 1))
             {
-                two_score = 100;
+                two_score = -100;
                 // player win?
                 copy[7, 7] = counter;
                 if (copy[7, 7] == counter)
                 {
-                    return -two_score + 15; // opponent win confirmed
+                    return score = -115; // opponent win confirmed
                 }
             }
-
+            else if (copy.AreBottomEdgesEmpty() == true & FindTwoInARow(board, us))
+            {
+                copy.PlaceAtBottomEdges(copy, counter);
+                int t = score + copy.PlaceAtBottomEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+               */
+                return score = score + copy.PlaceAtBottomEdges(copy, counter);
+            }
+            else if (copy.AreBottomEdgesEmpty() == true & FindTwoInARow(board, us + 1))
+            {
+                copy.PlaceAtBottomEdges(copy, counter);
+                int t = score + copy.PlaceAtBottomEdges(copy, counter);
+              /*  Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t2" + t);
+                */
+                return score = score + copy.PlaceAtBottomEdges(copy, counter);
+            }
+            else if (copy.AreBottomEdgesEmpty() == true & FindOneInARow(board, ourindex, us))
+            { 
+                int f = copy.PlaceAtBottomEdges(copy, counter);
+                copy.PlaceAtBottomEdges(copy, counter);
+                int t = score + copy.PlaceAtBottomEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtBottomEdges(copy, counter);
+            }
+            else if (copy.AreBottomEdgesEmpty() == true & FindOneInARow(board, ourindex, us + 1))
+            {
+                int f = copy.PlaceAtBottomEdges(copy, counter);
+                copy.PlaceAtBottomEdges(copy, counter);
+                int t = score + copy.PlaceAtBottomEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtBottomEdges(copy, counter);
+            }
+            else if (copy.AreTopEdgesEmpty() == true & FindTwoInARow(board, us))
+            {
+                copy.PlaceAtTopEdges(copy, counter);
+                int t = score + copy.PlaceAtTopEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+               */
+                return score = score + copy.PlaceAtTopEdges(copy, counter);
+            }
+            else if (copy.AreTopEdgesEmpty() == true & FindTwoInARow(board, us + 1))
+            {
+                copy.PlaceAtTopEdges(copy, counter);
+                int t = score + copy.PlaceAtTopEdges(copy, counter);
+                /*  Console.WriteLine("S" + score);
+                  Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                  Console.WriteLine("t2" + t);
+                  */
+                return score = score + copy.PlaceAtTopEdges(copy, counter);
+            }
+            else if (copy.AreTopEdgesEmpty() == true & FindOneInARow(board, ourindex, us))
+            {
+                int f = copy.PlaceAtTopEdges(copy, counter);
+                copy.PlaceAtTopEdges(copy, counter);
+                int t = score + copy.PlaceAtTopEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtTopEdges(copy, counter);
+            }
+            else if (copy.AreTopEdgesEmpty() == true & FindOneInARow(board, ourindex, us + 1))
+            {
+                int f = copy.PlaceAtTopEdges(copy, counter);
+                copy.PlaceAtTopEdges(copy, counter);
+                int t = score + copy.PlaceAtTopEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtTopEdges(copy, counter);
+            }
+            else if (copy.AreInnerLeftEdgesEmpty() == true & FindTwoInARow(board, us))
+            {
+                copy.PlaceAtLeftEdges(copy, counter);
+                int t = score + copy.PlaceAtLeftEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+               */
+                return score = score + copy.PlaceAtLeftEdges(copy, counter);
+            }
+            else if (copy.AreInnerLeftEdgesEmpty() == true & FindTwoInARow(board, us + 1))
+            {
+                copy.PlaceAtLeftEdges(copy, counter);
+                int t = score + copy.PlaceAtLeftEdges(copy, counter);
+                /*  Console.WriteLine("S" + score);
+                  Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                  Console.WriteLine("t2" + t);
+                  */
+                return score = score + copy.PlaceAtLeftEdges(copy, counter);
+            }
+            else if (copy.AreInnerLeftEdgesEmpty() == true & FindOneInARow(board, ourindex, us))
+            {
+                int f = copy.PlaceAtLeftEdges(copy, counter);
+                copy.PlaceAtLeftEdges(copy, counter);
+                int t = score + copy.PlaceAtLeftEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtLeftEdges(copy, counter);
+            }
+            else if (copy.AreInnerLeftEdgesEmpty() == true & FindOneInARow(board, ourindex, us + 1))
+            {
+                int f = copy.PlaceAtLeftEdges(copy, counter);
+                copy.PlaceAtLeftEdges(copy, counter);
+                int t = score + copy.PlaceAtLeftEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtLeftEdges(copy, counter);
+            }
+            else if (copy.AreRightEdgesEmpty() == true & FindTwoInARow(board, us))
+            {
+                copy.PlaceAtRightEdges(copy, counter);
+                int t = score + copy.PlaceAtRightEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+               */
+                return score = score + copy.PlaceAtRightEdges(copy, counter);
+            }
+            else if (copy.AreRightEdgesEmpty() == true & FindTwoInARow(board, us + 1))
+            {
+                copy.PlaceAtRightEdges(copy, counter);
+                int t = score + copy.PlaceAtRightEdges(copy, counter);
+                /*  Console.WriteLine("S" + score);
+                  Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                  Console.WriteLine("t2" + t);
+                  */
+                return score = score + copy.PlaceAtRightEdges(copy, counter);
+            }
+            else if (copy.AreRightEdgesEmpty() == true & FindOneInARow(board, ourindex, us))
+            {
+                int f = copy.PlaceAtRightEdges(copy, counter);
+                copy.PlaceAtRightEdges(copy, counter);
+                int t = score + copy.PlaceAtRightEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtRightEdges(copy, counter);
+            }
+            else if (copy.AreRightEdgesEmpty() == true & FindOneInARow(board, ourindex, us + 1))
+            {
+                int f = copy.PlaceAtRightEdges(copy, counter);
+                copy.PlaceAtRightEdges(copy, counter);
+                int t = score + copy.PlaceAtRightEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtRightEdges(copy, counter);
+            }
+            else if (copy.AreInnerBottomEdgesEmpty() == true & FindTwoInARow(board, us))
+            {
+                copy.PlaceAtInnerBottomEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerBottomEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+               */
+                return score = score + copy.PlaceAtInnerBottomEdges(copy, counter);
+            }
+            else if (copy.AreInnerBottomEdgesEmpty() == true & FindTwoInARow(board, us + 1))
+            {
+                copy.PlaceAtInnerBottomEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerBottomEdges(copy, counter);
+                /*  Console.WriteLine("S" + score);
+                  Console.WriteLine("f" + copy.PlaceAtInnerBottomEdges(copy, counter));
+                  Console.WriteLine("t2" + t);
+                  */
+                return score = score + copy.PlaceAtInnerBottomEdges(copy, counter);
+            }
+            else if (copy.AreInnerBottomEdgesEmpty() == true & FindOneInARow(board, ourindex, us))
+            {
+                int f = copy.PlaceAtInnerBottomEdges(copy, counter);
+                copy.PlaceAtInnerBottomEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerBottomEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtInnerBottomEdges(copy, counter);
+            }
+            else if (copy.AreInnerBottomEdgesEmpty() == true & FindOneInARow(board, ourindex, us + 1))
+            {
+                int f = copy.PlaceAtInnerBottomEdges(copy, counter);
+                copy.PlaceAtInnerBottomEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerBottomEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtInnerBottomEdges(copy, counter);
+            }
+            else if (copy.AreInnerTopEdgesEmpty() == true & FindTwoInARow(board, us))
+            {
+                copy.PlaceAtInnerTopEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerTopEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+               */
+                return score = score + copy.PlaceAtInnerTopEdges(copy, counter);
+            }
+            else if (copy.AreInnerTopEdgesEmpty() == true & FindTwoInARow(board, us + 1))
+            {
+                copy.PlaceAtInnerTopEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerTopEdges(copy, counter);
+                /*  Console.WriteLine("S" + score);
+                  Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                  Console.WriteLine("t2" + t);
+                  */
+                return score = score + copy.PlaceAtInnerTopEdges(copy, counter);
+            }
+            else if (copy.AreInnerTopEdgesEmpty() == true & FindOneInARow(board, ourindex, us))
+            {
+                int f = copy.PlaceAtInnerTopEdges(copy, counter);
+                copy.PlaceAtInnerTopEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerTopEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtInnerTopEdges(copy, counter);
+            }
+            else if (copy.AreInnerTopEdgesEmpty() == true & FindOneInARow(board, ourindex, us + 1))
+            {
+                int f = copy.PlaceAtInnerTopEdges(copy, counter);
+                copy.PlaceAtInnerTopEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerTopEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtInnerTopEdges(copy, counter);
+            }
+            else if (copy.AreInnerTopEdgesEmpty() == true & FindTwoInARow(board, us))
+            {
+                copy.PlaceAtInnerLeftEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerLeftEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+               */
+                return score = score + copy.PlaceAtInnerLeftEdges(copy, counter);
+            }
+            else if (copy.AreInnerLeftEdgesEmpty() == true & FindTwoInARow(board, us + 1))
+            {
+                copy.PlaceAtInnerLeftEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerLeftEdges(copy, counter);
+                /*  Console.WriteLine("S" + score);
+                  Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                  Console.WriteLine("t2" + t);
+                  */
+                return score = score + copy.PlaceAtInnerLeftEdges(copy, counter);
+            }
+            else if (copy.AreInnerLeftEdgesEmpty() == true & FindOneInARow(board, ourindex, us))
+            {
+                int f = copy.PlaceAtInnerLeftEdges(copy, counter);
+                copy.PlaceAtInnerLeftEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerLeftEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtInnerLeftEdges(copy, counter);
+            }
+            else if (copy.AreInnerLeftEdgesEmpty() == true & FindOneInARow(board, ourindex, us + 1))
+            {
+                int f = copy.PlaceAtInnerLeftEdges(copy, counter);
+                copy.PlaceAtInnerLeftEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerLeftEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtInnerLeftEdges(copy, counter);
+            }
+            else if (copy.AreInnerRightEdgesEmpty() == true & FindTwoInARow(board, us))
+            {
+                copy.PlaceAtInnerRightEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerRightEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+               */
+                return score = score + copy.PlaceAtInnerRightEdges(copy, counter);
+            }
+            else if (copy.AreInnerRightEdgesEmpty() == true & FindTwoInARow(board, us + 1))
+            {
+                copy.PlaceAtInnerRightEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerRightEdges(copy, counter);
+                /*  Console.WriteLine("S" + score);
+                  Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                  Console.WriteLine("t2" + t);
+                  */
+                return score = score + copy.PlaceAtInnerRightEdges(copy, counter);
+            }
+            else if (copy.AreInnerRightEdgesEmpty() == true & FindOneInARow(board, ourindex, us))
+            {
+                int f = copy.PlaceAtInnerRightEdges(copy, counter);
+                copy.PlaceAtInnerRightEdges(copy, counter);
+                int t = score + copy.PlaceAtInnerRightEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtInnerRightEdges(copy, counter);
+            }
+            else if (copy.AreInnerRightEdgesEmpty() == true & FindOneInARow(board, ourindex, us + 1))
+            {
+                int f = copy.PlaceAtRightEdges(copy, counter);
+                copy.PlaceAtRightEdges(copy, counter);
+                int t = score + copy.PlaceAtRightEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtRightEdges(copy, counter);
+            }
+            else if (copy.AreInnerRightEdgesEmpty() == true & FindTwoInARow(board, us))
+            {
+                copy.PlaceAtCentreBlock(copy, counter);
+                int t = score + copy.PlaceAtCentreBlock(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+               */
+                return score = score + copy.PlaceAtCentreBlock(copy, counter);
+            }
+            else if (copy.AreInnerRightEdgesEmpty() == true & FindTwoInARow(board, us + 1))
+            {
+                copy.PlaceAtCentreBlock(copy, counter);
+                int t = score + copy.PlaceAtCentreBlock(copy, counter);
+                /*  Console.WriteLine("S" + score);
+                  Console.WriteLine("f" + copy.PlaceAtBottomEdges(copy, counter));
+                  Console.WriteLine("t2" + t);
+                  */
+                return score = score + copy.PlaceAtCentreBlock(copy, counter);
+            }
+            else if (copy.AreInnerRightEdgesEmpty() == true & FindOneInARow(board, ourindex, us))
+            {
+                int f = copy.PlaceAtCentreBlock(copy, counter);
+                copy.PlaceAtCentreBlock(copy, counter);
+                int t = score + copy.PlaceAtCentreBlock(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtCentreBlock(copy, counter);
+            }
+            else if (copy.AreInnerRightEdgesEmpty() == true & FindOneInARow(board, ourindex, us + 1))
+            {
+                int f = copy.PlaceAtRightEdges(copy, counter);
+                copy.PlaceAtRightEdges(copy, counter);
+                int t = score + copy.PlaceAtRightEdges(copy, counter);
+                /*Console.WriteLine("S" + score);
+                Console.WriteLine("f" + f);
+                Console.WriteLine("t1" + t);
+                Console.ReadLine();
+                */
+                return score = score + copy.PlaceAtRightEdges(copy, counter);
+            }
             // if one in a row, if two in a row found, etc....
-            if (score == -1 || score == 1)
+            if (score == -1000 || score == 1000)
             {
                 board.DisplayBoard();
                 //         Console.Write("three: " + score);
@@ -385,7 +836,6 @@ namespace Minimax
                 board.DisplayBoard();
                 //       Console.Write("two: " + two_score);
                 //Console.ReadLine();
-
                 return two_score;
             }
             if (one_score != 0)
@@ -395,10 +845,8 @@ namespace Minimax
                 return one_score;
             }
             else
-                return 0;
+                return 10;
         }
-
-
         // MINIMAX FUNCTION
         public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max, ref int cont)
         {
@@ -436,6 +884,19 @@ namespace Minimax
             // place random move
             if (board.IsEmpty()) // if board is empty then play random move
             {
+                // decide scoring for random move
+                score = EvalForWin(board, ourindex, us); // 1 for win, 0 for unknown
+                // assign two score
+                if (FindTwoInARow(board, us)) // player win?
+                    score = 100; // twoinrow confirmed
+                if (FindTwoInARow(board, us + 1)) // twoinrow opponent?
+                    score = -100; // twoinrow confirmed
+                if (FindOneInARow(board, ourindex, us)) // oneinrow?
+                    score = 10; // oneinrow confirmed
+                if (FindOneInARow(board, ourindex, us + 1)) // oneinarow opponent?
+                    score = -10; // oneinrow confirmed
+
+                // make random move
                 Move = randMove;
                 positions = randMove;
                 board.DisplayBoard();
@@ -443,7 +904,6 @@ namespace Minimax
                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
             }
             // else run Minimax
-
             else if (board.IsMiddleEmpty() == true || board.IsBottomLeftEmpty() == true || board.IsBottomRightEmpty() == true || board.IsTopLeftEmpty() == true || board.IsTopRightEmpty() == true)
             {
                 // make copy original board
@@ -457,7 +917,9 @@ namespace Minimax
 
 
                     // ************************************************************************************************
-                    // main minimax work
+                    // ************************************************************************************************
+                    // ************************************** MAIN MINIMAX WORK ***************************************
+                    // ************************************************************************************************
                     // ************************************************************************************************
                     Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max, ref cont);  /* swap player */  // RECURSIVE call  
                                                                                                                                           // trying to prevent preventing cell overwrite
@@ -485,9 +947,15 @@ namespace Minimax
                             bestScore = score;
                         }
                     }
-                                       
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+                    // ******************************** END OF MAIN MINIMAX WORK **************************************
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+
                     if (copy.IsMiddleEmpty() == true)
                     {
+                        //define nearest positions in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(4, 4)));
                         nodelist.Add((new Tuple<int, int>(3, 4)));
@@ -506,9 +974,12 @@ namespace Minimax
                             {
                                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
                             }
-                        }
+                                    Debug.Assert(copy[x, y] == counters.NOUGHTS || copy[x, y] == counters.CROSSES,
+      "Cell can't be filled");
+                              }
                         catch
                         {
+                            
                             copy.IsTopLeftEmpty();
 
                         }
@@ -517,6 +988,7 @@ namespace Minimax
 
                     else if (copy.IsTopLeftEmpty() == true)
                     {
+                        //define nearest positions in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(1, 1)));
                         nodelist.Add((new Tuple<int, int>(1, 2)));
@@ -543,6 +1015,7 @@ namespace Minimax
 
                     else if (copy.IsTopRightEmpty() == true)
                     {
+                        //define nearest positions in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(7, 1)));
                         nodelist.Add((new Tuple<int, int>(6, 1)));
@@ -563,11 +1036,11 @@ namespace Minimax
                         {
                             copy.IsBottomLeftEmpty();
                         }
-
                     }
 
                     else if (copy.IsBottomLeftEmpty() == false)
                     {
+                        //define nearest positions in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(1, 7)));
                         nodelist.Add((new Tuple<int, int>(1, 6)));
@@ -592,6 +1065,7 @@ namespace Minimax
                     }
                     else if (copy.IsBottomRightEmpty() == false)
                     {
+                        //define nearest positions in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(7, 7)));
                         nodelist.Add((new Tuple<int, int>(7, 6)));
@@ -624,11 +1098,11 @@ namespace Minimax
     }
 }
 
-
 /*
 =============================================================================================
 Next steps: w/c 15/3/19
 =============================================================================================
+TO DO
 1 why miss three in a row
  - define three in a row doesnt find that config?
  - the search never reaches this point?
@@ -646,12 +1120,15 @@ Next steps: w/c 15/3/19
 5 unit test the above 
 - can we spot three in a row in one move?
 - give unit test a predefined board
+7 make checks to see if depth level and ply are correct
+8 print results to structured file
+
+
+COMPLETED
 6 implement counter for nodes - not searching part of tree? missing something in search?
  - search never gets up to this point
  - increment counter value when you declare a move
  - add "ref int n" to Minimax arguments
 -  add argument to Minimax for counter of nodes
-8 make checks to see if depth level and ply are correct
-9 print results to structured file
 =============================================================================================
 */

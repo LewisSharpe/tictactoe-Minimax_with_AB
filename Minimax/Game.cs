@@ -45,11 +45,11 @@ namespace Minimax
 
                         Console.WriteLine("========================================================================================================================"
                           + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
-                            "------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine +
+                            "------------------------------------------------------------------------------------------------------------------------" +
                             "Winner: " + currentPlayer.counter 
-                            + Environment.NewLine + "Score: " + score + Environment.NewLine + "positions visited: " +
-                            AIPlayer.cont +
-                            Environment.NewLine + "Coordinations of winning three-in-a-row at: "
+                            + Environment.NewLine + "Score: " + score + Environment.NewLine +
+                            "Positions visited: " + AIPlayer.cont + Environment.NewLine +
+                            "Coordinations of winning three-in-a-row at: "
                              + Environment.NewLine + "Cell 1: " + AIPlayer.IsLeftOfThree(board, currentPlayer.counter) 
                              + Environment.NewLine + "Cell 2: " + AIPlayer.IsCentreOfThree(board, currentPlayer.counter) 
                              + Environment.NewLine + "Cell 3: " + AIPlayer.IsRightOfThree(board, currentPlayer.counter));
@@ -62,7 +62,7 @@ namespace Minimax
                             score = -1000;
                         }
 
-                        Console.WriteLine("========================================================================================================================"
+                        Console.WriteLine("======================================================================================================================"
                            + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
                              "------------------------------------------------------------------------------------------------------------------------" +
                              "Winner: " + otherPlayer.counter 
