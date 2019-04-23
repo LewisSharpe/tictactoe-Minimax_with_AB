@@ -13,7 +13,7 @@ namespace Minimax
         public int maxPly = 4; // expand
         GameBoard copy;
         public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
-        public static int cont = 0;
+        public static int cont = 0; // counter for number of nodes visited
         public AIPlayer(counters _counter) : base(_counter) { }
 
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
@@ -48,14 +48,24 @@ namespace Minimax
             // Write result.
             Console.WriteLine("========================================================================================================================" +
             "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" +
-            "position: " + result.Item2 + Environment.NewLine +
-            "for player: " + counter + Environment.NewLine +
-            "score: " + result.Item1 + Environment.NewLine +
-            "positions visited " + cont + Environment.NewLine +
+            "position: " + result.Item2 + "; " +
+            "for player: " + counter + "; " +
+            "score: " + result.Item1 + "; " +
+            "positions visited " + cont + "; " +
             "depth level: " + ply + Environment.NewLine +
-            "elapsed time for move: " + stopwatch.Elapsed + Environment.NewLine +
+            "elapsed time for move: " + stopwatch.Elapsed + "; " +
             "no. of remaining moves left: " + availableMoves.Count + Environment.NewLine +
-            "two in a row detected at: " + "Cell 1: " + IsLeftofTwo(board, counter) + ", " + "Cell 2: " + IsRightofTwo(board, counter));
+            "two in a row detected at: " + "Cell 1: " + IsLeftofTwo(board, counter) + ", " + "Cell 2: " + IsRightofTwo(board, counter)
+            + Environment.NewLine +
+            "build on two-in-row? " + "left: " + copy.IsTwoLeftNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoLeftNeighbour(board, counter) +
+            ", right: " + copy.IsTwoRightNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoRightNeighbour(board, counter) + Environment.NewLine +
+            "top: " + copy.IsTwoTopNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoTopNeighbour(board, counter) +
+            ", bottom: " + copy.IsTwoBottomNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoBottomNeighbour(board, counter) + Environment.NewLine
+             + "build on one-in-row? " + "left: " + copy.IsOneLeftNeighbourEmpty(board, counter) + " at position " + copy.PrintOneLeftNeighbour(board, counter) +
+            ", right: " + copy.IsOneRightNeighbourEmpty(board, counter) + " at position " + copy.PrintOneRightNeighbour(board, counter) + Environment.NewLine +
+            "top: " + copy.IsOneTopNeighbourEmpty(board, counter) + " at position " + copy.PrintOneTopNeighbour(board, counter) +
+            ", bottom: " + copy.IsOneBottomNeighbourEmpty(board, counter) + " at position " + copy.PrintOneBottomNeighbour(board, counter) + Environment.NewLine +
+            "build on two-in-row with gap? " + copy.IsTwoWithGapEmpty(board, counter) + " at position " + copy.PrintTwoWithGap(board, counter));
             Console.WriteLine("========================================================================================================================");
             Console.ReadLine();
             // Return positions
@@ -95,26 +105,27 @@ namespace Minimax
             return found;
         }
 
-        // FIND ONE CELL OF SAME SYMBOL ON ITS OWN
+        // FIND ONE CELL OF SAME SYMBOL IN A ROW
         public bool FindOneInARow(GameBoard board, int ourindex, counters us)
         {
-            int DirIndex = 0;
-            int Dir = 0;
-            int oneCount = 1;
-            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
-            for (DirIndex = 0; DirIndex < Consts.NO_OF_DIRS; ++DirIndex)
-            {
-                Dir = Consts.DIRECTIONS[DirIndex];
-                oneCount += GetNumForDir(ourindex + Dir, Dir, board, us);
-                oneCount += GetNumForDir(ourindex + Dir * -1, Dir * -1, board, us);
-                if (oneCount == 1)
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
                 {
-                    return true;
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us)
+                                // two in a row in centre should give higher score
+                                return true;
+                        }
                 }
-            }
             return false;
         }
-
         // FIND TWO CELLS OF SAME SYMBOL IN A ROW
         public bool FindTwoInARow(GameBoard board, counters us)
         {
@@ -152,7 +163,7 @@ namespace Minimax
                                 continue;
                             if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
                                 // two in a row in centre should give higher score
-                                return new Tuple<int, int>(x,y);
+                                return new Tuple<int, int>(x, y);
                         }
                 }
             return new Tuple<int, int>(0, 0);
@@ -173,10 +184,31 @@ namespace Minimax
                                 continue;
                             if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
                                 // two in a row in centre should give higher score
-                                return new Tuple<int, int>(x + y, xx + yy);
+                                return new Tuple<int, int>(x + xx, y + yy);
                         }
                 }
             return new Tuple<int, int>(0, 0);
+        }
+        // FIND TWO CELLS OF SAME SYMBOL IN A ROW
+        public bool FindTwoInARowWithAGap(GameBoard board, counters us)
+        {
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us && board[x, y] == board[x + xx + 1, y + yy])
+                                // two in a row in centre should give higher score
+                                return true;
+                        }
+                }
+            return false;
         }
         // FIND THREE CELLS OF SAME SYMBOL IN A ROW
         public static bool FindThreeInARow(GameBoard board, counters us)
@@ -298,8 +330,8 @@ namespace Minimax
             int two_score = 10;
             int one_score = 10;
 
-            // assign
-            score = EvalForWin(board, ourindex, us); // 1 for win, 0 for unknown
+             // assign
+             score = EvalForWin(board, ourindex, us); // 1 for win, 0 for unknown
 
             // assign two score
             if (FindTwoInARow(board, us)) // player win?
@@ -307,14 +339,26 @@ namespace Minimax
                 two_score = 100;
             if (FindTwoInARow(board, us + 1)) // twoinrow opponent?
                 score = -100; // twoinrow confirmed
+                two_score = -100;
             // one score
             if (FindOneInARow(board, ourindex, us)) // oneinrow?
                 score = 10; // oneinrow confirmed
                 one_score = 10; 
             if (FindOneInARow(board, ourindex, us + 1)) // oneinarow opponent?
                 score = -10; // oneinrow confirmed
-                one_score = 10; 
-
+                one_score = -10;
+                      
+            // assign more weight to score with individual cell moves with prominent positioning
+            if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us))
+            {
+                score = 100;
+                // player win?
+                copy[4, 4] = counter;
+                if (copy[4, 4] == counter)
+                {
+                    return score = 125; // player win confirmed
+                }
+            }
             // assign more weight to score with individual cell moves with prominent positioning
             if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us))
             {
@@ -822,6 +866,7 @@ namespace Minimax
                 */
                 return score = score + copy.PlaceAtRightEdges(copy, counter);
             }
+
             // if one in a row, if two in a row found, etc....
             if (score == -1000 || score == 1000)
             {
@@ -848,7 +893,7 @@ namespace Minimax
                 return 10;
         }
         // MINIMAX FUNCTION
-        public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max, ref int cont)
+        public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max, ref int contt)
         {
             // decs
             counters us = counters.NOUGHTS;
@@ -860,7 +905,7 @@ namespace Minimax
 
             Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);  // best move with score// THRESHOLD <=============
                                                                    // add assertion here
-                                                                   // decs for random move 
+                               // decs for random move 
             Random rnd = new Random();
             int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 49
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 49
@@ -900,6 +945,7 @@ namespace Minimax
                 Move = randMove;
                 positions = randMove;
                 board.DisplayBoard();
+                cont = 1;
                 Console.Write(Environment.NewLine + "I am a random move" + Environment.NewLine);
                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
             }
@@ -921,6 +967,7 @@ namespace Minimax
                     // ************************************** MAIN MINIMAX WORK ***************************************
                     // ************************************************************************************************
                     // ************************************************************************************************
+                  
                     Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max, ref cont);  /* swap player */  // RECURSIVE call  
                                                                                                                                           // trying to prevent preventing cell overwrite
 
@@ -952,8 +999,334 @@ namespace Minimax
                     // ******************************** END OF MAIN MINIMAX WORK **************************************
                     // ************************************************************************************************
                     // ************************************************************************************************
-
-                    if (copy.IsMiddleEmpty() == true)
+                    if (copy.IsOneLeftNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
+                    {
+                        score = 10;
+                        Tuple<int, int> neigh = copy.PrintOneLeftNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = 100;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsOneLeftNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
+                    {
+                        score = -10;
+                        Tuple<int, int> neigh = copy.PrintOneLeftNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -100;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsOneRightNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
+                    {
+                        score = 10;
+                        Tuple<int, int> neigh = copy.PrintOneRightNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = 100;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsOneRightNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
+                    {
+                        score = -10;
+                        Tuple<int, int> neigh = copy.PrintOneRightNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -100;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsOneTopNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
+                    {
+                        score = 10;
+                        Tuple<int, int> neigh = copy.PrintOneTopNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = 100;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsOneTopNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
+                    {
+                        score = -10;
+                        Tuple<int, int> neigh = copy.PrintOneTopNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -100;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsOneBottomNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
+                    {
+                        score = 10;
+                        Tuple<int, int> neigh = copy.PrintOneBottomNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = 100;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsOneBottomNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
+                    {
+                        score = -10;
+                        Tuple<int, int> neigh = copy.PrintOneBottomNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -100;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    if (copy.IsTwoLeftNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
+                    {
+                        score = 100;
+                        Tuple<int, int> neigh = copy.PrintTwoLeftNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = 1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsTwoLeftNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = copy.PrintTwoLeftNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsTwoRightNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
+                    {
+                        score = 100;
+                        Tuple<int, int> neigh = copy.PrintTwoRightNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = 1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsTwoRightNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = copy.PrintTwoRightNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsTwoTopNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
+                    {
+                        score = 100;
+                        Tuple<int, int> neigh = copy.PrintTwoTopNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = 1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsTwoTopNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = copy.PrintTwoTopNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsTwoBottomNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
+                    {
+                        score = 100;
+                        Tuple<int, int> neigh = copy.PrintTwoBottomNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = 1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    else if (copy.IsTwoBottomNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = copy.PrintTwoBottomNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    //
+                    else if (copy.IsTwoWithGapEmpty(board, counter) & FindTwoInARowWithAGap(board, us) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = copy.PrintTwoWithGap(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+                    //
+                    else if (copy.IsTwoWithGapEmpty(board, counter) & FindTwoInARowWithAGap(board, us+1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = copy.PrintTwoWithGap(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                copy[neigh.Item1, neigh.Item2] = counter;
+                                positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                if (copy[neigh.Item1, neigh.Item2] == counter)
+                                {
+                                    score = -1000;
+                                    return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                }
+                            }
+                        }
+                    }
+       
+                    else if (copy.IsMiddleEmpty() == true)
                     {
                         //define nearest positions in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
@@ -972,18 +1345,18 @@ namespace Minimax
                             int y = nodelist[i].Item2;
                             if (copy[x, y] == counters.EMPTY)
                             {
+                                cont = 1;
                                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
                             }
-                                    Debug.Assert(copy[x, y] == counters.NOUGHTS || copy[x, y] == counters.CROSSES,
-      "Cell can't be filled");
-                              }
+                            Debug.Assert(copy[x, y] == counters.NOUGHTS || copy[x, y] == counters.CROSSES,
+"Cell can't be filled");
+                        }
                         catch
                         {
-                            
+
                             copy.IsTopLeftEmpty();
 
                         }
-
                     }
 
                     else if (copy.IsTopLeftEmpty() == true)
@@ -1002,6 +1375,7 @@ namespace Minimax
                             int y = nodelist[i].Item2;
                             if (copy[x, y] == counters.EMPTY)
                             {
+                                cont = 1;
                                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
                             }
                         }
@@ -1029,6 +1403,7 @@ namespace Minimax
                             int y = nodelist[i].Item2;
                             if (copy[x, y] == counters.EMPTY)
                             {
+                                cont = 1;
                                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
                             }
                         }
@@ -1054,6 +1429,7 @@ namespace Minimax
                             int y = nodelist[i].Item2;
                             if (copy[x, y] == counters.EMPTY)
                             {
+                                cont = 1;
                                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
                             }
                         }
@@ -1079,6 +1455,7 @@ namespace Minimax
                             int y = nodelist[i].Item2;
                             if (copy[x, y] == counters.EMPTY)
                             {
+                                cont = 1;
                                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
                             }
                         }
@@ -1086,8 +1463,8 @@ namespace Minimax
                         {
                             Minimax(board, counter, ply, positions, max, ref cont);
                         }
-                      
-                       
+
+
                     }
                     cont++;
                 }
@@ -1108,11 +1485,8 @@ TO DO
  - the search never reaches this point?
  - test three in a row in isolation
  - XX-XX why does it miss this
-2 prevent cell overwriting 
-- assertion to prevent this
 3 two in a row tweaking - can we build on either side?
  - left and right?
-4 add assertion if cell empty, locate error
 5 improve scoring - give higher scores to
 - connected two in a row 
 - two in a row you can build on - are both ends free?
@@ -1121,7 +1495,6 @@ TO DO
 - can we spot three in a row in one move?
 - give unit test a predefined board
 7 make checks to see if depth level and ply are correct
-8 print results to structured file
 
 
 COMPLETED
@@ -1130,5 +1503,8 @@ COMPLETED
  - increment counter value when you declare a move
  - add "ref int n" to Minimax arguments
 -  add argument to Minimax for counter of nodes
+2 prevent cell overwriting 
+- assertion to prevent this
+4 add assertion if cell empty, locate error
 =============================================================================================
 */
