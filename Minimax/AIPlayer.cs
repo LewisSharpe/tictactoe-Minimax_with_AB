@@ -108,7 +108,7 @@ namespace Minimax
         // FIND ONE CELL OF SAME SYMBOL IN A ROW
         public bool FindOneInARow(GameBoard board, int ourindex, counters us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -129,7 +129,7 @@ namespace Minimax
         // FIND TWO CELLS OF SAME SYMBOL IN A ROW
         public bool FindTwoInARow(GameBoard board, counters us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -150,7 +150,7 @@ namespace Minimax
         // IS LEFT OF TWO IN A ROW
         public static Tuple<int, int> IsLeftofTwo(GameBoard board, counters us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -171,7 +171,7 @@ namespace Minimax
         // IS RIGHT OF THE TWO IN ROW
         public static Tuple<int, int> IsRightofTwo(GameBoard board, counters us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -192,7 +192,7 @@ namespace Minimax
         // FIND HORZI GAP BETWEEN TWO IN A ROW
         public bool FindTwoInARowWithAHorziGap(GameBoard board, counters us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -213,7 +213,7 @@ namespace Minimax
         // FIND VERTICAL GAP BETWEEN TWO IN A ROW
         public bool FindTwoInARowWithAVerticalGap(GameBoard board, counters us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -234,7 +234,7 @@ namespace Minimax
         // FIND THREE CELLS OF SAME SYMBOL IN A ROW
         public static bool FindThreeInARow(GameBoard board, counters us)
         {
-            //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -259,7 +259,7 @@ namespace Minimax
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsLeftOfThree(GameBoard board, counters us)
         {
-            //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -284,7 +284,7 @@ namespace Minimax
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsCentreOfThree(GameBoard board, counters us)
         {
-            //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -309,7 +309,7 @@ namespace Minimax
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsRightOfThree(GameBoard board, counters us)
         {
-            //Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -351,6 +351,8 @@ namespace Minimax
             int two_score = 10;
             int one_score = 10;
 
+            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+
             // assign
             score = EvalForWin(board, ourindex, us); // 1 for win, 0 for unknown
 
@@ -368,6 +370,12 @@ namespace Minimax
             if (FindOneInARow(board, ourindex, us + 1)) // oneinarow opponent?
                 score = -10; // oneinrow confirmed
             one_score = -10;
+
+            // ************************************************************************************************
+            // ************************************************************************************************
+            // ******** ASSIGN MORE WEIGHT TO INDIVIDUAL CELLS WITH MORE PROMINENT POSITIONING TO BUILD ON ****
+            // ************************************************************************************************
+            // ************************************************************************************************
 
             // assign more weight to score with individual cell moves with prominent positioning
             if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us))
@@ -492,6 +500,17 @@ namespace Minimax
                     return score = -115; // opponent win confirmed
                 }
             }
+            // ************************************************************************************************
+            // ************************************************************************************************
+            // ** END OF ASSIGN MORE WEIGHT TO INDIVIDUAL CELLS WITH MORE PROMINENT POSITIONING TO BUILD ON **
+            // ************************************************************************************************
+            // ************************************************************************************************
+
+            // ************************************************************************************************
+            // ************************************************************************************************
+            // ************************* ASSIGNING LESSER VALUE TO EDGES ***********************************
+            // ************************************************************************************************
+            // ************************************************************************************************
             else if (copy.AreBottomEdgesEmpty() == true & FindTwoInARow(board, us))
             {
                 copy.PlaceAtBottomEdges(copy, counter);
@@ -935,8 +954,13 @@ namespace Minimax
                 */
                 return score = score + copy.PlaceAtCentreBlock(copy, counter);
             }
+            // ************************************************************************************************
+            // ************************************************************************************************
+            // ************************* END OF ASSIGNING LESSER VALUE TO EDGES *******************************
+            // ************************************************************************************************
+            // ************************************************************************************************
 
-            // if one in a row, if two in a row found, etc....
+            // if one in a row, if two in a row found, three in a row found etc....
             if (score == -1000 || score == 1000)
             {
                 board.DisplayBoard();
@@ -960,10 +984,12 @@ namespace Minimax
             }
             else
                 return 10;
-        }      // MINIMAX FUNCTION
+        }      
+        // MINIMAX FUNCTION
         public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max, ref int contt)
         {
             // decs
+            Debug.Assert(counter == counters.NOUGHTS || counter == counters.CROSSES);
             counters us = counters.NOUGHTS;
             int ourindex = 1;
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
@@ -975,8 +1001,8 @@ namespace Minimax
                                                                    // add assertion here
                                                                    // decs for random move 
             Random rnd = new Random();
-            int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 49
-            int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 49
+            int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 7
+            int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
             // check win
             if (Win(board, counter))
@@ -985,6 +1011,7 @@ namespace Minimax
                 return new Tuple<int, Tuple<int, int>, GameBoard>(-1000, positions, board);
             else if (availableMoves.Count == 0)
                 return new Tuple<int, Tuple<int, int>, GameBoard>(0, positions, board);
+            // CHECK DEPTH
             else if (ply > maxPly)
             {
                 score = EvalCurrentBoard(board, ourindex, us); // call stat evaluation func - takes board and player and gives score to that player
@@ -1008,7 +1035,6 @@ namespace Minimax
                     score = 10; // oneinrow confirmed
                 if (FindOneInARow(board, ourindex, us + 1)) // oneinarow opponent?
                     score = -10; // oneinrow confirmed
-
                 // make random move
                 Move = randMove;
                 positions = randMove;
@@ -1017,7 +1043,7 @@ namespace Minimax
                 Console.Write(Environment.NewLine + "I am a random move" + Environment.NewLine);
                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
             }
-            // else run Minimax
+            // else run priority moves and Minimax
             else if (board.IsMiddleEmpty() == true || board.IsBottomLeftEmpty() == true || board.IsBottomRightEmpty() == true || board.IsTopLeftEmpty() == true || board.IsTopRightEmpty() == true)
             {
                 // make copy original board
@@ -1026,6 +1052,7 @@ namespace Minimax
                                      // cell priority - favour centre and corners
                 for (int i = 0; i < availableMoves.Count; i++)
                 {
+                    Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
                     Move = availableMoves[i]; // current move
                                               // cell priority - favour centre and corners
 
@@ -1055,13 +1082,20 @@ namespace Minimax
                     }
                     // ************************************************************************************************
                     // ************************************************************************************************
-                    // ************************* WHEN TO MAXIMISE, WHEN TO MINIMISE ***********************************
+                    // ********************* END OF WHEN TO MAXIMISE, WHEN TO MINIMISE ********************************
                     // ************************************************************************************************
                     // ************************************************************************************************
 
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+                    // ***************** PRIORITY MOVES - PRIORITISE PRIME POSITIONS ON BOARD  ************************
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+
+                    // IF MIDDLE CELL (4,4) IS EMPTY
                     if (copy.IsMiddleEmpty() == true)
                     {
-                        //define nearest positions in list
+                        // if middle (4,4) then choose the defined nearest positions to the cell in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(4, 4)));
                         nodelist.Add((new Tuple<int, int>(3, 4)));
@@ -1092,9 +1126,10 @@ namespace Minimax
                         }
                     }
 
+                    // IF TOP LEFT CELL (1,1) IS EMPTY 
                     else if (copy.IsTopLeftEmpty() == true)
                     {
-                        //define nearest positions in list
+                        // if top left (1,1) then choose the defined nearest positions to the cell in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(1, 1)));
                         nodelist.Add((new Tuple<int, int>(1, 2)));
@@ -1119,10 +1154,10 @@ namespace Minimax
                         }
 
                     }
-
+                    // IF TOP RIGHT (7,1) IS EMPTY
                     else if (copy.IsTopRightEmpty() == true)
                     {
-                        //define nearest positions in list
+                        // if top right (7,1) then choose the defined nearest positions to the cell in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(7, 1)));
                         nodelist.Add((new Tuple<int, int>(6, 1)));
@@ -1145,10 +1180,10 @@ namespace Minimax
                             copy.IsBottomLeftEmpty();
                         }
                     }
-
+                    // IF BOTTOM LEFT (1,7) IS EMPTY
                     else if (copy.IsBottomLeftEmpty() == false)
                     {
-                        //define nearest positions in list
+                        // if bottom left (1,7) then choose the defined nearest positions to the cell in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(1, 7)));
                         nodelist.Add((new Tuple<int, int>(1, 6)));
@@ -1172,9 +1207,10 @@ namespace Minimax
                         }
 
                     }
+                    // IF BOTTOM RIGHT (7,7) IS EMPTY
                     else if (copy.IsBottomRightEmpty() == false)
                     {
-                        //define nearest positions in list
+                        // if bottom right (7,7) then choose the defined nearest positions to the cell in list
                         List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
                         nodelist.Add((new Tuple<int, int>(7, 7)));
                         nodelist.Add((new Tuple<int, int>(7, 6)));
@@ -1192,17 +1228,19 @@ namespace Minimax
                                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
                             }
                         }
+                        // IF ALL PRIME POSITIONS ARE TAKEN, THEN EXECUTE MINIMAX FUNCTION
                         catch
                         {
                             Minimax(board, counter, ply, positions, max, ref cont);
                         }
                     }
-
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+                    // ***************** END OF PRIORITY MOVES - PRIORITISE PRIME POSITIONS ON BOARD  *****************
+                    // ************************************************************************************************
+                    // ************************************************************************************************
                     else
                     {
-                        Move = availableMoves[i]; // current move
-                                                  // cell priority - favour centre and corners
-
                         // ************************************************************************************************
                         // ************************************************************************************************
                         // ************************************** MAIN MINIMAX WORK ***************************************
@@ -1217,31 +1255,20 @@ namespace Minimax
                         score = -result.Item1; // assign score
                         positions = result.Item2; // present position (x,y)
 
-                        // if maximising
-                        if (max)
-                        {
-                            if (score > bestScore)
-                            {
-                                bestMove = Move;
-                                bestScore = score;
-                            }
-                        }
-                        // if minimising
-                        else
-                        {
-                            if (bestScore > score)
-                            {
-                                bestMove = Move;
-                                bestScore = score;
-                            }
-                        }
+
                         // ************************************************************************************************
                         // ************************************************************************************************
                         // ******************************** END OF MAIN MINIMAX WORK **************************************
                         // ************************************************************************************************
                         // ************************************************************************************************
 
+                        // ************************************************************************************************
+                        // ************************************************************************************************
+                        // ***************** PRIORITY MOVES - CHECKING NEIGHBOURING CELLS TO EXISTING COUNTERS ************
+                        // ************************************************************************************************
+                        // ************************************************************************************************
 
+                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
                         if (copy.IsOneLeftNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
                         {
                             score = 10;
@@ -1263,6 +1290,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
                         else if (copy.IsOneLeftNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
                         {
                             score = -10;
@@ -1284,6 +1312,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // IS NEIGHBOUR TO CURRENT CELL EMPTY                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
                         else if (copy.IsOneRightNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
                         {
                             score = 10;
@@ -1305,6 +1334,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
                         else if (copy.IsOneRightNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
                         {
                             score = -10;
@@ -1326,6 +1356,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
                         else if (copy.IsOneTopNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
                         {
                             score = 10;
@@ -1347,6 +1378,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
                         else if (copy.IsOneTopNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
                         {
                             score = -10;
@@ -1368,6 +1400,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
                         else if (copy.IsOneBottomNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
                         {
                             score = 10;
@@ -1389,6 +1422,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
                         else if (copy.IsOneBottomNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
                         {
                             score = -10;
@@ -1410,6 +1444,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // FIND TWO IN A ROW WITH GAP HORIZONTALLY LEFT
                         if (copy.IsTwoLeftNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
                         {
                             score = 100;
@@ -1431,6 +1466,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // FIND TWO IN A ROW WITH GAP HORIZONTALLY LEFT
                         else if (copy.IsTwoLeftNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
                         {
                             score = -100;
@@ -1452,6 +1488,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // FIND TWO IN A ROW WITH GAP HORIZONTALLY RIGHT
                         else if (copy.IsTwoRightNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
                         {
                             score = 100;
@@ -1473,6 +1510,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // FIND TWO IN A ROW WITH GAP HORIZONTALLY RIGHT
                         else if (copy.IsTwoRightNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
                         {
                             score = -100;
@@ -1494,6 +1532,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // FIND TWO IN A ROW VERTICAL ABOVE WITH GAP
                         else if (copy.IsTwoTopNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
                         {
                             score = 100;
@@ -1515,6 +1554,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // FIND TWO IN A ROW VERTICAL ABOVE WITH GAP
                         else if (copy.IsTwoTopNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
                         {
                             score = -100;
@@ -1536,6 +1576,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // FIND TWO IN A ROW VERTICAL DOWN WAY WITH GAP
                         else if (copy.IsTwoBottomNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
                         {
                             score = 100;
@@ -1557,6 +1598,7 @@ namespace Minimax
                                 }
                             }
                         }
+                        // FIND TWO IN A ROW VERTICAL DOWN WAY WITH GAP
                         else if (copy.IsTwoBottomNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
                         {
                             score = -100;
@@ -1578,7 +1620,7 @@ namespace Minimax
                                 }
                             }
                         }
-                        //
+                        // FIND HORIZONTAL TWO IN A ROW WITH GAP
                         else if (copy.IsTwoWithHorziGapEmpty(board, counter) & FindTwoInARowWithAHorziGap(board, us) == true)
                         {
                             score = -100;
@@ -1600,7 +1642,7 @@ namespace Minimax
                                 }
                             }
                         }
-                        //
+                        // FIND HORIZONTAL TWO IN A ROW WITH GAP
                         else if (copy.IsTwoWithHorziGapEmpty(board, counter) & FindTwoInARowWithAHorziGap(board, us + 1) == true)
                         {
                             score = -100;
@@ -1622,7 +1664,7 @@ namespace Minimax
                                 }
                             }
                         }
-                        //
+                        // FIND VERTICAL TWO IN A ROW WITH GAP
                         else if (copy.IsTwoWithVerticalGapEmpty(board, counter) & FindTwoInARowWithAVerticalGap(board, us) == true)
                         {
                             score = -100;
@@ -1644,7 +1686,7 @@ namespace Minimax
                                 }
                             }
                         }
-                        //
+                        // FIND VERTICAL TWO IN A ROW WITH GAP
                         else if (copy.IsTwoWithVerticalGapEmpty(board, counter) & FindTwoInARowWithAVerticalGap(board, us + 1) == true)
                         {
                             score = -100;
@@ -1667,10 +1709,14 @@ namespace Minimax
 
                             }
 
-                        }
-                       
+                        } 
                     }
-                    cont++;
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+                    // *********** END OF PRIORITY MOVES - CHECKING NEIGHBOURING CELLS TO EXISTING COUNTERS ***********
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+                    cont++; // increment positions visited
                 }
                 
             }
@@ -1680,31 +1726,34 @@ namespace Minimax
     }
 }
 
-
-
 /*
 =============================================================================================
 Next steps: w/c 15/3/19
 =============================================================================================
-TO DO
+---------------------------------------------------------------------------------------------
+   - STILL EXISTING
+---------------------------------------------------------------------------------------------
 1 why miss three in a row
  - define three in a row doesnt find that config?
  - the search never reaches this point?
  - test three in a row in isolation
  - XX-XX why does it miss this
+4.1 - connected two in a row 
+---------------------------------------------------------------------------------------------
+   - PARTIALLY ACHIEVED
+---------------------------------------------------------------------------------------------
+7 make checks to see if depth level and ply are correct
+---------------------------------------------------------------------------------------------
+  - COMPLETED
+---------------------------------------------------------------------------------------------
 3 two in a row tweaking - can we build on either side?
  - left and right?
-5 improve scoring - give higher scores to
-- connected two in a row 
-- two in a row you can build on - are both ends free?
+4 improve scoring - give higher scores to
 - location is closer to the edge - less valuable - give lower score to this config.
+- two in a row you can build on - are both ends free?
 5 unit test the above 
 - can we spot three in a row in one move?
 - give unit test a predefined board
-7 make checks to see if depth level and ply are correct
-
-
-COMPLETED
 6 implement counter for nodes - not searching part of tree? missing something in search?
  - search never gets up to this point
  - increment counter value when you declare a move
@@ -1712,6 +1761,6 @@ COMPLETED
 -  add argument to Minimax for counter of nodes
 2 prevent cell overwriting 
 - assertion to prevent this
-4 add assertion if cell empty, locate error
+8 add assertion if cell empty, locate error
 =============================================================================================
 */
