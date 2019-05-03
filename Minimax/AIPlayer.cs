@@ -108,7 +108,7 @@ namespace Minimax
         // FIND ONE CELL OF SAME SYMBOL IN A ROW
         public bool FindOneInARow(GameBoard board, int ourindex, counters us)
         {
-             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -129,7 +129,7 @@ namespace Minimax
         // FIND TWO CELLS OF SAME SYMBOL IN A ROW
         public bool FindTwoInARow(GameBoard board, counters us)
         {
-             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -150,7 +150,7 @@ namespace Minimax
         // IS LEFT OF TWO IN A ROW
         public static Tuple<int, int> IsLeftofTwo(GameBoard board, counters us)
         {
-            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+     //       Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -171,7 +171,7 @@ namespace Minimax
         // IS RIGHT OF THE TWO IN ROW
         public static Tuple<int, int> IsRightofTwo(GameBoard board, counters us)
         {
-             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -192,7 +192,7 @@ namespace Minimax
         // FIND HORZI GAP BETWEEN TWO IN A ROW
         public bool FindTwoInARowWithAHorziGap(GameBoard board, counters us)
         {
-             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -213,7 +213,7 @@ namespace Minimax
         // FIND VERTICAL GAP BETWEEN TWO IN A ROW
         public bool FindTwoInARowWithAVerticalGap(GameBoard board, counters us)
         {
-             Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -234,7 +234,7 @@ namespace Minimax
         // FIND THREE CELLS OF SAME SYMBOL IN A ROW
         public static bool FindThreeInARow(GameBoard board, counters us)
         {
-            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -259,7 +259,7 @@ namespace Minimax
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsLeftOfThree(GameBoard board, counters us)
         {
-            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+           // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -284,7 +284,7 @@ namespace Minimax
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsCentreOfThree(GameBoard board, counters us)
         {
-            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+         //   Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -309,7 +309,7 @@ namespace Minimax
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsRightOfThree(GameBoard board, counters us)
         {
-            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+       //     Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
@@ -335,7 +335,7 @@ namespace Minimax
         public int EvalForWin(GameBoard board, int ourindex, counters us)
         {
             // eval if move is win draw or loss
-            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+           // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             if (FindThreeInARow(board, us)) // player win?
                 return 1000; // player win confirmed
             if (FindThreeInARow(board, us + 1)) // opponent win?
@@ -351,7 +351,7 @@ namespace Minimax
             int two_score = 10;
             int one_score = 10;
 
-            Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+          //  Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
 
             // assign
             score = EvalForWin(board, ourindex, us); // 1 for win, 0 for unknown
@@ -989,10 +989,12 @@ namespace Minimax
         public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max, ref int contt)
         {
             // decs
-            Debug.Assert(counter == counters.NOUGHTS || counter == counters.CROSSES);
+            //Debug.Assert(counter == counters.NOUGHTS || counter == counters.CROSSES);
             counters us = counters.NOUGHTS;
             int ourindex = 1;
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
+            // create new list of Tuple<int,int>
+            List<Tuple<int, Tuple<int, int>>> result_list = new List<Tuple<int, Tuple<int, int>>>();
             int bestScore = Consts.MIN_SCORE;
             int score = Consts.MIN_SCORE; // current score of move
             Tuple<int, int> Move = new Tuple<int, int>(0, 0);
@@ -1052,7 +1054,7 @@ namespace Minimax
                                      // cell priority - favour centre and corners
                 for (int i = 0; i < availableMoves.Count; i++)
                 {
-                    Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+                   // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
                     Move = availableMoves[i]; // current move
                                               // cell priority - favour centre and corners
 
@@ -1115,8 +1117,7 @@ namespace Minimax
                                 cont = 1;
                                 return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
                             }
-                            Debug.Assert(copy[x, y] == counters.NOUGHTS || copy[x, y] == counters.CROSSES,
-"Cell can't be filled");
+                          //  Debug.Assert(copy[x, y] == counters.NOUGHTS || copy[x, y] == counters.CROSSES, "Cell can't be filled");
                         }
                         catch
                         {
@@ -1247,14 +1248,20 @@ namespace Minimax
                         // ************************************************************************************************
                         // ************************************************************************************************
 
+                        // list defined in Minimax declarations
+
                         Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max, ref cont);  /* swap player */  // RECURSIVE call  
                                                                                                                                                         // trying to prevent preventing cell overwrite
-
                         copy[Move.Item1, Move.Item2] = counter; // place counter
                                                                 // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
                         score = -result.Item1; // assign score
                         positions = result.Item2; // present position (x,y)
 
+                        // list of all result - list of possible result Tuple<int, int>
+                        result_list.Add(new Tuple<int, Tuple<int, int>> (score, positions));
+
+                        // or play move
+                        // copy[Move.Item1, Move.Item2] = counters.SCORE;
 
                         // ************************************************************************************************
                         // ************************************************************************************************
@@ -1706,7 +1713,7 @@ namespace Minimax
                                         }
                                     }
                                 }
-
+                                
                             }
 
                         } 
@@ -1720,20 +1727,28 @@ namespace Minimax
                 }
                 
             }
-     
-                    return new Tuple<int, Tuple<int, int>, GameBoard>(bestScore, bestMove, board); // return
+            // print all moves with score
+            Console.WriteLine(result_list);
+            Console.ReadLine();
+            return new Tuple<int, Tuple<int, int>, GameBoard>(bestScore, bestMove, board); // return
         }
     }
 }
 
 /*
 =============================================================================================
-Next steps: w/c 15/3/19
+Next steps: w/c 29/4/19
 =============================================================================================
 ---------------------------------------------------------------------------------------------
    - STILL EXISTING
 ---------------------------------------------------------------------------------------------
-1 why miss three in a row
+1 PrintList Function
+- list or/and board representation
+- replace counter with score
+2 Check instance where get 1,1 and use that board as hard coded for unit test, and analyse why it places it here.
+
+    
+    1 why miss three in a row
  - define three in a row doesnt find that config?
  - the search never reaches this point?
  - test three in a row in isolation
@@ -1751,7 +1766,7 @@ Next steps: w/c 15/3/19
 4 improve scoring - give higher scores to
 - location is closer to the edge - less valuable - give lower score to this config.
 - two in a row you can build on - are both ends free?
-5 unit test the above 
+5 unit test t1he above 
 - can we spot three in a row in one move?
 - give unit test a predefined board
 6 implement counter for nodes - not searching part of tree? missing something in search?
@@ -1764,3 +1779,4 @@ Next steps: w/c 15/3/19
 8 add assertion if cell empty, locate error
 =============================================================================================
 */
+

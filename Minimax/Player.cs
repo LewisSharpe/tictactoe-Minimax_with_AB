@@ -18,10 +18,13 @@ namespace Minimax
         public Player(counters _counter)
         {
             counter = _counter;
-            if (counter == counters.NOUGHTS)
+            if (counter == counters.NOUGHTS) 
                 otherCounter = counters.CROSSES;
-            else
+            else if (counter == counters.CROSSES)
                 otherCounter = counters.NOUGHTS;
+            else if (counter == counters.SCORE)
+                otherCounter = counters.SCORE;
+
         }
                 public abstract Tuple<int, int> GetMove(GameBoard board);
        
