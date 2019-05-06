@@ -26,10 +26,10 @@ namespace Minimax
                 otherCounter = counters.SCORE;
 
         }
-                public abstract Tuple<int, int> GetMove(GameBoard board);
+                public abstract Tuple<int, int> GetMove(GameBoard<counters> board);
        
         // DETERMINE IF PLAYER HAS WON
-        public bool Win(GameBoard board, counters counter)
+        public bool Win(GameBoard<counters> board, counters counter)
         {
             if (
                 //HORIZONTAL

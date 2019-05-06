@@ -10,7 +10,7 @@ namespace Minimax
     // GAME EXECUTION CLASS
     class Game
     {
-        GameBoard board = new GameBoard(counters.EMPTY);
+        GameBoard<counters> board = new GameBoard<counters>(counters.EMPTY);
 
         public Game(Player _xPlayer, Player _oPlayer)
         {
@@ -88,7 +88,7 @@ namespace Minimax
             
         }
 
-        public bool IsOver(GameBoard board, Player currentPlayer)
+        public bool IsOver(GameBoard<counters> board, Player currentPlayer)
         {
             if (currentPlayer.Win(board, currentPlayer.counter) || board.IsFull())
                 return true;
