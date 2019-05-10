@@ -10,7 +10,8 @@ namespace Minimax
     // GAME EXECUTION CLASS
     class Game
     {
-        GameBoard board = new GameBoard(counters.EMPTY);
+        GameBoard<counters> board = new GameBoard<counters>(counters.EMPTY);
+        GameBoard<int> scoreBoard = new GameBoard<int>(17);
 
         public Game(Player _xPlayer, Player _oPlayer)
         {
@@ -23,7 +24,7 @@ namespace Minimax
             Stopwatch stopwatch_minimax = new Stopwatch();
             // Begin timing.
             stopwatch_minimax.Start();
-            Tuple<int, int> selectedMove = currentPlayer.GetMove(board);
+            Tuple<int, int> selectedMove = currentPlayer.GetMove(board, scoreBoard);
             board[selectedMove.Item1, selectedMove.Item2] = currentPlayer.counter;
             Tuple<int, int> centreof3inarow = new Tuple<int, int> (0,0);
 
@@ -88,7 +89,7 @@ namespace Minimax
             
         }
 
-        public bool IsOver(GameBoard board, Player currentPlayer)
+        public bool IsOver(GameBoard<counters> board, Player currentPlayer)
         {
             if (currentPlayer.Win(board, currentPlayer.counter) || board.IsFull())
                 return true;
