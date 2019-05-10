@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 namespace Minimax
 {
     // AIPLAYER CLASS
-    class AIPlayer : Player
+    class AIPlayer<T> : Player
+        where T : IComparable
     {
         // PUBLIC DECS
         public int ply = 2;
         public int maxPly = 4; // expand
-        GameBoard copy;
+        GameBoard<counters> copy;
+        GameBoard<int> scoreBoard;
         public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
         public AIPlayer(counters _counter) : base(_counter) { }
 
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
-        public List<Tuple<int, int>> getAvailableMoves(GameBoard board, Tuple<int, int> positions)
+        public List<Tuple<int, int>> getAvailableMoves(GameBoard<counters> board, Tuple<int, int> positions)
         {
             List<Tuple<int, int>> moves = new List<Tuple<int, int>>();
             for (int x = 1; x <= 7; x++)
@@ -32,7 +33,7 @@ namespace Minimax
         }
 
         // GET MOVE
-        public override Tuple<int, int> GetMove(GameBoard board)
+        public override Tuple<int, int> GetMove(GameBoard<counters> board)
         {
             // Create new stopwatch.
             Stopwatch stopwatch = new Stopwatch();
@@ -40,7 +41,7 @@ namespace Minimax
             stopwatch.Start();
             // Do work
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
-            Tuple<int, Tuple<int, int>, GameBoard> result;
+            Tuple<int, Tuple<int, int>, GameBoard<counters>> result;
             result = Minimax(board, counter, ply, positions, true, ref cont); // 0,0
             board.DisplayBoard();
             // Stop timing.
@@ -89,8 +90,23 @@ namespace Minimax
             }
         }
 
+        public int iFlip(int icounter)
+        {
+            if (counter == 0)
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                return 1;
+            }
+            else
+            {
+                Console.BackgroundColor
+                   = ConsoleColor.White;
+                return 0;
+            }
+        }
+
         // SPECIFY DIRECTION
-        public int GetNumForDir(int startSq, int dir, GameBoard board, counters us)
+        public int GetNumForDir(int startSq, int dir, GameBoard<counters> board, counters us)
         {
             int found = 0;
             while (board[startSq, startSq] != counters.BORDER)
@@ -106,7 +122,7 @@ namespace Minimax
         }
 
         // FIND ONE CELL OF SAME SYMBOL IN A ROW
-        public bool FindOneInARow(GameBoard board, int ourindex, counters us)
+        public bool FindOneInARow(GameBoard<counters> board, int ourindex, counters us)
         {
             // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -127,7 +143,7 @@ namespace Minimax
             return false;
         }
         // FIND TWO CELLS OF SAME SYMBOL IN A ROW
-        public bool FindTwoInARow(GameBoard board, counters us)
+        public bool FindTwoInARow(GameBoard<counters> board, counters us)
         {
             // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -148,7 +164,7 @@ namespace Minimax
             return false;
         }
         // IS LEFT OF TWO IN A ROW
-        public static Tuple<int, int> IsLeftofTwo(GameBoard board, counters us)
+        public static Tuple<int, int> IsLeftofTwo(GameBoard<counters> board, counters us)
         {
      //       Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -169,7 +185,7 @@ namespace Minimax
             return new Tuple<int, int>(0, 0);
         }
         // IS RIGHT OF THE TWO IN ROW
-        public static Tuple<int, int> IsRightofTwo(GameBoard board, counters us)
+        public static Tuple<int, int> IsRightofTwo(GameBoard<counters> board, counters us)
         {
             // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -190,7 +206,7 @@ namespace Minimax
             return new Tuple<int, int>(0, 0);
         }
         // FIND HORZI GAP BETWEEN TWO IN A ROW
-        public bool FindTwoInARowWithAHorziGap(GameBoard board, counters us)
+        public bool FindTwoInARowWithAHorziGap(GameBoard<counters> board, counters us)
         {
             // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -211,7 +227,7 @@ namespace Minimax
             return false;
         }
         // FIND VERTICAL GAP BETWEEN TWO IN A ROW
-        public bool FindTwoInARowWithAVerticalGap(GameBoard board, counters us)
+        public bool FindTwoInARowWithAVerticalGap(GameBoard<counters> board, counters us)
         {
             // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -232,7 +248,7 @@ namespace Minimax
             return false;
         }
         // FIND THREE CELLS OF SAME SYMBOL IN A ROW
-        public static bool FindThreeInARow(GameBoard board, counters us)
+        public static bool FindThreeInARow(GameBoard<counters> board, counters us)
         {
             // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -257,7 +273,7 @@ namespace Minimax
             return false;
         }
         // IS CENTRE OF THREE IN A ROW
-        public static Tuple<int, int> IsLeftOfThree(GameBoard board, counters us)
+        public static Tuple<int, int> IsLeftOfThree(GameBoard<counters> board, counters us)
         {
            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -282,7 +298,7 @@ namespace Minimax
             return new Tuple<int, int>(0, 0);
         }
         // IS CENTRE OF THREE IN A ROW
-        public static Tuple<int, int> IsCentreOfThree(GameBoard board, counters us)
+        public static Tuple<int, int> IsCentreOfThree(GameBoard<counters> board, counters us)
         {
          //   Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -307,7 +323,7 @@ namespace Minimax
             return new Tuple<int, int>(0, 0);
         }
         // IS CENTRE OF THREE IN A ROW
-        public static Tuple<int, int> IsRightOfThree(GameBoard board, counters us)
+        public static Tuple<int, int> IsRightOfThree(GameBoard<counters> board, counters us)
         {
        //     Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
@@ -332,7 +348,7 @@ namespace Minimax
             return new Tuple<int, int>(0, 0);
         }
         // IS THERE A WINNING THREE IN A ROW?
-        public int EvalForWin(GameBoard board, int ourindex, counters us)
+        public int EvalForWin(GameBoard<counters> board, int ourindex, counters us)
         {
             // eval if move is win draw or loss
            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
@@ -344,7 +360,7 @@ namespace Minimax
                 return 10;
         }
         // STATIC EVALUATION FUNCTION
-        public int EvalCurrentBoard(GameBoard board, int ourindex, counters us)
+        public int EvalCurrentBoard(GameBoard<counters> board, int ourindex, counters us)
         {
             // score decs
             int score = 10;
@@ -986,7 +1002,7 @@ namespace Minimax
                 return 10;
         }      
         // MINIMAX FUNCTION
-        public Tuple<int, Tuple<int, int>, GameBoard> Minimax(GameBoard board, counters counter, int ply, Tuple<int, int> positions, bool max, ref int contt)
+        public Tuple<int, Tuple<int, int>, GameBoard<counters>> Minimax(GameBoard<counters> board, counters counter, int ply, Tuple<int, int> positions, bool max, ref int contt)
         {
             // decs
             //Debug.Assert(counter == counters.NOUGHTS || counter == counters.CROSSES);
@@ -1006,18 +1022,22 @@ namespace Minimax
             int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 7
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
+            // why is it not going down to maxPly?
+            /*if (ply == 3)
+                Environment.Exit(17);
+                */
             // check win
             if (Win(board, counter))
-                return new Tuple<int, Tuple<int, int>, GameBoard>(1000, positions, board);
+                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(1000, positions, board);
             else if (Win(board, this.otherCounter))
-                return new Tuple<int, Tuple<int, int>, GameBoard>(-1000, positions, board);
+                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(-1000, positions, board);
             else if (availableMoves.Count == 0)
-                return new Tuple<int, Tuple<int, int>, GameBoard>(0, positions, board);
+                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(0, positions, board);
             // CHECK DEPTH
             else if (ply > maxPly)
             {
                 score = EvalCurrentBoard(board, ourindex, us); // call stat evaluation func - takes board and player and gives score to that player
-                return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
+                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board);
             }
             else if (ply > 0)
             {
@@ -1043,7 +1063,7 @@ namespace Minimax
                 board.DisplayBoard();
                 cont = 1;
                 Console.Write(Environment.NewLine + "I am a random move" + Environment.NewLine);
-                return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board);
+                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board);
             }
             // else run priority moves and Minimax
             else if (board.IsMiddleEmpty() == true || board.IsBottomLeftEmpty() == true || board.IsBottomRightEmpty() == true || board.IsTopLeftEmpty() == true || board.IsTopRightEmpty() == true)
@@ -1115,7 +1135,7 @@ namespace Minimax
                             if (copy[x, y] == counters.EMPTY)
                             {
                                 cont = 1;
-                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, nodelist[i], board); // return
                             }
                           //  Debug.Assert(copy[x, y] == counters.NOUGHTS || copy[x, y] == counters.CROSSES, "Cell can't be filled");
                         }
@@ -1145,7 +1165,7 @@ namespace Minimax
                             if (copy[x, y] == counters.EMPTY)
                             {
                                 cont = 1;
-                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, nodelist[i], board); // return
                             }
                         }
                         catch
@@ -1173,7 +1193,7 @@ namespace Minimax
                             if (copy[x, y] == counters.EMPTY)
                             {
                                 cont = 1;
-                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, nodelist[i], board); // return
                             }
                         }
                         catch
@@ -1199,7 +1219,7 @@ namespace Minimax
                             if (copy[x, y] == counters.EMPTY)
                             {
                                 cont = 1;
-                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, nodelist[i], board); // return
                             }
                         }
                         catch
@@ -1226,7 +1246,7 @@ namespace Minimax
                             if (copy[x, y] == counters.EMPTY)
                             {
                                 cont = 1;
-                                return new Tuple<int, Tuple<int, int>, GameBoard>(score, nodelist[i], board); // return
+                                return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, nodelist[i], board); // return
                             }
                         }
                         // IF ALL PRIME POSITIONS ARE TAKEN, THEN EXECUTE MINIMAX FUNCTION
@@ -1250,7 +1270,7 @@ namespace Minimax
 
                         // list defined in Minimax declarations
 
-                        Tuple<int, Tuple<int, int>, GameBoard> result = Minimax(copy, Flip(counter), ply + 1, Move, max, ref cont);  /* swap player */  // RECURSIVE call  
+                        Tuple<int, Tuple<int, int>, GameBoard<int>> result = Minimax(copy, Flip(counter), ply + 1, Move, max, ref cont);  /* swap player */  // RECURSIVE call  
                                                                                                                                                         // trying to prevent preventing cell overwrite
                         copy[Move.Item1, Move.Item2] = counter; // place counter
                                                                 // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
@@ -1260,8 +1280,20 @@ namespace Minimax
                         // list of all result - list of possible result Tuple<int, int>
                         result_list.Add(new Tuple<int, Tuple<int, int>> (score, positions));
 
-                        // or play move
-                        // copy[Move.Item1, Move.Item2] = counters.SCORE;
+                        GameBoard<int> g;
+
+                        // Intention:
+                        // I want to play move here as the potential score 
+                        // as the counter if cell is empty..
+                        /*
+                         copy[Move.Item1, Move.Item2] = score;
+                         */
+                        // Prevention: 
+                        // ERROR: Cannot implicitly convert type 'int' to 
+                        //'Minimax.counters'. An explicit conversion exists (are you
+                        // missing a cast?).
+                        // Not sure how to get around this?
+
 
                         // ************************************************************************************************
                         // ************************************************************************************************
@@ -1291,7 +1323,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = 100;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1313,7 +1345,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -100;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1335,7 +1367,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = 100;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1357,7 +1389,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -100;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1379,7 +1411,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = 100;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1401,7 +1433,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -100;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1423,7 +1455,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = 100;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1445,7 +1477,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -100;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1467,7 +1499,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = 1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1489,7 +1521,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1511,7 +1543,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = 1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1533,7 +1565,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1555,7 +1587,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = 1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1577,7 +1609,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1599,7 +1631,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = 1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1621,7 +1653,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1643,7 +1675,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1654,7 +1686,7 @@ namespace Minimax
                         {
                             score = -100;
                             Tuple<int, int> neigh = copy.PrintTwoWithHorziGap(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                           if (neigh.Item1 < 0 & neigh.Item1 > 7)
                             {
                                 if (neigh.Item2 < 0 & neigh.Item2 > 7)
                                 {
@@ -1665,7 +1697,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1687,7 +1719,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1709,7 +1741,7 @@ namespace Minimax
                                         if (copy[neigh.Item1, neigh.Item2] == counter)
                                         {
                                             score = -1000;
-                                            return new Tuple<int, Tuple<int, int>, GameBoard>(score, positions, board); // return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(score, positions, board); // return
                                         }
                                     }
                                 }
@@ -1724,59 +1756,53 @@ namespace Minimax
                     // ************************************************************************************************
                     // ************************************************************************************************
                     cont++; // increment positions visited
+              
                 }
                 
             }
             // print all moves with score
             Console.WriteLine(result_list);
             Console.ReadLine();
-            return new Tuple<int, Tuple<int, int>, GameBoard>(bestScore, bestMove, board); // return
+            // only if ply is 0 then
+            // display score board for potential moves on ONLY this current iteration board
+            return new Tuple<int, Tuple<int, int>, GameBoard<counters>>(bestScore, bestMove, board); // return
         }
     }
 }
 
 /*
 =============================================================================================
-Next steps: w/c 29/4/19
+Next steps: w/c 05/05/19
 =============================================================================================
 ---------------------------------------------------------------------------------------------
    - STILL EXISTING
 ---------------------------------------------------------------------------------------------
-1 PrintList Function
-- list or/and board representation
-- replace counter with score
-2 Check instance where get 1,1 and use that board as hard coded for unit test, and analyse why it places it here.
-
-    
-    1 why miss three in a row
+1. Print Score Board function - print score boards for all possible remaning moves from one input board (if ply is 0 or/and 1)
+Purpose - check if error is in putting scores together
+- must be a new instance of gameboard where int is taken rather than counters
+- parameterised GameBoard <T> - type parameter instantiate to int or counters
+- class GameBoard <T> - replace all counter references with T
+     ---> then either, 1) board = new GameBoard<int> and 2) board = new GameBoard<counters>
+- change DisplayBoard to take either int or counters
+- print boards for all depth levels
+    ---> top, second, third, fourth, etc
+- if symbol already there, place empty on score board
+2. Check instance where get 1,1 and use that board as hard coded for unit test, and analyse why it places it here.
+3. why miss three in a row
  - define three in a row doesnt find that config?
  - the search never reaches this point?
  - test three in a row in isolation
  - XX-XX why does it miss this
-4.1 - connected two in a row 
+4. connected two in a row 
 ---------------------------------------------------------------------------------------------
    - PARTIALLY ACHIEVED
 ---------------------------------------------------------------------------------------------
-7 make checks to see if depth level and ply are correct
+
+
 ---------------------------------------------------------------------------------------------
   - COMPLETED
 ---------------------------------------------------------------------------------------------
-3 two in a row tweaking - can we build on either side?
- - left and right?
-4 improve scoring - give higher scores to
-- location is closer to the edge - less valuable - give lower score to this config.
-- two in a row you can build on - are both ends free?
-5 unit test t1he above 
-- can we spot three in a row in one move?
-- give unit test a predefined board
-6 implement counter for nodes - not searching part of tree? missing something in search?
- - search never gets up to this point
- - increment counter value when you declare a move
- - add "ref int n" to Minimax arguments
--  add argument to Minimax for counter of nodes
-2 prevent cell overwriting 
-- assertion to prevent this
-8 add assertion if cell empty, locate error
+
 =============================================================================================
 */
 

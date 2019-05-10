@@ -10,7 +10,7 @@ namespace Minimax
     // GAME EXECUTION CLASS
     class Game
     {
-        GameBoard board = new GameBoard(counters.EMPTY);
+        GameBoard<counters> board = new GameBoard<counters>(counters.EMPTY);
 
         public Game(Player _xPlayer, Player _oPlayer)
         {
@@ -33,10 +33,10 @@ namespace Minimax
                 {
                     board.DisplayBoard();
                  
-                    if (currentPlayer.GetType() == typeof(AIPlayer))
+                    if (currentPlayer.GetType() == typeof(AIPlayer<counters>))
                     {
                         int score = 0;
-                        if (AIPlayer.FindThreeInARow(board, currentPlayer.counter) == true)
+                        if (AIPlayer<counters>.FindThreeInARow(board, currentPlayer.counter) == true)
                         {
 
                             score = 1000;
@@ -48,16 +48,16 @@ namespace Minimax
                             "------------------------------------------------------------------------------------------------------------------------" +
                             "Winner: " + currentPlayer.counter 
                             + Environment.NewLine + "Score: " + score + Environment.NewLine +
-                            "Positions visited: " + AIPlayer.cont + Environment.NewLine +
+                            "Positions visited: " + AIPlayer<counters>.cont + Environment.NewLine +
                             "Coordinations of winning three-in-a-row at: "
-                             + Environment.NewLine + "Cell 1: " + AIPlayer.IsLeftOfThree(board, currentPlayer.counter) 
-                             + Environment.NewLine + "Cell 2: " + AIPlayer.IsCentreOfThree(board, currentPlayer.counter) 
-                             + Environment.NewLine + "Cell 3: " + AIPlayer.IsRightOfThree(board, currentPlayer.counter));
+                             + Environment.NewLine + "Cell 1: " + AIPlayer<counters>.IsLeftOfThree(board, currentPlayer.counter) 
+                             + Environment.NewLine + "Cell 2: " + AIPlayer<counters>.IsCentreOfThree(board, currentPlayer.counter) 
+                             + Environment.NewLine + "Cell 3: " + AIPlayer<counters>.IsRightOfThree(board, currentPlayer.counter));
                     }
                     else
                     {
                         int score = 0;
-                        if (AIPlayer.FindThreeInARow(board, otherPlayer.counter) == true)
+                        if (AIPlayer<counters>.FindThreeInARow(board, otherPlayer.counter) == true)
                         {
                             score = -1000;
                         }
@@ -69,9 +69,9 @@ namespace Minimax
                              + Environment.NewLine + "Score: " + score 
                              + Environment.NewLine + "Coordinations of winning three-in-a-row at: "
                              + Environment.NewLine
-                             + "Cell 1: " + AIPlayer.IsLeftOfThree(board, otherPlayer.counter) + Environment.NewLine 
-                             + "Cell 2: " + AIPlayer.IsCentreOfThree(board, otherPlayer.counter) + Environment.NewLine
-                             + "Cell 3: " + AIPlayer.IsRightOfThree(board, otherPlayer.counter));
+                             + "Cell 1: " + AIPlayer<counters>.IsLeftOfThree(board, otherPlayer.counter) + Environment.NewLine 
+                             + "Cell 2: " + AIPlayer<counters>.IsCentreOfThree(board, otherPlayer.counter) + Environment.NewLine
+                             + "Cell 3: " + AIPlayer<counters>.IsRightOfThree(board, otherPlayer.counter));
                     }
                     // Stop timing.
                     stopwatch_minimax.Stop();
@@ -88,7 +88,7 @@ namespace Minimax
             
         }
 
-        public bool IsOver(GameBoard board, Player currentPlayer)
+        public bool IsOver(GameBoard<counters> board, Player currentPlayer)
         {
             if (currentPlayer.Win(board, currentPlayer.counter) || board.IsFull())
                 return true;

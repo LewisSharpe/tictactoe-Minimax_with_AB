@@ -61,7 +61,7 @@ namespace Minimax
                 }
 
                 Player player = new HumanPlayer(name, counter);
-                Player computer = new AIPlayer(player.otherCounter);
+                Player computer = new AIPlayer<counters>(player.otherCounter);
                 Game game;
                 if (counter == counters.CROSSES)
                     game = new Game(player, computer);
@@ -73,8 +73,8 @@ namespace Minimax
             {
                 counters counter;
                 counter = counters.CROSSES;
-                Player player = new AIPlayer(counter);
-                Player computer = new AIPlayer(player.otherCounter);
+                Player player = new AIPlayer<counters>(counter);
+                Player computer = new AIPlayer<counters>(player.otherCounter);
                 Game game;
                 if (counter == counters.CROSSES)
                     game = new Game(player, computer);
@@ -97,8 +97,8 @@ namespace Minimax
             {
                 counters counter;
                 counter = counters.SCORE;
-                Player player = new AIPlayer(counters.SCORE);
-                Player computer = new AIPlayer(counters.SCORE);
+                Player player = new AIPlayer<counters>(counters.SCORE);
+                Player computer = new AIPlayer<counters>(counters.SCORE);
                 Game game;
                 if (counter == counters.SCORE)
                     game = new Game(player, computer);
