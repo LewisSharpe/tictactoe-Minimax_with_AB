@@ -16,7 +16,7 @@ namespace Minimax
         }
 
    // GET MOVE: ASK FOR USER INPUT
-        public override Tuple<int, int> GetMove(GameBoard board)
+        public override Tuple<int, int> GetMove(GameBoard<counters> board, GameBoard<int> scoreBoard)
         {
             int x; // x axis
             int y; // y axis
@@ -35,7 +35,7 @@ namespace Minimax
         } // end do loop
 
         // CHECK IF MOVE IS VALID
-        public bool CheckValidMove(GameBoard board, int x, int y)
+        public bool CheckValidMove(GameBoard<counters> board, int x, int y)
         {
             if (board[x, y] == counters.EMPTY) // if move coords match empty cell
                 return true;  // place move

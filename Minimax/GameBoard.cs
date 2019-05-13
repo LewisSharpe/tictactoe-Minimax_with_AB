@@ -7,31 +7,33 @@ using System.Threading.Tasks;
 namespace Minimax
 {
     // GAME BOARD STRUCTURE CLASS
-    struct GameBoard
+    struct GameBoard <T> where T: IComparable
     {
         // cell ids
-        private counters s1, s2, s3, s4, s5, s6, s7,
+        private T s1, s2, s3, s4, s5, s6, s7,
                          s8, s9, s10, s11, s12, s13, s14,
                          s15, s16, s17, s18, s19, s20, s21,
                          s22, s23, s24, s25, s26, s27, s28,
                          s29, s30, s31, s32, s33, s34, s35,
                          s36, s37, s38, s39, s40, s41, s42,
                          s43, s44, s45, s46, s47, s48, s49;
-        private counters filler; // empty filler space for cell
+        private T filler; // empty filler space for cell
 
         // 1 BLANK BOARD
-        public GameBoard(counters _filler)
+        public GameBoard(T _filler)
         {
             filler = _filler; // blank filler
-            s1 = counters.EMPTY; s2 = counters.EMPTY; s3 = counters.EMPTY; s4 = counters.EMPTY; s5 = counters.EMPTY; s6 = counters.EMPTY; s7 = counters.EMPTY; // row 1
-            s8 = counters.EMPTY; s9 = counters.EMPTY; s10 = counters.EMPTY; s11 = counters.EMPTY; s12 = counters.EMPTY; s13 = counters.EMPTY; s14 = counters.EMPTY; // row 2
-            s15 = counters.EMPTY; s16 = counters.EMPTY; s17 = counters.EMPTY; s18 = counters.EMPTY; s19 = counters.EMPTY; s20 = counters.EMPTY; s21 = counters.EMPTY; // row 3
-            s22 = counters.EMPTY; s23 = counters.EMPTY; s24 = counters.CROSSES; s25 = counters.CROSSES; s26 = counters.EMPTY; s27 = counters.EMPTY; s28 = counters.EMPTY; // row 4  
-            s29 = counters.EMPTY; s30 = counters.EMPTY; s31 = counters.EMPTY; s32 = counters.EMPTY; s33 = counters.EMPTY; s34 = counters.EMPTY; s35 = counters.EMPTY; // row 5
-            s36 = counters.EMPTY; s37 = counters.EMPTY; s38 = counters.EMPTY; s39 = counters.EMPTY; s40 = counters.EMPTY; s41 = counters.EMPTY; s42 = counters.EMPTY; // row 6
-            s43 = counters.EMPTY; s44 = counters.EMPTY; s45 = counters.EMPTY; s46 = counters.EMPTY; s47 = counters.EMPTY; s48 = counters.EMPTY; s49 = counters.EMPTY; // row 7
+            s1 = filler; s2 = filler; s3 = filler; s4 = filler; s5 = filler; s6 = filler; s7 = filler; // row 1
+            s8 = filler; s9 = filler; s10 = filler; s11 = filler; s12 = filler; s13 = filler; s14 = filler; // row 2
+            s15 = filler; s16 = filler; s17 = filler; s18 = filler; s19 = filler; s20 = filler; s21 = filler; // row 3
+            s22 = filler; s23 = filler; s24 = filler; s25 = filler; s26 = filler; s27 = filler; s28 = filler; // row 4  
+            s29 = filler; s30 = filler; s31 = filler; s32 = filler; s33 = filler; s34 = filler; s35 = filler; // row 5
+            s36 = filler; s37 = filler; s38 = filler; s39 = filler; s40 = filler; s41 = filler; s42 = filler; // row 6
+            s43 = filler; s44 = filler; s45 = filler; s46 = filler; s47 = filler; s48 = filler; s49 = filler; // row 7
         }
-
+        /// <summary>
+        /// // change so takes in int and counters 
+        /// </summary>
         // DISPLAY GAMEBOARD AS FOLLOWS
         public void DisplayBoard()
         {
@@ -44,11 +46,12 @@ namespace Minimax
                 Console.Write(y + " ");
                 for (int x = 1; x <= 7; x++)
                 {
-                    if (this[x, y] == counters.EMPTY)
-                        Console.Write(counters.EMPTY);
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                        Console.Write(filler);
                     else
                         Console.Write(this[x, y]);
-                    Console.Write(" | ");
+                        Console.Write(" | ");
+
                 }
                 Console.WriteLine();
                 Console.WriteLine("  -   -   -   -   -   -   - ");
@@ -72,8 +75,8 @@ namespace Minimax
                         sw.Write(y + " ");
                         for (int x = 1; x <= 7; x++)
                         {
-                            if (this[x, y] == counters.EMPTY)
-                                sw.Write(counters.EMPTY);
+                            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                                sw.Write(filler);
                             else
                                 sw.Write(this[x, y]);
                             sw.Write(" | ");
@@ -90,7 +93,7 @@ namespace Minimax
         {
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
-                    if (this[x, y] == filler)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -100,7 +103,7 @@ namespace Minimax
         {
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
-                    if (this[x, y] != counters.EMPTY)
+                    if (!EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -109,7 +112,7 @@ namespace Minimax
         public bool IsMiddleEmpty() {
             for (int x = 4; x <= 4; x++)
                 for (int y = 4; y <= 4; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return true;
             return false;
         }
@@ -119,7 +122,7 @@ namespace Minimax
         {
             for (int x = 1; x <= 1; x++)
                 for (int y = 1; y <= 1; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return true;
             return false;
         }
@@ -129,7 +132,7 @@ namespace Minimax
         {
             for (int x = 1; x <= 1; x++)
                 for (int y = 7; y <= 7; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return true;
             return false;
         }
@@ -139,7 +142,7 @@ namespace Minimax
         {
             for (int x = 7; x <= 7; x++)
                 for (int y = 1; y <= 1; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return true;
             return false;
         }
@@ -149,7 +152,7 @@ namespace Minimax
         {
             for (int x = 7; x <= 7; x++)
                 for (int y = 7; y <= 7; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -159,7 +162,7 @@ namespace Minimax
         {
             for (int x = 1; x <= 1; x++)
                 for (int y = 2; y <= 6; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -169,7 +172,7 @@ namespace Minimax
         {
             for (int x = 7; x <= 7; x++)
                 for (int y = 2; y <= 6; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -179,7 +182,7 @@ namespace Minimax
         {
             for (int x = 2; x <= 6; x++)
                 for (int y = 1; y <= 1; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -189,7 +192,7 @@ namespace Minimax
         {
             for (int x = 3; x <= 6; x++)
                 for (int y = 3; y <= 6; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -199,7 +202,7 @@ namespace Minimax
         {
             for (int x = 2; x <= 6; x++)
                 for (int y = 7; y <= 7; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -209,7 +212,7 @@ namespace Minimax
         {
             for (int x = 2; x <= 6; x++)
                 for (int y = 1; y <= 1; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -219,7 +222,7 @@ namespace Minimax
         {
             for (int x = 1; x <= 1; x++)
                 for (int y = 2; y <= 6; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -229,18 +232,17 @@ namespace Minimax
         {
             for (int x = 7; x <= 7; x++)
                 for (int y = 2; y <= 6; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
-
-
+        
         // IS EDGES EMPTY
         public bool AreInnerBottomEdgesEmpty()
         {
             for (int x = 2; x <= 6; x++)
                 for (int y = 6; y <= 6; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -250,7 +252,7 @@ namespace Minimax
         {
             for (int x = 2; x <= 6; x++)
                 for (int y = 6; y <= 6; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -260,7 +262,7 @@ namespace Minimax
         {
             for (int x = 2; x <= 6; x++)
                 for (int y = 6; y <= 6; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
@@ -270,20 +272,20 @@ namespace Minimax
         {
             for (int x = 2; x <= 6; x++)
                 for (int y = 6; y <= 6; y++)
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
         }
 
         // PLACE ON EDGES
-        public int PlaceAtBottomEdges(GameBoard copy, counters counter)
+        public int PlaceAtBottomEdges(GameBoard<T> copy, T counter)
         {
             int x = 0;
             int y = 0;
             for (x = 2; x <= 6; x++)
             for (y = 7; y <= 7; y++)
                 this[x, y] = counter;
-                    if (this[x, y] == counters.EMPTY)
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                     {
                         
                         return -45;
@@ -292,14 +294,14 @@ namespace Minimax
         }
 
         // PLACE ON EDGES
-        public int PlaceAtTopEdges(GameBoard copy, counters counter)
+        public int PlaceAtTopEdges(GameBoard<T> copy, T counter)
         {
             int x = 0;
             int y = 0;
             for (x = 2; x <= 6; x++)
                 for (y = 1; y <= 1; y++)
                     this[x, y] = counter;
-            if (this[x, y] == counters.EMPTY)
+            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
             {
 
                 return -45;
@@ -308,14 +310,14 @@ namespace Minimax
         }
 
         // PLACE ON EDGES
-        public int PlaceAtLeftEdges(GameBoard copy, counters counter)
+        public int PlaceAtLeftEdges(GameBoard<T> copy, T counter)
         {
             int x = 0;
             int y = 0;
             for (x = 1; x <= 1; x++)
                 for (y = 2; y <= 6; y++)
                     this[x, y] = counter;
-            if (this[x, y] == counters.EMPTY)
+            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
             {
 
                 return -45;
@@ -324,14 +326,14 @@ namespace Minimax
         }
 
         // PLACE ON EDGES
-        public int PlaceAtRightEdges(GameBoard copy, counters counter)
+        public int PlaceAtRightEdges(GameBoard<T> copy, T counter)
         {
             int x = 0;
             int y = 0;
             for (x = 7; x <= 7; x++)
                 for (y = 2; y <= 6; y++)
                     this[x, y] = counter;
-            if (this[x, y] == counters.EMPTY)
+            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
             {
 
                 return -45;
@@ -340,14 +342,14 @@ namespace Minimax
         }
 
         // PLACE ON EDGES
-        public int PlaceAtInnerBottomEdges(GameBoard copy, counters counter)
+        public int PlaceAtInnerBottomEdges(GameBoard<T> copy, T counter)
         {
             int x = 0;
             int y = 0;
             for (x = 2; x <= 6; x++)
                 for (y = 6; y <= 6; y++)
                     this[x, y] = counter;
-            if (this[x, y] == counters.EMPTY)
+            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
             {
 
                 return -15;
@@ -356,14 +358,14 @@ namespace Minimax
         }
 
         // PLACE ON EDGES
-        public int PlaceAtInnerTopEdges(GameBoard copy, counters counter)
+        public int PlaceAtInnerTopEdges(GameBoard<T> copy, T counter)
         {
             int x = 0;
             int y = 0;
             for (x = 2; x <= 6; x++)
                 for (y = 6; y <= 6; y++)
                     this[x, y] = counter;
-            if (this[x, y] == counters.EMPTY)
+            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
             {
                 return -15;
             }
@@ -371,14 +373,14 @@ namespace Minimax
         }
 
         // PLACE ON EDGES
-        public int PlaceAtInnerLeftEdges(GameBoard copy, counters counter)
+        public int PlaceAtInnerLeftEdges(GameBoard<T> copy, T counter)
         {
             int x = 0;
             int y = 0;
             for (x = 1; x <= 1; x++)
                 for (y = 2; y <= 6; y++)
                     this[x, y] = counter;
-            if (this[x, y] == counters.EMPTY)
+            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
             {
                 return -15;
             }
@@ -386,14 +388,14 @@ namespace Minimax
         }
 
         // PLACE ON EDGES
-        public int PlaceAtInnerRightEdges(GameBoard copy, counters counter)
+        public int PlaceAtInnerRightEdges(GameBoard<T> copy, T counter)
         {
             int x = 0;
             int y = 0;
             for (x = 7; x <= 7; x++)
                 for (y = 2; y <= 6; y++)
                     this[x, y] = counter;
-            if (this[x, y] == counters.EMPTY)
+            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
             {
 
                 return -15;
@@ -402,14 +404,14 @@ namespace Minimax
         }
 
         // PLACE ON EDGES
-        public int PlaceAtCentreBlock(GameBoard copy, counters counter)
+        public int PlaceAtCentreBlock(GameBoard<T> copy, T counter)
         {
             int x = 0;
             int y = 0;
             for (x = 3; x <= 6; x++)
                 for (y = 3; y <= 6; y++)
                     this[x, y] = counter;
-            if (this[x, y] == counters.EMPTY)
+            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
             {
 
                 return 80;
@@ -417,352 +419,352 @@ namespace Minimax
             return 25;
         }
         // IS LEFT CELL BESIDE TWO IN ROW EMPTY
-        public bool IsTwoLeftNeighbourEmpty(GameBoard board, counters us)
+        public bool IsTwoLeftNeighbourEmpty(GameBoard<T> board, T us)
         {
             // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x - xx, y] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
                             return true;
                         }
                 }
             return false;
         }
         // PRINT LEFT EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoLeftNeighbour(GameBoard board, counters us)
+        public Tuple<int, int> PrintTwoLeftNeighbour(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x - xx, y] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
                                     return new Tuple<int, int>(x - xx, y);
                         }
                 }
             return new Tuple<int, int>(0, 0);
         }
         // IS RIGHT CELL BESIDE TWO IN ROW EMPTY
-        public bool IsTwoRightNeighbourEmpty(GameBoard board, counters us)
+        public bool IsTwoRightNeighbourEmpty(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x + xx + 1, y] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x + xx + 1, y], filler))
                             return true;
                         }
                 }
             return false;
         }
         // PRINT RIGHT EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoRightNeighbour(GameBoard board, counters us)
+        public Tuple<int, int> PrintTwoRightNeighbour(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x - xx, y] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
                                     return new Tuple<int, int>(x + xx + 1, y);
                         }
                 }
             return new Tuple<int, int>(0, 0);
         }
         // IS TOP CELL BESIDE TWO IN ROW EMPTY
-        public bool IsTwoTopNeighbourEmpty(GameBoard board, counters us)
+        public bool IsTwoTopNeighbourEmpty(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x, y + yy] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x, y + yy], filler))
                             return true;
                         }
                 }
             return false;
         }
         // PRINT TOP EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoTopNeighbour(GameBoard board, counters us)
+        public Tuple<int, int> PrintTwoTopNeighbour(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x, y + yy] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x, y + yy], filler))
                                     return new Tuple<int, int>(x, y + yy);
                         }
                 }
             return new Tuple<int, int>(0, 0);
         }
         // IS BOTTOM CELL BESIDE TWO IN ROW EMPTY
-        public bool IsTwoBottomNeighbourEmpty(GameBoard board, counters us)
+        public bool IsTwoBottomNeighbourEmpty(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x, y - yy] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x, y - yy], filler))
                             return true;
                         }
                 }
             return false;
         }
         // PRINT BOTTOM EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoBottomNeighbour(GameBoard board, counters us)
+        public Tuple<int, int> PrintTwoBottomNeighbour(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x, y - yy] == counters.EMPTY)
-                                    return new Tuple<int, int>(x, y - yy);
+                                if (EqualityComparer<T>.Default.Equals(board[x, y - yy], filler))
+                            return new Tuple<int, int>(x, y - yy);
                         }
                 }
             return new Tuple<int, int>(0, 0);
         }
         // IS LEFT CELL BESIDE TWO IN ROW EMPTY
-        public bool IsOneLeftNeighbourEmpty(GameBoard board, counters us)
+        public bool IsOneLeftNeighbourEmpty(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us)
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
                                 // two in a row in centre should give higher score
-                                if (board[x - xx, y] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
                                     return true;
                         }
                 }
             return false;
         }
         // PRINT LEFT EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintOneLeftNeighbour(GameBoard board, counters us)
+        public Tuple<int, int> PrintOneLeftNeighbour(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us)
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
                                 // two in a row in centre should give higher score
-                                if (board[x - xx, y] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
                                     return new Tuple<int, int>(x - xx, y);
                         }
                 }
             return new Tuple<int, int>(0, 0);
         }
         // IS RIGHT CELL BESIDE TWO IN ROW EMPTY
-        public bool IsOneRightNeighbourEmpty(GameBoard board, counters us)
+        public bool IsOneRightNeighbourEmpty(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us)
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
                                 // two in a row in centre should give higher score
-                                if (board[x + xx + 1, y] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x + xx + 1, y], filler))
                                     return true;
                         }
                 }
             return false;
         }
         // PRINT RIGHT EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintOneRightNeighbour(GameBoard board, counters us)
+        public Tuple<int, int> PrintOneRightNeighbour(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us)
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
                                 // two in a row in centre should give higher score
-                                if (board[x - xx, y] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
                                     return new Tuple<int, int>(x + xx + 1, y);
                         }
                 }
             return new Tuple<int, int>(0, 0);
         }
         // IS TOP CELL BESIDE TWO IN ROW EMPTY
-        public bool IsOneTopNeighbourEmpty(GameBoard board, counters us)
+        public bool IsOneTopNeighbourEmpty(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us)
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
                                 // two in a row in centre should give higher score
-                                if (board[x, y + yy] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x, y + yy], filler))
                                     return true;
                         }
                 }
             return false;
         }
         // PRINT TOP EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintOneTopNeighbour(GameBoard board, counters us)
+        public Tuple<int, int> PrintOneTopNeighbour(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us)
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
                                 // two in a row in centre should give higher score
-                                if (board[x, y + yy] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x, y + yy], filler))
                                     return new Tuple<int, int>(x, y + yy);
                         }
                 }
             return new Tuple<int, int>(0, 0);
         }
         // IS BOTTOM CELL BESIDE TWO IN ROW EMPTY
-        public bool IsOneBottomNeighbourEmpty(GameBoard board, counters us)
+        public bool IsOneBottomNeighbourEmpty(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us)
-                                // two in a row in centre should give higher score
-                                if (board[x, y - yy] == counters.EMPTY)
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
+                                    // two in a row in centre should give higher score
+                                    if (EqualityComparer<T>.Default.Equals(board[x, y - yy], filler))
                                     return true;
                         }
                 }
             return false;
         }
         // PRINT BOTTOM EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintOneBottomNeighbour(GameBoard board, counters us)
+        public Tuple<int, int> PrintOneBottomNeighbour(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us)
-                                // two in a row in centre should give higher score
-                                if (board[x, y - yy] == counters.EMPTY)
+                           if (EqualityComparer<T>.Default.Equals(board[x, y], us))
+                                    // two in a row in centre should give higher score
+                                    if (EqualityComparer<T>.Default.Equals(board[x, y - yy], filler))
                                     return new Tuple<int, int>(x, y - yy);
                         }
                 }
@@ -770,88 +772,88 @@ namespace Minimax
         }
 
         // IS THEIR GAP BETWEEN TWO IN ROW EMPTY
-        public bool IsTwoWithHorziGapEmpty(GameBoard board, counters us)
+        public bool IsTwoWithHorziGapEmpty(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx - 1, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx - 1, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x + xx, y + yy] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x + xx, y + yy], filler))
                                     return true;
                         }
                 }
             return false;
         }
         // PRINT GAP BETWEEN TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoWithHorziGap(GameBoard board, counters us)
+        public Tuple<int, int> PrintTwoWithHorziGap(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx - 1, y + yy])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx - 1, y + yy]))
                                 // two in a row in centre should give higher score
-                                if (board[x + xx, y + yy] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x + xx, y + yy], filler))
                                     return new Tuple<int, int>(x + xx, y + yy);
                         }
                 }
             return new Tuple<int, int>(0, 0);
         }
         // IS GAP CELL BETWEEN VERTICAL TWO IN ROW EMPTY
-        public bool IsTwoWithVerticalGapEmpty(GameBoard board, counters us)
+        public bool IsTwoWithVerticalGapEmpty(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy - 1])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy - 1]))
                                 // two in a row in centre should give higher score
-                                if (board[x + xx, y + yy] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x + xx, y + yy], filler))
                                     return true;
                         }
                 }
             return false;
         }
         // PRINT VERTICAL GAP BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoWithVerticalGap(GameBoard board, counters us)
+        public Tuple<int, int> PrintTwoWithVerticalGap(GameBoard<T> board, T us)
         {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == counters.NOUGHTS || board[x, y] == counters.CROSSES);
+                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
                     for (int xx = -1; xx <= 7; xx++)
                         for (int yy = -1; yy <= 7; yy++)
                         {
                             if (yy == 0 && xx == 0)
                                 continue;
-                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy - 1])
+                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy - 1]))
                                 // two in a row in centre should give higher score
-                                if (board[x + xx, y + yy] == counters.EMPTY)
+                                if (EqualityComparer<T>.Default.Equals(board[x + xx, y + yy], filler))
                                     return new Tuple<int, int>(x + xx, y + yy);
                         }
                 }
@@ -859,9 +861,9 @@ namespace Minimax
         }
 
         // CLONE A board OF THE CURRENT GAME BOARD
-        public GameBoard Clone()
+        public GameBoard<T> Clone()
         {
-            GameBoard g = new GameBoard();
+            GameBoard<T> g = new GameBoard<T>();
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
                     g[x, y] = this[x,y];
@@ -870,7 +872,7 @@ namespace Minimax
         }
 
         // CELL ID'S AND COORDS ASSIGN
-        public counters this[int x, int y]
+        public T this[int x, int y]
         {
             get
             {
@@ -972,7 +974,7 @@ namespace Minimax
                     return s48;
                 if (x == 7 && y == 7)
                     return s49;
-                return counters.EMPTY;
+                return filler;
             }
             set
             {
