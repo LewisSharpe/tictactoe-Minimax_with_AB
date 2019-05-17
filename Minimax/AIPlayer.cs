@@ -8,8 +8,8 @@ namespace Minimax
     class AIPlayer : Player
     {
         // PUBLIC DECS
-        public int ply = 2;
-        public int maxPly = 4; // expand
+        public int ply = 0;
+        public int maxPly = 2; // expand
         GameBoard<counters> copy;
         public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
@@ -46,7 +46,7 @@ namespace Minimax
             stopwatch.Stop();
             // Write result.
             Console.WriteLine("========================================================================================================================" +
-            "SELECTED MOVE:" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" +
+            "SELECTED MOVE: (ply=" + ply + ")" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" +
             "position: " + result.Item2 + "; " +
             "for player: " + counter + "; " +
             "score: " + result.Item1 + "; " +
@@ -329,7 +329,7 @@ namespace Minimax
 
             // SCORE BOARD SUMMARY PRINT USED FOR MINIMAX MOVES FOR DEBUGGING ONLY
             public Tuple<counters, Tuple<int, int>, Tuple<int, int>, int, int, int> PlyScoringSummary(GameBoard<counters> board, GameBoard<int> scoreBoard) {
-            int bestScore = Consts.MIN_SCORE;
+	    int bestScore = Consts.MIN_SCORE;
             int ply = 2;
             Tuple<int, int> positions = new Tuple<int, int>(2, 2);
             Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);
@@ -1088,7 +1088,7 @@ namespace Minimax
             // Begin timing.
             stopwatch.Start();
             Move = randMove;
-            positions = randMove;
+            positions = randMove; // HWL: NB: this overwrites the arg positions; which means you are actually not considering the move in positions, but a different, random move; this probably explains why you get such strange moves in your gameplay
             board.DisplayBoard();
             //cont = 1;
             if (ply > 0)
@@ -1185,15 +1185,22 @@ namespace Minimax
                 score = EvalCurrentBoard(board, scoreBoard, ourindex, us); // call stat evaluation func - takes board and player and gives score to that player
                 return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard);
             }
-            else if (ply > 0)
+	    /*
+            else if (ply > 0) // HWL: BUG: this doesn't look right: it seems you NEVER look-ahead to the next move!
             {
                 // check
                 score = EvalCurrentBoard(board, scoreBoard, ourindex, us);  // is current pos a win?
             }
+	    */
+	    /*  HWL: else branch shouldn't be here; if you reach that point, continue with the search in the tree! 
             else
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(10, positions, board, scoreBoard);
-            }         
+            }
+	    */
+	    // HWL: NB: the rest of this fct is never reached, if you have the else branch above in place!
+	    // Console.WriteLine("HWL: Is this line reached?");
+	    // Console.ReadLine(); // HWL: even with a ReadLine here, the program runs to the end
             // place random move
             if (board.IsEmpty()) // if board is empty then play random move
             {
@@ -1223,10 +1230,15 @@ namespace Minimax
                                      // cell priority - favour centre and corners
                 for (int i = 0; i < availableMoves.Count; i++)
                 {
-                   // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
+                    Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
                     Move = availableMoves[i]; // current move
                                               // cell priority - favour centre and corners
-
+		    // HWL: where do you actual place the piece for the position in Move? you don't do this here, just pass Move to the call of Minimax below; in the recursive call you then overwrite the input argument with a random move (see comment at start of Minimax; so you are actually not considering Move at all!
+		    // HWL: try placing the piece here, and below just use the score
+                    Debug.Assert(copy[Move.Item1, Move.Item2] == counters.EMPTY);
+                    copy[Move.Item1, Move.Item2] = counter; // place counter
+                                                            // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
+		    
                     // ************************************************************************************************
                     // ************************************************************************************************
                     // ************************************** MAIN MINIMAX WORK ***************************************
@@ -1236,7 +1248,7 @@ namespace Minimax
                     // list defined in Minimax declarations
                     Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> result = Minimax(copy, Flip(counter), ply + 1, Move, max, scoreBoard, ref cont); /* swap player */ // RECURSIVE call  
                                                                                                                                                                                         // trying to prevent preventing cell overwrite
-                    copy[Move.Item1, Move.Item2] = counter; // place counter
+                    copy[Move.Item1, Move.Item2] = counters.EMPTY; /*  counter; */ // HWL: remove counter that was tried in this iteration
                                                             // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
                     score = -result.Item1; // assign score
@@ -1247,6 +1259,10 @@ namespace Minimax
 
                     // assign score to correct cell in score
                     scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
+		    // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
+		    Console.WriteLine("**HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
+				      ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
+				      bestScore, bestMove.Item1, bestMove.Item2);
                     scoreBoard.DisplayBoard();
                     // Console.ReadLine();
 
@@ -1265,6 +1281,7 @@ namespace Minimax
                     // ************************************************************************************************
                     // ************************************************************************************************
                     // if maximising
+		    // HWL: I'm not sure you need this if: negating the score above (-score), should reflect the switching between player and opponent; the result should always be the max
                     if (max)
                     {
                         if (score > bestScore)

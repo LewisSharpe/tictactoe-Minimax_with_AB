@@ -32,11 +32,13 @@ namespace Minimax
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             DisplayMenu();
-            int menuChoice;
+            int menuChoice  = 2;  // HWL: hard-wire input so that you can redirect output to a file
+	    /*
             while (!(int.TryParse(Console.ReadKey().KeyChar.ToString(), out menuChoice) && (menuChoice >= 1 && menuChoice <= 4)))
                 Console.Write("\nInvalid input. Try again: ");
             Console.WriteLine();
-
+	    */
+	    
             // SELECTION 1 HUMAN V AI
             if (menuChoice == 1)
             {
@@ -101,7 +103,7 @@ namespace Minimax
         {
             // menu centered
             Console.Clear();
-            string welcome = "Welcome to Tic Tac Toe!";
+            string welcome = "Welcome to Tic Tac Toe! HWL TEST VERSION";
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (welcome.Length / 2)) + "}", welcome));
             string menu = "Menu:";
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (menu.Length / 2)) + "}", menu));
