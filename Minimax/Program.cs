@@ -92,20 +92,7 @@ namespace Minimax
                 Player oplayer = new HumanPlayer(oName, counters.NOUGHTS);
                 Game game = new Game(xplayer, oplayer); // play game execution
             }
-            // SELECTION 4 AI V AI AS SCORE AS COUNTER
-            if (menuChoice == 4)
-            {
-                counters counter;
-                counter = counters.SCORE;
-                Player player = new AIPlayer(counters.SCORE);
-                Player computer = new AIPlayer(counters.SCORE);
-                Game game;
-                if (counter == counters.SCORE)
-                    game = new Game(player, computer);
-                else
-                    game = new Game(computer, player);
-            }
-            // SELECTION 5 EXIT
+            // SELECTION 4 EXIT
             Environment.Exit(0);
         }
 
@@ -124,10 +111,8 @@ namespace Minimax
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o2.Length / 2)) + "}", o2));
             string o3 = "3. Play against another player";
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o3.Length / 2)) + "}", o3));
-            string o4 = "4. Score as a counter (in work)";
+            string o4 = "4. Exit";
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o4.Length / 2)) + "}", o4));
-            string o5 = "5. Exit";
-            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o5.Length / 2)) + "}", o5));
         }
     }
 }
