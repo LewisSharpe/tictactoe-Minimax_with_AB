@@ -8,8 +8,8 @@ namespace Minimax
     class AIPlayer : Player
     {
         // PUBLIC DECS
-        public int ply = 0;
-        public int maxPly = 2; // expand
+        public int ply = 0;    // start depth for search (should be 0)
+        public int maxPly = 3; // max depth for search
         GameBoard<counters> copy;
         public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
@@ -1072,7 +1072,7 @@ namespace Minimax
             else
                 return score = 10;
         }
-        public Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> MakeRandomMove(GameBoard<counters> board, counters counter, int ply, Tuple<int, int> positions, bool max, GameBoard<int> scoreBoard, ref int cont)
+        public Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> MakeRandomMove(GameBoard<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard<int> scoreBoard, ref int cont)
         {
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             Tuple<int, int> Move = new Tuple<int, int>(0, 0);
@@ -1128,7 +1128,7 @@ namespace Minimax
             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard);
         }
         // MINIMAX FUNCTION
-        public Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> Minimax(GameBoard<counters> board, counters counter, int ply, Tuple<int, int> positions, bool max, GameBoard<int> scoreBoard, ref int cont)
+        public Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> Minimax(GameBoard<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard<int> scoreBoard, ref int cont)
         {
             // decs
             counters us = Flip(counter);
@@ -1216,7 +1216,7 @@ namespace Minimax
                 if (FindOneInARow(board, ourindex, us + 1)) // oneinarow opponent?
                     score = -10; // oneinrow confirmed
 
-                MakeRandomMove(board, counter, ply, positions, max, scoreBoard, ref cont);
+                MakeRandomMove(board, counter, ply, positions, !mmax, scoreBoard, ref cont);
                 
               //  Console.ReadLine();
                 return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard);
@@ -1246,7 +1246,7 @@ namespace Minimax
                     // ************************************************************************************************
 
                     // list defined in Minimax declarations
-                    Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> result = Minimax(copy, Flip(counter), ply + 1, Move, max, scoreBoard, ref cont); /* swap player */ // RECURSIVE call  
+                    Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> result = Minimax(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, ref cont); /* swap player */ // RECURSIVE call  
                                                                                                                                                                                         // trying to prevent preventing cell overwrite
                     copy[Move.Item1, Move.Item2] = counters.EMPTY; /*  counter; */ // HWL: remove counter that was tried in this iteration
                                                             // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
@@ -1264,6 +1264,11 @@ namespace Minimax
 				      ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
 				      bestScore, bestMove.Item1, bestMove.Item2);
                     scoreBoard.DisplayBoard();
+		    if (score == Consts.MIN_SCORE || score == Consts.MAX_SCORE) {
+		      Console.WriteLine("**HWL CLAIM: putting piece {0} at position ({1},{2}) gives 3-in-a-row:",
+					counter, Move.Item1, Move.Item2);
+		      copy.DisplayBoard();
+		    }
                     // Console.ReadLine();
 
                     
@@ -1282,7 +1287,7 @@ namespace Minimax
                     // ************************************************************************************************
                     // if maximising
 		    // HWL: I'm not sure you need this if: negating the score above (-score), should reflect the switching between player and opponent; the result should always be the max
-                    if (max)
+                    if (/* true HWL || */ mmax)
                     {
                         if (score > bestScore)
                         {
@@ -1344,6 +1349,10 @@ namespace Minimax
                         }
                         
                     }
+/*
+		    // I don't think these checks should be here;
+		    // if you want to keep them, put them in the static eval fct, not here
+		    // the branches should NOT return immediately: this skips trying remaining moves!! -- HWL
                     // IF TOP LEFT CELL (1,1) IS EMPTY 
                     else if (copy.IsTopLeftEmpty() == true)
                     {
@@ -1459,7 +1468,8 @@ namespace Minimax
                         }
                        
                     }
-
+*/
+		    
                     // ************************************************************************************************
                     // ************************************************************************************************
                     // ***************** END OF PRIORITY MOVES - PRIORITISE PRIME POSITIONS ON BOARD  *****************

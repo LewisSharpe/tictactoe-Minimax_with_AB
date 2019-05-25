@@ -10,6 +10,7 @@ namespace Minimax
     // GAME EXECUTION CLASS
     class Game
     {
+        bool stopMe = false;
         GameBoard<counters> board = new GameBoard<counters>(counters.EMPTY);
         GameBoard<int> scoreBoard = new GameBoard<int>(21);
 
@@ -85,6 +86,14 @@ namespace Minimax
                 Console.WriteLine("The game is a draw.");
                 Program.Main();
             }
+	    if (stopMe) {
+	      stopwatch_minimax.Stop();
+	      Console.WriteLine("**HWL One move made. ");
+	      Console.WriteLine("**HWL elapsed time for one move: " + stopwatch_minimax.Elapsed + Environment.NewLine + "-------------------------------------------------------");
+	      Console.ReadLine();
+	    } else {
+	      stopMe = true;
+	    }
             PlayGame(otherPlayer, currentPlayer);
             
         }
