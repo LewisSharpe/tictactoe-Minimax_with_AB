@@ -43,16 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AIPlayer.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="GameBoard.cs" />
-    <Compile Include="HumanPlayer.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="AIPlayer_TPL.cs" />
+    <Compile Include="Game_TPL.cs" />
+    <Compile Include="GameBoard_TPL.cs" />
+    <Compile Include="HumanPlayer_TPL.cs" />
+    <Compile Include="Player_TPL.cs" />
+    <Compile Include="Program_TPL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
