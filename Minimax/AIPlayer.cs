@@ -11,6 +11,8 @@ namespace Minimax
         public int ply = 0;    // start depth for search (should be 0)
         public int maxPly = 1; // max depth for search
         GameBoard<counters> copy;
+        public int alpha = Consts.MIN_SCORE;
+        public int beta = Consts.MAX_SCORE;
         public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
         public AIPlayer(counters _counter) : base(_counter) { }
@@ -39,37 +41,11 @@ namespace Minimax
             // Do work
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> result;
-            result = Minimax(board, counter, ply, positions, true, scoreBoard, ref cont); // 0,0
+            result = Minimax(board, counter, ply, positions, true, scoreBoard, ref cont, alpha, beta); // 0,0
             int score = result.Item1;
             board.DisplayBoard();
             // Stop timing.
             stopwatch.Stop();
-            // Write result.
-           /* Console.WriteLine("========================================================================================================================" +
-            "SELECTED MOVE: (ply=" + ply + ")" + Environment.NewLine + "------------------------------------------------------------------------------------------------------------------------" +
-            "position: " + result.Item2 + "; " +
-            "for player: " + counter + "; " +
-            "score: " + result.Item1 + "; " +
-            "positions visited " + cont + "; " +
-            "depth level: " + ply + Environment.NewLine +
-            "elapsed time for move: " + stopwatch.Elapsed + "; " +
-            "no. of remaining moves left: " + availableMoves.Count + Environment.NewLine +
-            "two in a row detected at: " + "" +
-            "Cell 1: " + IsLeftofTwo(board, counter) + ", " + "Cell 2: " + IsRightofTwo(board, counter)
-            + Environment.NewLine +
-            "build on two-in-row? " + "left: " + copy.IsTwoLeftNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoLeftNeighbour(board, counter) +
-            ", right: " + copy.IsTwoRightNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoRightNeighbour(board, counter) + Environment.NewLine +
-            "top: " + copy.IsTwoTopNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoTopNeighbour(board, counter) +
-            ", bottom: " + copy.IsTwoBottomNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoBottomNeighbour(board, counter) + Environment.NewLine
-             + "build on one-in-row? " + "left: " + copy.IsOneLeftNeighbourEmpty(board, counter) + " at position " + copy.PrintOneLeftNeighbour(board, counter) +
-            ", right: " + copy.IsOneRightNeighbourEmpty(board, counter) + " at position " + copy.PrintOneRightNeighbour(board, counter) + Environment.NewLine +
-            "top: " + copy.IsOneTopNeighbourEmpty(board, counter) + " at position " + copy.PrintOneTopNeighbour(board, counter) +
-            ", bottom: " + copy.IsOneBottomNeighbourEmpty(board, counter) + " at position " + copy.PrintOneBottomNeighbour(board, counter) + Environment.NewLine +
-            "build on two-in-row?:" + " with horzi gap? " + copy.IsTwoWithHorziGapEmpty(board, counter) + " at position " + copy.PrintTwoWithHorziGap(board, counter) +
-             ", with vertical gap?: " + copy.IsTwoWithVerticalGapEmpty(board, counter) + " at position " + copy.PrintTwoWithVerticalGap(board, counter));
-            Console.WriteLine("========================================================================================================================");
-        */
-            //  Console.ReadLine();
             // Return positions
             return result.Item2;
         }
@@ -84,7 +60,7 @@ namespace Minimax
             {
                 return counters.NOUGHTS;
             }
-        }       
+        }
         // SPECIFY DIRECTION
         public int GetNumForDir(int startSq, int dir, GameBoard<counters> board, counters us)
         {
@@ -308,9 +284,9 @@ namespace Minimax
             return new Tuple<int, int>(0, 0);
         }
 
-            // SCORE BOARD SUMMARY PRINT USED FOR MINIMAX MOVES FOR DEBUGGING ONLY
-            public Tuple<counters, Tuple<int, int>, Tuple<int, int>, int, int, int> PlyScoringSummary(GameBoard<counters> board, GameBoard<int> scoreBoard) {
-	    int bestScore = Consts.MIN_SCORE;
+        // SCORE BOARD SUMMARY PRINT USED FOR MINIMAX MOVES FOR DEBUGGING ONLY
+        public Tuple<counters, Tuple<int, int>, Tuple<int, int>, int, int, int> PlyScoringSummary(GameBoard<counters> board, GameBoard<int> scoreBoard) {
+            int bestScore = Consts.MIN_SCORE;
             int ply = 2;
             Tuple<int, int> positions = new Tuple<int, int>(2, 2);
             Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);
@@ -328,7 +304,7 @@ namespace Minimax
         }
 
         // SCORE BOARD SUMMARY PRINT USED FOR PRIORITY MOVES FOR DEBUGGING ONLY
-        public Tuple<Tuple<int,int>, counters, int, Tuple<int, int>, int, int, int> PriorityScoringSummary(GameBoard<counters> board, GameBoard<int> scoreBoard)
+        public Tuple<Tuple<int, int>, counters, int, Tuple<int, int>, int, int, int> PriorityScoringSummary(GameBoard<counters> board, GameBoard<int> scoreBoard)
         {
             int bestScore = Consts.MIN_SCORE;
             int ply = 2;
@@ -346,7 +322,7 @@ namespace Minimax
                 "positions visited: " + cont + Environment.NewLine,
                 "depth level: " + ply + Environment.NewLine +
                 "-----------------------------------------------------------------------------------------------------------------------"));
-            return new Tuple<Tuple<int, int>, counters, int, Tuple<int, int>, int, int, int> (positions, counter, score, bestMove, bestScore, cont, ply);
+            return new Tuple<Tuple<int, int>, counters, int, Tuple<int, int>, int, int, int>(positions, counter, score, bestMove, bestScore, cont, ply);
         }
 
         // SCORE BOARD SUMMARY PRINT FOR RANDOM MOVES USED FOR DEBUGGING ONLY
@@ -371,7 +347,7 @@ namespace Minimax
                 "depth level: " + ply + Environment.NewLine +
                 "------------------------------------------------------------------------------------------------------------=----------");
             return new Tuple<Tuple<int, int>, counters, int, Tuple<int, int>, int, int, int>(positions, counter, score, bestMove, bestScore, cont, ply);
-        } 
+        }
 
         // IS THERE A WINNING THREE IN A ROW?
         public int EvalForWin(GameBoard<counters> board, int ourindex, counters us)
@@ -575,39 +551,40 @@ namespace Minimax
             // ************************* ASSIGNING LESSER VALUE TO EDGES ***********************************
             // ************************************************************************************************
             // ************************************************************************************************
-          
+
             // ************************************************************************************************
             // ************************************************************************************************
             // ************************* END OF ASSIGNING LESSER VALUE TO EDGES *******************************
             // ************************************************************************************************
             // ************************************************************************************************
 
-          /*  // if one in a row, if two in a row found, three in a row found etc....
-            if (score == -1000 || score == 1000)
-            {
-                board.DisplayBoard();
-                //         Console.Write("three: " + score);
-                //  Console.ReadLine();
+            /*  // if one in a row, if two in a row found, three in a row found etc....
+              if (score == -1000 || score == 1000)
+              {
+                  board.DisplayBoard();
+                  //         Console.Write("three: " + score);
+                  //  Console.ReadLine();
 
-                return score * Consts.MAX_SCORE;
-            } 
-          */
+                  return score * Consts.MAX_SCORE;
+              } 
+            */
             if (two_score != 0)
             {
-               // board.DisplayBoard();
+                // board.DisplayBoard();
                 //       Console.Write("two: " + two_score);
                 //Console.ReadLine();
                 return two_score;
             }
             if (one_score != 0)
             {
-//board.DisplayBoard();
+                //board.DisplayBoard();
                 //       Console.Write("one: " + one_score);
                 return one_score;
             }
             else
                 return score = 10;
         }
+
         public Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> MakeRandomMove(GameBoard<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard<int> scoreBoard, ref int cont)
         {
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
@@ -655,16 +632,16 @@ namespace Minimax
                        "build on two-in-row?:" + " with horzi gap? " + copy.IsTwoWithHorziGapEmpty(board, counter) + " at position " + copy.PrintTwoWithHorziGap(board, counter) +
                         ", with vertical gap?: " + copy.IsTwoWithVerticalGapEmpty(board, counter) + " at position " + copy.PrintTwoWithVerticalGap(board, counter));
             Console.WriteLine("========================================================================================================================");
-           // Console.ReadLine();
+            // Console.ReadLine();
             // assign score to correct cell in score
             scoreBoard[randMoveX, randMoveY] = score;
-           // RandScoringSummary(board, scoreBoard);
-          //  scoreBoard.DisplayBoard();
-         // Console.ReadLine();
+            // RandScoringSummary(board, scoreBoard);
+            //  scoreBoard.DisplayBoard();
+            // Console.ReadLine();
             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard);
         }
         // MINIMAX FUNCTION
-        public Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> Minimax(GameBoard<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard<int> scoreBoard, ref int cont)
+        public Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> Minimax(GameBoard<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard<int> scoreBoard, ref int cont, int alpha, int beta)
         {
             // decs
             counters us = Flip(counter);
@@ -697,7 +674,7 @@ namespace Minimax
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(-1000, positions, board, scoreBoard);
             }
-            
+
             if (FindTwoInARow(board, counter) && Two(board, counter) && copy[Move.Item1, Move.Item2] == counters.EMPTY)
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(100, positions, board, scoreBoard);
@@ -708,21 +685,21 @@ namespace Minimax
             }
             else if (FindOneInARow(board, ourindex, this.otherCounter) && One(board, counter) && copy[Move.Item1, Move.Item2] == counters.EMPTY)
             {
-            return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(100, positions, board, scoreBoard);
+                return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(100, positions, board, scoreBoard);
             }
             else if (FindOneInARow(board, ourindex, this.otherCounter) && One(board, this.otherCounter) && copy[Move.Item1, Move.Item2] == counters.EMPTY)
             {
-            return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(-100, positions, board, scoreBoard);
+                return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(-100, positions, board, scoreBoard);
             }
-            
+
             // CHECK DEPTH
             else if (ply > maxPly)
             {
                 score = EvalCurrentBoard(board, scoreBoard, ourindex, us); // call stat evaluation func - takes board and player and gives score to that player
                 return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard);
             }
-	    // Console.WriteLine("HWL: Is this line reached?");
-	    // Console.ReadLine(); // HWL: even with a ReadLine here, the program runs to the end
+            // Console.WriteLine("HWL: Is this line reached?");
+            // Console.ReadLine(); // HWL: even with a ReadLine here, the program runs to the end
             // place random move
             if (board.IsEmpty()) // if board is empty then play random move
             {
@@ -738,27 +715,25 @@ namespace Minimax
                 if (FindOneInARow(board, ourindex, us + 1)) // oneinarow opponent?
                     score = -10; // oneinrow confirmed
 
-                MakeRandomMove(board, counter, ply, positions, !mmax, scoreBoard, ref cont);
-                
-              //  Console.ReadLine();
+               // MakeRandomMove(board, counter, ply, positions, !mmax, scoreBoard, ref cont);
+
+                //  Console.ReadLine();
                 return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard);
             }
-            // else run priority moves and Minimax
-            else if (board.IsMiddleEmpty() == true || board.IsBottomLeftEmpty() == true || board.IsBottomRightEmpty() == true || board.IsTopLeftEmpty() == true || board.IsTopRightEmpty() == true)
-            {
+           
                 // make copy original board
                 copy = board.Clone(); // make copy board
-                // copy.DisplayBoard(); // display copy board
-                                     // cell priority - favour centre and corners
+                                      // copy.DisplayBoard(); // display copy board
+                                      // cell priority - favour centre and corners
                 for (int i = 0; i < availableMoves.Count; i++)
                 {
                     Move = availableMoves[i]; // current move
                                               // cell priority - favour centre and corners
-		    // HWL: where do you actual place the piece for the position in Move? you don't do this here, just pass Move to the call of Minimax below; in the recursive call you then overwrite the input argument with a random move (see comment at start of Minimax; so you are actually not considering Move at all!
-		    // HWL: try placing the piece here, and below just use the score
+                                              // HWL: where do you actual place the piece for the position in Move? you don't do this here, just pass Move to the call of Minimax below; in the recursive call you then overwrite the input argument with a random move (see comment at start of Minimax; so you are actually not considering Move at all!
+                                              // HWL: try placing the piece here, and below just use the score
                     copy[Move.Item1, Move.Item2] = counter; // place counter
                                                             // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
-		    
+
                     // ************************************************************************************************
                     // ************************************************************************************************
                     // ************************************** MAIN MINIMAX WORK ***************************************
@@ -766,10 +741,11 @@ namespace Minimax
                     // ************************************************************************************************
 
                     // list defined in Minimax declarations
-                    Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> result = Minimax(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, ref cont); /* swap player */ // RECURSIVE call  
-                                                                                                                                                                                        // trying to prevent preventing cell overwrite
+                    Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>> result = Minimax(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, ref cont, alpha, beta); /* swap player */ // RECURSIVE call  
+               
+                    // trying to prevent preventing cell overwrite
                     copy[Move.Item1, Move.Item2] = counters.EMPTY; /*  counter; */ // HWL: remove counter that was tried in this iteration
-                                                            // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
+                                                                                   // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
                     score = -result.Item1; // assign score
                     positions = result.Item2; // present position (x,y)
@@ -780,18 +756,17 @@ namespace Minimax
                     // assign score to correct cell in score
                     scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
                     // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
-               /*     Console.WriteLine(mmax.ToString() +
-                " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
-				      ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
-				      bestScore, bestMove.Item1, bestMove.Item2);
-                 */
+                     /*    Console.WriteLine(mmax.ToString() +
+                     " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
+                           ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
+                           bestScore, bestMove.Item1, bestMove.Item2);
+                           */
                     //   scoreBoard.DisplayBoard();
-		    if (score == Consts.MIN_SCORE || score == Consts.MAX_SCORE) {
-		      Console.WriteLine("**HWL CLAIM: putting piece {0} at position ({1},{2}) gives 3-in-a-row:",
-					counter, Move.Item1, Move.Item2);
-		     // copy.DisplayBoard();
-		    }
-                    // Console.ReadLine();
+                    if (score == Consts.MIN_SCORE || score == Consts.MAX_SCORE) {
+                     /*   Console.WriteLine("**HWL CLAIM: putting piece {0} at position ({1},{2}) gives 3-in-a-row:",
+                              counter, Move.Item1, Move.Item2);
+                              */
+                                   }
 
                     // ************************************************************************************************
                     // ************************************************************************************************
@@ -800,33 +775,44 @@ namespace Minimax
                     // ************************************************************************************************
 
                     // ************************************************************************************************
-                    // ************************************************************************************************
                     // ************************* WHEN TO MAXIMISE, WHEN TO MINIMISE ***********************************
+                    // ******************************* WITH ALPHA-BETA PRUNING ****************************************
                     // ************************************************************************************************
                     // ************************************************************************************************
-                    // if maximising
-		    // HWL: I'm not sure you need this if: negating the score above (-score), should reflect the switching between player and opponent; the result should always be the max
+
+                    // if maximising                  
                     if (/* true HWL || */ mmax)
-                    {
-                        if (score > bestScore)
                         {
-                            bestMove = Move;
-                            bestScore = score;
+                        alpha = score;
+                            if (score > bestScore)
+                            {
+                                bestMove = Move;
+                                bestScore = score;
+                            }
+                            if (alpha > bestScore)
+                            {
+                                bestMove = Move;
+                                bestScore = alpha;
+                            }
                         }
-                    }
-                    // if minimising
-                    else
-                    {
-                        if (bestScore > score)
+                        // if minimising
+                        else
                         {
-                            bestMove = Move;
-                            bestScore = score;
-                        }
+                            if (bestScore > score)
+                            {
+                                bestMove = Move;
+                                bestScore = score;
+                            }
+                            if (beta <= alpha)
+                                bestScore = alpha;
+                                                                                                                                                   
+                        return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(bestScore, positions, board, scoreBoard);
                     }
+
                     // ************************************************************************************************
                     // ************************************************************************************************
                     // ********************* END OF WHEN TO MAXIMISE, WHEN TO MINIMISE ********************************
-                    // ************************************************************************************************
+                    // ******************************* WITH ALPHA-BETA PRUNING ****************************************
                     // ************************************************************************************************
 
                     // ************************************************************************************************
@@ -847,7 +833,7 @@ namespace Minimax
                         nodelist.Add((new Tuple<int, int>(3, 5)));
                         nodelist.Add((new Tuple<int, int>(5, 3)));
                         nodelist.Add((new Tuple<int, int>(5, 5)));
-                       // copy.DisplayBoard();
+                        // copy.DisplayBoard();
 
                         for (int indexer = 0; indexer < nodelist.Count; indexer++)
                         {
@@ -855,139 +841,19 @@ namespace Minimax
                             int y = nodelist[indexer].Item2;
                             if (copy[x, y] == counters.EMPTY)
                             {
-                             //   cont = 1;
+                                //   cont = 1;
                                 // assign score to correct cell in score
                                 // make copy of board
                                 scoreBoard[x, y] = score;
-                           //     scoreBoard.DisplayBoard();
-                            //    PriorityScoringSummary(board, scoreBoard);
-                             // Console.ReadLine();
-                                return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, nodelist[indexer], board, scoreBoard); // return
-                            }
-                         }
-                        
-                    }
-/*
-		    // I don't think these checks should be here;
-		    // if you want to keep them, put them in the static eval fct, not here
-		    // the branches should NOT return immediately: this skips trying remaining moves!! -- HWL
-                    // IF TOP LEFT CELL (1,1) IS EMPTY 
-                    else if (copy.IsTopLeftEmpty() == true)
-                    {
-                        // if top left (1,1) then choose the defined nearest positions to the cell in list
-                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
-                        nodelist.Add((new Tuple<int, int>(1, 1)));
-                        nodelist.Add((new Tuple<int, int>(1, 2)));
-                        nodelist.Add((new Tuple<int, int>(2, 2)));
-                        nodelist.Add((new Tuple<int, int>(2, 1)));
-                        copy.DisplayBoard();
-
-                        for (int indexer = 0; indexer < nodelist.Count; indexer++)
-                        {
-
-                            int x = nodelist[indexer].Item1;
-                            int y = nodelist[indexer].Item2;
-                            if (copy[x, y] == counters.EMPTY)
-                            {
-                        //      cont = 1;
-                                // assign score to correct cell in score
-                                scoreBoard[x, y] = score;
-                                scoreBoard.DisplayBoard();
-                                PriorityScoringSummary(board, scoreBoard);
-                          //    Console.ReadLine();
-                                return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, nodelist[indexer], board, scoreBoard); // return
-                            }
-
-                        }
-
-                    }
-                    // IF TOP RIGHT (7,1) IS EMPTY
-                    else if (copy.IsTopRightEmpty() == true)
-                    {
-                        // if top right (7,1) then choose the defined nearest positions to the cell in list
-                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
-                        nodelist.Add((new Tuple<int, int>(7, 1)));
-                        nodelist.Add((new Tuple<int, int>(6, 1)));
-                        nodelist.Add((new Tuple<int, int>(7, 2)));
-                        nodelist.Add((new Tuple<int, int>(6, 2)));
-                        copy.DisplayBoard();
-                        for (int indexer = 0; indexer < nodelist.Count; indexer++)
-                        {
-
-                            int x = nodelist[indexer].Item1;
-                            int y = nodelist[indexer].Item2;
-                            if (copy[x, y] == counters.EMPTY)
-                            {
-                          //    cont = 1;
-                                // assign score to correct cell in score
-                                scoreBoard[x, y] = score;
-                                scoreBoard.DisplayBoard();
-                                PriorityScoringSummary(board, scoreBoard);
-                         //     Console.ReadLine();
+                                //     scoreBoard.DisplayBoard();
+                                //    PriorityScoringSummary(board, scoreBoard);
+                                // Console.ReadLine();
+                                
                                 return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, nodelist[indexer], board, scoreBoard); // return
                             }
                         }
-                        
                     }
-                    // IF BOTTOM LEFT (1,7) IS EMPTY
-                    else if (copy.IsBottomLeftEmpty() == true)
-                    {
-                        // if bottom left (1,7) then choose the defined nearest positions to the cell in list
-                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
-                        nodelist.Add((new Tuple<int, int>(1, 7)));
-                        nodelist.Add((new Tuple<int, int>(1, 6)));
-                        nodelist.Add((new Tuple<int, int>(2, 6)));
-                        nodelist.Add((new Tuple<int, int>(2, 7)));
-                        copy.DisplayBoard();
 
-                        for (int indexer = 0; indexer < nodelist.Count; indexer++)
-                        {
-                            int x = nodelist[indexer].Item1;
-                            int y = nodelist[indexer].Item2;
-                            if (copy[x, y] == counters.EMPTY)
-                            {
-                        //      cont = 1;
-                                // assign score to correct cell in score
-                                scoreBoard[x, y] = score;
-                                scoreBoard.DisplayBoard();
-                                PriorityScoringSummary(board, scoreBoard);
-                       //       Console.ReadLine();
-                                return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, nodelist[indexer], board, scoreBoard); // return
-                            }
-                        }
-                        
-
-                    }
-                    // IF BOTTOM RIGHT (7,7) IS EMPTY
-                    else if (copy.IsBottomRightEmpty() == true)
-                    {
-                        // if bottom right (7,7) then choose the defined nearest positions to the cell in list
-                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
-                        nodelist.Add((new Tuple<int, int>(7, 7)));
-                        nodelist.Add((new Tuple<int, int>(7, 6)));
-                        nodelist.Add((new Tuple<int, int>(6, 6)));
-                        nodelist.Add((new Tuple<int, int>(6, 7)));
-                        copy.DisplayBoard();
-
-                        for (int indexer = 0; indexer < nodelist.Count; indexer++)
-                        {
-                            int x = nodelist[indexer].Item1;
-                            int y = nodelist[indexer].Item2;
-                            if (copy[x, y] == counters.EMPTY)
-                            {
-                   //           cont = 1;
-                                // assign score to correct cell in score
-                                scoreBoard[x, y] = score;
-                                scoreBoard.DisplayBoard();
-                                PriorityScoringSummary(board, scoreBoard);
-                              // Console.ReadLine();
-                                return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, nodelist[indexer], board, scoreBoard); // return
-                            }
-                        }
-                       
-                    }
-*/
-		    
                     // ************************************************************************************************
                     // ************************************************************************************************
                     // ***************** END OF PRIORITY MOVES - PRIORITISE PRIME POSITIONS ON BOARD  *****************
@@ -995,7 +861,7 @@ namespace Minimax
                     // ************************************************************************************************
                     else
                     {
-                       
+
                         // ************************************************************************************************
                         // ************************************************************************************************
                         // ***************** PRIORITY MOVES - CHECKING NEIGHBOURING CELLS TO EXISTING COUNTERS ************
@@ -1021,7 +887,7 @@ namespace Minimax
 
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                        //  Console.ReadLine();
+                                            //  Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return
                                         }
                                     }
@@ -1045,7 +911,7 @@ namespace Minimax
                                             score = -100;
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                        //    Console.ReadLine();
+                                            //    Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1070,7 +936,7 @@ namespace Minimax
                                             score = 100;
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                      //      Console.ReadLine();
+                                            //      Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1094,9 +960,9 @@ namespace Minimax
                                         {
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                       //     Console.ReadLine();
+                                            //     Console.ReadLine();
                                             score = -100;
-                                                                                     return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
                                 }
@@ -1119,9 +985,9 @@ namespace Minimax
                                         {
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                          //Console.ReadLine();
+                                            //Console.ReadLine();
                                             score = 100;
-                                                                                     return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
+                                            return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
                                 }
@@ -1145,7 +1011,7 @@ namespace Minimax
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
                                             score = -100;
-                                  //        Console.ReadLine();
+                                            //        Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1170,7 +1036,7 @@ namespace Minimax
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
                                             score = 100;
-                           //               Console.ReadLine();
+                                            //               Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1195,7 +1061,7 @@ namespace Minimax
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
                                             score = -100;
-                             //             Console.ReadLine();
+                                            //             Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1220,7 +1086,7 @@ namespace Minimax
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
                                             // score = 1000;
-                              //            Console.ReadLine();
+                                            //            Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1245,7 +1111,7 @@ namespace Minimax
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
                                             // score = -1000;
-                                  //        Console.ReadLine();
+                                            //        Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1270,7 +1136,7 @@ namespace Minimax
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
                                             // score = 1000;
-                                 //         Console.ReadLine();
+                                            //         Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1295,7 +1161,7 @@ namespace Minimax
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
                                             // score = -1000;
-                               //           Console.ReadLine();
+                                            //           Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1320,7 +1186,7 @@ namespace Minimax
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
                                             // score = 1000;
-                            //              Console.ReadLine();
+                                            //              Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1345,7 +1211,7 @@ namespace Minimax
                                             // score = -1000;
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                            //               Console.ReadLine();
+                                            //               Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1369,8 +1235,8 @@ namespace Minimax
                                         {
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                       //   score = 1000;
-                           //               Console.ReadLine();
+                                            //   score = 1000;
+                                            //               Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1395,7 +1261,7 @@ namespace Minimax
                                             // score = -1000;
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                           //               Console.ReadLine();
+                                            //               Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1420,7 +1286,7 @@ namespace Minimax
                                             // score = -1000;
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                           //               Console.ReadLine();
+                                            //               Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1432,7 +1298,7 @@ namespace Minimax
                         {
                             score = -100;
                             Tuple<int, int> neigh = copy.PrintTwoWithHorziGap(board, counter);
-                           if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
                             {
                                 if (neigh.Item2 < 0 & neigh.Item2 > 7)
                                 {
@@ -1445,7 +1311,7 @@ namespace Minimax
                                             // score = -1000;
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                           //               Console.ReadLine();
+                                            //               Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1470,7 +1336,7 @@ namespace Minimax
                                             // score = -1000;
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                           //               Console.ReadLine();
+                                            //               Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
@@ -1495,71 +1361,31 @@ namespace Minimax
                                             // score = -1000;
                                             // assign score to correct cell in score
                                             scoreBoard[neigh.Item1, neigh.Item2] = score;
-                             //             Console.ReadLine();
+                                            //             Console.ReadLine();
                                             return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(score, positions, board, scoreBoard); // return return
                                         }
                                     }
                                 }
-                                
+
                             }
 
-                        } 
+                        }
                     }
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    // *********** END OF PRIORITY MOVES - CHECKING NEIGHBOURING CELLS TO EXISTING COUNTERS ***********
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    cont++; // increment positions visited
-              
-                }
+                        // ************************************************************************************************
+                        // ************************************************************************************************
+                        // *********** END OF PRIORITY MOVES - CHECKING NEIGHBOURING CELLS TO EXISTING COUNTERS ***********
+                        // ************************************************************************************************
+                        // ************************************************************************************************
+                        cont++; // increment positions visited
+
+                    }
+                
+                // only if ply is 0 then
+                // display score board for potential moves on ONLY this current iteration board
+                // scoreBoard.DisplayBoard();
+                // PlyScoringSummary(board, scoreBoard);
+                //  Console.ReadLine();
+                return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(bestScore, bestMove, board, scoreBoard); // return
             }
-            // only if ply is 0 then
-            // display score board for potential moves on ONLY this current iteration board
-           // scoreBoard.DisplayBoard();
-           // PlyScoringSummary(board, scoreBoard);
-        //  Console.ReadLine();
-            return new Tuple<int, Tuple<int, int>, GameBoard<counters>, GameBoard<int>>(bestScore, bestMove, board, scoreBoard); // return
         }
     }
-}
-
-/*
-=============================================================================================
-Next steps: w/c 05/05/19
-=============================================================================================
----------------------------------------------------------------------------------------------
-   - STILL EXISTING
----------------------------------------------------------------------------------------------
-Random
-Prune
-    
-    1. Print Score Board function - print score boards for all possible remaning moves from one input board (if ply is 0 or/and 1)
-Purpose - check if error is in putting scores together
-- must be a new instance of gameboard where int is taken rather than counters
-- parameterised GameBoard <T> - type parameter instantiate to int or counters
-- class GameBoard <T> - replace all counter references with T
-     ---> then either, 1) board = new GameBoard<int> and 2) board = new GameBoard<counters>
-- change DisplayBoard to take either int or counters
-- print boards for all depth levels
-    ---> top, second, third, fourth, etc
-- if symbol already there, place empty on score board
-2. Check instance where get 1,1 and use that board as hard coded for unit test, and analyse why it places it here.
-3. why miss three in a row
- - define three in a row doesnt find that config?
- - the search never reaches this point?
- - test three in a row in isolation
- - XX-XX why does it miss this
-4. connected two in a row 
----------------------------------------------------------------------------------------------
-   - PARTIALLY ACHIEVED
----------------------------------------------------------------------------------------------
-
-
----------------------------------------------------------------------------------------------
-  - COMPLETED
----------------------------------------------------------------------------------------------
-
-=============================================================================================
-*/
-
