@@ -103,6 +103,7 @@ namespace Minimax
         {
             // menu centered
             Console.Clear();
+            /*
             string welcome = "Welcome to Tic Tac Toe! HWL TEST VERSION";
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (welcome.Length / 2)) + "}", welcome));
             string menu = "Menu:";
@@ -115,6 +116,7 @@ namespace Minimax
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o3.Length / 2)) + "}", o3));
             string o4 = "4. Exit";
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o4.Length / 2)) + "}", o4));
-        }
+            */
+       }
     }
 }
