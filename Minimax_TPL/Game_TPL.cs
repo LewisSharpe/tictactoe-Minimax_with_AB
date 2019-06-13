@@ -25,6 +25,8 @@ namespace Minimax_TPL
             Stopwatch stopwatch_minimax = new Stopwatch();
             // Begin timing.
             stopwatch_minimax.Start();
+            board[7, 1] = counters.CROSSES;
+            board[6, 2] = counters.CROSSES;
             Tuple<int, int> selectedMove = currentPlayer_TPL.GetMove(board, scoreBoard);
             board[selectedMove.Item1, selectedMove.Item2] = currentPlayer_TPL.counter;
             Tuple<int, int> centreof3inarow = new Tuple<int, int> (0,0);

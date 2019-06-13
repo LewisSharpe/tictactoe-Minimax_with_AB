@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
@@ -12,7 +12,6 @@ namespace Minimax_TPL
         // PUBLIC DECS
         public int ply = 0;    // start depth for search (should be 0)
         public int maxPly = 1; // max depth for search
-        GameBoard_TPL<counters> copy;
         public int alpha = Consts.MIN_SCORE;
         public int beta = Consts.MAX_SCORE;
         public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
@@ -37,20 +36,13 @@ namespace Minimax_TPL
         // GET MOVE
         public override Tuple<int, int> GetMove(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
         {
-            bool mmax = true;
             // Create new stopwatch.
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing.
             stopwatch.Start();
             // Do work
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
-            var tasks = new List<Task>();
             Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>> result;
-            foreach (Tuple<int, int> m in availableMoves)
-            {
-                var tmp = m;
-                tasks.Add(Task.Factory.StartNew(() => Minimax(board, counter, ply, positions, mmax, scoreBoard, alpha, beta)));
-            }
             result = Minimax(board, counter, ply, positions, true, scoreBoard, alpha, beta); // 0,0
             int score = result.Item1;
             board.DisplayBoard();
@@ -295,7 +287,8 @@ namespace Minimax_TPL
         }
 
         // SCORE BOARD SUMMARY PRINT USED FOR MINIMAX MOVES FOR DEBUGGING ONLY
-        public Tuple<counters, Tuple<int, int>, Tuple<int, int>, int, int, int> PlyScoringSummary(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard) {
+        public Tuple<counters, Tuple<int, int>, Tuple<int, int>, int, int, int> PlyScoringSummary(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
+        {
             int bestScore = Consts.MIN_SCORE;
             int ply = 2;
             Tuple<int, int> positions = new Tuple<int, int>(2, 2);
@@ -409,24 +402,24 @@ namespace Minimax_TPL
             // ************************************************************************************************
 
             // assign more weight to score with individual cell moves with prominent positioning
-            if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us))
+            if (board.IsMiddleEmpty() == true & FindTwoInARow(board, us))
             {
                 score = 100;
                 // Player_TPL win?
-                copy[4, 4] = counter;
-                if (copy[4, 4] == counter)
+                board[4, 4] = counter;
+                if (board[4, 4] == counter)
                 {
                     return score = 125; // Player_TPL win confirmed
                 }
                 return score = 10;
             }
             // assign more weight to score with individual cell moves with prominent positioning
-            if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us))
+            if (board.IsMiddleEmpty() == true & FindTwoInARow(board, us))
             {
                 score = 100;
                 // Player_TPL win?
-                copy[4, 4] = counter;
-                if (copy[4, 4] == counter)
+                board[4, 4] = counter;
+                if (board[4, 4] == counter)
                 {
                     // assign score to correct cell in score
                     scoreBoard[4, 4] = score;
@@ -434,12 +427,12 @@ namespace Minimax_TPL
                 }
                 return score = 10;
             }
-            else if (copy.IsMiddleEmpty() == true & FindTwoInARow(board, us + 1))
+            else if (board.IsMiddleEmpty() == true & FindTwoInARow(board, us + 1))
             {
                 score = -100;
                 // Player_TPL win?
-                copy[4, 4] = counter;
-                if (copy[4, 4] == counter)
+                board[4, 4] = counter;
+                if (board[4, 4] == counter)
                 {
                     // assign score to correct cell in score
                     scoreBoard[4, 4] = score;
@@ -447,12 +440,12 @@ namespace Minimax_TPL
                 }
                 return score = 10;
             }
-            if (copy.IsTopLeftEmpty() == true & FindTwoInARow(board, us))
+            if (board.IsTopLeftEmpty() == true & FindTwoInARow(board, us))
             {
                 score = 100;
                 // Player_TPL win?
-                copy[1, 1] = counter;
-                if (copy[1, 1] == counters.EMPTY)
+                board[1, 1] = counter;
+                if (board[1, 1] == counters.EMPTY)
                 {
                     // assign score to correct cell in score
                     scoreBoard[1, 1] = score;
@@ -460,12 +453,12 @@ namespace Minimax_TPL
                 }
                 return score = 10;
             }
-            else if (copy.IsTopLeftEmpty() == true & FindTwoInARow(board, us + 1))
+            else if (board.IsTopLeftEmpty() == true & FindTwoInARow(board, us + 1))
             {
                 score = -100;
                 // Player_TPL win?
-                copy[1, 1] = counter;
-                if (copy[1, 1] == counters.EMPTY)
+                board[1, 1] = counter;
+                if (board[1, 1] == counters.EMPTY)
                 {
                     // assign score to correct cell in score
                     scoreBoard[1, 1] = score;
@@ -473,12 +466,12 @@ namespace Minimax_TPL
                 }
                 return score = 10;
             }
-            if (copy.IsTopRightEmpty() == true & FindTwoInARow(board, us))
+            if (board.IsTopRightEmpty() == true & FindTwoInARow(board, us))
             {
                 score = 100;
                 // Player_TPL win?
-                copy[7, 1] = counter;
-                if (copy[7, 1] == counters.EMPTY)
+                board[7, 1] = counter;
+                if (board[7, 1] == counters.EMPTY)
                 {
                     // assign score to correct cell in score
                     scoreBoard[7, 1] = score;
@@ -486,12 +479,12 @@ namespace Minimax_TPL
                 }
                 return score = 10;
             }
-            else if (copy.IsTopRightEmpty() == true & FindTwoInARow(board, us + 1))
+            else if (board.IsTopRightEmpty() == true & FindTwoInARow(board, us + 1))
             {
                 score = -100;
                 // Player_TPL win?
-                copy[7, 1] = counter;
-                if (copy[7, 1] == counters.EMPTY)
+                board[7, 1] = counter;
+                if (board[7, 1] == counters.EMPTY)
                 {
                     // assign score to correct cell in score
                     scoreBoard[7, 1] = score;
@@ -499,12 +492,12 @@ namespace Minimax_TPL
                 }
                 return score = 10;
             }
-            if (copy.IsBottomLeftEmpty() == true & FindTwoInARow(board, us))
+            if (board.IsBottomLeftEmpty() == true & FindTwoInARow(board, us))
             {
                 score = 100;
                 // Player_TPL win?
-                copy[1, 7] = counter;
-                if (copy[1, 7] == counters.EMPTY)
+                board[1, 7] = counter;
+                if (board[1, 7] == counters.EMPTY)
                 {
                     // assign score to correct cell in score
                     scoreBoard[1, 7] = score;
@@ -512,12 +505,12 @@ namespace Minimax_TPL
                 }
                 return score = 10;
             }
-            else if (copy.IsBottomLeftEmpty() == true & FindTwoInARow(board, us + 1))
+            else if (board.IsBottomLeftEmpty() == true & FindTwoInARow(board, us + 1))
             {
                 score = -100;
                 // Player_TPL win?
-                copy[1, 7] = counter;
-                if (copy[1, 7] == counters.EMPTY)
+                board[1, 7] = counter;
+                if (board[1, 7] == counters.EMPTY)
                 {
                     // assign score to correct cell in score
                     scoreBoard[1, 7] = score;
@@ -525,12 +518,12 @@ namespace Minimax_TPL
                 }
                 return score = 10;
             }
-            if (copy.IsBottomRightEmpty() == true & FindTwoInARow(board, us))
+            if (board.IsBottomRightEmpty() == true & FindTwoInARow(board, us))
             {
                 score = 100;
                 // Player_TPL win?
-                copy[7, 7] = counter;
-                if (copy[7, 7] == counters.EMPTY)
+                board[7, 7] = counter;
+                if (board[7, 7] == counters.EMPTY)
                 {
                     // assign score to correct cell in score
                     scoreBoard[7, 7] = score;
@@ -538,12 +531,12 @@ namespace Minimax_TPL
                 }
                 return score = 10;
             }
-            else if (copy.IsBottomRightEmpty() == true & FindTwoInARow(board, us + 1))
+            else if (board.IsBottomRightEmpty() == true & FindTwoInARow(board, us + 1))
             {
                 two_score = -100;
                 // Player_TPL win?
-                copy[7, 7] = counter;
-                if (copy[7, 7] == counters.EMPTY)
+                board[7, 7] = counter;
+                if (board[7, 7] == counters.EMPTY)
                 {
                     // assign score to correct cell in score
                     scoreBoard[7, 7] = score;
@@ -631,16 +624,16 @@ namespace Minimax_TPL
                        "no. of remaining moves left: " + availableMoves.Count + Environment.NewLine +
                        "two in a row detected at: " + "Cell 1: " + IsLeftofTwo(board, counter) + ", " + "Cell 2: " + IsRightofTwo(board, counter)
                        + Environment.NewLine +
-                       "build on two-in-row? " + "left: " + copy.IsTwoLeftNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoLeftNeighbour(board, counter) +
-                       ", right: " + copy.IsTwoRightNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoRightNeighbour(board, counter) + Environment.NewLine +
-                       "top: " + copy.IsTwoTopNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoTopNeighbour(board, counter) +
-                       ", bottom: " + copy.IsTwoBottomNeighbourEmpty(board, counter) + " at position " + copy.PrintTwoBottomNeighbour(board, counter) + Environment.NewLine
-                        + "build on one-in-row? " + "left: " + copy.IsOneLeftNeighbourEmpty(board, counter) + " at position " + copy.PrintOneLeftNeighbour(board, counter) +
-                       ", right: " + copy.IsOneRightNeighbourEmpty(board, counter) + " at position " + copy.PrintOneRightNeighbour(board, counter) + Environment.NewLine +
-                       "top: " + copy.IsOneTopNeighbourEmpty(board, counter) + " at position " + copy.PrintOneTopNeighbour(board, counter) +
-                       ", bottom: " + copy.IsOneBottomNeighbourEmpty(board, counter) + " at position " + copy.PrintOneBottomNeighbour(board, counter) + Environment.NewLine +
-                       "build on two-in-row?:" + " with horzi gap? " + copy.IsTwoWithHorziGapEmpty(board, counter) + " at position " + copy.PrintTwoWithHorziGap(board, counter) +
-                        ", with vertical gap?: " + copy.IsTwoWithVerticalGapEmpty(board, counter) + " at position " + copy.PrintTwoWithVerticalGap(board, counter));
+                       "build on two-in-row? " + "left: " + board.IsTwoLeftNeighbourEmpty(board, counter) + " at position " + board.PrintTwoLeftNeighbour(board, counter) +
+                       ", right: " + board.IsTwoRightNeighbourEmpty(board, counter) + " at position " + board.PrintTwoRightNeighbour(board, counter) + Environment.NewLine +
+                       "top: " + board.IsTwoTopNeighbourEmpty(board, counter) + " at position " + board.PrintTwoTopNeighbour(board, counter) +
+                       ", bottom: " + board.IsTwoBottomNeighbourEmpty(board, counter) + " at position " + board.PrintTwoBottomNeighbour(board, counter) + Environment.NewLine
+                        + "build on one-in-row? " + "left: " + board.IsOneLeftNeighbourEmpty(board, counter) + " at position " + board.PrintOneLeftNeighbour(board, counter) +
+                       ", right: " + board.IsOneRightNeighbourEmpty(board, counter) + " at position " + board.PrintOneRightNeighbour(board, counter) + Environment.NewLine +
+                       "top: " + board.IsOneTopNeighbourEmpty(board, counter) + " at position " + board.PrintOneTopNeighbour(board, counter) +
+                       ", bottom: " + board.IsOneBottomNeighbourEmpty(board, counter) + " at position " + board.PrintOneBottomNeighbour(board, counter) + Environment.NewLine +
+                       "build on two-in-row?:" + " with horzi gap? " + board.IsTwoWithHorziGapEmpty(board, counter) + " at position " + board.PrintTwoWithHorziGap(board, counter) +
+                        ", with vertical gap?: " + board.IsTwoWithVerticalGapEmpty(board, counter) + " at position " + board.PrintTwoWithVerticalGap(board, counter));
             Console.WriteLine("========================================================================================================================");
             // Console.ReadLine();
             // assign score to correct cell in score
@@ -685,19 +678,19 @@ namespace Minimax_TPL
                 return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(-1000, positions, board, scoreBoard);
             }
 
-            if (FindTwoInARow(board, counter) && Two(board, counter) && copy[Move.Item1, Move.Item2] == counters.EMPTY)
+            if (FindTwoInARow(board, counter) && Two(board, counter) && board[Move.Item1, Move.Item2] == counters.EMPTY)
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(100, positions, board, scoreBoard);
             }
-            else if (FindTwoInARow(board, this.otherCounter) && Two(board, this.otherCounter) && copy[Move.Item1, Move.Item2] == counters.EMPTY)
+            else if (FindTwoInARow(board, this.otherCounter) && Two(board, this.otherCounter) && board[Move.Item1, Move.Item2] == counters.EMPTY)
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(-100, positions, board, scoreBoard);
             }
-            else if (FindOneInARow(board, ourindex, this.otherCounter) && One(board, counter) && copy[Move.Item1, Move.Item2] == counters.EMPTY)
+            else if (FindOneInARow(board, ourindex, this.otherCounter) && One(board, counter) && board[Move.Item1, Move.Item2] == counters.EMPTY)
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(100, positions, board, scoreBoard);
             }
-            else if (FindOneInARow(board, ourindex, this.otherCounter) && One(board, this.otherCounter) && copy[Move.Item1, Move.Item2] == counters.EMPTY)
+            else if (FindOneInARow(board, ourindex, this.otherCounter) && One(board, this.otherCounter) && board[Move.Item1, Move.Item2] == counters.EMPTY)
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(-100, positions, board, scoreBoard);
             }
@@ -730,41 +723,31 @@ namespace Minimax_TPL
                 //  Console.ReadLine();
                 return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard);
             }
-            // else run priority moves and Minimax
-          
-                // make copy original board
-                copy = board.Clone(); // make copy board
-                                      // copy.DisplayBoard(); // display copy board
-                                      // cell priority - favour centre and corners
 
-
+            GameBoard_TPL<counters> copy;
+            // if ply is 0 or 1
+            if (ply == 0 || ply == 1)
+            {
                 /* Parallel version, using only 2 tasks */
                 int k = 2;
                 var options = new ParallelOptions() { MaxDegreeOfParallelism = k };
-                // if ply is 0 or 1
+
                 Parallel.For(0, availableMoves.Count, options, i =>
                 {
-                    // make copy 
-                    //board.Clone(); - ONE THAT IS PROCESSED, NOT THE ORIGINAL BOARD, less than the 0 or 1 parallel for loop, else sequential for loop
+                    copy = board.Clone();
                     Move = availableMoves[i]; // current move
                                               // cell priority - favour centre and corners
                                               // HWL: where do you actual place the piece for the position in Move? you don't do this here, just pass Move to the call of Minimax below; in the recursive call you then overwrite the input argument with a random move (see comment at start of Minimax; so you are actually not considering Move at all!
                                               // HWL: try placing the piece here, and below just use the score
-
                     copy[Move.Item1, Move.Item2] = counter; // place counter
-
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    // ************************************** MAIN MINIMAX WORK ***************************************
-                    // ************************************************************************************************
-                    // ************************************************************************************************
+                                                            // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
                     // list defined in Minimax declarations
                     Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>> result = Minimax(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, alpha, beta); /* swap Player_TPL */ // RECURSIVE call  
 
                     // trying to prevent preventing cell overwrite
                     copy[Move.Item1, Move.Item2] = counters.EMPTY; /*  counter; */ // HWL: remove counter that was tried in this iteration
-                                                                                   // GameBoard_TPL board0 = MakeMove(board, move); // copies board - parallel ready
+                                                                                   // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
                     score = -result.Item1; // assign score
                     positions = result.Item2; // present position (x,y)
@@ -778,624 +761,656 @@ namespace Minimax_TPL
                           bestScore, bestMove.Item1, bestMove.Item2);
                           */
                     //   scoreBoard.DisplayBoard();
-                    if (score == Consts.MIN_SCORE || score == Consts.MAX_SCORE)
-                    {
-                        /*   Console.WriteLine("**HWL CLAIM: putting piece {0} at position ({1},{2}) gives 3-in-a-row:",
-                                 counter, Move.Item1, Move.Item2);
-                                 */
-                    }
-                    Object my_object = new Object();
-                    // if maximising                  
-                    if (/* true HWL || */ mmax)
-                    {
-                        alpha = score;
-                        if (score > bestScore)
-                        {
-                            lock (my_object)
-                            {
-                                bestMove = Move;
-                                bestScore = score;
-                            }
-                        }
-                        if (alpha > bestScore)
-                        {
-                            lock (my_object)
-                            {
-                                bestMove = Move;
-                                bestScore = alpha;
-                                }
-                            }
-                    }
-                    // if minimising
-                    else
-                    {
-                        if (bestScore > score)
-                        {
-                            bestMove = Move;
-                            bestScore = score;
-                        }
-                        if (beta <= alpha)
-                            bestScore = alpha;
 
-                    }
-
-
-
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    // ******************************** END OF MAIN MINIMAX WORK **************************************
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-
-                    // ************************************************************************************************
-                    // ************************* WHEN TO MAXIMISE, WHEN TO MINIMISE ***********************************
-                    // ******************************* WITH ALPHA-BETA PRUNING ****************************************
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-
-
-
-
-
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    // ********************* END OF WHEN TO MAXIMISE, WHEN TO MINIMISE ********************************
-                    // ******************************* WITH ALPHA-BETA PRUNING ****************************************
-                    // ************************************************************************************************
-
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    // ***************** PRIORITY MOVES - PRIORITISE PRIME POSITIONS ON BOARD  ************************
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    // IF MIDDLE CELL (4,4) IS EMPTY
-                    if (copy.IsMiddleEmpty() == true)
-                    {
-                        // if middle (4,4) then choose the defined nearest positions to the cell in list
-                        List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
-                        nodelist.Add((new Tuple<int, int>(4, 4)));
-                        nodelist.Add((new Tuple<int, int>(3, 4)));
-                        nodelist.Add((new Tuple<int, int>(5, 4)));
-                        nodelist.Add((new Tuple<int, int>(3, 3)));
-                        nodelist.Add((new Tuple<int, int>(3, 5)));
-                        nodelist.Add((new Tuple<int, int>(5, 3)));
-                        nodelist.Add((new Tuple<int, int>(5, 5)));
-                        // copy.DisplayBoard();
-
-                        for (int indexer = 0; indexer < nodelist.Count; indexer++)
-                        {
-                            int x = nodelist[indexer].Item1;
-                            int y = nodelist[indexer].Item2;
-                            if (copy[x, y] == counters.EMPTY)
-                            {
-                                //   cont = 1;
-                                // assign score to correct cell in score
-                                // make copy of board
-                                scoreBoard[x, y] = score;
-                                //     scoreBoard.DisplayBoard();
-                                //    PriorityScoringSummary(board, scoreBoard);
-                                // Console.ReadLine();
-
-                                score = 125;
-                            }
-                        }
-                    }
-
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    // ***************** END OF PRIORITY MOVES - PRIORITISE PRIME POSITIONS ON BOARD  *****************
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    else
-                    {
-
-                        // ************************************************************************************************
-                        // ************************************************************************************************
-                        // ***************** PRIORITY MOVES - CHECKING NEIGHBOURING CELLS TO EXISTING COUNTERS ************
-                        // ************************************************************************************************
-                        // ************************************************************************************************
-
-                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
-                        if (copy.IsOneLeftNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
-                        {
-                            score = 10;
-                            Tuple<int, int> neigh = copy.PrintOneLeftNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            score = 105;
-
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            //  Console.ReadLine();
-                                        }
-                                    }
-                                }
-                            }
-                        }     // IS NEIGHBOUR TO CURRENT CELL EMPTY
-                        else if (copy.IsOneLeftNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
-                        {
-                            score = -10;
-                            Tuple<int, int> neigh = copy.PrintOneLeftNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            score = -105;
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            //    Console.ReadLine();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // IS NEIGHBOUR TO CURRENT CELL EMPTY                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
-                        else if (copy.IsOneRightNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
-                        {
-                            score = 10;
-                            Tuple<int, int> neigh = copy.PrintOneRightNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            score = 105;
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            //      Console.ReadLine();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
-                        else if (copy.IsOneRightNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
-                        {
-                            score = -10;
-                            Tuple<int, int> neigh = copy.PrintOneRightNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            //     Console.ReadLine();
-                                            score = -105;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
-                        else if (copy.IsOneTopNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
-                        {
-                            score = 10;
-                            Tuple<int, int> neigh = copy.PrintOneTopNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            //Console.ReadLine();
-                                            score = 105;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
-                        else if (copy.IsOneTopNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
-                        {
-                            score = -10;
-                            Tuple<int, int> neigh = copy.PrintOneTopNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            score = -105;
-                                            //        Console.ReadLine();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
-                        else if (copy.IsOneBottomNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
-                        {
-                            score = 10;
-                            Tuple<int, int> neigh = copy.PrintOneBottomNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            score = 105;
-                                            //               Console.ReadLine();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
-                        else if (copy.IsOneBottomNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
-                        {
-                            score = -10;
-                            Tuple<int, int> neigh = copy.PrintOneBottomNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            score = -105;
-                                            //             Console.ReadLine();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND TWO IN A ROW WITH GAP HORIZONTALLY LEFT
-                        if (copy.IsTwoLeftNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
-                        {
-                            score = 105;
-                            Tuple<int, int> neigh = copy.PrintTwoLeftNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            score = 1000;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND TWO IN A ROW WITH GAP HORIZONTALLY LEFT
-                        else if (copy.IsTwoLeftNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
-                        {
-                            score = -105;
-                            Tuple<int, int> neigh = copy.PrintTwoLeftNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            score = -1000;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND TWO IN A ROW WITH GAP HORIZONTALLY RIGHT
-                        else if (copy.IsTwoRightNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
-                        {
-                            score = 105;
-                            Tuple<int, int> neigh = copy.PrintTwoRightNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            score = 1000;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND TWO IN A ROW WITH GAP HORIZONTALLY RIGHT
-                        else if (copy.IsTwoRightNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
-                        {
-                            score = -105;
-                            Tuple<int, int> neigh = copy.PrintTwoRightNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            score = -1000;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND TWO IN A ROW VERTICAL ABOVE WITH GAP
-                        else if (copy.IsTwoTopNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
-                        {
-                            score = 105;
-                            Tuple<int, int> neigh = copy.PrintTwoTopNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            score = 1000;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND TWO IN A ROW VERTICAL ABOVE WITH GAP
-                        else if (copy.IsTwoTopNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
-                        {
-                            score = -105;
-                            Tuple<int, int> neigh = copy.PrintTwoTopNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            score = -1000;
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND TWO IN A ROW VERTICAL DOWN WAY WITH GAP
-                        else if (copy.IsTwoBottomNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
-                        {
-                            score = 105;
-                            Tuple<int, int> neigh = copy.PrintTwoBottomNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                            score = 1000;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND TWO IN A ROW VERTICAL DOWN WAY WITH GAP
-                        else if (copy.IsTwoBottomNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
-                        {
-                            score = -105;
-                            Tuple<int, int> neigh = copy.PrintTwoBottomNeighbour(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            score = -1000;
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND HORIZONTAL TWO IN A ROW WITH GAP
-                        else if (copy.IsTwoWithHorziGapEmpty(board, counter) & FindTwoInARow(board, us) == true)
-                        {
-                            score = -105;
-                            Tuple<int, int> neigh = copy.PrintTwoWithHorziGap(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            score = -1000;
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND HORIZONTAL TWO IN A ROW WITH GAP
-                        else if (copy.IsTwoWithHorziGapEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
-                        {
-                            score = -105;
-                            Tuple<int, int> neigh = copy.PrintTwoWithHorziGap(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            score = -1000;
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND VERTICAL TWO IN A ROW WITH GAP
-                        else if (copy.IsTwoWithVerticalGapEmpty(board, counter) & FindTwoInARow(board, us) == true)
-                        {
-                            score = -105;
-                            Tuple<int, int> neigh = copy.PrintTwoWithVerticalGap(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            score = -1000;
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIND VERTICAL TWO IN A ROW WITH GAP
-                        else if (copy.IsTwoWithVerticalGapEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
-                        {
-                            score = -105;
-                            Tuple<int, int> neigh = copy.PrintTwoWithVerticalGap(board, counter);
-                            if (neigh.Item1 < 0 & neigh.Item1 > 7)
-                            {
-                                if (neigh.Item2 < 0 & neigh.Item2 > 7)
-                                {
-                                    if (copy[neigh.Item1, neigh.Item2] == counters.EMPTY)
-                                    {
-                                        copy[neigh.Item1, neigh.Item2] = counter;
-                                        positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
-                                        if (copy[neigh.Item1, neigh.Item2] == counter)
-                                        {
-                                            score = -1000;
-                                            // assign score to correct cell in score
-                                            scoreBoard[neigh.Item1, neigh.Item2] = score;
-                                        }
-                                    }
-                                }
-
-                            }
-
-                        }
-                    }
-
-
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    // *********** END OF PRIORITY MOVES - CHECKING NEIGHBOURING CELLS TO EXISTING COUNTERS ***********
-                    // ************************************************************************************************
-                    // ************************************************************************************************
-                    cont++; // increment positions visited
 
                 });
-                return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(bestScore, bestMove, board, scoreBoard); // return
-            } 
-          }
-         }
-       
-    
-                // only if ply is 0 then
-                // display score board for potential moves on ONLY this current iteration board
-                // scoreBoard.DisplayBoard();
-                // PlyScoringSummary(board, scoreBoard);
-                //  Console.ReadLine();
+            }
 
-    /*
-     ===============================
-     TO DO
-     ===============================
-     Check for level between switch of loops
-     Lock update for all global vars
-     Seq version - return in all cases, or just update the score
-     Change returns to score updates
-     Print score board, and redirect to file, check for reasonable score, why miss three in row?
+            else if (ply > 1)
+            {
+                for (int i = 0; i < availableMoves.Count; i++)
+                {
+                    copy = board.Clone();
+                    Move = availableMoves[i]; // current move
+                                              // cell priority - favour centre and corners
+                                              // HWL: where do you actual place the piece for the position in Move? you don't do this here, just pass Move to the call of Minimax below; in the recursive call you then overwrite the input argument with a random move (see comment at start of Minimax; so you are actually not considering Move at all!
+                                              // HWL: try placing the piece here, and below just use the score
+                    copy[Move.Item1, Move.Item2] = counter; // place counter
+                                                            // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
-      */
+                    // list defined in Minimax declarations
+                    Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>> result = Minimax(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, alpha, beta); /* swap Player_TPL */ // RECURSIVE call  
+
+                    // trying to prevent preventing cell overwrite
+                    copy[Move.Item1, Move.Item2] = counters.EMPTY; /*  counter; */ // HWL: remove counter that was tried in this iteration
+                                                                                   // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
+
+                    score = -result.Item1; // assign score
+                    positions = result.Item2; // present position (x,y)
+
+                    // assign score to correct cell in score
+                    scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
+                    // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
+                    /*    Console.WriteLine(mmax.ToString() +
+                    " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
+                          ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
+                          bestScore, bestMove.Item1, bestMove.Item2);
+                          */
+                    //   scoreBoard.DisplayBoard();
+
+                }
+
+            // ************************************************************************************************
+            // ************************* WHEN TO MAXIMISE, WHEN TO MINIMISE ***********************************
+            // ******************************* WITH ALPHA-BETA PRUNING ****************************************
+            // ************************************************************************************************
+            // ************************************************************************************************
+
+            // if maximising                  
+            if (/* true HWL || */ mmax)
+                {
+                    alpha = score;
+                    if (score > bestScore)
+                    {
+                        bestMove = Move;
+                        bestScore = score;
+                    }
+                    if (alpha > bestScore)
+                    {
+                        bestMove = Move;
+                        bestScore = alpha;
+                    }
+                }
+                // if minimising
+                else
+                {
+                    if (bestScore > score)
+                    {
+                        bestMove = Move;
+                        bestScore = score;
+                    }
+                    if (beta <= alpha)
+                        bestScore = alpha;
+
+                    return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(bestScore, positions, board, scoreBoard);
+                }
+
+                // ************************************************************************************************
+                // ************************************************************************************************
+                // ********************* END OF WHEN TO MAXIMISE, WHEN TO MINIMISE ********************************
+                // ******************************* WITH ALPHA-BETA PRUNING ****************************************
+                // ************************************************************************************************
+
+                // ************************************************************************************************
+                // ************************************************************************************************
+                // ***************** PRIORITY MOVES - PRIORITISE PRIME POSITIONS ON BOARD  ************************
+                // ************************************************************************************************
+                // ************************************************************************************************
+
+                // IF MIDDLE CELL (4,4) IS EMPTY
+                if (board.IsMiddleEmpty() == true)
+                {
+                    // if middle (4,4) then choose the defined nearest positions to the cell in list
+                    List<Tuple<int, int>> nodelist = new List<Tuple<int, int>>();
+                    nodelist.Add((new Tuple<int, int>(4, 4)));
+                    nodelist.Add((new Tuple<int, int>(3, 4)));
+                    nodelist.Add((new Tuple<int, int>(5, 4)));
+                    nodelist.Add((new Tuple<int, int>(3, 3)));
+                    nodelist.Add((new Tuple<int, int>(3, 5)));
+                    nodelist.Add((new Tuple<int, int>(5, 3)));
+                    nodelist.Add((new Tuple<int, int>(5, 5)));
+                    // board.DisplayBoard();
+
+                    for (int indexer = 0; indexer < nodelist.Count; indexer++)
+                    {
+                        int x = nodelist[indexer].Item1;
+                        int y = nodelist[indexer].Item2;
+                        if (board[x, y] == counters.EMPTY)
+                        {
+                            //   cont = 1;
+                            // assign score to correct cell in score
+                            // make board of board
+                            scoreBoard[x, y] = score;
+                            //     scoreBoard.DisplayBoard();
+                            //    PriorityScoringSummary(board, scoreBoard);
+                            // Console.ReadLine();
+                            return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, nodelist[indexer], board, scoreBoard); // return
+                        }
+                    }
+                }
+
+                // ************************************************************************************************
+                // ************************************************************************************************
+                // ***************** END OF PRIORITY MOVES - PRIORITISE PRIME POSITIONS ON BOARD  *****************
+                // ************************************************************************************************
+                // ************************************************************************************************
+                else
+                {
+
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+                    // ***************** PRIORITY MOVES - CHECKING NEIGHBOURING CELLS TO EXISTING COUNTERS ************
+                    // ************************************************************************************************
+                    // ************************************************************************************************
+
+                    // IS NEIGHBOUR TO CURRENT CELL EMPTY
+                    if (board.IsOneLeftNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
+                    {
+                        score = 10;
+                        Tuple<int, int> neigh = board.PrintOneLeftNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        score = 100;
+
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //  Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return
+                                    }
+                                }
+                            }
+                        }
+                    }     // IS NEIGHBOUR TO CURRENT CELL EMPTY
+                    else if (board.IsOneLeftNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
+                    {
+                        score = -10;
+                        Tuple<int, int> neigh = board.PrintOneLeftNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        score = -100;
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //    Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // IS NEIGHBOUR TO CURRENT CELL EMPTY                        // IS NEIGHBOUR TO CURRENT CELL EMPTY
+                    else if (board.IsOneRightNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
+                    {
+                        score = 10;
+                        Tuple<int, int> neigh = board.PrintOneRightNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        score = 100;
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //      Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // IS NEIGHBOUR TO CURRENT CELL EMPTY
+                    else if (board.IsOneRightNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
+                    {
+                        score = -10;
+                        Tuple<int, int> neigh = board.PrintOneRightNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //     Console.ReadLine();
+                                        score = -100;
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // IS NEIGHBOUR TO CURRENT CELL EMPTY
+                    else if (board.IsOneTopNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
+                    {
+                        score = 10;
+                        Tuple<int, int> neigh = board.PrintOneTopNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //Console.ReadLine();
+                                        score = 100;
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // IS NEIGHBOUR TO CURRENT CELL EMPTY
+                    else if (board.IsOneTopNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
+                    {
+                        score = -10;
+                        Tuple<int, int> neigh = board.PrintOneTopNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        score = -100;
+                                        //        Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // IS NEIGHBOUR TO CURRENT CELL EMPTY
+                    else if (board.IsOneBottomNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us) == true)
+                    {
+                        score = 10;
+                        Tuple<int, int> neigh = board.PrintOneBottomNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        score = 100;
+                                        //               Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // IS NEIGHBOUR TO CURRENT CELL EMPTY
+                    else if (board.IsOneBottomNeighbourEmpty(board, counter) & FindOneInARow(board, ourindex, us + 1) == true)
+                    {
+                        score = -10;
+                        Tuple<int, int> neigh = board.PrintOneBottomNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        score = -100;
+                                        //             Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND TWO IN A ROW WITH GAP HORIZONTALLY LEFT
+                    if (board.IsTwoLeftNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
+                    {
+                        score = 100;
+                        Tuple<int, int> neigh = board.PrintTwoLeftNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        // score = 1000;
+                                        //            Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND TWO IN A ROW WITH GAP HORIZONTALLY LEFT
+                    else if (board.IsTwoLeftNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = board.PrintTwoLeftNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        // score = -1000;
+                                        //        Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND TWO IN A ROW WITH GAP HORIZONTALLY RIGHT
+                    else if (board.IsTwoRightNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
+                    {
+                        score = 100;
+                        Tuple<int, int> neigh = board.PrintTwoRightNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        // score = 1000;
+                                        //         Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND TWO IN A ROW WITH GAP HORIZONTALLY RIGHT
+                    else if (board.IsTwoRightNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = board.PrintTwoRightNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        // score = -1000;
+                                        //           Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND TWO IN A ROW VERTICAL ABOVE WITH GAP
+                    else if (board.IsTwoTopNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
+                    {
+                        score = 100;
+                        Tuple<int, int> neigh = board.PrintTwoTopNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        // score = 1000;
+                                        //              Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND TWO IN A ROW VERTICAL ABOVE WITH GAP
+                    else if (board.IsTwoTopNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = board.PrintTwoTopNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // score = -1000;
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //               Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND TWO IN A ROW VERTICAL DOWN WAY WITH GAP
+                    else if (board.IsTwoBottomNeighbourEmpty(board, counter) & FindTwoInARow(board, us) == true)
+                    {
+                        score = 100;
+                        Tuple<int, int> neigh = board.PrintTwoBottomNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //   score = 1000;
+                                        //               Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND TWO IN A ROW VERTICAL DOWN WAY WITH GAP
+                    else if (board.IsTwoBottomNeighbourEmpty(board, counter) & FindTwoInARow(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = board.PrintTwoBottomNeighbour(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // score = -1000;
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //               Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND HORIZONTAL TWO IN A ROW WITH GAP
+                    else if (board.IsTwoWithHorziGapEmpty(board, counter) & FindTwoInARowWithAHorziGap(board, us) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = board.PrintTwoWithHorziGap(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // score = -1000;
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //               Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND HORIZONTAL TWO IN A ROW WITH GAP
+                    else if (board.IsTwoWithHorziGapEmpty(board, counter) & FindTwoInARowWithAHorziGap(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = board.PrintTwoWithHorziGap(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // score = -1000;
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //               Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND VERTICAL TWO IN A ROW WITH GAP
+                    else if (board.IsTwoWithVerticalGapEmpty(board, counter) & FindTwoInARowWithAVerticalGap(board, us) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = board.PrintTwoWithVerticalGap(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // score = -1000;
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //               Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // FIND VERTICAL TWO IN A ROW WITH GAP
+                    else if (board.IsTwoWithVerticalGapEmpty(board, counter) & FindTwoInARowWithAVerticalGap(board, us + 1) == true)
+                    {
+                        score = -100;
+                        Tuple<int, int> neigh = board.PrintTwoWithVerticalGap(board, counter);
+                        if (neigh.Item1 < 0 & neigh.Item1 > 7)
+                        {
+                            if (neigh.Item2 < 0 & neigh.Item2 > 7)
+                            {
+                                if (board[neigh.Item1, neigh.Item2] == counters.EMPTY)
+                                {
+                                    board[neigh.Item1, neigh.Item2] = counter;
+                                    positions = new Tuple<int, int>(neigh.Item1, neigh.Item2);
+                                    if (board[neigh.Item1, neigh.Item2] == counter)
+                                    {
+                                        // score = -1000;
+                                        // assign score to correct cell in score
+                                        scoreBoard[neigh.Item1, neigh.Item2] = score;
+                                        //             Console.ReadLine();
+                                        return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(score, positions, board, scoreBoard); // return return
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+                // ************************************************************************************************
+                // ************************************************************************************************
+                // *********** END OF PRIORITY MOVES - CHECKING NEIGHBOURING CELLS TO EXISTING COUNTERS ***********
+                // ************************************************************************************************
+                // ************************************************************************************************
+                cont++; // increment positions visited
+
+            }
+            return new Tuple<int, Tuple<int, int>, GameBoard_TPL<counters>, GameBoard_TPL<int>>(bestScore, bestMove, board, scoreBoard); // return
+        }
+        // only if ply is 0 then
+        // display score board for potential moves on ONLY this current iteration board
+        // scoreBoard.DisplayBoard();
+        // PlyScoringSummary(board, scoreBoard);
+        //  Console.ReadLine();
+
+    }
+}
