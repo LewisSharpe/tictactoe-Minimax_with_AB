@@ -19,3 +19,10 @@ C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.c
 C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
 C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
 C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
