@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minimax", "Minimax\Minimax.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minimax_TPL", "Minimax_TPL\Minimax_TPL.csproj", "{A41018D2-17D3-485B-AC86-7A1ED8397BBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParGameSearch", "ParGameSearch\ParGameSearch.csproj", "{03C0A865-3B63-4786-A63C-F43BED8CF204}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A41018D2-17D3-485B-AC86-7A1ED8397BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A41018D2-17D3-485B-AC86-7A1ED8397BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A41018D2-17D3-485B-AC86-7A1ED8397BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03C0A865-3B63-4786-A63C-F43BED8CF204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03C0A865-3B63-4786-A63C-F43BED8CF204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03C0A865-3B63-4786-A63C-F43BED8CF204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03C0A865-3B63-4786-A63C-F43BED8CF204}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
