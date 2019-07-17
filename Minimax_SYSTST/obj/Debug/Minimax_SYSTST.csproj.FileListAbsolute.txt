@@ -1,0 +1,9 @@
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_SYSTST\bin\Debug\Minimax_SYSTST.exe.config
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_SYSTST\bin\Debug\Minimax_SYSTST.exe
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_SYSTST\bin\Debug\Minimax_SYSTST.pdb
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.exe
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.pdb
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.systst.resources
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.csproj.GenerateResource.cache
