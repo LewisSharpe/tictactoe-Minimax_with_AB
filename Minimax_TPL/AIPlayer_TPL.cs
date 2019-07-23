@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -448,14 +449,14 @@ namespace Minimax_TPL
                         {
                             bestScore = alpha;
                         }
-                }
+                }/*
                 // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
                 Console.WriteLine(mmax.ToString() +
                 " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
                       ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
                       bestScore, bestMove.Item1, bestMove.Item2);
-                board.DisplayBoard();
-            }
+            */
+                }
             return new Tuple<int, Tuple<int, int>>(score, positions); // return
         }
         // top-level fct that generates parallelism;
@@ -483,7 +484,17 @@ namespace Minimax_TPL
                     () => { ress[1] = ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, id, bestRes); },
                     () => { ress[2] = ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, id, bestRes); },
                     () => { ress[3] = ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, id, bestRes); });
-        
+
+            //Write to a file
+            using (StreamWriter writer = new StreamWriter("C:/Users/LATITUDE/Desktop/ttt_csharp_230719/Minimax_TPL/print_val.txt"))
+            {
+                writer.WriteLine("test");
+                writer.WriteLine("res0:" + ress[0] + Environment.NewLine +
+                    "res1:" + ress[1] + Environment.NewLine +
+                    "res2:" + ress[2] + Environment.NewLine +
+                    "res3:" + ress[3] + Environment.NewLine);
+            }
+
             for (int j = 1; j < ress.Length; j++)
             {
                 res = (ress[j].Item1 > res.Item1) ? ress[j] : res;
@@ -518,8 +529,11 @@ namespace Minimax_TPL
                         {
                             if (offset == 0) { cnt--; } else { offset--; }
                         }
-                    }
+                    board.DisplayBoard();
                 }
+               
+            }
+           
             return bestRes;
     }
         // MINIMAX FUNCTION
