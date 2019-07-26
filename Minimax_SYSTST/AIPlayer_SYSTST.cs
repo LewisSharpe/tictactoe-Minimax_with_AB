@@ -38,7 +38,7 @@ namespace Minimax_SYSTST
                 // A
                 return string.Format("{0}{1}seq-systst-{2:yyyy-MM-dd_hh-mm-ss-tt}.bin",
                     // B
-                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
                     // C
                     Path.DirectorySeparatorChar,
                     // D

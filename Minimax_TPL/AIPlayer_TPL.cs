@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,6 +35,9 @@ namespace Minimax_TPL
     // GET MOVE
     public override Tuple<int, int> GetMove(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
         {
+            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
+            //for (int i = 0; i < availableMoves.Count; i++)
+            //{
             int score = Consts.MIN_SCORE;
             Tuple<int, int> pop = new Tuple<int, int>(0, 0);
             Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, pop);
@@ -43,16 +47,23 @@ namespace Minimax_TPL
             // Begin timing.
             stopwatch.Start();
             // Do work
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
-            Tuple<int, Tuple<int, int>> result;
-            
-            result = Minimax(board, counter, ply, positions, true, scoreBoard, alpha, beta);
-            if (ply > 1)
-                result = SeqSearch(board, counter, ply, positions, true, scoreBoard, alpha, beta);
-            // Stop timing.
-            stopwatch.Stop();
-            // Return positions
-            return result.Item2;
+            int stride = 1, id = 1, numTasks = 1;
+            Tuple<int, Tuple<int, int>> result = new Tuple<int, Tuple<int, int>>(0,new Tuple<int, int>(0,0));
+            if (ply == 0 || ply == 1)
+            {
+                result = ParSearchWrap(board, numTasks, scoreBoard); // return
+                return result.Item2;
+                }
+            else if (ply > 1)
+            {
+                 result = SeqSearch(board, counter, ply, positions, true, scoreBoard, alpha, beta);
+                 return result.Item2;
+            }
+                    // Stop timing.
+                stopwatch.Stop();
+                // Return positions
+            //}
+            return new Tuple<int, int>(0, 0);
         }
         // WHICH SIDE IS IN PLAY?
         public counters Flip(counters counter)
@@ -454,8 +465,8 @@ namespace Minimax_TPL
                 " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
                       ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
                       bestScore, bestMove.Item1, bestMove.Item2);
-                board.DisplayBoard();
-            }
+            
+                }
             return new Tuple<int, Tuple<int, int>>(score, positions); // return
         }
         // top-level fct that generates parallelism;
@@ -465,11 +476,11 @@ namespace Minimax_TPL
         public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, int numTasks, GameBoard_TPL<int> scoreBoard)
         {
             int score = Consts.MIN_SCORE;
-            Tuple<int, int> pop = new Tuple<int, int>(0, 0);
+            Tuple<int, int> pop = new Tuple<int, int>(1, 6);
             int stride = 1; int id = 1;
             Tuple<int, Tuple<int, int>>[] ress = new Tuple<int, Tuple<int, int>>[4];
             // compute the maximum over all results
-            Tuple<int, Tuple<int, int>> res = ress[0]; // , res1, res2, res3, res4;
+            Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(score, pop); ; // , res1, res2, res3, res4;
             Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, pop);
 
             // counters?[] board1 = new counters?[board.Length];
@@ -483,7 +494,17 @@ namespace Minimax_TPL
                     () => { ress[1] = ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, id, bestRes); },
                     () => { ress[2] = ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, id, bestRes); },
                     () => { ress[3] = ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, id, bestRes); });
-        
+
+            //Write to a file
+            using (StreamWriter writer = new StreamWriter("C:/Users/LATITUDE/Desktop/ttt_csharp_230719/Minimax_TPL/print_val.txt"))
+            {
+                writer.WriteLine("t");
+                writer.WriteLine("res0:" + ress[0] + Environment.NewLine +
+                    "res1:" + ress[1] + Environment.NewLine +
+                    "res2:" + ress[2] + Environment.NewLine +
+                    "res3:" + ress[3] + Environment.NewLine);
+            }
+
             for (int j = 1; j < ress.Length; j++)
             {
                 res = (ress[j].Item1 > res.Item1) ? ress[j] : res;
@@ -518,8 +539,11 @@ namespace Minimax_TPL
                         {
                             if (offset == 0) { cnt--; } else { offset--; }
                         }
-                    }
+                    board.DisplayBoard();
                 }
+               
+            }
+           
             return bestRes;
     }
         // MINIMAX FUNCTION
