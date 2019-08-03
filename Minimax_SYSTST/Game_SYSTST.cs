@@ -41,27 +41,27 @@ namespace Minimax_SYSTST
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 2:
-                    board[1, 1] = counters.CROSSES; board[2, 1] = counters.EMPTY; board[3, 1] = counters.CROSSES; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.CROSSES; board[3, 1] = counters.CROSSES; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.CROSSES; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 3:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.CROSSES; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.CROSSES; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 4:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.CROSSES; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.CROSSES; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
@@ -69,94 +69,94 @@ namespace Minimax_SYSTST
                     break;
                 case 5:
                     // try multiple blocks or choose win
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 1] = counters.CROSSES; board[2, 1] = counters.CROSSES; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.NOUGHTS; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.NOUGHTS; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.NOUGHTS; board[4, 4] = counters.NOUGHTS; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 6:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.CROSSES; board[6, 1] = counters.EMPTY; board[7, 1] = counters.CROSSES;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.NOUGHTS;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.NOUGHTS;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.NOUGHTS;
                     break;
                 case 7:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.NOUGHTS; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
                     board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.CROSSES; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.CROSSES; board[6, 6] = counters.CROSSES; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.CROSSES; board[7, 7] = counters.EMPTY;
                     break;
                 case 8:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.NOUGHTS; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.NOUGHTS; board[5, 3] = counters.NOUGHTS; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.NOUGHTS; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 9:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.CROSSES; board[4, 3] = counters.EMPTY; board[5, 3] = counters.NOUGHTS; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.NOUGHTS; board[4, 5] = counters.EMPTY; board[5, 5] = counters.CROSSES; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 10:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.CROSSES; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.CROSSES; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.NOUGHTS; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.NOUGHTS; board[5, 4] = counters.NOUGHTS; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.CROSSES; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.CROSSES; board[4, 6] = counters.CROSSES; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.CROSSES; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 11:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.NOUGHTS; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.NOUGHTS; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.CROSSES; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.CROSSES; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 12:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.CROSSES; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.CROSSES; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.CROSSES; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.CROSSES; board[2, 3] = counters.EMPTY; board[3, 3] = counters.NOUGHTS; board[4, 3] = counters.EMPTY; board[5, 3] = counters.NOUGHTS; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.NOUGHTS; board[5, 4] = counters.NOUGHTS; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.NOUGHTS; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.CROSSES; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.CROSSES; board[4, 6] = counters.CROSSES; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.CROSSES; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 13:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.CROSSES; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.CROSSES; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.NOUGHTS; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.CROSSES; board[3, 4] = counters.CROSSES; board[4, 4] = counters.NOUGHTS; board[5, 4] = counters.NOUGHTS; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.CROSSES; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.CROSSES; board[4, 6] = counters.CROSSES; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.CROSSES; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 14:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.CROSSES; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.CROSSES; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.NOUGHTS; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.NOUGHTS; board[5, 4] = counters.NOUGHTS; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.CROSSES; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.CROSSES; board[2, 6] = counters.EMPTY; board[3, 6] = counters.CROSSES; board[4, 6] = counters.CROSSES; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.CROSSES; board[2, 7] = counters.EMPTY; board[3, 7] = counters.CROSSES; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 15:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
@@ -164,8 +164,8 @@ namespace Minimax_SYSTST
                     board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.CROSSES; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.NOUGHTS; board[2, 7] = counters.CROSSES; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 16:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
@@ -173,8 +173,8 @@ namespace Minimax_SYSTST
                     board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 6] = counters.NOUGHTS; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.NOUGHTS; board[2, 7] = counters.CROSSES; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 17:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
@@ -183,160 +183,162 @@ namespace Minimax_SYSTST
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 7] = counters.CROSSES; board[2, 7] = counters.NOUGHTS; board[3, 7] = counters.CROSSES; board[4, 7] = counters.NOUGHTS; board[5, 7] = counters.CROSSES; board[6, 7] = counters.NOUGHTS; board[7, 7] = counters.CROSSES;
                     break;
                 case 18:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
                     board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 4] = counters.NOUGHTS; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.CROSSES; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 7] = counters.CROSSES; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 19:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.CROSSES; board[2, 1] = counters.NOUGHTS; board[3, 1] = counters.NOUGHTS; board[4, 1] = counters.EMPTY; board[5, 1] = counters.NOUGHTS; board[6, 1] = counters.EMPTY; board[7, 1] = counters.CROSSES;
+                    board[1, 2] = counters.NOUGHTS; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.CROSSES; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.NOUGHTS; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.CROSSES; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.NOUGHTS; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.CROSSES; board[2, 7] = counters.NOUGHTS; board[3, 7] = counters.CROSSES; board[4, 7] = counters.NOUGHTS; board[5, 7] = counters.CROSSES; board[6, 7] = counters.NOUGHTS; board[7, 7] = counters.CROSSES;
                     break;
                 case 20:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.CROSSES; board[2, 1] = counters.NOUGHTS; board[3, 1] = counters.NOUGHTS; board[4, 1] = counters.CROSSES; board[5, 1] = counters.NOUGHTS; board[6, 1] = counters.CROSSES; board[7, 1] = counters.CROSSES;
+                    board[1, 2] = counters.NOUGHTS; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.CROSSES;
+                    board[1, 3] = counters.CROSSES; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.NOUGHTS;
+                    board[1, 4] = counters.NOUGHTS; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.CROSSES;
+                    board[1, 5] = counters.CROSSES; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.NOUGHTS;
+                    board[1, 6] = counters.NOUGHTS; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.NOUGHTS;
+                    board[1, 7] = counters.CROSSES; board[2, 7] = counters.NOUGHTS; board[3, 7] = counters.CROSSES; board[4, 7] = counters.NOUGHTS; board[5, 7] = counters.CROSSES; board[6, 7] = counters.NOUGHTS; board[7, 7] = counters.CROSSES;
                     break;
                 case 21:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    // choose win
+                    board[1, 1] = counters.NOUGHTS; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.NOUGHTS; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 22:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.NOUGHTS; board[3, 1] = counters.NOUGHTS; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.NOUGHTS; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 23:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.NOUGHTS; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.NOUGHTS; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 24:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.NOUGHTS; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.NOUGHTS; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 25:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    // try multiple blocks or choose win
+                    board[1, 1] = counters.NOUGHTS; board[2, 1] = counters.NOUGHTS; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.CROSSES; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.CROSSES; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.CROSSES; board[4, 4] = counters.CROSSES; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 26:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.NOUGHTS; board[6, 1] = counters.EMPTY; board[7, 1] = counters.NOUGHTS;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.CROSSES;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.CROSSES;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.CROSSES;
                     break;
                 case 27:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.CROSSES; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
                     board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.NOUGHTS; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.NOUGHTS; board[6, 6] = counters.NOUGHTS; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.NOUGHTS; board[7, 7] = counters.EMPTY;
                     break;
                 case 28:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.CROSSES; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.CROSSES; board[5, 3] = counters.CROSSES; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.CROSSES; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 29:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.NOUGHTS; board[4, 3] = counters.EMPTY; board[5, 3] = counters.CROSSES; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.CROSSES; board[4, 5] = counters.EMPTY; board[5, 5] = counters.NOUGHTS; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 30:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.NOUGHTS; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.NOUGHTS; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.CROSSES; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.CROSSES; board[5, 4] = counters.CROSSES; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.NOUGHTS; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.NOUGHTS; board[4, 6] = counters.NOUGHTS; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.NOUGHTS; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 31:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.CROSSES; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.CROSSES; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.NOUGHTS; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.NOUGHTS; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
                     board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 32:
-                    board[1, 1] = counters.EMPTY; board[1, 2] = counters.EMPTY; board[1, 3] = counters.EMPTY; board[1, 4] = counters.EMPTY; board[1, 5] = counters.EMPTY; board[1, 6] = counters.EMPTY; board[1, 7] = counters.EMPTY;
-                    board[2, 1] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[2, 7] = counters.EMPTY;
-                    board[3, 1] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[3, 7] = counters.EMPTY;
-                    board[4, 1] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[4, 7] = counters.EMPTY;
-                    board[5, 1] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[5, 7] = counters.EMPTY;
-                    board[6, 1] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[6, 7] = counters.EMPTY;
-                    board[7, 1] = counters.EMPTY; board[7, 2] = counters.EMPTY; board[7, 3] = counters.EMPTY; board[7, 4] = counters.EMPTY; board[7, 5] = counters.EMPTY; board[7, 6] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.NOUGHTS; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.NOUGHTS; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.NOUGHTS; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.NOUGHTS; board[2, 3] = counters.EMPTY; board[3, 3] = counters.CROSSES; board[4, 3] = counters.EMPTY; board[5, 3] = counters.CROSSES; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.CROSSES; board[5, 4] = counters.CROSSES; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.CROSSES; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.NOUGHTS; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.NOUGHTS; board[4, 6] = counters.NOUGHTS; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.NOUGHTS; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 33:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.NOUGHTS; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.NOUGHTS; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.CROSSES; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.NOUGHTS; board[3, 4] = counters.NOUGHTS; board[4, 4] = counters.CROSSES; board[5, 4] = counters.CROSSES; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.NOUGHTS; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.NOUGHTS; board[4, 6] = counters.NOUGHTS; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.NOUGHTS; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 34:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.NOUGHTS; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
+                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.NOUGHTS; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.CROSSES; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.CROSSES; board[5, 4] = counters.CROSSES; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.NOUGHTS; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.NOUGHTS; board[2, 6] = counters.EMPTY; board[3, 6] = counters.NOUGHTS; board[4, 6] = counters.NOUGHTS; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.NOUGHTS; board[2, 7] = counters.EMPTY; board[3, 7] = counters.NOUGHTS; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 35:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
@@ -344,8 +346,8 @@ namespace Minimax_SYSTST
                     board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.NOUGHTS; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.CROSSES; board[2, 7] = counters.NOUGHTS; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 36:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
@@ -353,8 +355,8 @@ namespace Minimax_SYSTST
                     board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 6] = counters.CROSSES; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.CROSSES; board[2, 7] = counters.NOUGHTS; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 37:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
@@ -363,34 +365,34 @@ namespace Minimax_SYSTST
                     board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
                     board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 7] = counters.NOUGHTS; board[2, 7] = counters.CROSSES; board[3, 7] = counters.NOUGHTS; board[4, 7] = counters.CROSSES; board[5, 7] = counters.NOUGHTS; board[6, 7] = counters.CROSSES; board[7, 7] = counters.NOUGHTS;
                     break;
                 case 38:
                     board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
                     board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
                     board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 4] = counters.CROSSES; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.NOUGHTS; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
                     board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 7] = counters.NOUGHTS; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
                     break;
                 case 39:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.NOUGHTS; board[2, 1] = counters.CROSSES; board[3, 1] = counters.CROSSES; board[4, 1] = counters.EMPTY; board[5, 1] = counters.CROSSES; board[6, 1] = counters.EMPTY; board[7, 1] = counters.NOUGHTS;
+                    board[1, 2] = counters.CROSSES; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
+                    board[1, 3] = counters.NOUGHTS; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
+                    board[1, 4] = counters.CROSSES; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
+                    board[1, 5] = counters.NOUGHTS; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
+                    board[1, 6] = counters.CROSSES; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
+                    board[1, 7] = counters.NOUGHTS; board[2, 7] = counters.CROSSES; board[3, 7] = counters.NOUGHTS; board[4, 7] = counters.CROSSES; board[5, 7] = counters.NOUGHTS; board[6, 7] = counters.CROSSES; board[7, 7] = counters.NOUGHTS;
                     break;
                 case 40:
-                    board[1, 1] = counters.EMPTY; board[2, 1] = counters.EMPTY; board[3, 1] = counters.EMPTY; board[4, 1] = counters.EMPTY; board[5, 1] = counters.EMPTY; board[6, 1] = counters.EMPTY; board[7, 1] = counters.EMPTY;
-                    board[1, 2] = counters.EMPTY; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.EMPTY;
-                    board[1, 3] = counters.EMPTY; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.EMPTY;
-                    board[1, 4] = counters.EMPTY; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.EMPTY;
-                    board[1, 5] = counters.EMPTY; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.EMPTY;
-                    board[1, 6] = counters.EMPTY; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.EMPTY;
-                    board[1, 7] = counters.EMPTY; board[2, 7] = counters.EMPTY; board[3, 7] = counters.EMPTY; board[4, 7] = counters.EMPTY; board[5, 7] = counters.EMPTY; board[6, 7] = counters.EMPTY; board[7, 7] = counters.EMPTY;
+                    board[1, 1] = counters.NOUGHTS; board[2, 1] = counters.CROSSES; board[3, 1] = counters.CROSSES; board[4, 1] = counters.NOUGHTS; board[5, 1] = counters.CROSSES; board[6, 1] = counters.NOUGHTS; board[7, 1] = counters.NOUGHTS;
+                    board[1, 2] = counters.CROSSES; board[2, 2] = counters.EMPTY; board[3, 2] = counters.EMPTY; board[4, 2] = counters.EMPTY; board[5, 2] = counters.EMPTY; board[6, 2] = counters.EMPTY; board[7, 2] = counters.NOUGHTS;
+                    board[1, 3] = counters.NOUGHTS; board[2, 3] = counters.EMPTY; board[3, 3] = counters.EMPTY; board[4, 3] = counters.EMPTY; board[5, 3] = counters.EMPTY; board[6, 3] = counters.EMPTY; board[7, 3] = counters.CROSSES;
+                    board[1, 4] = counters.CROSSES; board[2, 4] = counters.EMPTY; board[3, 4] = counters.EMPTY; board[4, 4] = counters.EMPTY; board[5, 4] = counters.EMPTY; board[6, 4] = counters.EMPTY; board[7, 4] = counters.NOUGHTS;
+                    board[1, 5] = counters.NOUGHTS; board[2, 5] = counters.EMPTY; board[3, 5] = counters.EMPTY; board[4, 5] = counters.EMPTY; board[5, 5] = counters.EMPTY; board[6, 5] = counters.EMPTY; board[7, 5] = counters.CROSSES;
+                    board[1, 6] = counters.CROSSES; board[2, 6] = counters.EMPTY; board[3, 6] = counters.EMPTY; board[4, 6] = counters.EMPTY; board[5, 6] = counters.EMPTY; board[6, 6] = counters.EMPTY; board[7, 6] = counters.CROSSES;
+                    board[1, 7] = counters.NOUGHTS; board[2, 7] = counters.CROSSES; board[3, 7] = counters.NOUGHTS; board[4, 7] = counters.CROSSES; board[5, 7] = counters.NOUGHTS; board[6, 7] = counters.CROSSES; board[7, 7] = counters.NOUGHTS;
                     break;
                 default:
                     Environment.Exit(99);
