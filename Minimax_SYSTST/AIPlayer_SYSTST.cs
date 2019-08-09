@@ -13,8 +13,9 @@ namespace Minimax_SYSTST
         public int maxPly = 1; // max depth for search
         public int alpha = Consts.MIN_SCORE;
         public int beta = Consts.MAX_SCORE;
-        public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
+        public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
+        public static int error_confirm = 0;
         public AIPlayer_SYSTST(counters _counter) : base(_counter) { }
 
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
@@ -38,7 +39,22 @@ namespace Minimax_SYSTST
                 // A
                 return string.Format("{0}{1}seq-systst-{2:yyyy-MM-dd_hh-mm-ss-tt}.bin",
                     // B
-                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
+                    // C
+                    Path.DirectorySeparatorChar,
+                    // D
+                    DateTime.Now);
+            }
+        }
+
+        public static string TestFileName
+        {
+            get
+            {
+                // A
+                return string.Format("{0}{1}test-{2:yyyy-MM-dd_hh-mm-ss-tt}.bin",
+                    // B
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
                     // C
                     Path.DirectorySeparatorChar,
                     // D
@@ -49,6 +65,7 @@ namespace Minimax_SYSTST
         // GET MOVE
         public override Tuple<int, int> GetMove(GameBoard_SYSTST<counters> board, GameBoard_SYSTST<int> scoreBoard)
         {
+            counters us = Flip(counter);
             // Create new stopwatch.
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing.
@@ -59,6 +76,22 @@ namespace Minimax_SYSTST
             result = Minimax(board, counter, ply, positions, true, scoreBoard, ref cont, alpha, beta); // 0,0
             int score = result.Item1;
             board.DisplayBoard();
+            Game_SYSTST.cntr++;
+            //  Console.WriteLine(Game_SYSTST.cntr + "NOWCOUNT" + Game_SYSTST.nowcount);
+            //  Console.ReadLine();
+            if (result.Item1 == 1000 & result.Item2 == new Tuple<int, int>(1,2))
+            {
+                error_confirm = 1;
+                Console.Write("X ERROR on Board " + Game_SYSTST.cntr + " : Board combination missed");
+                Console.ReadLine();
+
+            }
+            else if (result.Item1 == 100 || result.Item1 == -100 & result.Item2 == new Tuple<int, int>(2, 2))
+            {
+                error_confirm = 1;
+                Console.Write("X ERROR on Board " + Game_SYSTST.cntr + " : Board combination missed");
+                Console.ReadLine();
+            }
             // Stop timing.
             stopwatch.Stop();
             // Return positions
@@ -683,13 +716,35 @@ namespace Minimax_SYSTST
             }
             else if (Win(board, counter))
             {
-                return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(1000, positions, board, scoreBoard);
+                Console.WriteLine("✓ SUCCESS on Board " + Game_SYSTST.cntr + " : Winning combination found");
+                Console.ReadLine();
+                Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>> result = Minimax(board, Flip(counter), ply + 1, Move, !mmax, scoreBoard, ref cont, alpha, beta); /* swap player */ // RECURSIVE call  
+                var file = @"C:/Users/LATITUDE/Desktop/ttt_csharp_270719/Minimax_SYSTST/SYSTST_report.csv";
+
+                using (var stream = File.CreateText(file))
+                {
+                    for (int i = 0; i < availableMoves.Count; i++)
+                    {
+                        int no = Game_SYSTST.cntr;
+                        GameBoard_SYSTST<counters> initial_board = board;
+                        string test_result = "SUCCESS";
+                        int no_of_steps = 0;
+                        Tuple<int, int> winning_move = result.Item2;
+                        int win_score = 1000;
+                        counters winner = us;
+                        string csvRow = string.Format("{0},{1},{2},{3},{4},{5},{6}", no, initial_board, test_result, no_of_steps, winning_move, win_score, winner);
+
+                        stream.WriteLine(csvRow);
+                    }
+                    return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(1000, positions, board, scoreBoard);
+                }
             }
             else if (Win(board, this.otherCounter))
             {
+                Console.WriteLine("✓ SUCCESS on Board " + Game_SYSTST.cntr + " : Winning combination found");
+                Console.ReadLine();
                 return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(-1000, positions, board, scoreBoard);
             }
-
             if (FindTwoInARow(board, counter) && Two(board, counter) && board[Move.Item1, Move.Item2] == counters.EMPTY)
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(100, positions, board, scoreBoard);
@@ -796,9 +851,17 @@ namespace Minimax_SYSTST
                                 bestScore = score;
                             }
                             if (beta <= alpha)
-                                bestScore = alpha;
-                                                                                                                                                   
-                        return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(bestScore, positions, board, scoreBoard);
+                                bestScore = alpha;                  
+/*
+                    Console.WriteLine(error_confirm);
+                    Console.ReadLine();
+                    */
+
+                    StreamWriter newer = new StreamWriter(TestFileName);
+                    newer.Write(result);
+                    newer.Close();
+
+                    return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(bestScore, positions, board, scoreBoard);
                     }
 
                     // ************************************************************************************************
