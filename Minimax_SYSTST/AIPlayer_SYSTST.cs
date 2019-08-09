@@ -13,8 +13,9 @@ namespace Minimax_SYSTST
         public int maxPly = 1; // max depth for search
         public int alpha = Consts.MIN_SCORE;
         public int beta = Consts.MAX_SCORE;
-        public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
+        public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
+        public static int error_confirm = 0;
         public AIPlayer_SYSTST(counters _counter) : base(_counter) { }
 
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
@@ -38,7 +39,22 @@ namespace Minimax_SYSTST
                 // A
                 return string.Format("{0}{1}seq-systst-{2:yyyy-MM-dd_hh-mm-ss-tt}.bin",
                     // B
-                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
+                    // C
+                    Path.DirectorySeparatorChar,
+                    // D
+                    DateTime.Now);
+            }
+        }
+
+        public static string TestFileName
+        {
+            get
+            {
+                // A
+                return string.Format("{0}{1}test-{2:yyyy-MM-dd_hh-mm-ss-tt}.bin",
+                    // B
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
                     // C
                     Path.DirectorySeparatorChar,
                     // D
@@ -59,6 +75,19 @@ namespace Minimax_SYSTST
             result = Minimax(board, counter, ply, positions, true, scoreBoard, ref cont, alpha, beta); // 0,0
             int score = result.Item1;
             board.DisplayBoard();
+            if (result.Item1 == 1000 & result.Item2 == new Tuple<int, int>(1,2))
+            {
+                error_confirm = 1;
+           
+            }
+            else if (result.Item1 == 100 || result.Item1 == -100 & result.Item2 == new Tuple<int, int>(2, 2))
+            {
+                error_confirm = 1;
+          
+            }
+            Game_SYSTST.cntr++;
+            Console.WriteLine(Game_SYSTST.cntr + "NOWCOUNT" + Game_SYSTST.nowcount);
+            Console.ReadLine();
             // Stop timing.
             stopwatch.Stop();
             // Return positions
@@ -796,9 +825,16 @@ namespace Minimax_SYSTST
                                 bestScore = score;
                             }
                             if (beta <= alpha)
-                                bestScore = alpha;
-                                                                                                                                                   
-                        return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(bestScore, positions, board, scoreBoard);
+                                bestScore = alpha;                  
+/*
+                    Console.WriteLine(error_confirm);
+                    Console.ReadLine();
+                    */
+                    StreamWriter newer = new StreamWriter(TestFileName);
+                    newer.Write(result);
+                    newer.Close();
+
+                    return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(bestScore, positions, board, scoreBoard);
                     }
 
                     // ************************************************************************************************
