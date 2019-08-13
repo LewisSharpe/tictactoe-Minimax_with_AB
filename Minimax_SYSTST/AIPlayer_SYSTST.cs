@@ -13,8 +13,9 @@ namespace Minimax_SYSTST
         public int maxPly = 1; // max depth for search
         public int alpha = Consts.MIN_SCORE;
         public int beta = Consts.MAX_SCORE;
-        public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
+        public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
+        public static int error_confirm = 0;
         public AIPlayer_SYSTST(counters _counter) : base(_counter) { }
 
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
@@ -31,24 +32,10 @@ namespace Minimax_SYSTST
             return moves;
         }
 
-       public static string SpecialFileName
-        {
-            get
-            {
-                // A
-                return string.Format("{0}{1}seq-systst-{2:yyyy-MM-dd_hh-mm-ss-tt}.bin",
-                    // B
-                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                    // C
-                    Path.DirectorySeparatorChar,
-                    // D
-                    DateTime.Now);
-            }
-        }
-
         // GET MOVE
         public override Tuple<int, int> GetMove(GameBoard_SYSTST<counters> board, GameBoard_SYSTST<int> scoreBoard)
         {
+            counters us = Flip(counter);
             // Create new stopwatch.
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing.
@@ -59,6 +46,42 @@ namespace Minimax_SYSTST
             result = Minimax(board, counter, ply, positions, true, scoreBoard, ref cont, alpha, beta); // 0,0
             int score = result.Item1;
             board.DisplayBoard();
+            Game_SYSTST.cntr++;
+            //  Console.WriteLine(Game_SYSTST.cntr + "NOWCOUNT" + Game_SYSTST.nowcount);
+            //  Console.ReadLine();
+            if (result.Item1 == 1000 & result.Item2 == new Tuple<int, int>(1,2))
+            {
+                error_confirm = 1;
+                Console.Write("X ERROR on Board " + Game_SYSTST.cntr + " : Board combination missed");
+                Console.ReadLine();
+                var file = @"C:/Users/LATITUDE/Desktop/ttt_csharp_270719/Minimax_SYSTST/SYSTST_report.csv";
+                var date = DateTime.Now.ToShortDateString();
+                var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
+                var csv = new System.Text.StringBuilder();
+                string first = "FAILURE on Board: " + Game_SYSTST.cntr + " : Board combination missed";
+                string failure = "FAILURE";
+                string reason = "Board combination missed";
+                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}", date, time, failure.ToString(), "Board " + int.Parse(Game_SYSTST.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.ToString(), counter, cont, ply, Environment.NewLine);
+                csv.Append(newLine);
+                                   File.AppendAllText(file, newLine.ToString());
+            }
+            else if (result.Item1 == 100 || result.Item1 == -100 & result.Item2 == new Tuple<int, int>(2, 2))
+            {
+                error_confirm = 1;
+                Console.Write("X ERROR on Board " + Game_SYSTST.cntr + " : Board combination missed");
+                Console.ReadLine();
+                var file = @"C:/Users/LATITUDE/Desktop/ttt_csharp_270719/Minimax_SYSTST/SYSTST_report.csv";
+                var date = DateTime.Now.ToShortDateString();
+                var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
+                var csv = new System.Text.StringBuilder();
+                var first = "FAILURE on Board: " + Game_SYSTST.cntr + " : Board combination missed";
+                string failure = "FAILURE";
+                string reason = "Board combination missed";
+                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}", date, time, failure.ToString(), "Board " + int.Parse(Game_SYSTST.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.ToString(), counter, cont, ply, Environment.NewLine);
+              //  var newLine = string.Format(Environment.NewLine + date + " " + time + "{0}", first, Environment.NewLine);
+                csv.Append(newLine);
+                File.AppendAllText(file, newLine.ToString());
+            }
             // Stop timing.
             stopwatch.Stop();
             // Return positions
@@ -188,7 +211,7 @@ namespace Minimax_SYSTST
             return false;
         }
         // FIND VERTICAL GAP BETWEEN TWO IN A ROW
-        public bool FindTwoInARowWithAVerticalGap(GameBoard_SYSTST<counters> board, counters us)
+        public bool FindTwoInARowithAVerticalGap(GameBoard_SYSTST<counters> board, counters us)
         {
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
@@ -681,15 +704,40 @@ namespace Minimax_SYSTST
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(10, positions, board, scoreBoard);
             }
-            else if (Win(board, counter))
+            if (Win(board, counter))
             {
+                Console.WriteLine("✓ PASS on Board " + Game_SYSTST.cntr + " : Winning combination found");
+                Console.ReadLine();
+                var date = DateTime.Now.ToShortDateString();
+                var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
+                var file = @"C:/Users/LATITUDE/Desktop/ttt_csharp_270719/Minimax_SYSTST/SYSTST_report.csv";
+                var csv = new System.Text.StringBuilder();
+                string first = "PASS on Board: " + Game_SYSTST.cntr + " : Winning combination found";
+                string pass = "PASS";
+                string reason = "Winning combination found";
+                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}", date, time, pass.ToString(), "Board " + int.Parse(Game_SYSTST.cntr.ToString()), reason.ToString(), score, positions, counter, cont, ply, Environment.NewLine);
+                //var newLine = string.Format(Environment.NewLine + date + " " + time + "{0}", first, Environment.NewLine);
+                csv.Append(newLine);
+                    File.AppendAllText(file, newLine.ToString());
                 return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(1000, positions, board, scoreBoard);
             }
-            else if (Win(board, this.otherCounter))
+            if (Win(board, this.otherCounter))
             {
+                Console.WriteLine(Environment.NewLine + "✓ PASS on Board " + Game_SYSTST.cntr + " : Winning combination found");
+                Console.ReadLine();
+                var date = DateTime.Now.ToShortDateString();
+                var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
+                var file = @"C:/Users/LATITUDE/Desktop/ttt_csharp_270719/Minimax_SYSTST/SYSTST_report.csv";
+                    var csv = new System.Text.StringBuilder();
+                    string first = "PASS on Board: " + Game_SYSTST.cntr + " : Winning combination found";
+                string pass = "PASS";
+                string reason = "Winning combination found";
+                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}", date, time, pass.ToString(), "Board " + int.Parse(Game_SYSTST.cntr.ToString()), reason.ToString(), score, positions, counter, cont, ply, Environment.NewLine);
+                //var newLine = string.Format(Environment.NewLine + date + " " + time + "{0}", first, Environment.NewLine);
+                csv.Append(newLine);
+                File.AppendAllText(file, newLine.ToString());
                 return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(-1000, positions, board, scoreBoard);
             }
-
             if (FindTwoInARow(board, counter) && Two(board, counter) && board[Move.Item1, Move.Item2] == counters.EMPTY)
             {
                 return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(100, positions, board, scoreBoard);
@@ -796,9 +844,8 @@ namespace Minimax_SYSTST
                                 bestScore = score;
                             }
                             if (beta <= alpha)
-                                bestScore = alpha;
-                                                                                                                                                   
-                        return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(bestScore, positions, board, scoreBoard);
+                                bestScore = alpha;                  
+                    return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(bestScore, positions, board, scoreBoard);
                     }
 
                     // ************************************************************************************************
@@ -807,18 +854,8 @@ namespace Minimax_SYSTST
                     // ******************************* WITH ALPHA-BETA PRUNING ****************************************
                     // ************************************************************************************************
 
-                  
-                
                         cont++; // increment positions visited
-
-                StreamWriter File = new StreamWriter(SpecialFileName);
-                File.Write("iteration:" + iteration + Environment.NewLine); ;
-                File.Write(board.ToString() + Environment.NewLine);
-                File.Write(mmax.ToString() +
-              " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
-                    ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
-                    bestScore, bestMove.Item1, bestMove.Item2 + Environment.NewLine + Environment.NewLine);
-                File.Close();
+               
 
             }
             return new Tuple<int, Tuple<int, int>, GameBoard_SYSTST<counters>, GameBoard_SYSTST<int>>(bestScore, bestMove, board, scoreBoard); // return
