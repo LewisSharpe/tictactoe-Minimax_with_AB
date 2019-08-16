@@ -18,7 +18,7 @@ namespace Minimax_SYSTST
                          s29, s30, s31, s32, s33, s34, s35,
                          s36, s37, s38, s39, s40, s41, s42,
                          s43, s44, s45, s46, s47, s48, s49;
-        private T filler; // empty filler space for cell
+        private static T filler; // empty filler space for cell
 
         // 1 BLANK BOARD
         public GameBoard_SYSTST(T _filler)
