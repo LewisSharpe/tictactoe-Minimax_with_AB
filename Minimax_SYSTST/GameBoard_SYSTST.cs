@@ -18,7 +18,7 @@ namespace Minimax_SYSTST
                          s29, s30, s31, s32, s33, s34, s35,
                          s36, s37, s38, s39, s40, s41, s42,
                          s43, s44, s45, s46, s47, s48, s49;
-        private T filler; // empty filler space for cell
+        private static T filler; // empty filler space for cell
 
         // 1 BLANK BOARD
         public GameBoard_SYSTST(T _filler)
@@ -59,15 +59,16 @@ namespace Minimax_SYSTST
             }
             Console.WriteLine();
         }
-
         // DISPLAY GAMEBOARD AS FOLLOWS
-        public void DisplayBoardToFile()
+        public void DisplayIntBoardToFile()
         {
-            string path = @"C:\Users\Owner\Desktop\Minimax\Minimax\copy.txt";
+            string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_SYSTST/intboards.txt";
             // This text is added only once to the file.
             // Create a file to write to.
             using (StreamWriter sw = new StreamWriter(path, true))
             {
+          //      System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_SYSTST/intboards.txt", string.Empty);
+                sw.Write("iteration: " + Game_SYSTST.cntr);
                     for (int x = 1; x <= 7; x++)
                     sw.Write("  " + x + " ");
                     sw.WriteLine();
@@ -88,7 +89,64 @@ namespace Minimax_SYSTST
                     sw.WriteLine();
                 }
             }
-
+        public void DisplayFinBoardToFile()
+        {
+            string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_SYSTST/finboards.txt";
+            // This text is added only once to the file.
+            // Create a file to write to.
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+           //     System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_SYSTST/finboards.txt", string.Empty);
+                sw.Write("iteration: " + Game_SYSTST.cntr);
+                for (int x = 1; x <= 7; x++)
+                    sw.Write("  " + x + " ");
+                sw.WriteLine();
+                for (int y = 1; y <= 7; y++)
+                {
+                    sw.Write(y + " ");
+                    for (int x = 1; x <= 7; x++)
+                    {
+                        if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                            sw.Write(filler);
+                        else
+                            sw.Write(this[x, y]);
+                        sw.Write(" | ");
+                    }
+                    sw.WriteLine();
+                    sw.WriteLine("  -   -   -   -   -   -   - ");
+                }
+                sw.WriteLine();
+            }
+        }
+        public void DisplayScoreBoardToFile()
+        {
+            string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_SYSTST/scoreboards.txt";
+            // This text is added only once to the file.
+            // Create a file to write to.
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+          //      System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_SYSTST/scoreboards.txt", string.Empty);
+                sw.Write("iteration: " + Game_SYSTST.cntr);
+                for (int x = 1; x <= 7; x++)
+                    sw.Write("  " + x + " ");
+                sw.WriteLine();
+                for (int y = 1; y <= 7; y++)
+                {
+                    sw.Write(y + " ");
+                    for (int x = 1; x <= 7; x++)
+                    {
+                        if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                            sw.Write(filler);
+                        else
+                            sw.Write(this[x, y]);
+                        sw.Write(" | ");
+                    }
+                    sw.WriteLine();
+                    sw.WriteLine("  -   -   -   -   -   -   - ");
+                }
+                sw.WriteLine();
+            }
+        }
         // IF GAMEBOARD IS FULL
         public bool IsFull()
         {

@@ -21,7 +21,7 @@ namespace Minimax_TPL
 
         public void PlayGame(Player_TPL currentPlayer_TPL, Player_TPL otherPlayer_TPL)
         {
-            board[1, 4] = counters.CROSSES;
+            board[1, 4] = counters.NOUGHTS;
             // Create new stopwatch.
             Stopwatch stopwatch_minimax = new Stopwatch();
             // Begin timing.
@@ -35,18 +35,12 @@ namespace Minimax_TPL
                 if (currentPlayer_TPL.Win(board, currentPlayer_TPL.counter))
                 {
                     board.DisplayBoard();
-                 
+                    int score = 1000;
+                    
+
                     if (currentPlayer_TPL.GetType() == typeof(AIPlayer_TPL))
                     {
-                        int score = 0;
-                        if (AIPlayer_TPL.FindThreeInARow(board, currentPlayer_TPL.counter) == true)
-                        {
-
-                            score = 1000;
-                           
-                        }
-
-                        Console.WriteLine("========================================================================================================================"
+                         Console.WriteLine("========================================================================================================================"
                           + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
                             "------------------------------------------------------------------------------------------------------------------------" +
                             "Winner: " + currentPlayer_TPL.counter 
@@ -59,12 +53,7 @@ namespace Minimax_TPL
                     }
                     else
                     {
-                        int score = 0;
-                        if (AIPlayer_TPL.FindThreeInARow(board, otherPlayer_TPL.counter) == true)
-                        {
                             score = -1000;
-                        }
-
                         Console.WriteLine("======================================================================================================================"
                            + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
                              "------------------------------------------------------------------------------------------------------------------------" +

@@ -1,0 +1,896 @@
+iteration: 1  1   2   3   4   5   6   7 
+1 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 2  1   2   3   4   5   6   7 
+1 EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 2  1   2   3   4   5   6   7 
+1 EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 4  1   2   3   4   5   6   7 
+1 NOUGHTS | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 4  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 5  1   2   3   4   5   6   7 
+1 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 5  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 6  1   2   3   4   5   6   7 
+1 CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 6  1   2   3   4   5   6   7 
+1 CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 6  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 6  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 7  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 8  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | CROSSES | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | NOUGHTS | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 9  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+
+iteration: 10  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 11  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 12  1   2   3   4   5   6   7 
+1 CROSSES | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 CROSSES | EMPTY | NOUGHTS | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 NOUGHTS | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 13  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | CROSSES | CROSSES | NOUGHTS | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 CROSSES | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 CROSSES | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 15  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 NOUGHTS | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 15  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 NOUGHTS | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 16  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 NOUGHTS | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 17  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | 
+  -   -   -   -   -   -   - 
+
+iteration: 18  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 19  1   2   3   4   5   6   7 
+1 CROSSES | NOUGHTS | NOUGHTS | EMPTY | NOUGHTS | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+2 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | 
+  -   -   -   -   -   -   - 
+
+iteration: 19  1   2   3   4   5   6   7 
+1 CROSSES | NOUGHTS | NOUGHTS | EMPTY | NOUGHTS | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+2 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | 
+  -   -   -   -   -   -   - 
+
+iteration: 20  1   2   3   4   5   6   7 
+1 CROSSES | NOUGHTS | NOUGHTS | CROSSES | NOUGHTS | CROSSES | CROSSES | 
+  -   -   -   -   -   -   - 
+2 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+3 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+4 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+5 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+6 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+7 CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | 
+  -   -   -   -   -   -   - 
+
+iteration: 22  1   2   3   4   5   6   7 
+1 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 22  1   2   3   4   5   6   7 
+1 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 22  1   2   3   4   5   6   7 
+1 EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 22  1   2   3   4   5   6   7 
+1 EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 23  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 24  1   2   3   4   5   6   7 
+1 CROSSES | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 24  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 24  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 25  1   2   3   4   5   6   7 
+1 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 25  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 26  1   2   3   4   5   6   7 
+1 NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 26  1   2   3   4   5   6   7 
+1 NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 26  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+
+iteration: 27  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 28  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 29  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | NOUGHTS | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | CROSSES | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 30  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 31  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 32  1   2   3   4   5   6   7 
+1 NOUGHTS | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 NOUGHTS | EMPTY | CROSSES | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 CROSSES | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 33  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | NOUGHTS | NOUGHTS | CROSSES | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 34  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | CROSSES | CROSSES | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 NOUGHTS | EMPTY | NOUGHTS | NOUGHTS | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 NOUGHTS | EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 35  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 CROSSES | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 35  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 CROSSES | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 36  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 CROSSES | NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 37  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | 
+  -   -   -   -   -   -   - 
+
+iteration: 38  1   2   3   4   5   6   7 
+1 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+2 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+
+iteration: 39  1   2   3   4   5   6   7 
+1 NOUGHTS | CROSSES | CROSSES | EMPTY | CROSSES | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+2 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | 
+  -   -   -   -   -   -   - 
+
+iteration: 39  1   2   3   4   5   6   7 
+1 NOUGHTS | CROSSES | CROSSES | EMPTY | CROSSES | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+2 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+3 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+4 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+5 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+6 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | 
+  -   -   -   -   -   -   - 
+7 NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | 
+  -   -   -   -   -   -   - 
+
+iteration: 40  1   2   3   4   5   6   7 
+1 NOUGHTS | CROSSES | CROSSES | NOUGHTS | CROSSES | NOUGHTS | NOUGHTS | 
+  -   -   -   -   -   -   - 
+2 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+3 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+4 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | NOUGHTS | 
+  -   -   -   -   -   -   - 
+5 NOUGHTS | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+6 CROSSES | EMPTY | EMPTY | EMPTY | EMPTY | EMPTY | CROSSES | 
+  -   -   -   -   -   -   - 
+7 NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | CROSSES | NOUGHTS | 
+  -   -   -   -   -   -   - 
+
