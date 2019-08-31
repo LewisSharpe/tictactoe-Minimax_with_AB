@@ -1,0 +1,9 @@
+﻿SYS TEST ITEMS:
+No
+Initial Board
+Test Result
+Sequences of Moves
+No of Steps
+Winning Move
+Winner
+Elapsed Time
