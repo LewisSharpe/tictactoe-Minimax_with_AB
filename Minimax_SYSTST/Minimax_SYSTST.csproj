@@ -57,14 +57,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="copy.txt" />
-    <Content Include="systst.Designer.txt" />
-    <Content Include="systst.txt">
-      <SubType>Form</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="systst.resx" />
+    <Content Include="systst_table_items.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

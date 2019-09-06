@@ -18,13 +18,10 @@ namespace Minimax_SYSTST
         public Player_SYSTST(counters _counter)
         {
             counter = _counter;
-            if (counter == counters.NOUGHTS) 
-                otherCounter = counters.CROSSES;
-            else if (counter == counters.CROSSES)
-                otherCounter = counters.NOUGHTS;
-            else if (counter == counters.SCORE)
-                otherCounter = counters.SCORE;
-
+            if (counter == counters.O) 
+                otherCounter = counters.X;
+            else if (counter == counters.X)
+                otherCounter = counters.O;
         }
                 public abstract Tuple<int, int> GetMove(GameBoard_SYSTST<counters> board, GameBoard_SYSTST<int> scoreBoard);
        
