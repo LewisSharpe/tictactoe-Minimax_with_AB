@@ -1,0 +1,7 @@
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\ParGameSearch\bin\Debug\ParGameSearch.exe.config
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\ParGameSearch\bin\Debug\ParGameSearch.exe
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\ParGameSearch\bin\Debug\ParGameSearch.pdb
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\ParGameSearch\obj\Debug\ParGameSearch.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\ParGameSearch\obj\Debug\ParGameSearch.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\ParGameSearch\obj\Debug\ParGameSearch.exe
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\ParGameSearch\obj\Debug\ParGameSearch.pdb
