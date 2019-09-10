@@ -37,7 +37,7 @@ namespace Minimax_TPL
         // CHECK IF MOVE IS VALID
         public bool CheckValidMove(GameBoard_TPL<counters> board, int x, int y)
         {
-            if (board[x, y] == counters.EMPTY) // if move coords match empty cell
+            if (board[x, y] == counters.e) // if move coords match e cell
                 return true;  // place move
             Console.WriteLine("\nThere is already a counter at ({0}, {1}). Try again.", x, y);
             // Debug.Assert();

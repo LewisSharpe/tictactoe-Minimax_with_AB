@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,11 +12,12 @@ namespace Minimax_TPL
     {
         // PUBLIC DECS
         public int ply = 0;    // start depth for search (should be 0)
-        public int maxPly = 1; // max depth for search
+        public int maxPly = 3; // max depth for search
         public int alpha = Consts.MIN_SCORE;
         public int beta = Consts.MAX_SCORE;
-        public Tuple<int, int> positions = new Tuple<int, int>(2, 2);
+        public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
+        public static int error_confirm = 0;
         public AIPlayer_TPL(counters _counter) : base(_counter) { }
 
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
@@ -24,7 +26,7 @@ namespace Minimax_TPL
             List<Tuple<int, int>> moves = new List<Tuple<int, int>>();
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
-                    if (board[x, y] == counters.EMPTY)
+                    if (board[x, y] == counters.e)
                     {
                         Tuple<int, int> coords = new Tuple<int, int>(x, y);
                         moves.Add(coords);
@@ -34,36 +36,83 @@ namespace Minimax_TPL
     // GET MOVE
     public override Tuple<int, int> GetMove(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
         {
+            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             int score = Consts.MIN_SCORE;
             Tuple<int, int> pop = new Tuple<int, int>(0, 0);
             Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, pop);
             bool mmax = true;
+            // write to file
+            var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
+            var date = DateTime.Now.ToShortDateString();
+            var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
+            var csv = new System.Text.StringBuilder();
+            var title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", "DATE", "TIME", "INT BOARD", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", Environment.NewLine);
+            csv.Append(title);
+            File.AppendAllText(file, title.ToString());
             // Create new stopwatch.
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing.
             stopwatch.Start();
             // Do work
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
-            Tuple<int, Tuple<int, int>> result;
-            
-            result = Minimax(board, counter, ply, positions, true, scoreBoard, alpha, beta);
-            if (ply > 1)
-                result = SeqSearch(board, counter, ply, positions, true, scoreBoard, alpha, beta);
+            int stride = 4, id = 1, numTasks = 4;
+            Tuple<int, Tuple<int, int>> result = new Tuple<int, Tuple<int, int>>(0,new Tuple<int, int>(0,0));
+            if (ply == 0 || ply == 1)
+            {
+                result = ParSearchWrap(board, numTasks, scoreBoard); // return
+                return result.Item2;
+            }
+            else if (ply > 1)
+            {
+                 result = SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
+                 return result.Item2;
+            }
+            string status;
+            if (Win(board, counter))
+            {
+                Game_TPL.cntr++;
+                status = "PASS";
+                Console.WriteLine("? PASS on Board " + Game_TPL.cntr + " : Winning combination found");
+                //        board.DisplayBoard();
+                Console.ReadLine();
+                title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", "DATE", "TIME", "INT BOARD", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", Environment.NewLine);
+                csv.Append(title);
+                File.AppendAllText(file, title.ToString());
+            }
+            if (Win(board, this.otherCounter))
+            {
+                Game_TPL.cntr++;
+                status = "PASS";
+                Console.WriteLine("? PASS on Board " + Game_TPL.cntr + " : Winning combination found");
+                //        board.DisplayBoard();
+                Console.ReadLine();
+                title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", "DATE", "TIME", "INT BOARD", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", Environment.NewLine);
+                csv.Append(title);
+                File.AppendAllText(file, title.ToString());
+            }
+            else
+            {
+                status = "FAIL";
+                string reason = "Board combination missed";
+                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", date, time, board, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Environment.NewLine);
+                csv.Append(newLine);
+                File.AppendAllText(file, newLine.ToString());
+            }
             // Stop timing.
             stopwatch.Stop();
-            // Return positions
-            return result.Item2;
+                // Return positions
+            //}
+            return new Tuple<int, int>(0, 0);
         }
         // WHICH SIDE IS IN PLAY?
         public counters Flip(counters counter)
         {
-            if (counter == counters.NOUGHTS)
+            if (counter == counters.O)
             {
-                return counters.CROSSES;
+                return counters.X;
             }
             else
             {
-                return counters.NOUGHTS;
+                return counters.O;
             }
         }
         // FIND ONE CELL OF SAME SYMBOL IN A ROW
@@ -204,37 +253,39 @@ namespace Minimax_TPL
             return false;
         }
         // IS CENTRE OF THREE IN A ROW
-        public static Tuple<int, int> IsLeftOfThree(GameBoard_TPL<counters> board, counters us)
-        {
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    for (int xx = 0; xx <= 1; xx++)
-                        for (int yy = 0; yy <= 1; yy++)
-                        {
-
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (board[x, y] == us &&
-                            board[x, y] == board[x + xx, y + yy] &&
-                            board[x, y] == board[x - xx, y - yy])
-                            {
-                                return new Tuple<int, int>(x - xx, y - yy);
-                            }
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-        // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsCentreOfThree(GameBoard_TPL<counters> board, counters us)
         {
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
+            int x = 0; int xx = 0; int y = 0; int yy = 0;
+            for (x = 1; x <= 7; x++)
+                for (y = 1; y <= 7; y++)
+                
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    for (xx = 0; xx <= 1; xx++)
+                        for (yy = 0; yy <= 1; yy++)
+                        
+
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us &&
+                            board[x, y] == board[x + xx, y + yy] &&
+                            board[x, y] == board[x - xx, y - yy])
+            {
+                return new Tuple<int, int>(x - xx, y - yy);
+            }
+                           
+                
+            return new Tuple<int, int>(x - xx, y - yy);
+        }
+        // IS CENTRE OF THREE IN A ROW
+        public static Tuple<int, int> IsLeftOfThree(GameBoard_TPL<counters> board, counters us)
+        {
+            int x = 0; int xx = 0; int y = 0; int yy = 0;
+            for (x = 1; x <= 7; x++)
+                for (y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    for (int xx = 0; xx <= 1; xx++)
-                        for (int yy = 0; yy <= 1; yy++)
+                    for (xx = 0; xx <= 1; xx++)
+                        for (yy = 0; yy <= 1; yy++)
                         {
 
                             if (yy == 0 && xx == 0)
@@ -243,21 +294,22 @@ namespace Minimax_TPL
                             board[x, y] == board[x + xx, y + yy] &&
                             board[x, y] == board[x - xx, y - yy])
                             {
-                                return new Tuple<int, int>(x, y);
+                                return new Tuple<int, int>(x-1, y+1);
                             }
                         }
                 }
-            return new Tuple<int, int>(0, 0);
+            return new Tuple<int, int>(x-3, y-1);
         }
         // IS CENTRE OF THREE IN A ROW
         public static Tuple<int, int> IsRightOfThree(GameBoard_TPL<counters> board, counters us)
         {
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
+            int x = 0; int xx = 0; int y = 0; int yy = 0;
+            for (x = 1; x <= 7; x++)
+                for (y = 1; y <= 7; y++)
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
-                    for (int xx = 0; xx <= 1; xx++)
-                        for (int yy = 0; yy <= 1; yy++)
+                    for (xx = 0; xx <= 1; xx++)
+                        for (yy = 0; yy <= 1; yy++)
                         {
 
                             if (yy == 0 && xx == 0)
@@ -266,108 +318,31 @@ namespace Minimax_TPL
                             board[x, y] == board[x + xx, y + yy] &&
                             board[x, y] == board[x - xx, y - yy])
                             {
-                                return new Tuple<int, int>(x + xx, y + yy);
+                                return new Tuple<int, int>(x - 1, y -3);
                             }
                         }
                 }
-            return new Tuple<int, int>(0, 0);
-        }
-
-        // SCORE BOARD SUMMARY PRINT USED FOR MINIMAX MOVES FOR DEBUGGING ONLY
-        public Tuple<counters, Tuple<int, int>, Tuple<int, int>, int, int, int> PlyScoringSummary(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
-        {
-            int bestScore = Consts.MIN_SCORE;
-            int ply = 2;
-            Tuple<int, int> positions = new Tuple<int, int>(2, 2);
-            Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);
-            Console.WriteLine(Tuple.Create("-----------------------------------------------------------------------------------------------------------------------"
-                + "DEBUGGING: SCORING SUMMARY FOR MOVE:" + Environment.NewLine +
-                "------------------------------------------------------------------------------------------------------------------------" +
-                 "for Player_TPL: " + Flip(counter) + Environment.NewLine,
-                 "position: " + positions + Environment.NewLine,
-                 "best move: " + bestMove + Environment.NewLine,
-                 "best score: " + bestScore + Environment.NewLine,
-                 "positions visited: " + cont + Environment.NewLine,
-                 "depth level: " + ply + Environment.NewLine +
-                 "-----------------------------------------------------------------------------------------------------------------------"));
-            return new Tuple<counters, Tuple<int, int>, Tuple<int, int>, int, int, int>(counter, positions, bestMove, bestScore, cont, ply);
-        }
-
-        // SCORE BOARD SUMMARY PRINT USED FOR PRIORITY MOVES FOR DEBUGGING ONLY
-        public Tuple<Tuple<int, int>, counters, int, Tuple<int, int>, int, int, int> PriorityScoringSummary(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
-        {
-            int bestScore = Consts.MIN_SCORE;
-            int ply = 2;
-            int score = 10;
-            Tuple<int, int> positions = new Tuple<int, int>(2, 2);
-            Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);
-            Console.Write(Tuple.Create("-----------------------------------------------------------------------------------------------------------------------"
-                + "DEBUGGING: SCORING SUMMARY FOR MOVE:" + Environment.NewLine +
-                "------------------------------------------------------------------------------------------------------------------------" +
-                "Priority Moves function selects position " + positions + Environment.NewLine,
-                "for Player_TPL:" + Flip(counter) + Environment.NewLine,
-                "score: " + score + Environment.NewLine,
-                "best move: " + bestMove + Environment.NewLine,
-                "best score: " + bestScore + Environment.NewLine,
-                "positions visited: " + cont + Environment.NewLine,
-                "depth level: " + ply + Environment.NewLine +
-                "-----------------------------------------------------------------------------------------------------------------------"));
-            return new Tuple<Tuple<int, int>, counters, int, Tuple<int, int>, int, int, int>(positions, counter, score, bestMove, bestScore, cont, ply);
-        }
-
-        // SCORE BOARD SUMMARY PRINT FOR RANDOM MOVES USED FOR DEBUGGING ONLY
-        public Tuple<Tuple<int, int>, counters, int, Tuple<int, int>, int, int, int> RandScoringSummary(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
-        {
-            int bestScore = Consts.MIN_SCORE;
-            int ply = 2;
-            int score = 10;
-            Tuple<int, int> positions = new Tuple<int, int>(2, 2);
-            counters counter = counters.NOUGHTS;
-            Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);
-            Tuple.Create(Environment.NewLine + "-----------------------------------------------------------------------------------------------------------------------"
-                        + "SELECTED MOVE:" + Environment.NewLine +
-                        "------------------------------------------------------------------------------------------------------------------------" +
-                       "I AM AN RANDOMLY ASSIGNED MOVE" + Environment.NewLine,
-                       "position: " + positions,
-                       "for Player_TPL: " + Flip(counter),
-                        "score: " + score + Environment.NewLine,
-                "best move: " + bestMove + Environment.NewLine,
-                "best score: " + bestScore + Environment.NewLine,
-                "positions visited: " + cont + Environment.NewLine,
-                "depth level: " + ply + Environment.NewLine +
-                "------------------------------------------------------------------------------------------------------------=----------");
-            return new Tuple<Tuple<int, int>, counters, int, Tuple<int, int>, int, int, int>(positions, counter, score, bestMove, bestScore, cont, ply);
-        }
-
-        // IS THERE A WINNING THREE IN A ROW?
-        public int EvalForWin(GameBoard_TPL<counters> board, counters us)
-        {
-            // eval if move is win draw or loss
-            if (FindThreeInARow(board, us)) // Player_TPL win?
-                return 1000; // Player_TPL win confirmed
-            else if (FindThreeInARow(board, us + 1)) // opponent win?
-                return -1000; // opp win confirmed
-            else if (FindTwoInARow(board, us)) // Player_TPL win?
-                return 100; // Player_TPL win confirmed
-            else if (FindTwoInARow(board, us + 1)) // opponent win?
-                return -100; // opp win confirmed
-            if (FindOneInARow(board, us)) // Player_TPL win?
-                return 10; // Player_TPL win confirmed
-            else if (FindOneInARow(board, us + 1)) // opponent win?
-                return -10; // opp win confirmed
-            else
-                return 23; // dummy value
+           return new Tuple<int, int>(x - 1, y - 3);
         }
         // STATIC EVALUATION FUNCTION
         public int EvalCurrentBoard(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard, counters us)
         {
-            // score decs
-            int score = 0;
-        
-            // assign
-            score = EvalForWin(board, us); // 1 for win, 0 for unknown
-           
-                return score;
+            int score;
+            // eval if move is win draw or loss
+            if (FindThreeInARow(board, us)) // Player_TPL win?
+                return score = 1000; // Player_TPL win confirmed
+            else if (FindThreeInARow(board, us + 1)) // opponent win?
+                return score = -1000; // opp win confirmed
+            else if (FindTwoInARow(board, us)) // Player_TPL win?
+                return score = 100; // Player_TPL win confirmed
+            else if (FindTwoInARow(board, us + 1)) // opponent win?
+                return score = -100; // opp win confirmed
+            if (FindOneInARow(board, us)) // Player_TPL win?
+                return score = 10; // Player_TPL win confirmed
+            else if (FindOneInARow(board, us + 1)) // opponent win?
+                return score = -10; // opp win confirmed
+            else
+                return score = 23; // dummy value
         }
 
         public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
@@ -376,18 +351,16 @@ namespace Minimax_TPL
             counters us = Flip(counter);
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             // create new list of Tuple<int,int>
-            List<Tuple<int, Tuple<int, int>>> result_list = new List<Tuple<int, Tuple<int, int>>>();
             int bestScore = mmax ? -1001 : 1001;
             int score = Consts.MIN_SCORE; // current score of move
             Tuple<int, int> Move = new Tuple<int, int>(0, 0);
-            Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);  // best move with score// THRESHOLD <=============
-            // CHECK DEPTH
-            if (ply > maxPly)
-            {
-                score = EvalCurrentBoard(board, scoreBoard, us); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
-                return new Tuple<int, Tuple<int, int>>(score, positions);
-            }
+            Tuple<int, int> bestMove = new Tuple<int, int>(0, 0);  // best move with score// THRESHOLD <=============
             GameBoard_TPL<counters> copy = board.Clone();
+            // check win
+            if (availableMoves.Count == 0)
+            {
+                return new Tuple<int, Tuple<int, int>>(10, positions);
+            }
             for (int i = 0; i < availableMoves.Count; i++)
             {
                 Move = availableMoves[i]; // current move
@@ -398,10 +371,10 @@ namespace Minimax_TPL
                                                         // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
                 // list defined in Minimax declarations
-                Tuple<int, Tuple<int, int>> result = Minimax(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, alpha, beta); /* swap Player_TPL */ // RECURSIVE call  
+                Tuple<int, Tuple<int, int>> result = ParallelChoice(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, alpha, beta); /* swap Player_TPL */ // RECURSIVE call  
 
                 // trying to prevent preventing cell overwrite
-                copy[Move.Item1, Move.Item2] = counters.EMPTY; /*  counter; */ // HWL: remove counter that was tried in this iteration
+                copy[Move.Item1, Move.Item2] = counters.e; /*  counter; */ // HWL: remove counter that was tried in this iteration
                                                                                // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
                 score = -result.Item1; // assign score
@@ -409,6 +382,18 @@ namespace Minimax_TPL
 
                 // assign score to correct cell in score
                 scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
+
+                // CHECK DEPTH
+                if (ply > maxPly)
+                {
+                    score = EvalCurrentBoard(board, scoreBoard, us); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
+                    return new Tuple<int, Tuple<int, int>>(score, positions);
+                }
+
+                if (Game_TPL.cntr >= 40)
+                {
+                    Environment.Exit(99);
+                }
 
                 Object my_object = new Object();
                 // if maximising                  
@@ -419,8 +404,8 @@ namespace Minimax_TPL
                     {
                         lock (my_object)
                         {
-                            bestMove = Move;
-                            bestScore = score;
+                            Move = bestMove;
+                            score = bestScore;
                         }
                     }
                     if (alpha > bestScore)
@@ -439,8 +424,8 @@ namespace Minimax_TPL
                     {
                         lock (my_object)
                         {
-                            bestMove = Move;
-                            bestScore = score;
+                            Move = bestMove;
+                            score = bestScore;
                         }
                     }
                     if (beta <= alpha)
@@ -449,13 +434,46 @@ namespace Minimax_TPL
                             bestScore = alpha;
                         }
                 }
-                // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
-                Console.WriteLine(mmax.ToString() +
-                " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
-                      ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
-                      bestScore, bestMove.Item1, bestMove.Item2);
-                board.DisplayBoard();
+                if (Win(board, counter))
+                {
+                    Game_TPL.cntr++;
+                    Console.WriteLine("? PASS on Board " + Game_TPL.cntr + " : Winning combination found");
+                    //        board.DisplayBoard();
+                    Console.ReadLine();
+                    var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_report.csv";
+                    var date = DateTime.Now.ToShortDateString();
+                    var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
+                    var csv = new System.Text.StringBuilder();
+                    var title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", "DATE", "TIME", "INT BOARD", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", Environment.NewLine);
+                    csv.Append(title);
+                    File.AppendAllText(file, title.ToString());
+                    return new Tuple<int, Tuple<int, int>>(1000, positions);
+                }
+                else if (Win(board, this.otherCounter))
+                {
+                    Game_TPL.cntr++;
+                    Console.WriteLine("? PASS on Board " + Game_TPL.cntr + " : Winning combination found");
+                    //        board.DisplayBoard();
+                    Console.ReadLine();
+                    var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_report.csv";
+                    var date = DateTime.Now.ToShortDateString();
+                    var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
+                    var csv = new System.Text.StringBuilder();
+                    var title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", "DATE", "TIME", "INT BOARD", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", Environment.NewLine);
+                    csv.Append(title);
+                    File.AppendAllText(file, title.ToString());
+                    return new Tuple<int, Tuple<int, int>>(-1000, positions);
+                }
+
+                /*
+      // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
+      Console.WriteLine(mmax.ToString() +
+      " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
+            ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
+            bestScore, bestMove.Item1, bestMove.Item2);
+           */
             }
+            cont++;
             return new Tuple<int, Tuple<int, int>>(score, positions); // return
         }
         // top-level fct that generates parallelism;
@@ -469,7 +487,7 @@ namespace Minimax_TPL
             int stride = 1; int id = 1;
             Tuple<int, Tuple<int, int>>[] ress = new Tuple<int, Tuple<int, int>>[4];
             // compute the maximum over all results
-            Tuple<int, Tuple<int, int>> res = ress[0]; // , res1, res2, res3, res4;
+            Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(score, pop); ; // , res1, res2, res3, res4;
             Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, pop);
 
             // counters?[] board1 = new counters?[board.Length];
@@ -478,16 +496,28 @@ namespace Minimax_TPL
             GameBoard_TPL<counters> board3 = board.Clone();
             GameBoard_TPL<counters> board4 = board.Clone();
 
-                        // start and synchronise 4 parallel tasks
-            Parallel.Invoke(() => { ress[0] = ParSearchWork(board1, counter, ply, positions, true, scoreBoard, stride, id, bestRes); },
-                    () => { ress[1] = ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, id, bestRes); },
-                    () => { ress[2] = ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, id, bestRes); },
-                    () => { ress[3] = ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, id, bestRes); });
-        
+
+            // start and synchronise 4 parallel tasks
+            Parallel.Invoke(() => { ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes); },
+                    () => { ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes); },
+                    () => { ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes); },
+                    () => { ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes); });
+
+            //Write to a file
+            using (StreamWriter writer = new StreamWriter(@"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//print_val.txt"))
+            {
+                writer.WriteLine("t");
+                writer.WriteLine("res0:" + ress[0] + Environment.NewLine +
+                    "res1:" + ress[1] + Environment.NewLine +
+                    "res2:" + ress[2] + Environment.NewLine +
+                    "res3:" + ress[3] + Environment.NewLine);
+            }
+
             for (int j = 1; j < ress.Length; j++)
             {
                 res = (ress[j].Item1 > res.Item1) ? ress[j] : res;
             }
+
             // return overall maximum
             return res;
         }
@@ -497,7 +527,8 @@ namespace Minimax_TPL
             Tuple<int, Tuple<int, int>> res;
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             int score = Consts.MIN_SCORE; // current score of move
-            counters us = counters.CROSSES;
+            counters us = counters.X;
+            stride = 4;
             int cnt = stride, offset = id;
             if (ply > maxPly)
             {
@@ -510,20 +541,25 @@ namespace Minimax_TPL
                     {
                         if (offset == 0 && cnt == 0)
                         {
-                            res = SeqSearch(board, counter, ply+1, positions, mmax, scoreBoard, alpha, beta);
+                            res = SeqSearch(board, Flip(counter), ply+1, positions, mmax, scoreBoard, alpha, beta);
                             bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes;
                             cnt = stride;
                         }
                         else
                         {
                             if (offset == 0) { cnt--; } else { offset--; }
-                        }
-                    }
-                }
+                        }  
+                 }              
+                    if (ply == 0)
+                    {
+                       Console.WriteLine("board " + Game_TPL.cntr + " processed by thread id: " + Thread.CurrentThread.ManagedThreadId.ToString() + " thread running status: " + Thread.CurrentThread.ThreadState +  " :");
+                        board.DisplayBoard();
+                   }    
+            }         
             return bestRes;
     }
         // MINIMAX FUNCTION
-        public Tuple<int, Tuple<int, int>> Minimax(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
+        public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
         {
             // decs
             counters us = Flip(counter);
@@ -533,7 +569,7 @@ namespace Minimax_TPL
             int bestScore = mmax ? -1001 : 1001;
             int score = Consts.MIN_SCORE; // current score of move
             Tuple<int, int> Move = new Tuple<int, int>(0, 0);
-            Tuple<int, int> bestMove = new Tuple<int, int>(1, 1);  // best move with score// THRESHOLD <=============
+            Tuple<int, int> bestMove = new Tuple<int, int>(0, 0);  // best move with score// THRESHOLD <=============
                                                                    // add assertion here
                                                                    // decs for random move 
             Random rnd = new Random();
@@ -541,32 +577,28 @@ namespace Minimax_TPL
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
 
-            // check win
-            if (availableMoves.Count == 0)
-            {
-                return new Tuple<int, Tuple<int, int>>(10, positions);
-            }
             if (ply == 0 || ply == 1)
             {
-                return ParSearchWrap(board, numTasks, scoreBoard); // return
+                
+                new Thread(() =>
+                {
+                    Thread.CurrentThread.IsBackground = true;
+                    /* run your code here */
+                 ParSearchWrap(board, numTasks, scoreBoard); // return
+                }).Start();
+                return new Tuple<int, Tuple<int, int>>(score, positions);
             }
             else if (ply > 1)
             {
-                return SeqSearch(board, counter, ply, positions, true, scoreBoard, alpha, beta);
+                new Thread(() =>
+                {
+                    Thread.CurrentThread.IsBackground = true;
+                    /* run your code here */
+                    SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
+                }).Start();
+                return new Tuple<int, Tuple<int, int>>(score, positions);
             }
-           
-           
-            if (Win(board, counter))
-            {
-                return new Tuple<int, Tuple<int, int>>(1000, positions);
-            }
-            else if (Win(board, this.otherCounter))
-            {
-                return new Tuple<int, Tuple<int, int>>(-1000, positions);
-            }
-           
-            cont++; // increment positions visited
-            return new Tuple<int, Tuple<int, int>>(bestScore, bestMove); // return
+            return new Tuple<int, Tuple<int, int>>(bestScore, bestMove);
         }
        }
       }
