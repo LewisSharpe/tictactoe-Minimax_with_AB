@@ -18,11 +18,10 @@ namespace Minimax_TPL
     // COUNTER TYPES - ABLE TO PLACE OF BOARD
     public enum counters
     {
-        NOUGHTS,
-        CROSSES,
+        O,
+        X,
         BORDER,
-        SCORE,
-        EMPTY
+        e
     }
 
     // MAIN EXECUTION
@@ -53,21 +52,21 @@ namespace Minimax_TPL
                     Console.Write("\nInvalid counter. Enter 'X' or 'O': ");
                 if (new_counter == 'X')
                 {
-                    counter = counters.CROSSES;
+                    counter = counters.X;
                 }
                 else if (new_counter == 'O')
                 {
-                    counter = counters.NOUGHTS;
+                    counter = counters.O;
                 }
                 else
                 {
-                    counter = counters.EMPTY;
+                    counter = counters.e;
                 }
 
                 Player_TPL Player_TPL = new HumanPlayer_TPL(name, counter);
                 Player_TPL computer = new AIPlayer_TPL(Player_TPL.otherCounter);
                 Game_TPL Game_TPL;
-                if (counter == counters.CROSSES)
+                if (counter == counters.X)
                     Game_TPL = new Game_TPL(Player_TPL, computer);
                 else
                     Game_TPL = new Game_TPL(computer, Player_TPL);
@@ -76,11 +75,11 @@ namespace Minimax_TPL
             if (menuChoice == 2)
             {
                 counters counter;
-                counter = counters.CROSSES;
+                counter = counters.X;
                 Player_TPL Player_TPL = new AIPlayer_TPL(counter);
                 Player_TPL computer = new AIPlayer_TPL(Player_TPL.otherCounter);
                 Game_TPL Game_TPL;
-                if (counter == counters.CROSSES)
+                if (counter == counters.X)
                     Game_TPL = new Game_TPL(Player_TPL, computer);
                 else
                     Game_TPL = new Game_TPL(computer, Player_TPL);
@@ -92,8 +91,8 @@ namespace Minimax_TPL
                 string xName = Console.ReadLine();
                 Console.Write("Enter name for O: ");
                 string oName = Console.ReadLine();
-                Player_TPL xPlayer_TPL = new HumanPlayer_TPL(xName, counters.CROSSES);
-                Player_TPL oPlayer_TPL = new HumanPlayer_TPL(oName, counters.NOUGHTS);
+                Player_TPL xPlayer_TPL = new HumanPlayer_TPL(xName, counters.X);
+                Player_TPL oPlayer_TPL = new HumanPlayer_TPL(oName, counters.O);
                 Game_TPL Game_TPL = new Game_TPL(xPlayer_TPL, oPlayer_TPL); // play Game_TPL execution
             }
             // SELECTION 4 EXIT

@@ -17,11 +17,10 @@ namespace Minimax_SYSTST
     // COUNTER TYPES - ABLE TO PLACE OF BOARD
     public enum counters
     {
-        NOUGHTS,
-        CROSSES,
+        O,
+        X,
         BORDER,
-        SCORE,
-        EMPTY
+        e
     }
 
     // MAIN EXECUTION
@@ -54,21 +53,21 @@ namespace Minimax_SYSTST
                     Console.Write("\nInvalid counter. Enter 'X' or 'O': ");
                 if (new_counter == 'X')
                 {
-                    counter = counters.CROSSES;
+                    counter = counters.X;
                 }
                 else if (new_counter == 'O')
                 {
-                    counter = counters.NOUGHTS;
+                    counter = counters.O;
                 }
                 else
                 {
-                    counter = counters.EMPTY;
+                    counter = counters.e;
                 }
 
                 Player_SYSTST player = new HumanPlayer_SYSTST(name, counter);
                 Player_SYSTST computer = new AIPlayer_SYSTST(player.otherCounter);
                 Game_SYSTST game;
-                if (counter == counters.CROSSES)
+                if (counter == counters.X)
                     game = new Game_SYSTST(player, computer);
                 else
                     game = new Game_SYSTST(computer, player);
@@ -77,11 +76,11 @@ namespace Minimax_SYSTST
             if (menuChoice == 2)
             {
                 counters counter;
-                counter = counters.CROSSES;
+                counter = counters.X;
                 Player_SYSTST player = new AIPlayer_SYSTST(counter);
                 Player_SYSTST computer = new AIPlayer_SYSTST(player.otherCounter);
                 Game_SYSTST game;
-                if (counter == counters.CROSSES)
+                if (counter == counters.X)
                     game = new Game_SYSTST(player, computer);
                 else
                     game = new Game_SYSTST(computer, player);
@@ -93,8 +92,8 @@ namespace Minimax_SYSTST
                 string xName = Console.ReadLine();
                 Console.Write("Enter name for O: ");
                 string oName = Console.ReadLine();
-                Player_SYSTST xplayer = new HumanPlayer_SYSTST(xName, counters.CROSSES);
-                Player_SYSTST oplayer = new HumanPlayer_SYSTST(oName, counters.NOUGHTS);
+                Player_SYSTST xplayer = new HumanPlayer_SYSTST(xName, counters.X);
+                Player_SYSTST oplayer = new HumanPlayer_SYSTST(oName, counters.O);
                 Game_SYSTST game = new Game_SYSTST(xplayer, oplayer); // play game execution
             }
             // SELECTION 4 EXIT

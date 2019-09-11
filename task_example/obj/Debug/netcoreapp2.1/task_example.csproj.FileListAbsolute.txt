@@ -1,0 +1,11 @@
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\bin\Debug\netcoreapp2.1\task_example.deps.json
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\bin\Debug\netcoreapp2.1\task_example.runtimeconfig.json
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\bin\Debug\netcoreapp2.1\task_example.runtimeconfig.dev.json
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\bin\Debug\netcoreapp2.1\task_example.dll
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\bin\Debug\netcoreapp2.1\task_example.pdb
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\obj\Debug\netcoreapp2.1\task_example.csprojAssemblyReference.cache
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\obj\Debug\netcoreapp2.1\task_example.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\obj\Debug\netcoreapp2.1\task_example.AssemblyInfoInputs.cache
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\obj\Debug\netcoreapp2.1\task_example.AssemblyInfo.cs
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\obj\Debug\netcoreapp2.1\task_example.dll
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\task_example\obj\Debug\netcoreapp2.1\task_example.pdb
