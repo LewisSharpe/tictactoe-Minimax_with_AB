@@ -21,10 +21,3 @@ C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYS
 C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.csproj.CoreCompileInputs.cache
 C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.exe
 C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.pdb
-C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\bin\Debug\Minimax_SYSTST.exe.config
-C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\bin\Debug\Minimax_SYSTST.exe
-C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\bin\Debug\Minimax_SYSTST.pdb
-C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.csprojAssemblyReference.cache
-C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.csproj.CoreCompileInputs.cache
-C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.exe
-C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.pdb
