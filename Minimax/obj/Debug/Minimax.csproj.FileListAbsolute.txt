@@ -75,3 +75,10 @@ C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax\obj\Debug\Minimax.csprojAsse
 C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax\obj\Debug\Minimax.csproj.CoreCompileInputs.cache
 C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax\obj\Debug\Minimax.exe
 C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax\obj\Debug\Minimax.pdb
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax\bin\Debug\Minimax.exe.config
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax\bin\Debug\Minimax.exe
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax\bin\Debug\Minimax.pdb
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax\obj\Debug\Minimax.csprojAssemblyReference.cache
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax\obj\Debug\Minimax.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax\obj\Debug\Minimax.exe
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax\obj\Debug\Minimax.pdb

@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "task_example/1.0.0": {
+      "ParSort/1.0.0": {
         "runtime": {
-          "task_example.dll": {}
+          "ParSort.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "task_example/1.0.0": {
+    "ParSort/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
