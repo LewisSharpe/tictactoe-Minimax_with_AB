@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\task_example\\task_example.csproj",
-      "projectName": "task_example",
-      "projectPath": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\task_example\\task_example.csproj",
+      "projectUniqueName": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj",
+      "projectName": "ParSort",
+      "projectPath": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj",
       "packagesPath": "C:\\Users\\Lewis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\task_example\\obj\\",
+      "outputPath": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

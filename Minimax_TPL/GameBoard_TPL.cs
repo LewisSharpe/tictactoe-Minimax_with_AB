@@ -10,14 +10,15 @@ namespace Minimax_TPL
     struct GameBoard_TPL <T> where T: IComparable
     {
         // cell ids
-        private T s1, s2, s3, s4, s5, s6, s7,
+        public T s1, s2, s3, s4, s5, s6, s7,
                          s8, s9, s10, s11, s12, s13, s14,
                          s15, s16, s17, s18, s19, s20, s21,
                          s22, s23, s24, s25, s26, s27, s28,
                          s29, s30, s31, s32, s33, s34, s35,
                          s36, s37, s38, s39, s40, s41, s42,
                          s43, s44, s45, s46, s47, s48, s49;
-        private T filler; // empty filler space for cell
+        public T filler; // empty filler space for cell
+        private static Object thisLock = new Object();
 
         // 1 BLANK BOARD
         public GameBoard_TPL(T _filler)
@@ -58,6 +59,57 @@ namespace Minimax_TPL
             }
             Console.WriteLine();
         }
+
+
+        // DISPLAY GameBoard_TPL AS FOLLOWS
+        public void DisplayBoardToCSVCell()
+        {
+            try
+            {
+                using (StreamWriter sw = File.AppendText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/board.txt"))
+                {
+                    sw.Write("iteration: " + Game_TPL.cntr);
+                    for (int x = 1; x <= 7; x++)
+                        sw.Write("  " + x + " ");
+                    sw.WriteLine();
+                    for (int y = 1; y <= 7; y++)
+                    {
+                        sw.Write(y + " ");
+                        for (int x = 1; x <= 7; x++)
+                        {
+                            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                                sw.Write(filler);
+                            else
+                                sw.Write(this[x, y]);
+                            sw.Write(" | ");
+                        }
+                        sw.WriteLine();
+                        sw.WriteLine("  -   -   -   -   -   -   - ");
+                    }
+                    sw.WriteLine();
+                    sw.Close();
+
+                    // This text is added only once to the file.
+                    // Create a file to write to.
+                    if (System.IO.File.Exists(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/board.txt"))
+                    {
+                        lock (thisLock)
+                        {
+
+                            File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/board.txt", string.Empty);
+                        }
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        
+
 
         // DISPLAY GameBoard_TPL AS FOLLOWS
         public void DisplayBoardToFile()
