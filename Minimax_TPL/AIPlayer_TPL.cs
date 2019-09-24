@@ -49,11 +49,14 @@ namespace Minimax_TPL
             var date = DateTime.Now.ToShortDateString();
             var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
             var csv = new System.Text.StringBuilder();
-            var title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", "DATE", "TIME", "INT BOARD", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", "THREAD NO.", Environment.NewLine);
-            csv.Append(title);
-            lock (thisLock)
+            if (ply == 0)
             {
-                File.AppendAllText(file, title.ToString());
+                var title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", "DATE", "TIME", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", "THREAD NO.", "INT BOARD", Environment.NewLine);
+                csv.Append(title);
+                lock (thisLock)
+                {
+                    File.AppendAllText(file, title.ToString());
+                }
             }
             // Create new stopwatch.
             Stopwatch stopwatch = new Stopwatch();
@@ -452,36 +455,26 @@ namespace Minimax_TPL
                     Console.ReadLine();
                     List<string> read_intboard_tocsv = new List<string>();
                     var newLine = "";
-                    try
-                    {
-                        // Open the text file using a stream reader.
-                        using (StreamReader sr = new StreamReader("C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/board.txt"))
-                        {
-                            // Read the stream to a string, and write the string to the console.
-                            read_intboard_tocsv.Add(sr.ReadToEnd());
-                            //enumerate the inner list
-                            foreach (var a in read_intboard_tocsv)
-                            {
-                                // write to file
-                                string status = "PASS";
-                                string reason = "Winning combination found";
-                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), a.ToString());
-                                csv.Append(newLine);
-                            }
-                        }
-                    }
-                    catch (IOException e)
-                    {
-                        Console.WriteLine("The file could not be read:");
-                        Console.WriteLine(e.Message);
-                    }
-                    lock (thisLock)
+
+                    // write to file
+                    string status = "PASS";
+                    string reason = "Winning combination found";
+                    newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), string.Empty, Environment.NewLine);
+                    csv.Append(newLine);
+
                     {
                         File.AppendAllText(file, newLine.ToString());
+                        board.DisplayIntBoardToFile();
+                        board.DisplayFinBoardToFile();
+                        if (ply == 0)
+                        
+                            scoreBoard.DisplayScoreBoardToFile();
+                        
+
+                        // Stop timing.
+                        stopwatch.Stop();
+                        return new Tuple<int, Tuple<int, int>>(1000, positions);
                     }
-                    // Stop timing.
-                    stopwatch.Stop();
-                    return new Tuple<int, Tuple<int, int>>(1000, positions);
                 }
                 else if (Win(board, this.otherCounter))
                 {
@@ -498,39 +491,27 @@ namespace Minimax_TPL
                     Console.WriteLine("✓ PASS on Board " + Game_TPL.cntr + " : Winning combination found");
                     board.DisplayBoardToCSVCell();
                     Console.ReadLine();
-                    List<string> read_intboard_tocsv = new List<string>();
                     var newLine = "";
-                    try
-                    {  
-                        // Open the text file using a stream reader.
-                        using (StreamReader sr = new StreamReader("C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/board.txt"))
-                        {
-                            // Read the stream to a string, and write the string to the console.
-                            read_intboard_tocsv.Add(sr.ReadToEnd());
-                            //enumerate the inner list
-                            foreach (var a in read_intboard_tocsv)
-                            {
-                                // write to file
-                                string status = "PASS";
-                                string reason = "Winning combination found";
-                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), a.ToString());
-                                csv.Append(newLine);
-                            }
-                        }
-                    }
-                    catch (IOException e)
-                    {
-                        Console.WriteLine("The file could not be read:");
-                        Console.WriteLine(e.Message);
-                    }
-                   
+                    // write to file
+                    string status = "PASS";
+                    string reason = "Winning combination found";
+                    newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), string.Empty, Environment.NewLine);
+                    csv.Append(newLine);
+
                     lock (thisLock)
                     {
                         File.AppendAllText(file, newLine.ToString());
+                        board.DisplayIntBoardToFile();
+                        board.DisplayFinBoardToFile();
+                   
+                        
+                            scoreBoard.DisplayScoreBoardToFile();
+                        
+
+                        // Stop timing.
+                        stopwatch.Stop();
+                        return new Tuple<int, Tuple<int, int>>(-1000, positions);
                     }
-                    // Stop timing.
-                    stopwatch.Stop();
-                    return new Tuple<int, Tuple<int, int>>(-1000, positions);
                 }
                 else if (!Win(board, counter))
                 {
@@ -543,35 +524,23 @@ namespace Minimax_TPL
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
+                    board.DisplayBoardToCSVCell();
                     List<string> read_intboard_tocsv = new List<string>();
                     var newLine = "";
-                    try
-                    {
-                        // Open the text file using a stream reader.
-                        using (StreamReader sr = new StreamReader("C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/board.txt"))
-                        {
-                            // Read the stream to a string, and write the string to the console.
-                            read_intboard_tocsv.Add(sr.ReadToEnd());
-                            //enumerate the inner list
-                            foreach (var a in read_intboard_tocsv)
-                            {
+                   
                                 // write to file
                                 string status = "FAIL";
                                 string reason = "Board combination missed";
-                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), a.ToString());
+                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), string.Empty, Environment.NewLine);
                                 csv.Append(newLine);
-                            }
-                        }
-                    }
-                    catch (IOException e)
-                    {
-                        Console.WriteLine("The file could not be read:");
-                        Console.WriteLine(e.Message);
-                    }
-
+                           
                     lock (thisLock)
                     {
                         File.AppendAllText(file, newLine.ToString());
+                        board.DisplayIntBoardToFile();
+                        board.DisplayFinBoardToFile();
+                        scoreBoard.DisplayScoreBoardToFile();
+                        
                     }
                     // Stop timing.
                     stopwatch.Stop();
@@ -587,34 +556,23 @@ namespace Minimax_TPL
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
-                    List<string> read_intboard_tocsv = new List<string>(); 
-                   var newLine = "";
-                    try
-                    {  
-                        // Open the text file using a stream reader.
-                        using (StreamReader sr = new StreamReader("C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/board.txt"))
-                        {
-                            // Read the stream to a string, and write the string to the console.
-                            read_intboard_tocsv.Add(sr.ReadToEnd());
-                            //enumerate the inner list
-                            foreach (var a in read_intboard_tocsv)
-                            {
+                    List<string> read_intboard_tocsv = new List<string>();
+                    board.DisplayBoardToCSVCell();
+                    var newLine = "";
+                    
                                 // write to file
                                 string status = "FAIL";
                                 string reason = "Board combination missed";
-                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), a.ToString());
+                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), string.Empty, Environment.NewLine);
                                 csv.Append(newLine);
-                            }
-                        }
-                    }
-                    catch (IOException e)
-                    {
-                        Console.WriteLine("The file could not be read:");
-                        Console.WriteLine(e.Message);
-                    }
+                           
                     lock (thisLock)
                     {
-                    File.AppendAllText(file, newLine.ToString());
+                        File.AppendAllText(file, newLine.ToString());
+                        board.DisplayIntBoardToFile();
+                        board.DisplayFinBoardToFile();         
+                        scoreBoard.DisplayScoreBoardToFile();
+                        
                     }
                     // Stop timing.
                     stopwatch.Stop();
@@ -631,9 +589,9 @@ namespace Minimax_TPL
                     lock (thisLock)
                     {
                         File.AppendAllText(file, title.ToString());
+                        scoreBoard.DisplayBoardToFile();
                     }
-                    scoreBoard.DisplayBoard();
-                    Console.WriteLine("Player move: " + counter + " which, returns: " + result.Item1 + result.Item2);
+                 //   Console.WriteLine("Player move: " + counter + " which, returns: " + result.Item1 + result.Item2);
                 }
                 /*
       // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board

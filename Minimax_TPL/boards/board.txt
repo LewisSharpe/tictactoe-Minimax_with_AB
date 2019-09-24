@@ -1,0 +1,304 @@
+iteration: 11  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 X | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 11  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 12  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 13  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 13  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 13  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 13  1   2   3   4   5   6   7 
+1 X | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 X | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 X | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 X | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 X | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 14  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+
+iteration: 16  1   2   3   4   5   6   7 
+1 e | X | X | e | e | e | e | 
+  -   -   -   -   -   -   - 
+2 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+3 e | X | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+4 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+5 X | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+6 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+7 e | e | e | e | e | e | e | 
+  -   -   -   -   -   -   - 
+

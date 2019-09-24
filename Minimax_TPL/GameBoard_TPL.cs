@@ -108,7 +108,55 @@ namespace Minimax_TPL
             }
         }
 
-        
+        // DISPLAY GameBoard_TPL AS FOLLOWS
+        public void DisplayScoreBoardToCSVCell()
+        {
+            /*
+            try
+            {
+                using (StreamWriter sw = File.AppendText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/scoreboard.txt"))
+                {
+                    sw.Write("iteration: " + Game_TPL.cntr);
+                    for (int x = 1; x <= 7; x++)
+                        sw.Write("  " + x + " ");
+                    sw.WriteLine();
+                    for (int y = 1; y <= 7; y++)
+                    {
+                        sw.Write(y + " ");
+                        for (int x = 1; x <= 7; x++)
+                        {
+                            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                                sw.Write(filler);
+                            else
+                                sw.Write(this[x, y]);
+                            sw.Write(" | ");
+                        }
+                        sw.WriteLine();
+                        sw.WriteLine("  -   -   -   -   -   -   - ");
+                    }
+                    sw.WriteLine();
+                    sw.Close();
+
+                    // This text is added only once to the file.
+                    // Create a file to write to.
+                    if (System.IO.File.Exists(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/scoreboard.txt"))
+                    {
+                        lock (thisLock)
+                        {
+
+                            File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/scoreboard.txt", string.Empty);
+                        }
+                    }
+                }
+                
+            }
+            catch
+            {
+
+            }
+            */
+        }
+
 
 
         // DISPLAY GameBoard_TPL AS FOLLOWS
@@ -139,6 +187,98 @@ namespace Minimax_TPL
                     sw.WriteLine();
                 }
             }
+
+        // DISPLAY GAMEBOARD AS FOLLOWS
+        public void DisplayIntBoardToFile()
+        {
+            string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/intboards.txt";
+            // This text is added only once to the file.
+            // Create a file to write to.
+             File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/intboards.txt", string.Empty);
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                //      System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/intboards.txt", string.Empty);
+                sw.Write("iteration: " + Game_TPL.cntr);
+                for (int x = 1; x <= 7; x++)
+                    sw.Write("  " + x + " ");
+                sw.WriteLine();
+                for (int y = 1; y <= 7; y++)
+                {
+                    sw.Write(y + " ");
+                    for (int x = 1; x <= 7; x++)
+                    {
+                        if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                            sw.Write(filler);
+                        else
+                            sw.Write(this[x, y]);
+                        sw.Write(" | ");
+                    }
+                    sw.WriteLine();
+                    sw.WriteLine("  -   -   -   -   -   -   - ");
+                }
+                sw.WriteLine();
+            }
+        }
+        public void DisplayFinBoardToFile()
+        {
+            string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/finboards.txt";
+            // This text is added only once to the file.
+            // Create a file to write to.
+             File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/finboards.txt", string.Empty);
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                //     System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/finboards.txt", string.Empty);
+                sw.Write("iteration: " + Game_TPL.cntr);
+                for (int x = 1; x <= 7; x++)
+                    sw.Write("  " + x + " ");
+                sw.WriteLine();
+                for (int y = 1; y <= 7; y++)
+                {
+                    sw.Write(y + " ");
+                    for (int x = 1; x <= 7; x++)
+                    {
+                        if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                            sw.Write(filler);
+                        else
+                            sw.Write(this[x, y]);
+                        sw.Write(" | ");
+                    }
+                    sw.WriteLine();
+                    sw.WriteLine("  -   -   -   -   -   -   - ");
+                }
+                sw.WriteLine();
+            }
+        }
+        public void DisplayScoreBoardToFile()
+        {
+            string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/scoreboards.txt";
+            // This text is added only once to the file.
+            // Create a file to write to.
+            File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/scoreboards.txt", string.Empty);
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                //      System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/scoreboards.txt", string.Empty);
+                sw.Write("iteration: " + Game_TPL.cntr);
+                for (int x = 1; x <= 7; x++)
+                    sw.Write("  " + x + " ");
+                sw.WriteLine();
+                for (int y = 1; y <= 7; y++)
+                {
+                    sw.Write(y + " ");
+                    for (int x = 1; x <= 7; x++)
+                    {
+                        if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                            sw.Write(filler);
+                        else
+                            sw.Write(this[x, y]);
+                        sw.Write(" | ");
+                    }
+                    sw.WriteLine();
+                    sw.WriteLine("  -   -   -   -   -   -   - ");
+                }
+                sw.WriteLine();
+            }
+        }
 
         // IF GameBoard_TPL IS FULL
         public bool IsFull()
