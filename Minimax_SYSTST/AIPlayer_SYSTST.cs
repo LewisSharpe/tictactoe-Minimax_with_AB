@@ -69,7 +69,7 @@ namespace Minimax_SYSTST
             var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", date, time, board, status.ToString(), "Board " + int.Parse(Game_SYSTST.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_SYSTST.board, Game_SYSTST.scoreBoard, cont, ply, stopwatch.Elapsed, Environment.NewLine);
             csv.Append(newLine);
             File.AppendAllText(file, newLine.ToString());
-            Console.ReadLine();
+            // Console.ReadLine();
             if (result.Item1 == 1000 & result.Item2 == new Tuple<int, int>(1,2))
             {
               //  Game_SYSTST.cntr++;
@@ -392,7 +392,7 @@ namespace Minimax_SYSTST
           //      Console.WriteLine(Game_SYSTST.cntr + "NOWCOUNT" + Game_SYSTST.nowcount);
                 Console.WriteLine("✓ PASS on Board " + Game_SYSTST.cntr + " : Winning combination found");
       //        board.DisplayBoard();
-                Console.ReadLine();
+              //  Console.ReadLine();
                 var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_SYSTST//SYSTST_report.csv";
                 var date = DateTime.Now.ToShortDateString();
                 var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
@@ -424,10 +424,10 @@ namespace Minimax_SYSTST
                 Game_SYSTST.cntr++;
                 Game_SYSTST.nowcount++;
                 Console.WriteLine(Game_SYSTST.cntr + "NOWCOUNT" + Game_SYSTST.nowcount);
-                Console.ReadLine();
+               // Console.ReadLine();
                 Console.WriteLine(Environment.NewLine + "✓ PASS on Board " + Game_SYSTST.cntr + " : Winning combination found");
          //    board.DisplayBoard();
-                Console.ReadLine();
+             //   Console.ReadLine();
                 var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_SYSTST//SYSTST_report.csv";
                 var date = DateTime.Now.ToShortDateString();
                 var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45

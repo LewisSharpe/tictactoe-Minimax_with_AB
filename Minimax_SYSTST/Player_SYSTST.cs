@@ -23,7 +23,7 @@ namespace Minimax_SYSTST
             else if (counter == counters.X)
                 otherCounter = counters.O;
         }
-                public abstract Tuple<int, int> GetMove(GameBoard_SYSTST<counters> board, GameBoard_SYSTST<int> scoreBoard);
+                public abstract Tuple<int,int> GetMove(GameBoard_SYSTST<counters> board, GameBoard_SYSTST<int> scoreBoard);
        
         // DETERMINE IF PLAYER HAS WON
         public bool Win(GameBoard_SYSTST<counters> board, counters counter)

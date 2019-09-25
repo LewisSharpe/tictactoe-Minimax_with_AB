@@ -18,7 +18,7 @@ namespace Minimax_SYSTST
       public static GameBoard_SYSTST<counters> board = new GameBoard_SYSTST<counters>(counters.e);
      public static  GameBoard_SYSTST<int> scoreBoard = new GameBoard_SYSTST<int>(21);
         static counters counter = counters.X;
-        counters us = Flip(counter);
+      static  counters us = Flip(counter);
 
         public Game_SYSTST(Player_SYSTST _xPlayer, Player_SYSTST _oPlayer)
         {

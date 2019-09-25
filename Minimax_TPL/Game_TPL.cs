@@ -12,15 +12,15 @@ namespace Minimax_TPL
     // GAME EXECUTION CLASS
     class Game_TPL
     {
-        public static int cntr = 2;
+        public static int cntr = 3;
         public static int nowcount = 0;
-        bool stopMe = false;
+       static bool stopMe = false;
         public static GameBoard_TPL<counters> board = new GameBoard_TPL<counters>(counters.e);
         public static GameBoard_TPL<int> scoreBoard = new GameBoard_TPL<int>(21);
         static counters counter = counters.X;
-        counters us = Flip(counter);
+       static counters us = Flip(counter);
 
-        public Game_TPL(Player_TPL _xPlayer, Player_TPL _oPlayer)
+        public Game_TPL(Player_TPL currentPlayer, Player_TPL otherPlayer)
         {
             if (cntr == 1)
             {
@@ -28,10 +28,10 @@ namespace Minimax_TPL
                 File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/finboards.txt", string.Empty);
                 File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/scoreboards.txt", string.Empty);
             }
-            PlayGame(_xPlayer, _oPlayer, ref cntr);
+            PlayGame(currentPlayer, otherPlayer, ref cntr);
         }
 
-        public void PlayGame(Player_TPL currentPlayer, Player_TPL otherPlayer, ref int cntr)
+        public static void PlayGame(Player_TPL currentPlayer, Player_TPL otherPlayer, ref int cntr)
         {
             // Create new stopwatch.
             Stopwatch stopwatch_minimax = new Stopwatch();
@@ -410,21 +410,21 @@ namespace Minimax_TPL
                     Environment.Exit(99);
                     break;
             }
-            Tuple<int, int> selectedMove = currentPlayer.GetMove(board, scoreBoard);
-            board[selectedMove.Item1, selectedMove.Item2] = currentPlayer.counter;
+            currentPlayer.GetMove(board, scoreBoard);
+            
             Tuple<int, int> centreof3inarow = new Tuple<int, int>(0, 0);
 
             if (IsOver(board, currentPlayer))
             {
-                if (currentPlayer.Win(board, currentPlayer.counter))
+                if (Player_TPL.Win(board, Player_TPL.counter))
                 {
                     board.DisplayBoard();
-
+                    
 
                     if (currentPlayer.GetType() == typeof(AIPlayer_TPL))
                     {
                         int score = 0;
-                        if (AIPlayer_TPL.FindThreeInARow(board, currentPlayer.counter) == true)
+                        if (AIPlayer_TPL.FindThreeInARow(board, Player_TPL.counter) == true)
                         {
 
                             score = 1000;
@@ -435,20 +435,20 @@ namespace Minimax_TPL
                         Console.WriteLine("========================================================================================================================"
                           + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
                             "------------------------------------------------------------------------------------------------------------------------" +
-                            "Winner: " + currentPlayer.counter
+                            "Winner: " + Player_TPL.counter
                             + Environment.NewLine + "Score: " + score + Environment.NewLine +
                             "Positions visited: " + AIPlayer_TPL.cont + Environment.NewLine +
                             "Coordinations of winning three-in-a-row at: "
-                             + Environment.NewLine + "Cell 1: " + AIPlayer_TPL.IsLeftOfThree(board, currentPlayer.counter)
-                             + Environment.NewLine + "Cell 2: " + AIPlayer_TPL.IsCentreOfThree(board, currentPlayer.counter)
-                             + Environment.NewLine + "Cell 3: " + AIPlayer_TPL.IsRightOfThree(board, currentPlayer.counter));
+                             + Environment.NewLine + "Cell 1: " + AIPlayer_TPL.IsLeftOfThree(board, Player_TPL.counter)
+                             + Environment.NewLine + "Cell 2: " + AIPlayer_TPL.IsCentreOfThree(board, Player_TPL.counter)
+                             + Environment.NewLine + "Cell 3: " + AIPlayer_TPL.IsRightOfThree(board, Player_TPL.counter));
 
 
                     }
                     else
                     {
                         int score = 0;
-                        if (AIPlayer_TPL.FindThreeInARow(board, otherPlayer.counter) == true)
+                        if (AIPlayer_TPL.FindThreeInARow(board, Player_TPL.counter) == true)
                         {
                             score = -1000;
                         }
@@ -457,13 +457,13 @@ namespace Minimax_TPL
                         Console.WriteLine("======================================================================================================================"
                                + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
                                  "------------------------------------------------------------------------------------------------------------------------" +
-                                 "Winner: " + otherPlayer.counter
+                                 "Winner: " + Player_TPL.counter
                                  + Environment.NewLine + "Score: " + score
                                  + Environment.NewLine + "Coordinations of winning three-in-a-row at: "
                                  + Environment.NewLine
-                                 + "Cell 1: " + AIPlayer_TPL.IsLeftOfThree(board, otherPlayer.counter) + Environment.NewLine
-                                 + "Cell 2: " + AIPlayer_TPL.IsCentreOfThree(board, otherPlayer.counter) + Environment.NewLine
-                                 + "Cell 3: " + AIPlayer_TPL.IsRightOfThree(board, otherPlayer.counter));
+                                 + "Cell 1: " + AIPlayer_TPL.IsLeftOfThree(board, Player_TPL.counter) + Environment.NewLine
+                                 + "Cell 2: " + AIPlayer_TPL.IsCentreOfThree(board, Player_TPL.counter) + Environment.NewLine
+                                 + "Cell 3: " + AIPlayer_TPL.IsRightOfThree(board, Player_TPL.counter));
                     }
                     // Stop timing.
                     stopwatch_minimax.Stop();
@@ -499,9 +499,9 @@ namespace Minimax_TPL
             }
             PlayGame(otherPlayer, currentPlayer, ref cntr);
         }
-        public bool IsOver(GameBoard_TPL<counters> board, Player_TPL currentPlayer)
+        public static bool IsOver(GameBoard_TPL<counters> board, Player_TPL currentPlayer)
         {
-            if (currentPlayer.Win(board, currentPlayer.counter) || board.IsFull())
+            if (Player_TPL.Win(board, Player_TPL.counter) || board.IsFull())
                 return true;
             return false;
         }
@@ -518,7 +518,7 @@ namespace Minimax_TPL
                 return counters.O;
             }
         }
-        public void ErrorSkip(GameBoard_TPL<counters> board, Player_TPL currentPlayer, Player_TPL otherPlayer)
+        public static void ErrorSkip(GameBoard_TPL<counters> board, Player_TPL currentPlayer, Player_TPL otherPlayer)
         {
             nowcount = cntr;
             if (AIPlayer_TPL.error_confirm == 1 & AIPlayer_TPL.positions == new Tuple<int, int>(2, 2))
@@ -530,7 +530,7 @@ namespace Minimax_TPL
                 }
             }
         }
-        public void ReRun(GameBoard_TPL<counters> board, Player_TPL currentPlayer, Player_TPL otherPlayer)
+        public static void ReRun(GameBoard_TPL<counters> board, Player_TPL currentPlayer, Player_TPL otherPlayer)
         {
             nowcount = cntr;
             if (IsOver(board, currentPlayer))

@@ -10,9 +10,9 @@ namespace Minimax_TPL
     abstract class Player_TPL
     {
         public string name;
-        public counters counter;
+        public static counters counter;
         public counters otherCounter;
-        protected counters _counter;
+        protected  counters _counter;
         
         // COUNTER ASSIGNMENT FOR Player_TPL
         public Player_TPL(counters _counter)
@@ -23,10 +23,10 @@ namespace Minimax_TPL
             else if (counter == counters.X)
                 otherCounter = counters.O;
         }
-                public abstract Tuple<int, int> GetMove(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard);
+                public abstract void GetMove(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard);
        
         // DETERMINE IF Player_TPL HAS WON
-        public bool Win(GameBoard_TPL<counters> board, counters counter)
+        public static bool Win(GameBoard_TPL<counters> board, counters counter)
         {
             if (
                 //HORIZONTAL
@@ -199,7 +199,7 @@ namespace Minimax_TPL
         }
 
         // DETERMINE IF Player_TPL HAS TWO
-        public bool Two(GameBoard_TPL<counters> board, counters counter)
+        public static bool Two(GameBoard_TPL<counters> board, counters counter)
         {
             if (
                 //HORIZONTAL
@@ -423,7 +423,7 @@ namespace Minimax_TPL
         }
 
         // DETERMINE IF Player_TPL HAS ONE
-        public bool One(GameBoard_TPL<counters> board, counters counter)
+        public static bool One(GameBoard_TPL<counters> board, counters counter)
         {
             if (
                 //HORIZONTAL

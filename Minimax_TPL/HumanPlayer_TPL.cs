@@ -16,7 +16,7 @@ namespace Minimax_TPL
         }
 
    // GET MOVE: ASK FOR USER INPUT
-        public override Tuple<int, int> GetMove(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
+        public override void GetMove(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
         {
             int x; // x axis
             int y; // y axis
@@ -31,7 +31,7 @@ namespace Minimax_TPL
                 while (!(int.TryParse(Console.ReadKey().KeyChar.ToString(), out y) && (y >= 1 && y <= 7)))
                     Console.Write("\nInvalid input. Try again: ");
             } while (!CheckValidMove(board, x, y));
-            return new Tuple<int, int>(x, y); // ask for valid coords
+            
         } // end do loop
 
         // CHECK IF MOVE IS VALID
