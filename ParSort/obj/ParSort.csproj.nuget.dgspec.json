@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj": {}
+    "C:\\Users\\Lewis\\Desktop\\ttt_csharp_250919\\ParSort\\ParSort.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj": {
+    "C:\\Users\\Lewis\\Desktop\\ttt_csharp_250919\\ParSort\\ParSort.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj",
+        "projectUniqueName": "C:\\Users\\Lewis\\Desktop\\ttt_csharp_250919\\ParSort\\ParSort.csproj",
         "projectName": "ParSort",
-        "projectPath": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj",
+        "projectPath": "C:\\Users\\Lewis\\Desktop\\ttt_csharp_250919\\ParSort\\ParSort.csproj",
         "packagesPath": "C:\\Users\\Lewis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\obj\\",
+        "outputPath": "C:\\Users\\Lewis\\Desktop\\ttt_csharp_250919\\ParSort\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
