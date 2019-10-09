@@ -62,10 +62,10 @@ namespace Minimax_TPL
         // DISPLAY GAMEBOARD AS FOLLOWS
         public void DisplayIntBoardToFile()
         {
-            string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/intboards.txt";
+            string path = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL//boards//intboards.txt";
             // This text is added only once to the file.
             // Create a file to write to.
-             File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/intboards.txt", string.Empty);
+             File.WriteAllText(@"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL//boards//intboards.txt", string.Empty);
             using (StreamWriter sw = new StreamWriter(path, true))
             {
                 //      System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/intboards.txt", string.Empty);
@@ -92,10 +92,10 @@ namespace Minimax_TPL
         }
         public void DisplayFinBoardToFile()
         {
-            string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/finboards.txt";
+            string path = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL//boards//finboards.txt";
             // This text is added only once to the file.
             // Create a file to write to.
-             File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/finboards.txt", string.Empty);
+             File.WriteAllText(@"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL//boards//finboards.txt", string.Empty);
             using (StreamWriter sw = new StreamWriter(path, true))
             {
                 //     System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/finboards.txt", string.Empty);
@@ -122,10 +122,10 @@ namespace Minimax_TPL
         }
         public void DisplayScoreBoardToFile()
         {
-            string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/scoreboards.txt";
+            string path = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL//boards//scoreboards.txt";
             // This text is added only once to the file.
             // Create a file to write to.
-            File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/scoreboards.txt", string.Empty);
+            File.WriteAllText(@"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL//boards//scoreboards.txt", string.Empty);
             using (StreamWriter sw = new StreamWriter(path, true))
             {
                 //      System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/scoreboards.txt", string.Empty);

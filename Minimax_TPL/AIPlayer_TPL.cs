@@ -397,7 +397,7 @@ namespace Minimax_TPL
                     stopwatch.Start();
                     Game_TPL.cntr++;
                     // write to file
-                    var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
+                    var file = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL//TPLTST_Report.csv";
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
@@ -435,7 +435,7 @@ namespace Minimax_TPL
                     stopwatch.Start();
                     Game_TPL.cntr++;
                     // write to file
-                    var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
+                    var file = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL///TPLTST_Report.csv";
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
@@ -470,7 +470,7 @@ namespace Minimax_TPL
                     // Begin timing.
                     stopwatch.Start();
                     // write to file
-                    var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
+                    var file = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL//TPLTST_Report.csv";
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
@@ -500,7 +500,7 @@ namespace Minimax_TPL
                     // Begin timing.
                     stopwatch.Start();
                     // write to file
-                    var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
+                    var file = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL///TPLTST_Report.csv";
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
@@ -570,7 +570,7 @@ namespace Minimax_TPL
                     () => { ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes); });
 
             //Write to a file
-            using (StreamWriter writer = new StreamWriter(@"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//print_val.txt"))
+            using (StreamWriter writer = new StreamWriter(@"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL//print_val.txt"))
             {
                 writer.WriteLine("t");
                 writer.WriteLine("res0:" + ress[0] + Environment.NewLine +
@@ -623,7 +623,7 @@ namespace Minimax_TPL
                     Console.WriteLine("board " + Game_TPL.cntr + " processed by thread id: " + 0 + " :");
                     board.DisplayBoard();
                     // write to file
-                    var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
+                    var file = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_TPL///TPLTST_Report.csv";
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();

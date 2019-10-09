@@ -46,7 +46,7 @@ namespace Minimax_SYSTST
             board.DisplayBoard();
             Console.WriteLine("Player move: " + counter + " which, returns: " + result.Item1 + result.Item2);
             int score = result.Item1;
-            var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_SYSTST//SYSTST_Report.csv";
+            var file = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_SYSTST//SYSTST_Report.csv";
             var date = DateTime.Now.ToShortDateString();
             var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
             var csv = new System.Text.StringBuilder();
@@ -393,7 +393,7 @@ namespace Minimax_SYSTST
                 Console.WriteLine("✓ PASS on Board " + Game_SYSTST.cntr + " : Winning combination found");
       //        board.DisplayBoard();
               //  Console.ReadLine();
-                var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_SYSTST//SYSTST_report.csv";
+                var file = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_SYSTST//SYSTST_report.csv";
                 var date = DateTime.Now.ToShortDateString();
                 var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                 var csv = new System.Text.StringBuilder();
@@ -428,7 +428,7 @@ namespace Minimax_SYSTST
                 Console.WriteLine(Environment.NewLine + "✓ PASS on Board " + Game_SYSTST.cntr + " : Winning combination found");
          //    board.DisplayBoard();
              //   Console.ReadLine();
-                var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_SYSTST//SYSTST_report.csv";
+                var file = @"C://Users//LATITUDE//Desktop//ttt_csharp_041019_stable//Minimax_SYSTST//SYSTST_report.csv";
                 var date = DateTime.Now.ToShortDateString();
                 var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                 var csv = new System.Text.StringBuilder();
