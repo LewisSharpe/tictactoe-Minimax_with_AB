@@ -19,8 +19,8 @@ namespace Minimax_TPL
         public static int cont = 0; // counter for number of nodes visited
         public static int error_confirm = 0;
         private static Object thisLock = new Object();
-        public static Semaphore threadPool = new Semaphore(5, 8);
-        public static Semaphore threadPool1 = new Semaphore(5, 8);
+        Tuple<int, Tuple<int, int>>[] ress = new Tuple<int, Tuple<int, int>>[4];
+        int thread_no_track = 0;
         public AIPlayer_TPL(counters _counter) : base(_counter) { }
 
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
@@ -41,66 +41,14 @@ namespace Minimax_TPL
         {
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             int score = Consts.MIN_SCORE;
-            Tuple<int, int> pop = new Tuple<int, int>(0, 0);
-            Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, pop);
             bool mmax = true;
-            // write to file
-            var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
-            var date = DateTime.Now.ToShortDateString();
-            var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
-            var csv = new System.Text.StringBuilder();
-            if (ply == 0)
-            {
-                var title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", "DATE", "TIME", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", "THREAD NO.", "INT BOARD", Environment.NewLine);
-                csv.Append(title);
-                lock (thisLock)
-                {
-                    File.AppendAllText(file, title.ToString());
-                }
-            }
             // Create new stopwatch.
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing.
             stopwatch.Start();
             // Do work
-            int stride = 4, id = 1, numTasks = 4;
-            Tuple<int, Tuple<int, int>> result = new Tuple<int, Tuple<int, int>>(0, new Tuple<int, int>(0, 0));
-            result = ParallelChoice(board, counter, ply, positions, mmax, scoreBoard, alpha, beta); // return
-            string status;
-            /*
-            if (Win(board, counter))
-            {
-                Game_TPL.cntr++;
-                status = "PASS";
-                Console.WriteLine("✓ PASS on Board " + Game_TPL.cntr + " : Winning combination found");
-                //        board.DisplayBoard();
-                Console.ReadLine();
-                string reason = "Winning combination found";
-                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, board, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), Environment.NewLine);
-                csv.Append(newLine);
-                File.AppendAllText(file, newLine.ToString());
-            }
-            if (Win(board, this.otherCounter))
-            {
-                Game_TPL.cntr++;
-                status = "PASS";
-                Console.WriteLine("✓ PASS on Board " + Game_TPL.cntr + " : Winning combination found");
-                //        board.DisplayBoard();
-                Console.ReadLine();
-                string reason = "Winning combination found";
-                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, board, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), Environment.NewLine);
-                csv.Append(newLine);
-                File.AppendAllText(file, newLine.ToString());
-            }
-            else
-            {
-                status = "FAIL";
-                string reason = "Board combination missed";
-                var newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, board, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), Environment.NewLine);
-                csv.Append(newLine);
-                File.AppendAllText(file, newLine.ToString());
-            }
-            */
+            Tuple<int, Tuple<int, int>> result = new Tuple<int, Tuple<int, int>>(score, positions);
+            result = ParallelChoice(board, counter, ply, positions, mmax, scoreBoard, alpha, beta); // return         
             // Stop timing.
             stopwatch.Stop();
             // Return positions
@@ -451,31 +399,31 @@ namespace Minimax_TPL
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
                     Console.WriteLine("✓ PASS on Board " + Game_TPL.cntr + " : Winning combination found");
-                    board.DisplayBoardToCSVCell();
-                    Console.ReadLine();
+                 //   Console.ReadLine();
                     List<string> read_intboard_tocsv = new List<string>();
                     var newLine = "";
 
                     // write to file
                     string status = "PASS";
                     string reason = "Winning combination found";
-                    newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), string.Empty, Environment.NewLine);
+                    newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, thread_no_track, string.Empty, Environment.NewLine);
                     csv.Append(newLine);
 
+                    lock (thisLock)
                     {
                         File.AppendAllText(file, newLine.ToString());
                         board.DisplayIntBoardToFile();
                         board.DisplayFinBoardToFile();
-                        if (ply == 0)
-                        
-                            scoreBoard.DisplayScoreBoardToFile();
-                        
 
-                        // Stop timing.
-                        stopwatch.Stop();
+
+                        scoreBoard.DisplayScoreBoardToFile();
+                    }
+
+                    // Stop timing.
+                    stopwatch.Stop();
                         return new Tuple<int, Tuple<int, int>>(1000, positions);
                     }
-                }
+                
                 else if (Win(board, this.otherCounter))
                 {
                     // Create new stopwatch.
@@ -489,13 +437,12 @@ namespace Minimax_TPL
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
                     Console.WriteLine("✓ PASS on Board " + Game_TPL.cntr + " : Winning combination found");
-                    board.DisplayBoardToCSVCell();
-                    Console.ReadLine();
+               //     Console.ReadLine();
                     var newLine = "";
                     // write to file
                     string status = "PASS";
                     string reason = "Winning combination found";
-                    newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), string.Empty, Environment.NewLine);
+                    newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, thread_no_track, string.Empty, Environment.NewLine);
                     csv.Append(newLine);
 
                     lock (thisLock)
@@ -503,15 +450,15 @@ namespace Minimax_TPL
                         File.AppendAllText(file, newLine.ToString());
                         board.DisplayIntBoardToFile();
                         board.DisplayFinBoardToFile();
-                   
-                        
-                            scoreBoard.DisplayScoreBoardToFile();
-                        
+
+
+                        scoreBoard.DisplayScoreBoardToFile();
+                    }
 
                         // Stop timing.
                         stopwatch.Stop();
                         return new Tuple<int, Tuple<int, int>>(-1000, positions);
-                    }
+                    
                 }
                 else if (!Win(board, counter))
                 {
@@ -524,16 +471,14 @@ namespace Minimax_TPL
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
-                    board.DisplayBoardToCSVCell();
                     List<string> read_intboard_tocsv = new List<string>();
                     var newLine = "";
                    
                                 // write to file
                                 string status = "FAIL";
                                 string reason = "Board combination missed";
-                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), string.Empty, Environment.NewLine);
-                                csv.Append(newLine);
-                           
+                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, thread_no_track, string.Empty, Environment.NewLine);
+                                csv.Append(newLine);                         
                     lock (thisLock)
                     {
                         File.AppendAllText(file, newLine.ToString());
@@ -557,13 +502,12 @@ namespace Minimax_TPL
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
                     List<string> read_intboard_tocsv = new List<string>();
-                    board.DisplayBoardToCSVCell();
                     var newLine = "";
                     
                                 // write to file
                                 string status = "FAIL";
                                 string reason = "Board combination missed";
-                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, Thread.CurrentThread.ManagedThreadId.ToString(), string.Empty, Environment.NewLine);
+                                newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, thread_no_track, string.Empty, Environment.NewLine);
                                 csv.Append(newLine);
                            
                     lock (thisLock)
@@ -572,34 +516,27 @@ namespace Minimax_TPL
                         board.DisplayIntBoardToFile();
                         board.DisplayFinBoardToFile();         
                         scoreBoard.DisplayScoreBoardToFile();
-                        
+                        /*
+     // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
+     Console.WriteLine(mmax.ToString() +
+     " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
+           ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
+           bestScore, bestMove.Item1, bestMove.Item2);
+          */
                     }
                     // Stop timing.
                     stopwatch.Stop();
                 }
                 if (ply == 0)
                 {
-                    // write to file
-                    var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
-                    var date = DateTime.Now.ToShortDateString();
-                    var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
-                    var csv = new System.Text.StringBuilder();
-                    var title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}", "DATE", "TIME", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", "THREAD NO.", "INT BOARD");
-                    csv.Append(title);
+                    
                     lock (thisLock)
                     {
-                        File.AppendAllText(file, title.ToString());
-                        scoreBoard.DisplayBoardToFile();
+                        scoreBoard.DisplayScoreBoardToFile();
                     }
                  //   Console.WriteLine("Player move: " + counter + " which, returns: " + result.Item1 + result.Item2);
                 }
-                /*
-      // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
-      Console.WriteLine(mmax.ToString() +
-      " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
-            ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
-            bestScore, bestMove.Item1, bestMove.Item2);
-           */
+               
             }
             return new Tuple<int, Tuple<int, int>>(score, positions); // return
         }
@@ -612,7 +549,7 @@ namespace Minimax_TPL
             int score = Consts.MIN_SCORE;
             Tuple<int, int> pop = new Tuple<int, int>(0, 0);
             int stride = 1; int id = 1;
-            Tuple<int, Tuple<int, int>>[] ress = new Tuple<int, Tuple<int, int>>[4];
+
             // compute the maximum over all results
             Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(score, pop); ; // , res1, res2, res3, res4;
             Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, pop);
@@ -623,65 +560,86 @@ namespace Minimax_TPL
             GameBoard_TPL<counters> board3 = board.Clone();
             GameBoard_TPL<counters> board4 = board.Clone();
 
-
             // start and synchronise 4 parallel tasks
-            Parallel.Invoke(() => { ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes); },
-                    () => { ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes); },
-                    () => { ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes); },
-                    () => { ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes); });
-
-            //Write to a file
-            using (StreamWriter writer = new StreamWriter(@"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//print_val.txt"))
-            {
-                writer.WriteLine("t");
-                writer.WriteLine("res0:" + ress[0] + Environment.NewLine +
-                    "res1:" + ress[1] + Environment.NewLine +
-                    "res2:" + ress[2] + Environment.NewLine +
-                    "res3:" + ress[3] + Environment.NewLine);
-            }
+            Parallel.Invoke(() => { ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 1); },
+                    () => { ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 2); },
+                    () => { ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 3); },
+                    () => { ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 4); });
 
             for (int j = 1; j < ress.Length; j++)
             {
-                res = (ress[j].Item1 > res.Item1) ? ress[j] : res;
-            }
+                stride++;
+                if (stride == 1 && res == ress[0])
+                {
+                    res = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 1);
+                }
+                else if (stride == 2 && res == ress[1])
+                {
+                    res = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 2);
+                }
+                else if (stride == 3 && res == ress[2])
+                {
+                    res = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 1);
+                }
+                else if (stride == 4 && res == ress[3])
+                {
+                    res = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 1);
+                }
 
+                res = (ress[j].Item1 > res.Item1) ? ress[j] : res;
+                bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes;
+            }
             // return overall maximum
             return res;
         }
-        public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, int stride, int id, Tuple<int,Tuple<int,int>> bestRes)
+    
+        public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, int stride, int id, Tuple<int,Tuple<int,int>> bestRes, int thread_no)
         {
-            Tuple<int, Tuple<int, int>> res;
+            Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(999, new Tuple<int, int>(9,9));
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             int score = Consts.MIN_SCORE; // current score of move
-            counters us = counters.X;
-            stride = 4;
+            stride = 1;
             int cnt = stride, offset = id;
+            counters us = Flip(counter);
             if (ply > maxPly)
             {
                 score = EvalCurrentBoard(board, scoreBoard, us); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
             }
             for (int i = 0; i < availableMoves.Count; i++)
             {
-                    // try values for position i
-                    for (int val = 0; val < maxPly; val++)
+                stride++;
+                // try values for position i
+                for (int val = 0; val < maxPly; val++)
                     {
                         if (offset == 0 && cnt == 0)
-                        {
-                            res = SeqSearch(board, Flip(counter), ply+1, positions, mmax, scoreBoard, alpha, beta);
-                            bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes;
-                            cnt = stride;
+                       {    
+                        res = SeqSearch(board, counter, ply, positions, true, scoreBoard, alpha, beta);
+                        bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes;
+                        cnt = stride;
+                        thread_no_track = thread_no;
                         }
                         else
                         {
                             if (offset == 0) { cnt--; } else { offset--; }
                         }
                     cont++;
-                }              
-                    if (ply == 0)
+                }
+                if (ply == 0)
+                {
+                    Console.WriteLine("board " + Game_TPL.cntr + " processed by thread id: " + thread_no + " :");
+                    board.DisplayBoard();
+                    // write to file
+                    var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
+                    var date = DateTime.Now.ToShortDateString();
+                    var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
+                    var csv = new System.Text.StringBuilder();
+                    var title = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", "DATE", "TIME", "RESULT", "BOARD NO", "REASON", "SCORE", "X", "Y", "SIDE", "FIN BOARD", "SCORE BOARD", "POSITIONS VISTED", "DEPTH", "TIME ELAPSED", "THREAD NO.", "INT BOARD", Environment.NewLine);
+                    csv.Append(title);
+                    lock (thisLock)
                     {
-                       Console.WriteLine("board " + Game_TPL.cntr + " processed by thread id: " + Thread.CurrentThread.ManagedThreadId.ToString() + " thread running status: " + Thread.CurrentThread.ThreadState +  " :");
-                        board.DisplayBoard();
-                   }
+                        File.AppendAllText(file, title.ToString());
+                    }
+                }
        
             }         
             return bestRes;
@@ -705,43 +663,79 @@ namespace Minimax_TPL
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
 
-           
             if (ply == 0 || ply == 1)
             {
-                threadPool.WaitOne();
-               // Console.WriteLine("Thread {0} is inside the PLY<1 critical section...", Thread.CurrentThread.Name);
-                new Thread(() =>
-                {
-                    Thread.CurrentThread.IsBackground = true;
-                    /* run your code here */
-                 ParSearchWrap(board, numTasks, scoreBoard); // return
-                }).Start();
-                threadPool.Release();
-                return new Tuple<int, Tuple<int, int>>(score, positions);
+                return ParSearchWrap(board, numTasks, scoreBoard); // return
             }
             else if (ply > 1)
             {
-                threadPool1.WaitOne();
-               // Console.WriteLine("Thread {0} is inside the PLY>1 critical section...", Thread.CurrentThread.Name);
-                new Thread(() =>
-                {
-                    Thread.CurrentThread.IsBackground = true;
-                    /* run your code here */
-                    SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
-                }).Start();
-                threadPool1.Release();
-                return new Tuple<int, Tuple<int, int>>(score, positions);
+                return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
             }
             return new Tuple<int, Tuple<int, int>>(bestScore, bestMove);
         }
-       }
-      }
+    }
+}
+/*
+ ====================================================
+ ---------------------------------------------------
+ To do list for w/c 30.09.19
+ ---------------------------------------------------
+ - stride the search
+ - produce list of all tried moves
+ - no need for thread pool at this stage
 
-// to do
-// max number of thread
-// fix positions counter
-// find way to print board to CSV cell
-// select one move from all threads
-// score board
+-----------------------------------------------------
+=====================================================
+-----------------------------------------------------
+ Progress summary- LS
+ 27.09.19
+-----------------------------------------------------
+  *   progress:
+------------------------------------------------------
+    - implementation containing use of threads and thread pool - however, problem - too many threads
+    - printout output of all threads to CSV file
+    - print boards to CSV cell function
+    - modifications to SEQ version
+    - performance tuning on par sort example in prep for SEQ and TPL versions
+------------------------------------------------------
+  *  issues still existing:
+------------------------------------------------------
+     use of no of threads - too many at the moment
+     display boards to CSV - function implemented, but a few issues
+     selecting one move all moves considered by all threads together
+======================================================
+    -------------------------------------------------------------------------------------------------------------------------
+ -  Sample code for debugging later on:
+    -------------------------------------------------------------------------------------------------------------------------
+                        Tuple<int, int> Move = new Tuple<int, int>(0, 0);
+                        Move = availableMoves[i]; // current move
+                                                  // cell priority - favour centre and corners
+                                                  // HWL: where do you actual place the piece for the position in Move? you don't do this here, just pass Move to the call of Minimax below; in the recursive call you then overwrite the input argument with a random move (see comment at start of Minimax; so you are actually not considering Move at all!
+                                                  // HWL: try placing the piece here, and below just use the score
+                        res = board[Move.Item1, Move.Item2] = counter; // place counter
+   ---------------------------------------------------------------------------------------------------------------------------
+   ===========================================================================================================================
+   ---------------------------------------------------------------------------------------------------------------------------
+   Psuedocode for attempt of strided search in Par Search Worker
+   ---------------------------------------------------------------------------------------------------------------------------
+   if current move has finished then
+   stride++
+
+   for loop
+   if stride = 1 and res[0]
+   next available move using ress 1
+   if stride = 2 and res[1]
+   next available move using ress 2
+   if stride = 3 and res[2]
+   next available move using ress 2
+   if stride = 4 and res[3]
+   next available move using ress 3
+   if stride = 4
+   reset stride back to 1
+   end for loop
+   ---------------------------------------------------------------------------------------------------------------------------
+   ===========================================================================================================================
+   
+     */
 
 
