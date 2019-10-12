@@ -1,0 +1,1191 @@
+12/10/2019,04:45:37,PASS,Board 3,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],258,0,00:00:00.5513886,0,,,
+12/10/2019,04:45:38,PASS,Board 3,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],259,0,00:00:00.1311841,1,iteration: 3  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 3  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:38,PASS,Board 4,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],262,0,00:00:00.1145057,1,iteration: 3  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 3  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:40,PASS,Board 5,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],351,0,00:00:00.1722394,4,iteration: 4  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 4  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:40,PASS,Board 6,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],353,0,00:00:00.0061780,4,iteration: 4  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 4  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:40,PASS,Board 7,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],355,0,00:00:00.0217919,3,iteration: 6  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 6  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:41,PASS,Board 8,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],358,0,00:00:00.0032758,1,iteration: 7  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 7  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:41,PASS,Board 9,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],361,0,00:00:00.0127498,4,iteration: 8  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 8  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:41,PASS,Board 10,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],366,0,00:00:00.0691005,3,iteration: 9  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 9  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:41,PASS,Board 11,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],367,0,00:00:00.0497220,2,iteration: 11  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 11  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:41,PASS,Board 13,Winning combination found,1000,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],368,0,00:00:00.0024985,2,iteration: 11  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 11  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:41,PASS,Board 13,Winning combination found,1000,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],369,0,00:00:00.2719095,1,iteration: 13  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 13  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:41,PASS,Board 14,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],373,0,00:00:00.0197680,1,iteration: 13  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 13  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:41,PASS,Board 15,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],379,0,00:00:00.0121330,1,iteration: 14  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 14  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:41,PASS,Board 16,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],380,0,00:00:00.0138606,3,iteration: 16  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 16  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:42,PASS,Board 18,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],385,0,00:00:00.0150604,1,iteration: 16  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 16  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:42,PASS,Board 18,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],386,0,00:00:00.5058828,2,iteration: 18  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 18  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:42,PASS,Board 19,Winning combination found,1000,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],389,0,00:00:00.0074321,4,iteration: 18  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 18  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:42,PASS,Board 20,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],389,0,00:00:00.2168437,4,iteration: 20  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 20  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:43,PASS,Board 21,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],395,0,00:00:00.0411636,4,iteration: 20  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 20  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:43,PASS,Board 22,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],396,0,00:00:00.0236787,3,iteration: 22  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 22  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:43,PASS,Board 23,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],399,0,00:00:00.3936351,3,iteration: 22  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 22  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:43,PASS,Board 24,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],402,0,00:00:00.0290481,3,iteration: 24  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 22  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:43,PASS,Board 25,Winning combination found,1000,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],404,0,00:00:00.0155364,1,iteration: 24  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 24  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:43,PASS,Board 27,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],410,0,00:00:00.0029449,1,iteration: 25  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 25  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:43,PASS,Board 28,Winning combination found,1000,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],411,0,00:00:00.0025481,2,iteration: 27  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 27  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:43,PASS,Board 28,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],413,0,00:00:00.1299466,1,iteration: 28  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 28  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:44,PASS,Board 30,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],420,0,00:00:00.0031303,4,iteration: 28  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 28  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:44,PASS,Board 30,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],420,0,00:00:00.0126958,4,iteration: 28  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 28  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:44,PASS,Board 31,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],426,0,00:00:00.0016175,1,iteration: 30  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 30  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:44,PASS,Board 32,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],431,0,00:00:00.0334039,1,iteration: 31  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 31  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:44,PASS,Board 33,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],431,0,00:00:00.0024694,1,iteration: 31  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 31  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+12/10/2019,04:45:44,PASS,Board 34,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],433,0,00:00:00.0030763,1,iteration: 31  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 31  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:44,PASS,Board 35,Winning combination found,1000,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],436,0,00:00:00.0087946,4,iteration: 34  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 34  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:44,PASS,Board 36,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],440,0,00:00:00.0095107,1,iteration: 35  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 35  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
+12/10/2019,04:45:44,PASS,Board 38,Winning combination found,-1001,8,0,O,Minimax_TPL.GameBoard_TPL`1[Minimax_TPL.counters],Minimax_TPL.GameBoard_TPL`1[System.Int32],447,0,00:00:00.0140472,3,iteration: 36  1   2   3   4   5   6   7 
+1 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+2 O | X | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+3 O | O | X | O | O | O | O | 
+  -   -   -   -   -   -   - 
+4 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+5 O | O | O | O | X | O | O | 
+  -   -   -   -   -   -   - 
+6 O | O | O | O | O | O | O | 
+  -   -   -   -   -   -   - 
+7 O | O | O | O | O | O | e | 
+  -   -   -   -   -   -   - 
+
+,iteration: 36  1   2   3   4   5   6   7 
+1 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+2 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+3 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+4 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+5 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+6 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+7 21 | 21 | 21 | 21 | 21 | 21 | 21 | 
+  -   -   -   -   -   -   - 
+
+,
+DATE,TIME,RESULT,BOARD NO,REASON,SCORE,X,Y,SIDE,FIN BOARD,SCORE BOARD,POSITIONS VISTED,DEPTH,TIME ELAPSED,THREAD NO.,INT BOARD,
