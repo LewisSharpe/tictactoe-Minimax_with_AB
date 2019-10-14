@@ -24,9 +24,14 @@ namespace Minimax_TPL
         {
             if (cntr == 1)
             {
+	      /* HWL
                 File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/intboards.txt", string.Empty);
                 File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/finboards.txt", string.Empty);
                 File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/scoreboards.txt", string.Empty);
+	      */
+                File.WriteAllText(@"intboards.txt", string.Empty);
+                File.WriteAllText(@"finboards.txt", string.Empty);
+                File.WriteAllText(@"scoreboards.txt", string.Empty);
             }
             PlayGame(_xPlayer, _oPlayer, ref cntr);
         }
@@ -39,6 +44,16 @@ namespace Minimax_TPL
             stopwatch_minimax.Start();
             switch (cntr)
             {
+                case 0:
+                    // HWL: this is the 'diagonal' board that should find a win in 2 moves
+                    board[1, 1] = counters.e; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
+                    board[1, 2] = counters.e; board[2, 2] = counters.O; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
+                    board[1, 3] = counters.e; board[2, 3] = counters.e; board[3, 3] = counters.X; board[4, 3] = counters.e; board[5, 3] = counters.e; board[6, 3] = counters.e; board[7, 3] = counters.e;
+                    board[1, 4] = counters.e; board[2, 4] = counters.e; board[3, 4] = counters.e; board[4, 4] = counters.X; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
+                    board[1, 5] = counters.e; board[2, 5] = counters.e; board[3, 5] = counters.e; board[4, 5] = counters.e; board[5, 5] = counters.O; board[6, 5] = counters.e; board[7, 5] = counters.e;
+                    board[1, 6] = counters.e; board[2, 6] = counters.e; board[3, 6] = counters.e; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.e; board[7, 6] = counters.e;
+                    board[1, 7] = counters.e; board[2, 7] = counters.e; board[3, 7] = counters.e; board[4, 7] = counters.e; board[5, 7] = counters.e; board[6, 7] = counters.e; board[7, 7] = counters.e;
+                    break;
                 case 1:
                     // choose win
                     board[1, 1] = counters.O; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
@@ -410,10 +425,17 @@ namespace Minimax_TPL
                     Environment.Exit(99);
                     break;
             }
-            Tuple<int, int> selectedMove = currentPlayer.GetMove(board, scoreBoard);
+	    Console.WriteLine("** HWL: Running board {0} "  , cntr);
+	    board.DisplayBoard();
+            Tuple<int, int> selectedMove = currentPlayer.GetMove(board, currentPlayer.counter, scoreBoard);
             board[selectedMove.Item1, selectedMove.Item2] = currentPlayer.counter;
             Tuple<int, int> centreof3inarow = new Tuple<int, int>(0, 0);
 
+	    cntr++;
+            PlayGame(otherPlayer, currentPlayer, ref cntr);
+	    return;
+	    // -----------------------------------------------------------------------------
+	    // HWL: don't think you need any of the below; should just be calling PlayGame recursively here
             if (IsOver(board, currentPlayer))
             {
                 if (currentPlayer.Win(board, currentPlayer.counter))

@@ -16,7 +16,7 @@ namespace Minimax_TPL
         }
 
    // GET MOVE: ASK FOR USER INPUT
-        public override Tuple<int, int> GetMove(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard)
+        public override Tuple<int, int> GetMove(GameBoard_TPL<counters> board, counters counter, GameBoard_TPL<int> scoreBoard)
         {
             int x; // x axis
             int y; // y axis

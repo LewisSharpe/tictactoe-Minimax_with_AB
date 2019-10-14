@@ -23,7 +23,7 @@ namespace Minimax_TPL
             else if (counter == counters.X)
                 otherCounter = counters.O;
         }
-                public abstract Tuple<int, int> GetMove(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard);
+        public abstract Tuple<int, int> GetMove(GameBoard_TPL<counters> board, counters counter, GameBoard_TPL<int> scoreBoard);
        
         // DETERMINE IF Player_TPL HAS WON
         public bool Win(GameBoard_TPL<counters> board, counters counter)
