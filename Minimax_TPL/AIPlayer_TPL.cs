@@ -600,11 +600,19 @@ namespace Minimax_TPL
                     () => { ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 3); },
                     () => { ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 4); });
 	    */
-            ress[0] = ParSearchWork(board1, counter, ply, positions, true, scoreBoard, stride, 1, bestRes, 1);
-            ress[1] = ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, 2, bestRes, 2);
-            ress[2] = ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, 3, bestRes, 3);
-            ress[3] = ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, 4, bestRes, 4);
+	    
+	    List<Tuple<int, int>> unconsideredMoves = getAvailableMoves(board, positions);
 
+            ress[0] = ParSearchWork(board1, counter, ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves /* for DEBUGGING only */);
+            ress[1] = ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves /* for DEBUGGING only */);
+            ress[2] = ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves /* for DEBUGGING only */);
+            ress[3] = ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves /* for DEBUGGING only */);
+
+	    // HWL: check here that the all consideredMoves put together is the same as availableMoves (both defined in ParSearchWorker) 
+	    if (unconsideredMoves.Count > 0) { // HWL: DEBUGGING only
+	      throw new System.Exception(String.Format("Board {0}: {1} moves remain unconsidered in ParSearchWrapper()", Game_TPL.cntr, unconsideredMoves.Count.ToString()));
+	    }
+	    
 	    bestRes = res = ress[0];
 	    Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread 0: {2}", Game_TPL.cntr, Flip(counter), bestRes.ToString());
             for (int j = 1; j < ress.Length; j++)
@@ -637,15 +645,17 @@ namespace Minimax_TPL
             return res;
         }
     
-        public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, int stride, int id, Tuple<int,Tuple<int,int>> bestRes, int thread_no)
+        public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, int stride, int id, Tuple<int,Tuple<int,int>> bestRes, int thread_no, List<Tuple<int, int>> unconsideredMoves /* for DEBUGGING only */)
         {
             Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(999, new Tuple<int, int>(9,9));
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
 	    List<Tuple<int, int>> consideredMoves = new List<Tuple<int, int>>();
             int score = Consts.MIN_SCORE; // current score of move
             // stride = 1; // ???
-            int cnt = stride, offset = id;
-            counters us = Flip(counter);
+            // int cnt = stride, offset = id; // HWL BUG: cnt needs to start with 0 (my bad!)
+            int cnt = 0, offset = id; // HWL BUG: cnt needs to start with 0 (my bad!)
+	    // ASSERT: 0 <= id <= stride
+            counters us = Flip(counter); // HWL: I don't think you should flip at this point, rather at the call to SeqSearch
 	    Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, counter.ToString(), id);
 	    board.DisplayBoard();  
             if (ply > maxPly)
@@ -664,7 +674,7 @@ namespace Minimax_TPL
 		    if (ply == 0 ) { consideredMoves.Add(availableMoves[i]); }
 		    res = SeqSearch(board, counter, ply, positions, true, scoreBoard, alpha, beta);
 		    bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes;
-		    cnt = stride;
+		    cnt = stride-1;
 		    thread_no_track = thread_no;
 		  }
 		else
@@ -701,6 +711,10 @@ namespace Minimax_TPL
 	    if (ply == 0) {
 	      Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, id, showList(consideredMoves));
 	      Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
+	      // HWL: remove all cosideredMoves from the global list unconsideredMoves, to check that all moves are considered at the end
+	      foreach (var mv in consideredMoves) {
+		unconsideredMoves.Remove(mv);
+	      }
 	    }
 	    return bestRes;
 	}
