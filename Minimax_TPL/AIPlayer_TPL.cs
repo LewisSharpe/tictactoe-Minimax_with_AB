@@ -411,6 +411,7 @@ namespace Minimax_TPL
 		      input_board.DisplayBoard();
 		      {
 			GameBoard_TPL<counters> tmp_board = board.Clone(); // HWL: for debugging onlu
+			tmp_board.filler = counters.e;
 			tmp_board[Move.Item1, Move.Item2] = counter;
 			tmp_board.DisplayBoard();
 		      }
@@ -459,6 +460,7 @@ namespace Minimax_TPL
 		      input_board.DisplayBoard();
 		      {
 			GameBoard_TPL<counters> tmp_board = board.Clone(); // HWL: for debugging onlu
+			tmp_board.filler = counters.e;
 			tmp_board[Move.Item1, Move.Item2] = counter;
 			tmp_board.DisplayBoard();
 		      }

@@ -12,7 +12,7 @@ namespace Minimax_TPL
     // GAME EXECUTION CLASS
     class Game_TPL
     {
-        public static int cntr = 2;
+        public static int cntr = 1;
         public static int nowcount = 0;
         bool stopMe = false;
         public static GameBoard_TPL<counters> board = new GameBoard_TPL<counters>(counters.e);

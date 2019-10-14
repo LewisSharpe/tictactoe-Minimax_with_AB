@@ -47,12 +47,14 @@ namespace Minimax_TPL
                 Console.Write(y + " ");
                 for (int x = 1; x <= 7; x++)
                 {
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+		  /*
+		  if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
 		      Console.Write(" "); // HWL: Console.Write(filler); 
                     else
-                        Console.Write(this[x, y]);
-                        Console.Write(" | ");
-
+		      Console.Write(this[x, y].CompareTo(counters.e)==0 ? " " : this[x, y].ToString());
+		  */
+		  Console.Write(this[x, y].CompareTo(counters.e)==0 ? " " : this[x, y].ToString());
+		  Console.Write(" | ");
                 }
                 Console.WriteLine();
                 Console.WriteLine("  -   -   -   -   -   -   - ");
