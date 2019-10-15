@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -309,7 +310,7 @@ namespace Minimax_TPL
             Tuple<int, int> Move = new Tuple<int, int>(0, 0);
             Tuple<int, int> bestMove = new Tuple<int, int>(0, 0);  // best move with score// THRESHOLD <=============
             GameBoard_TPL<counters> copy = board.Clone();
-            GameBoard_TPL<counters> input_board = board.Clone(); // HWL: for debugging onlu
+            GameBoard_TPL<counters> input_board = board.Clone(); // HWL: for DEBUGGING onlu
             // check win
             if (availableMoves.Count == 0)
             {
@@ -324,6 +325,8 @@ namespace Minimax_TPL
                 copy[Move.Item1, Move.Item2] = counter; // place counter
                                                         // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
+		// HWL: move the check for Win in here <======
+		
                 // list defined in Minimax declarations
 		// HWL: in the initial parallel version you should NOT generate parallelism recursively; the only place where you use parallelism constructs should be in ParSearchWrapper!
                 // Tuple<int, Tuple<int, int>> result = ParallelChoice(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, alpha, beta); /* swap Player_TPL */ // RECURSIVE call  
@@ -342,8 +345,8 @@ namespace Minimax_TPL
                 // CHECK DEPTH
                 if (ply > maxPly)
                 {
-                    score = EvalCurrentBoard(board, scoreBoard, us); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
-                    return new Tuple<int, Tuple<int, int>>(score, positions);
+		  score = EvalCurrentBoard(board, scoreBoard, /* counter */  us ); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
+                   return new Tuple<int, Tuple<int, int>>(score, positions);
                 }
 
                 if (Game_TPL.cntr >= 40)
@@ -353,7 +356,7 @@ namespace Minimax_TPL
 
                 Object my_object = new Object();
                 // if maximising                  
-                if (/* true HWL || */ mmax)
+                if (/* true HWL || */ mmax)  // TOCHECK
                 {
                     alpha = score;
                     if (score > bestScore)
@@ -362,7 +365,7 @@ namespace Minimax_TPL
                         {
 			    // Move = bestMove; // HWL: wrong way around
                             bestMove = Move;
-                            score = bestScore;
+                            bestScore = score; 
                         }
                     }
                     if (alpha > bestScore)
@@ -391,6 +394,7 @@ namespace Minimax_TPL
                             bestScore = alpha;
                         }
                 }
+		// HWL: needs to move; <===
                 // if (Win(board, counter)) // HWL: board is the input board, not the one checked in each iteration
                 if (score == Consts.MAX_SCORE) 
                 {
@@ -437,11 +441,11 @@ namespace Minimax_TPL
 		      // Stop timing.
 		      stopwatch.Stop();
 		    }
-		    return new Tuple<int, Tuple<int, int>>(1000, positions);
+		    return new Tuple<int, Tuple<int, int>>(1000, Move /* HWL was: positions */);
                     }
                 
                 // else if (Win(board, this.otherCounter)) // HWL: board is the input board, not the one checked in each iteration
-                else if (score == - Consts.MAX_SCORE) // HWL: board is the input board, not the one checked in each iteration
+		else if (score == - Consts.MAX_SCORE) // HWL: board is the input board, not the one checked in each iteration
                 {
                     // Create new stopwatch.
                     Stopwatch stopwatch = new Stopwatch();
@@ -486,7 +490,7 @@ namespace Minimax_TPL
 		      // Stop timing.
 		      stopwatch.Stop();
 		    }
-		    return new Tuple<int, Tuple<int, int>>(-1000, positions);
+		    return new Tuple<int, Tuple<int, int>>(-1000, Move /* HWL was: positions */);
                     
                 }
                 else if (!Win(board, counter))
@@ -570,7 +574,8 @@ namespace Minimax_TPL
                 }
                
             }
-            return new Tuple<int, Tuple<int, int>>(score, positions); // return
+            // HWL was: return new Tuple<int, Tuple<int, int>>(score, positions); // return
+            return new Tuple<int, Tuple<int, int>>(bestScore, bestMove); // return
         }
         // top-level fct that generates parallelism;
         // currently fixed to 4 parallel tasks
@@ -654,8 +659,9 @@ namespace Minimax_TPL
             // stride = 1; // ???
             // int cnt = stride, offset = id; // HWL BUG: cnt needs to start with 0 (my bad!)
             int cnt = 0, offset = id; // HWL BUG: cnt needs to start with 0 (my bad!)
-	    // ASSERT: 0 <= id <= stride
-            counters us = Flip(counter); // HWL: I don't think you should flip at this point, rather at the call to SeqSearch
+	    // ASSERT: 0 <= id < stride
+	    Debug.Assert(0 <= id && id < stride);
+            counters us = Flip(counter); // HWL: TOCHECK: I don't think you should flip at this point, rather at the call to SeqSearch
 	    Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, counter.ToString(), id);
 	    board.DisplayBoard();  
             if (ply > maxPly)
@@ -671,7 +677,7 @@ namespace Minimax_TPL
 		if (offset == 0 && cnt == 0)
 		  {
 		    // HWL: this is a move for the current thread to process; remember it (for debugging)
-		    if (ply == 0 ) { consideredMoves.Add(availableMoves[i]); }
+		    if (ply == 0 ) { consideredMoves.Add(availableMoves[i]); } // HWL DEBUGGING
 		    res = SeqSearch(board, counter, ply, positions, true, scoreBoard, alpha, beta);
 		    bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes;
 		    cnt = stride-1;
