@@ -316,6 +316,12 @@ namespace Minimax_TPL
             {
                 return new Tuple<int, Tuple<int, int>>(10, positions);
             }
+	    // <+++
+	    // CHECK DEPTH: if deeper than maxPly, don't search further just return the current score
+	    if (ply > maxPly) {
+		score = EvalCurrentBoard(board, scoreBoard, counter /* us */ ); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
+		return new Tuple<int, Tuple<int, int>>(score, positions);
+	    }
             for (int i = 0; i < availableMoves.Count; i++)
             {
                 Move = availableMoves[i]; // current move
@@ -342,13 +348,8 @@ namespace Minimax_TPL
                 // assign score to correct cell in score
                 scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
 
-                // CHECK DEPTH
-                if (ply > maxPly)
-                {
-		  score = EvalCurrentBoard(board, scoreBoard, /* counter */  us ); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
-                   return new Tuple<int, Tuple<int, int>>(score, positions);
-                }
-
+		// CHECK for ply>maxPly was here (should be before the for loop) +++>
+		
                 if (Game_TPL.cntr >= 40)
                 {
                     Environment.Exit(99);
@@ -394,7 +395,7 @@ namespace Minimax_TPL
                             bestScore = alpha;
                         }
                 }
-		// HWL: needs to move; <===
+		// HWL: needs to move up in the loop (just before SeqSearch call)  ======>
                 // if (Win(board, counter)) // HWL: board is the input board, not the one checked in each iteration
                 if (score == Consts.MAX_SCORE) 
                 {
@@ -493,6 +494,7 @@ namespace Minimax_TPL
 		    return new Tuple<int, Tuple<int, int>>(-1000, Move /* HWL was: positions */);
                     
                 }
+		// HWL: once moved up, these branches shouldn't be necessary (unless you want to print info)
                 else if (!Win(board, counter))
                 {
                     // Create new stopwatch.
