@@ -69,8 +69,8 @@ namespace Minimax_TPL
                 return counters.O;
             }
         }
-        // FIND ONE CELL OF SAME SYMBOL IN A ROW
-        public bool FindOneInARow(GameBoard_TPL<counters> board, counters us)
+    // FIND ONE CELL OF SAME SYMBOL IN A ROW
+    public bool FindOneInARow(GameBoard_TPL<counters> board, counters us)
         {
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
@@ -404,12 +404,14 @@ namespace Minimax_TPL
                     // Begin timing.
                     stopwatch.Start();
 		    if (ply==0) {
-		      // HWL: NO, this winning position can be anywhere in the search tree, and doesn't mean you have a winning move for the overall input position!!!
-		      // Game_TPL.cntr++;
-		      // write to file
-		      // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
-		      var file = "TPLTST_Report.csv";
-		      var date = DateTime.Now.ToShortDateString();
+                        // HWL: NO, this winning position can be anywhere in the search tree, and doesn't mean you have a winning move for the overall input position!!!
+                        // Game_TPL.cntr++;
+                        // write to file
+                        // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
+                        var folder = Environment.CurrentDirectory;
+                                    var file = "TPLTST_Report.csv";
+                        var rel_path = PathMaker_TPL.GetRelativePath(file, folder);
+                        var date = DateTime.Now.ToShortDateString();
 		      var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
 		      var csv = new System.Text.StringBuilder();
 		      Console.WriteLine("✓ PASS on Board " + Game_TPL.cntr + " : Winning combination found (ply={0}, player={1}, Move={2}); Input and Output boards are: ", ply, counter.ToString(), Move.ToString());
@@ -425,20 +427,19 @@ namespace Minimax_TPL
 		      var newLine = "";
 
 		      // write to file
-		      /* HWL: disabled for now; path invalid 
+		   //    HWL: disabled for now; path invalid 
 			 string status = "PASS";
 			 string reason = "Winning combination found";
 			 newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, thread_no_track, string.Empty, Environment.NewLine);
 			 csv.Append(newLine);
 			 lock (thisLock)
 			 {
-			 File.AppendAllText(file, newLine.ToString());
+			 File.AppendAllText(rel_path, newLine.ToString());
 			 board.DisplayIntBoardToFile();
 			 board.DisplayFinBoardToFile();
-			 
 			 scoreBoard.DisplayScoreBoardToFile();
 			 }
-		      */
+		      
 		      // Stop timing.
 		      stopwatch.Stop();
 		    }
@@ -453,11 +454,13 @@ namespace Minimax_TPL
                     // Begin timing.
                     stopwatch.Start();
 		    if (ply==0) {
-		      // HWL: NO, this winning position can be anywhere in the search tree, and doesn't mean you have a winning move for the overall input position!!!
-		      // Game_TPL.cntr++;
-		      // write to file
-		      // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
-		      var file = "TPLTST_Report.csv";
+                        // HWL: NO, this winning position can be anywhere in the search tree, and doesn't mean you have a winning move for the overall input position!!!
+                        // Game_TPL.cntr++;
+                        // write to file
+                        // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
+                        var folder = Environment.CurrentDirectory;
+                                    var file = "TPLTST_Report.csv";
+                        var rel_path = PathMaker_TPL.GetRelativePath(file, folder);
 		      var date = DateTime.Now.ToShortDateString();
 		      var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
 		      var csv = new System.Text.StringBuilder();
@@ -470,7 +473,7 @@ namespace Minimax_TPL
 			tmp_board.DisplayBoard();
 		      }
 		      //     Console.ReadLine();
-		      /* HWL: omit for now
+		      // HWL: omit for now
 			 var newLine = "";
 			 // write to file
 			 string status = "PASS";
@@ -480,14 +483,12 @@ namespace Minimax_TPL
 			 
 			 lock (thisLock)
 			 {
-			 File.AppendAllText(file, newLine.ToString());
+			 File.AppendAllText(rel_path, newLine.ToString());
 			 board.DisplayIntBoardToFile();
 			 board.DisplayFinBoardToFile();
-			 
-
 			 scoreBoard.DisplayScoreBoardToFile();
 			 }
-		      */
+		      
 		      // Stop timing.
 		      stopwatch.Stop();
 		    }
@@ -503,13 +504,15 @@ namespace Minimax_TPL
                     stopwatch.Start();
                     // write to file
                     // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
-                    var file = "TPLTST_Report.csv";
-		    var date = DateTime.Now.ToShortDateString();
+                    var folder = Environment.CurrentDirectory;
+                                var file = "TPLTST_Report.csv";
+                    var rel_path = PathMaker_TPL.GetRelativePath(file, folder);
+                    var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
                     List<string> read_intboard_tocsv = new List<string>();
                     var newLine = "";
-		    /* HWL: disabled for now; path invalid 
+		    // HWL: disabled for now; path invalid 
 		    // write to file
 		    string status = "FAIL";
 		    string reason = "Board combination missed";
@@ -517,13 +520,13 @@ namespace Minimax_TPL
 		    csv.Append(newLine);                         
                     lock (thisLock)
                     {
-                        File.AppendAllText(file, newLine.ToString());
+                        File.AppendAllText(rel_path, newLine.ToString());
                         board.DisplayIntBoardToFile();
                         board.DisplayFinBoardToFile();
                         scoreBoard.DisplayScoreBoardToFile();
                         
                     }
-		    */
+		    
                     // Stop timing.
                     stopwatch.Stop();
                 }
@@ -535,12 +538,14 @@ namespace Minimax_TPL
                     stopwatch.Start();
                     // write to file
                     // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
-                    var file = "TPLTST_Report.csv";
+                    var folder = Environment.CurrentDirectory;
+                                var file = "TPLTST_Report.csv";
+                    var rel_path = PathMaker_TPL.GetRelativePath(file, folder);
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
                     List<string> read_intboard_tocsv = new List<string>();
-		    /* HWL: omit for now
+		    // HWL: omit for now
                     var newLine = "";
                     
 		    // write to file
@@ -548,19 +553,20 @@ namespace Minimax_TPL
                     string reason = "Board combination missed";
                     newLine = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", date, time, status.ToString(), "Board " + int.Parse(Game_TPL.cntr.ToString()), reason.ToString(), result.Item1.ToString(), result.Item2.Item1.ToString(), result.Item2.Item2.ToString(), counter, Game_TPL.board, Game_TPL.scoreBoard, cont, ply, stopwatch.Elapsed, thread_no_track, string.Empty, Environment.NewLine);
                     csv.Append(newLine);
-                           
+
                     lock (thisLock)
                     {
-                        File.AppendAllText(file, newLine.ToString());
+                        File.AppendAllText(rel_path, newLine.ToString());
                         board.DisplayIntBoardToFile();
-                        board.DisplayFinBoardToFile();         
+                        board.DisplayFinBoardToFile();
                         scoreBoard.DisplayScoreBoardToFile();
-     // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
+                    }
+     /*
+                        // HWL: summarise the result of having tried Move, print the assoc scoreboard and check that the matching move is the one for the highest score on the board
      Console.WriteLine(mmax.ToString() +
      " **HWL (ply={0}) Trying Move ({4},{5}) gives score {1} and position ({2},{3})  [[so far bestScore={6}, bestMove=({7},{8})",
            ply, score, result.Item2.Item1, result.Item2.Item2, Move.Item1, Move.Item2,
            bestScore, bestMove.Item1, bestMove.Item2);
-                    }
 		    */
                     // Stop timing.
                     stopwatch.Stop();
@@ -587,8 +593,6 @@ namespace Minimax_TPL
         {
             int score = Consts.MIN_SCORE;
             Tuple<int, int> pop = new Tuple<int, int>(0, 0);
-            // int stride = 1; int id = 1; // ???
-            // int stride = 4; int id = 1;
 
             // compute the maximum over all results
             Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(score, pop); ; // , res1, res2, res3, res4;
@@ -623,26 +627,7 @@ namespace Minimax_TPL
 	    bestRes = res = ress[0];
 	    Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread 0: {2}", Game_TPL.cntr, Flip(counter), bestRes.ToString());
             for (int j = 1; j < ress.Length; j++)
-            { 
-	      /*HWL: not necessary
-	        stride++;
-                if (stride == 1 && res == ress[0])
-                {
-                    res = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 1);
-                }
-                else if (stride == 2 && res == ress[1])
-                {
-                    res = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 2);
-                }
-                else if (stride == 3 && res == ress[2])
-                {
-                    res = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 1);
-                }
-                else if (stride == 4 && res == ress[3])
-                {
-                    res = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 1);
-                }
-	      */
+            {
 	      Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread {2}: {3}", Game_TPL.cntr, Flip(counter), j, ress[j].ToString());
 	      res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // result: <score, <position>>
 	      // bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes; // not needed
@@ -698,10 +683,12 @@ namespace Minimax_TPL
 		    Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
                     Console.WriteLine("board " + Game_TPL.cntr + " processed by thread id: " + thread_no + " :");
                     board.DisplayBoard();
-		    /* HWL: omit for now
+                    // HWL: omit for now
                     // write to file
                     // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
-                    var file = "TPLTST_Report.csv";
+                    var folder = Environment.CurrentDirectory ;
+                                var file = "TPLTST_Report.csv";
+                    var rel_path = PathMaker_TPL.GetRelativePath(file, folder);
                     var date = DateTime.Now.ToShortDateString();
                     var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
                     var csv = new System.Text.StringBuilder();
@@ -709,9 +696,9 @@ namespace Minimax_TPL
                     csv.Append(title);
                     lock (thisLock)
                     {
-                        File.AppendAllText(file, title.ToString());
+                        File.AppendAllText(rel_path, title.ToString());
                     }
-		    */
+		    
                 }
        
             }         
@@ -807,23 +794,14 @@ namespace Minimax_TPL
    ---------------------------------------------------------------------------------------------------------------------------
    ===========================================================================================================================
    ---------------------------------------------------------------------------------------------------------------------------
-   Psuedocode for attempt of strided search in Par Search Worker
+   To do 17.10.19
    ---------------------------------------------------------------------------------------------------------------------------
-   if current move has finished then
-   stride++
-
-   for loop
-   if stride = 1 and res[0]
-   next available move using ress 1
-   if stride = 2 and res[1]
-   next available move using ress 2
-   if stride = 3 and res[2]
-   next available move using ress 2
-   if stride = 4 and res[3]
-   next available move using ress 3
-   if stride = 4
-   reset stride back to 1
-   end for loop
+   relative path for file
+   move 'Win' further up
+   check mmax and Flip - asomething wrong?
+   use assertions in SeqSearch
+   print scoreboard
+   remove isOver
    ---------------------------------------------------------------------------------------------------------------------------
    ===========================================================================================================================
    
