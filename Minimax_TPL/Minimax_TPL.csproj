@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AIPlayer_TPL.cs" />
+    <Compile Include="CSV_TPL.cs" />
     <Compile Include="Game_TPL.cs" />
     <Compile Include="GameBoard_TPL.cs" />
     <Compile Include="HumanPlayer_TPL.cs" />
