@@ -61,51 +61,95 @@ namespace Minimax_TPL
             }
             Console.WriteLine();
         }
-        // DISPLAY GAMEBOARD AS FOLLOWS
+        // DISPLAY GAMEBOARD AS FOLLOWS - IN DEVELOPMENT
         public void DisplayIntBoardToFile()
         {
-	  // string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/intboards.txt";
-            string path = @"intboards.txt";
-            // This text is added only once to the file.
-            // Create a file to write to.
-	    // File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/intboards.txt", string.Empty);
-             File.WriteAllText(@"intboards.txt", string.Empty);
+            string path = @"data/intboards.txt";
+            int number = Game_TPL.cntr;
+            // ... Cases may not be duplicated.
             using (StreamWriter sw = new StreamWriter(path, true))
             {
-                //      System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/intboards.txt", string.Empty);
-                sw.Write("iteration: " + Game_TPL.cntr);
-                for (int x = 1; x <= 7; x++)
-                    sw.Write("  " + x + " ");
-                sw.WriteLine();
-                for (int y = 1; y <= 7; y++)
+                switch (number)
                 {
-                    sw.Write(y + " ");
-                    for (int x = 1; x <= 7; x++)
-                    {
-                        if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                            sw.Write(filler);
-                        else
-                            sw.Write(this[x, y]);
-                        sw.Write(" | ");
-                    }
-                    sw.WriteLine();
-                    sw.WriteLine("  -   -   -   -   -   -   - ");
+                    case 0:
+                        sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write("1 | O |   |   |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("2 |  | X |   |   |   |   |   |");
+                        sw.Write("- - - - - - -");
+                        sw.Write("3 |   |   | O  |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("4 |   |   |  | O  |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("5 |   |   |   |  | X  |   |   |");
+                        sw.Write("- - - - - - -");
+                        sw.Write("6 |   |   |   |   |  |O   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("7 |   |   |   |   |   |   |   |");
+                        return;
+                    case 1:
+                        sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write("1 | O |   |   |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("2 |  | X |   |   |   |   |   |");
+                        sw.Write("- - - - - - -");
+                        sw.Write("3 |   |   | O  |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("4 |   |   |  | O  |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("5 |   |   |   |  | X  |   |   |");
+                        sw.Write("- - - - - - -");
+                        sw.Write("6 |   |   |   |   |  |O   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("7 |   |   |   |   |   |   |   |");
+                        return;
+                    case 2:
+                        sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write("1 |  |  X | X |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("2 |  |    |   |   |   |   |   |");
+                        sw.Write("- - - - - - -");
+                        sw.Write("3 |   | X |   |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("4 |   |   |   |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("5 |   |   |   |   |   |   |   |");
+                        sw.Write("- - - - - - -");
+                        sw.Write("6 |   |   |   |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("7 |   |   |   |   |   |   |   |");
+                        return;
+                    case 3:
+                        sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write("1 |  |    |   | X |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("2 |  |    |   |   |   |   |   |");
+                        sw.Write("- - - - - - -");
+                        sw.Write("3 |   |   |   | X |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("4 |   |   |   |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("5 |   |   |   |   |   |   |   |");
+                        sw.Write("- - - - - - -");
+                        sw.Write("6 |   |   |   |   |   |   |   |");
+                        sw.Write(" - - - - - - -");
+                        sw.Write("7 |   |   |   |   |   |   |   |");
+                        return;
                 }
-                sw.WriteLine();
             }
-        }
+    }
         public void DisplayFinBoardToFile()
         {
 	  // string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/finboards.txt";
-            string path = @"finboards.txt";
+            string path = @"data/finboards.txt";
             // This text is added only once to the file.
             // Create a file to write to.
 	    // File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/finboards.txt", string.Empty);
-             File.WriteAllText(@"finboards.txt", string.Empty);
+             File.WriteAllText(@"data/finboards.txt", string.Empty);
             using (StreamWriter sw = new StreamWriter(path, true))
             {
+                sw.Write(Environment.NewLine);
                 //     System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/finboards.txt", string.Empty);
-                sw.Write("iteration: " + Game_TPL.cntr);
                 for (int x = 1; x <= 7; x++)
                     sw.Write("  " + x + " ");
                 sw.WriteLine();
@@ -123,21 +167,22 @@ namespace Minimax_TPL
                     sw.WriteLine();
                     sw.WriteLine("  -   -   -   -   -   -   - ");
                 }
+                sw.Write("^^ fin board for Board " + Game_TPL.cntr);
                 sw.WriteLine();
             }
         }
         public void DisplayScoreBoardToFile()
         {
 	  // string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/scoreboards.txt";
-            string path = @"scoreboards.txt";
+            string path = @"data/scoreboards.txt";
             // This text is added only once to the file.
             // Create a file to write to.
             // File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/scoreboards.txt", string.Empty);
-            File.WriteAllText(@"scoreboards.txt", string.Empty);
+             File.WriteAllText(@"data/scoreboards.txt", string.Empty);
             using (StreamWriter sw = new StreamWriter(path, true))
             {
+                sw.Write(Environment.NewLine);
                 //      System.IO.File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/scoreboards.txt", string.Empty);
-                sw.Write("iteration: " + Game_TPL.cntr);
                 for (int x = 1; x <= 7; x++)
                     sw.Write("  " + x + " ");
                 sw.WriteLine();
@@ -155,6 +200,7 @@ namespace Minimax_TPL
                     sw.WriteLine();
                     sw.WriteLine("  -   -   -   -   -   -   - ");
                 }
+                sw.Write("^^ score board for Board " + Game_TPL.cntr);
                 sw.WriteLine();
             }
         }

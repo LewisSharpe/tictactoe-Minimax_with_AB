@@ -29,9 +29,10 @@ namespace Minimax_TPL
                 File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/finboards.txt", string.Empty);
                 File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/scoreboards.txt", string.Empty);
 	      */
-                File.WriteAllText(@"intboards.txt", string.Empty);
-                File.WriteAllText(@"finboards.txt", string.Empty);
-                File.WriteAllText(@"scoreboards.txt", string.Empty);
+                File.WriteAllText(@"data/intboards.txt", string.Empty);
+                File.WriteAllText(@"data/finboards.txt", string.Empty);
+                File.WriteAllText(@"data/scoreboards.txt", string.Empty);
+                File.WriteAllText(@"data/TPLTST_Report.csv", string.Empty);
             }
             PlayGame(_xPlayer, _oPlayer, ref cntr);
         }
