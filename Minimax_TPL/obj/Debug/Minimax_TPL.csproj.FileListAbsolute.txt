@@ -68,3 +68,17 @@ C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\obj\Debug\Minimax_TPL.cspro
 C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
 C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\obj\Debug\Minimax_TPL.exe
 C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
