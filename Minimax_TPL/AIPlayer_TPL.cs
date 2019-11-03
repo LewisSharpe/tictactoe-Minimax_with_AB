@@ -417,8 +417,16 @@ namespace Minimax_TPL
                 score = -result.Item1; // assign score
                 positions = result.Item2; // present position (x,y)
 
-                // assign score to correct cell in score
-                scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
+             
+
+                if (ply == 0)
+                {
+                    // assign score to correct cell in score
+                    scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
+                    // HWL: debugging scoreboard: print a trace of moves tried to scores calculated
+                    //Console.WriteLine("++ HWL");
+                    Console.WriteLine("++ HWL score: " + score.ToString() + " for Move " + Move.ToString() + " Result " + result.ToString());
+                }
 
                 // CHECK for ply>maxPly was here (should be before the for loop) +++>
 
@@ -470,7 +478,7 @@ namespace Minimax_TPL
 
                 PrintCSVHeadRow();
                 if (result.Item2 != new Tuple<int, int>(0, 0)) { 
-                Console.Write(result.Item2);
+            //    Console.Write(result.Item2);
                 PrintCSVFailRow(board, scoreBoard);
             }
            
