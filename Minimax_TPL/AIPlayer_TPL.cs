@@ -420,6 +420,13 @@ namespace Minimax_TPL
                 // assign score to correct cell in score
                 scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
 
+                if (ply == 0)
+                {
+                    string path = "data/printresult_stream.txt";
+                    string createText = "++ HWL score: " + score.ToString() + " for Move " + Move.ToString() + " Result " + result.ToString() + Environment.NewLine;
+                    File.AppendAllText(path, createText);
+                }
+
                 // CHECK for ply>maxPly was here (should be before the for loop) +++>
 
                 if (Game_TPL.cntr >= 40)
@@ -470,13 +477,13 @@ namespace Minimax_TPL
 
                 PrintCSVHeadRow();
                 if (result.Item2 != new Tuple<int, int>(0, 0)) { 
-                Console.Write(result.Item2);
+            //    Console.Write(result.Item2);
                 PrintCSVFailRow(board, scoreBoard);
             }
            
                 // HWL: needs to move up in the loop (just before SeqSearch call)  ======>
                 // if (Win(board, counter)) // HWL: board is the input board, not the one checked in each iteration
-                if (score == bestScore) 
+                if (score == Consts.MAX_SCORE) 
                 {
 		    if (ply==0) {
 		      // HWL: NO, this winning position can be anywhere in the search tree, and doesn't mean you have a winning move for the overall input position!!!
@@ -497,7 +504,7 @@ namespace Minimax_TPL
                     }
                 
                 // else if (Win(board, this.otherCounter)) // HWL: board is the input board, not the one checked in each iteration
-		else if (score == - bestScore) // HWL: board is the input board, not the one checked in each iteration
+		else if (score == -Consts.MAX_SCORE) // HWL: board is the input board, not the one checked in each iteration
                 {
 		    if (ply==0) {
 		      // HWL: NO, this winning position can be anywhere in the search tree, and doesn't mean you have a winning move for the overall input position!!!
