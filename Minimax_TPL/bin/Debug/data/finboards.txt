@@ -10,8 +10,8 @@
   -   -   -   -   -   -   - 
 5 e | e | e | e | X | e | e | 
   -   -   -   -   -   -   - 
-6 e | e | X | e | e | O | e | 
+6 e | e | e | e | e | O | e | 
   -   -   -   -   -   -   - 
-7 e | e | e | e | X | e | e | 
+7 e | e | X | e | e | X | e | 
   -   -   -   -   -   -   - 
 ^^ FIN BOARD FOR BOARD 1
