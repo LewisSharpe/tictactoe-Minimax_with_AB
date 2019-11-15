@@ -16,9 +16,9 @@ namespace Minimax_TPL
     {
         // PUBLIC DECS
         public static int ply = 0;    // start depth for search (should be 0)
-        public const int maxPly = 3; // max depth for search
-        public int alpha = Consts.MIN_SCORE;
-        public int beta = Consts.MAX_SCORE;
+        public const int maxPly = 1; // max depth for search
+        public int alpha;
+        public int beta;
         public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
         public static int error_confirm = 0;
@@ -380,7 +380,7 @@ namespace Minimax_TPL
             int bestScore = mmax ? -1001 : 1001;
             int score = Consts.MIN_SCORE; // current score of move
             Tuple<int, int> Move = new Tuple<int, int>(0, 0);
-            Tuple<int, int> bestMove = new Tuple<int, int>(0, 0);  // best move with score// THRESHOLD <=============
+            Tuple<int, int> bestMove = new Tuple<int, int>(8, 1);  // best move with score// THRESHOLD <=============
             GameBoard_TPL<counters> copy = board.Clone();
             GameBoard_TPL<counters> input_board = board.Clone(); // HWL: for DEBUGGING onlu
             // check win
@@ -401,29 +401,36 @@ namespace Minimax_TPL
                                           // HWL: where do you actual place the piece for the position in Move? you don't do this here, just pass Move to the call of Minimax below; in the recursive call you then overwrite the input argument with a random move (see comment at start of Minimax; so you are actually not considering Move at all!
                                           // HWL: try placing the piece here, and below just use the score
                 copy[Move.Item1, Move.Item2] = counter; // place counter
-                                                        // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
+                                                        // GameBoard board0 = MakeMove(board, move); // copies board - l ready
 
                 // HWL: move the check for Win in here <======
 
                 // list defined in Minimax declarations
                 // HWL: in the initial parallel version you should NOT generate parallelism recursively; the only place where you use parallelism constructs should be in ParSearchWrapper!
-                // Tuple<int, Tuple<int, int>> result = ParallelChoice(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, alpha, beta); /* swap Player_TPL */ // RECURSIVE call  
+                //result = ParallelChoice(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, alpha, beta); /* swap Player_TPL */ // RECURSIVE call  
                 result = SeqSearch(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, alpha, beta); /* swap Player_TPL */ // RECURSIVE call  
 
                 // trying to prevent preventing cell overwrite
                 copy[Move.Item1, Move.Item2] = counters.e; /*  counter; */ // HWL: remove counter that was tried in this iteration
                                                                            // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
+                // PROBLEM EXISTS HERE BELOW , result.Item2 return null - LS 14.11.19
                 score = -result.Item1; // assign score
                 positions = result.Item2; // present position (x,y)
 
                 // assign score to correct cell in score
                 scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
-
-                if (ply == 0)
+                
+                if (result.Item2 == new Tuple<int, int>(2, 3) || result.Item2 == new Tuple<int,int>(3,2)) 
+            {
+                    Environment.Exit(99);
+            }
+                    if (ply == 0)
                 {
                     string path = "data/printresult_stream.txt";
-                    string createText = "++ HWL score: " + score.ToString() + " for Move " + Move.ToString() + " Result " + result.ToString() + Environment.NewLine;
+                    string createText = "++ FOR BOARD "  + Game_TPL.cntr + " "  + "HWL score: " + score.ToString() + " for Move " + Move.ToString() + " Result " + result.ToString() + Environment.NewLine;
+                    Console.WriteLine(createText);
+                    Console.ReadLine();
                     File.AppendAllText(path, createText);
                 }
 
@@ -480,7 +487,7 @@ namespace Minimax_TPL
             //    Console.Write(result.Item2);
                 PrintCSVFailRow(board, scoreBoard);
             }
-           
+           /*
                 // HWL: needs to move up in the loop (just before SeqSearch call)  ======>
                 // if (Win(board, counter)) // HWL: board is the input board, not the one checked in each iteration
                 if (score == Consts.MAX_SCORE) 
@@ -500,7 +507,7 @@ namespace Minimax_TPL
 		      }      
                        PrintCSVPassRow(board, scoreBoard);
 		    }
-		    return new Tuple<int, Tuple<int, int>>(1000, Move /* HWL was: positions */);
+		    return new Tuple<int, Tuple<int, int>>(999, Move );
                     }
                 
                 // else if (Win(board, this.otherCounter)) // HWL: board is the input board, not the one checked in each iteration
@@ -521,8 +528,10 @@ namespace Minimax_TPL
 		      }    
               PrintCSVPassRow(board, scoreBoard);
 		    }
-		    return new Tuple<int, Tuple<int, int>>(-1000, Move /* HWL was: positions */);   
+		    return new Tuple<int, Tuple<int, int>>(-999, Move );   
                 }
+                */
+    
                 if (ply == 0)
                 {              
                     lock (thisLock)
@@ -531,6 +540,8 @@ namespace Minimax_TPL
                     }
                  //   Console.WriteLine("Player move: " + counter + " which, returns: " + result.Item1 + result.Item2);
                 }
+
+                
                
             }
             // HWL was: return new Tuple<int, Tuple<int, int>>(score, positions); // return
@@ -543,13 +554,12 @@ namespace Minimax_TPL
         public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, counters counter, int numTasks, GameBoard_TPL<int> scoreBoard)
         {
             int score = Consts.MIN_SCORE;
-            Tuple<int, int> pop = new Tuple<int, int>(0, 0);
             // int stride = 1; int id = 1; // ???
             // int stride = 4; int id = 1;
 
             // compute the maximum over all results
-            Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(score, pop); ; // , res1, res2, res3, res4;
-            Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, pop);
+            Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(score, positions); ; // , res1, res2, res3, res4;
+            Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, positions);
 
             // counters?[] board1 = new counters?[board.Length];
             GameBoard_TPL<counters> board1 = board.Clone();
@@ -689,7 +699,7 @@ namespace Minimax_TPL
             }
             else if (ply > 1)
             {
-                return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
+            return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
             }
             return new Tuple<int, Tuple<int, int>>(bestScore, bestMove);
         }

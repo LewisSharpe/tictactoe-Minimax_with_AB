@@ -33,6 +33,7 @@ namespace Minimax_TPL
                 File.WriteAllText(@"data/finboards.txt", string.Empty);
                 File.WriteAllText(@"data/scoreboards.txt", string.Empty);
                 File.WriteAllText(@"data/TPLTST_Report.csv", string.Empty);
+                File.WriteAllText(@"data/printresult_stream.txt", string.Empty);
             }
             PlayGame(_xPlayer, _oPlayer, ref cntr);
         }
