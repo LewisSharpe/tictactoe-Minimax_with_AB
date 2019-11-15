@@ -16,7 +16,7 @@ namespace Minimax_TPL
     {
         // PUBLIC DECS
         public static int ply = 0;    // start depth for search (should be 0)
-        public const int maxPly = 3; // max depth for search
+        public const int maxPly = 1; // max depth for search
         public int alpha = Consts.MIN_SCORE;
         public int beta = Consts.MAX_SCORE;
         public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
@@ -350,32 +350,32 @@ namespace Minimax_TPL
                 }
             return new Tuple<int, int>(x - 1, y - 3);
         }
-        // STATIC EVALUATION FUNCTION
-        public int EvalCurrentBoard(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard, counters us)
-        {
-            int score;
-            // eval if move is win draw or loss
-            if (FindThreeInARow(board, us)) // Player_TPL win?
-                return score = 1000; // Player_TPL win confirmed
-            else if (FindThreeInARow(board, us + 1)) // opponent win?
-                return score = -1000; // opp win confirmed
-            else if (FindTwoInARow(board, us)) // Player_TPL win?
-                return score = 100; // Player_TPL win confirmed
-            else if (FindTwoInARow(board, us + 1)) // opponent win?
-                return score = -100; // opp win confirmed
-            if (FindOneInARow(board, us)) // Player_TPL win?
-                return score = 10; // Player_TPL win confirmed
-            else if (FindOneInARow(board, us + 1)) // opponent win?
-                return score = -10; // opp win confirmed
-            else
-                return score = 23; // dummy value
-        }
+// STATIC EVALUATION FUNCTION
+public int EvalCurrentBoard(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard, counters us)
+{
+    int score;
+    // eval if move is win draw or loss
+    if (FindThreeInARow(board, us)) // Player_TPL win?
+        return score = 1000; // Player_TPL win confirmed
+    else if (FindThreeInARow(board, us + 1)) // opponent win?
+        return score = -1000; // opp win confirmed
+    else if (FindTwoInARow(board, us)) // Player_TPL win?
+        return score = 100; // Player_TPL win confirmed
+    else if (FindTwoInARow(board, us + 1)) // opponent win?
+        return score = -100; // opp win confirmed
+    if (FindOneInARow(board, us)) // Player_TPL win?
+        return score = 10; // Player_TPL win confirmed
+    else if (FindOneInARow(board, us + 1)) // opponent win?
+        return score = -10; // opp win confirmed
+    else
+        return score = 23; // dummy value
+}
 
-        public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
-        {
+public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
+{
             // decs
 	    counters us = Flip(counter); // HWL: why flip counter here? should only be flipped when calling SeqSearch recursively
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
+            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions); // HWL: <==== change to only return indices betwee 1-3
             // create new list of Tuple<int,int>
             int bestScore = mmax ? -1001 : 1001;
             int score = Consts.MIN_SCORE; // current score of move
@@ -392,10 +392,12 @@ namespace Minimax_TPL
 	    // CHECK DEPTH: if deeper than maxPly, don't search further just return the current score
 	    if (ply > maxPly) {
 		score = EvalCurrentBoard(board, scoreBoard, counter /* us */ ); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
+		// Console.WriteLine("== HWL: static eval: {0}", score);
 		return new Tuple<int, Tuple<int, int>>(score, positions);
 	    }
-            for (int i = 0; i < availableMoves.Count; i++)
-            {
+	    int end = (ply==0) || (ply == 1) ? 1 : availableMoves.Count;
+            for (int i = 0; i < end /* availableMoves.Count */; i++)
+	      { // for
                 Move = availableMoves[i]; // current move
                                           // cell priority - favour centre and corners
                                           // HWL: where do you actual place the piece for the position in Move? you don't do this here, just pass Move to the call of Minimax below; in the recursive call you then overwrite the input argument with a random move (see comment at start of Minimax; so you are actually not considering Move at all!
@@ -421,10 +423,11 @@ namespace Minimax_TPL
                 // assign score to correct cell in score
                 scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
 
-                if (ply == 0)
+                if (/* ply == 0 */ true)
                 {
                     string path = "data/printresult_stream.txt";
-                    string createText = "++ FOR BOARD "  + Game_TPL.cntr + " "  + "HWL score: " + score.ToString() + " for Move " + Move.ToString() + " Result " + result.ToString() + Environment.NewLine;
+                    string createText = "++ FOR BOARD "  + Game_TPL.cntr + " and depth ply = " + ply.ToString()  + "HWL score: " + score.ToString() + " for Move " + Move.ToString() + " Result " + result.ToString() + Environment.NewLine;
+		    // Console.WriteLine(createText);
                     File.AppendAllText(path, createText);
                 }
 
@@ -447,6 +450,7 @@ namespace Minimax_TPL
                             // Move = bestMove; // HWL: wrong way around
                             bestMove = Move;
                             bestScore = score;
+			    Console.WriteLine("== HWL: new best score {0} at {1}", bestScore, bestMove);
                         }
                     }
                     if (alpha > bestScore)
@@ -455,6 +459,7 @@ namespace Minimax_TPL
                         {
                             bestMove = Move;
                             bestScore = alpha;
+			    Console.WriteLine("-- HWL: new best score {0} at {1}", bestScore, bestMove);
                         }
                     }
                 }
@@ -465,14 +470,17 @@ namespace Minimax_TPL
                     {
                         lock (my_object)
                         {
-                            Move = bestMove;
-                            score = bestScore;
+                            // Move = bestMove; // HWL: wrong way around
+                            bestMove = Move;
+                            bestScore = score;
+			    //Console.WriteLine("== HWL: new best score {0} at {1}", bestScore, bestMove);
                         }
                     }
                     if (beta <= alpha)
                         lock (my_object)
                         {
                             bestScore = alpha;
+			    Console.WriteLine("-- HWL: new best score {0} at {1}", bestScore, bestMove);
                         }
                 }
 
@@ -484,7 +492,10 @@ namespace Minimax_TPL
            
                 // HWL: needs to move up in the loop (just before SeqSearch call)  ======>
                 // if (Win(board, counter)) // HWL: board is the input board, not the one checked in each iteration
-                if (score == Consts.MAX_SCORE) 
+
+		continue; // BAD BAD BAD BAD BAD BAD BAD BAD BAD BAD BAD
+		
+		if (score == Consts.MAX_SCORE) 
                 {
 		    if (ply==0) {
 		      // HWL: NO, this winning position can be anywhere in the search tree, and doesn't mean you have a winning move for the overall input position!!!
@@ -591,8 +602,8 @@ namespace Minimax_TPL
             return res;
         }
     
-        public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, int stride, int id, Tuple<int,Tuple<int,int>> bestRes, int thread_no, List<Tuple<int, int>> unconsideredMoves /* for DEBUGGING only */)
-        {
+public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, int stride, int id, Tuple<int,Tuple<int,int>> bestRes, int thread_no, List<Tuple<int, int>> unconsideredMoves /* for DEBUGGING only */)
+{
             Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(999, new Tuple<int, int>(9,9));
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
 	    List<Tuple<int, int>> consideredMoves = new List<Tuple<int, int>>();
@@ -654,19 +665,19 @@ namespace Minimax_TPL
 	      }
 	    }
 	    return bestRes;
-	}
+}
 
-	public static string showList(List<Tuple<int,int>> xs) {
-	  string str = "";
-	  foreach (Tuple<int,int> t in xs) {
-	    str += t.ToString() + ", ";
-	  }
-	  return str;
-	}
+public static string showList(List<Tuple<int,int>> xs) {
+  string str = "";
+  foreach (Tuple<int,int> t in xs) {
+    str += t.ToString() + ", ";
+  }
+  return str;
+}
 	
-        // MINIMAX FUNCTION
+// MINIMAX FUNCTION
         public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
-        {
+{
             // decs
             counters us = Flip(counter);
             List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
