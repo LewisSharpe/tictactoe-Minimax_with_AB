@@ -27,11 +27,11 @@ namespace Minimax_TPL
         Tuple<int, Tuple<int, int>>[] ress = new Tuple<int, Tuple<int, int>>[4];
         public static int thread_no_track = 0;
         Tuple<int, Tuple<int, int>> result;
+        int SEGM_BOARD = 1;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
         // Create new stopwatch.
         Stopwatch stopwatch = new Stopwatch();
 
         public AIPlayer_TPL(counters _counter) : base(_counter) { }
-
         // GENERATE LIST OF REMAINING AVAILABLE MOVES
         public List<Tuple<int, int>> getAvailableMoves(GameBoard_TPL<counters> board, Tuple<int, int> positions)
         {
@@ -45,10 +45,24 @@ namespace Minimax_TPL
                     }
             return moves;
         }
+
+        // GENERATE LIST OF REMAINING AVAILABLE MOVES for 3 x 3 
+        public List<Tuple<int, int>> getAvailableSegmentedMoves(GameBoard_TPL<counters> board, Tuple<int, int> positions)
+        {
+            List<Tuple<int, int>> moves = new List<Tuple<int, int>>();
+            for (int x = 1; x <= 3; x++)
+                for (int y = 1; y <= 3; y++)
+                    if (board[x, y] == counters.e)
+                    {
+                        Tuple<int, int> coords = new Tuple<int, int>(x, y);
+                        moves.Add(coords);
+                    }
+            return moves;
+
+        }
         // GET MOVE
         public override Tuple<int, int> GetMove(GameBoard_TPL<counters> board, counters counter, GameBoard_TPL<int> scoreBoard)
         {
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             int score = Consts.MIN_SCORE;
             bool mmax = true;
             // Begin timing.
@@ -375,7 +389,7 @@ public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, coun
 {
             // decs
 	    counters us = Flip(counter); // HWL: why flip counter here? should only be flipped when calling SeqSearch recursively
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions); // HWL: <==== change to only return indices betwee 1-3
+            List<Tuple<int, int>> availableMoves = getAvailableSegmentedMoves(board, positions); // HWL: <==== change to only return indices betwee 1-3
             // create new list of Tuple<int,int>
             int bestScore = mmax ? -1001 : 1001;
             int score = Consts.MIN_SCORE; // current score of move
@@ -422,18 +436,20 @@ public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, coun
 
                 // assign score to correct cell in score
                 scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
-
-                if (/* ply == 0 */ true)
+                   
+                if (ply == 0)
                 {
+                    scoreBoard.DisplayScoreBoard();
+                    scoreBoard.DisplayScoreBoardToFile();
                     string path = "data/printresult_stream.txt";
                     string createText = "++ FOR BOARD "  + Game_TPL.cntr + " and depth ply = " + ply.ToString()  + "HWL score: " + score.ToString() + " for Move " + Move.ToString() + " Result " + result.ToString() + Environment.NewLine;
-		    // Console.WriteLine(createText);
+		            // Console.WriteLine(createText);
                     File.AppendAllText(path, createText);
                 }
 
                 // CHECK for ply>maxPly was here (should be before the for loop) +++>
 
-                if (Game_TPL.cntr >= 40)
+                if (Game_TPL.cntr >=8)
                 {
                     Environment.Exit(99);
                 }
@@ -489,61 +505,13 @@ public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, coun
             //    Console.Write(result.Item2);
                 PrintCSVFailRow(board, scoreBoard);
             }
+
+              
            
                 // HWL: needs to move up in the loop (just before SeqSearch call)  ======>
                 // if (Win(board, counter)) // HWL: board is the input board, not the one checked in each iteration
 
 		continue; // BAD BAD BAD BAD BAD BAD BAD BAD BAD BAD BAD
-		
-		if (score == Consts.MAX_SCORE) 
-                {
-		    if (ply==0) {
-		      // HWL: NO, this winning position can be anywhere in the search tree, and doesn't mean you have a winning move for the overall input position!!!
-		      // Game_TPL.cntr++;
-		      // write to file
-		      // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
-		      Console.WriteLine("✓ PASS on Board " + Game_TPL.cntr + " : Winning combination found (ply={0}, player={1}, Move={2}); Input and Output boards are: ", ply, counter.ToString(), Move.ToString());
-		      input_board.DisplayBoard();
-		      {
-			GameBoard_TPL<counters> tmp_board = board.Clone(); // HWL: for debugging onlu
-			tmp_board.filler = counters.e;
-			tmp_board[Move.Item1, Move.Item2] = counter;
-			tmp_board.DisplayBoard();
-		      }      
-                       PrintCSVPassRow(board, scoreBoard);
-		    }
-		    return new Tuple<int, Tuple<int, int>>(1000, Move /* HWL was: positions */);
-                    }
-                
-                // else if (Win(board, this.otherCounter)) // HWL: board is the input board, not the one checked in each iteration
-		else if (score == -Consts.MAX_SCORE) // HWL: board is the input board, not the one checked in each iteration
-                {
-		    if (ply==0) {
-		      // HWL: NO, this winning position can be anywhere in the search tree, and doesn't mean you have a winning move for the overall input position!!!
-		      // Game_TPL.cntr++;
-		      // write to file
-		      // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
-		      Console.WriteLine("✓ PASS on Board " + Game_TPL.cntr + " : Winning combination found for OPPONENT (ply={0}, player={1}, Move={2}); Input and Output boards are: ", ply, counter.ToString(), Move.ToString());
-		      input_board.DisplayBoard();
-		      {
-			GameBoard_TPL<counters> tmp_board = board.Clone(); // HWL: for debugging onlu
-			tmp_board.filler = counters.e;
-			tmp_board[Move.Item1, Move.Item2] = counter;
-			tmp_board.DisplayBoard();
-		      }    
-              PrintCSVPassRow(board, scoreBoard);
-		    }
-		    return new Tuple<int, Tuple<int, int>>(-1000, Move /* HWL was: positions */);   
-                }
-                if (ply == 0)
-                {              
-                    lock (thisLock)
-                    {
-                      scoreBoard.DisplayScoreBoardToFile();
-                    }
-                 //   Console.WriteLine("Player move: " + counter + " which, returns: " + result.Item1 + result.Item2);
-                }
-               
             }
             // HWL was: return new Tuple<int, Tuple<int, int>>(score, positions); // return
             return new Tuple<int, Tuple<int, int>>(bestScore, bestMove); // return
@@ -554,6 +522,7 @@ public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, coun
         // NOTE: each tasks needs a clone of the board; but in the recursive calls no cloning is needed
         public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, counters counter, int numTasks, GameBoard_TPL<int> scoreBoard)
         {
+            List<Tuple<int, int>> availableMoves = getAvailableSegmentedMoves(board, positions);
             int score = Consts.MIN_SCORE;
             // int stride = 1; int id = 1; // ???
             // int stride = 4; int id = 1;
@@ -576,7 +545,7 @@ public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, coun
                     () => { ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 4); });
 	    */
 	    
-	    List<Tuple<int, int>> unconsideredMoves = getAvailableMoves(board, positions);
+	    List<Tuple<int, int>> unconsideredMoves = getAvailableSegmentedMoves(board, positions);
 
             ress[0] = ParSearchWork(board1, counter, ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves /* for DEBUGGING only */);
             ress[1] = ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves /* for DEBUGGING only */);
@@ -595,17 +564,24 @@ public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, coun
             { 
 	      Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread {2}: {3}", Game_TPL.cntr, Flip(counter), j, ress[j].ToString());
 	      res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // result: <score, <position>>
-	      // bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes; // not needed
+                                                              // bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes; // not needed
             }
 	    Console.WriteLine("__ HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, Flip(counter), res.ToString());
-            // return overall maximum
+            board[result.Item2.Item1, result.Item2.Item2] = Flip(counter);
+            board.DisplayBoard();
+            while (!Win(board, Flip(counter))) {
+                ParSearchWrap(board, Flip(counter), numTasks, scoreBoard); // return
+                board.DisplayBoard();
+                break;
+            }
+                // return overall maximum
             return res;
         }
     
 public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, int stride, int id, Tuple<int,Tuple<int,int>> bestRes, int thread_no, List<Tuple<int, int>> unconsideredMoves /* for DEBUGGING only */)
 {
             Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(999, new Tuple<int, int>(9,9));
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
+            List<Tuple<int, int>> availableMoves = getAvailableSegmentedMoves(board, positions);
 	    List<Tuple<int, int>> consideredMoves = new List<Tuple<int, int>>();
             int score = Consts.MIN_SCORE; // current score of move
             // stride = 1; // ???
@@ -615,10 +591,27 @@ public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, 
 	    Debug.Assert(0 <= id && id < stride);
             counters us = Flip(counter); // HWL: TOCHECK: I don't think you should flip at this point, rather at the call to SeqSearch
 	    Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, counter.ToString(), id);
+            if (SEGM_BOARD == 1)
+            {
+                for (int x = 4; x <= 7; x++)
+                    for (int y = 1; y <= 7; y++)
+                        if (board[x, y] != counters.N)
+                        {
+                            board[x, y] = counters.N;
+                            scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
+                        }
+                for (int x = 1; x <= 3; x++)
+                    for (int y = 4; y <= 7; y++)
+                        if (board[x, y] != counters.N)
+                        {
+                            board[x, y] = counters.N;
+                            scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
+                        }
+            }
             board.DisplayBoard();
             if (ply == 0)
             {
-                scoreBoard.DisplayScoreBoardToFile();
+             //   scoreBoard.DisplayScoreBoardToFile();
             }
             if (ply > maxPly)
             {
@@ -630,11 +623,10 @@ public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, 
 		if (offset == 0 && cnt == 0)
 		  {
 		    // HWL: this is a move for the current thread to process; remember it (for debugging)
-		    if (ply == 0 ) { consideredMoves.Add(availableMoves[i]); } // HWL DEBUGGING
-		    res = SeqSearch(board, counter, ply, positions, true, scoreBoard, alpha, beta);
-		    bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes;
-		    cnt = stride-1;
-		    thread_no_track = thread_no;
+		    if (ply == 0 ) {
+            consideredMoves.Add(availableMoves[i]); } // HWL DEBUGGING
+            res = SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
+            bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes;
 		  }
 		else
 		  {
@@ -648,11 +640,24 @@ public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, 
 		    Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, id, showList(consideredMoves));
 		    Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
                     Console.WriteLine("board " + Game_TPL.cntr + " processed by thread id: " + thread_no + " :");
-                    board.DisplayBoard();
-                    if (ply == 0)
+                    if (SEGM_BOARD == 1)
                     {
-                        scoreBoard.DisplayScoreBoardToFile();
+                        for (int x = 4; x <= 7; x++)
+                            for (int y = 1; y <= 7; y++)
+                                if (board[x, y] != counters.N)
+                                {
+                                    board[x, y] = counters.N;
+                                    scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
+                                }
+                        for (int x = 1; x <= 3; x++)
+                            for (int y = 4; y <= 7; y++)
+                                if (board[x, y] != counters.N)
+                                {
+                                    board[x, y] = counters.N;
+                                    scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
+                                }
                     }
+                    board.DisplayBoard();
                 }
             }         
 	    /* HWL: here, after the loop, print the considered moves; do you want to print to file in each loop iteration, or just at the end after the loop!? */
@@ -680,7 +685,6 @@ public static string showList(List<Tuple<int,int>> xs) {
 {
             // decs
             counters us = Flip(counter);
-            List<Tuple<int, int>> availableMoves = getAvailableMoves(board, positions);
             // create new list of Tuple<int,int>
             int numTasks = 1;
             int bestScore = mmax ? -1001 : 1001;
@@ -694,14 +698,14 @@ public static string showList(List<Tuple<int,int>> xs) {
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
 
-            if (ply == 0 || ply == 1)
-            {
-	        return ParSearchWrap(board, counter, numTasks, scoreBoard); // return
-            }
-            else if (ply > 1)
-            {
-            return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
-            }
+                if (ply == 0 || ply == 1)
+                {
+                    return ParSearchWrap(board, Flip(counter), numTasks, scoreBoard); // return
+                }
+                else if (ply > 1)
+                {
+                    return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
+                }
             return new Tuple<int, Tuple<int, int>>(bestScore, bestMove);
         }
     }

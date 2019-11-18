@@ -21,7 +21,9 @@ namespace Minimax_TPL
         O,
         X,
         BORDER,
-        e
+        N,
+        e,
+        
     }
 
     // MAIN EXECUTION
