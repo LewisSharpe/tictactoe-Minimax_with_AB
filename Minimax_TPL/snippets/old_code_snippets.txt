@@ -1,0 +1,235 @@
+﻿  // IS LEFT OF TWO IN A ROW
+        public static Tuple<int, int> IsLeftofTwo(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                                // two in a row in centre should give higher score
+                                return new Tuple<int, int>(x, y);
+                        }
+                }
+            return new Tuple<int, int>(0, 0);
+        }
+        // IS RIGHT OF THE TWO IN ROW
+        public static Tuple<int, int> IsRightofTwo(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy])
+                                // two in a row in centre should give higher score
+                                return new Tuple<int, int>(x + xx, y + yy);
+                        }
+                }
+            return new Tuple<int, int>(0, 0);
+        }
+        // FIND HORZI GAP BETWEEN TWO IN A ROW
+        public bool FindTwoInARowWithAHorziGap(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us && board[x, y] == board[x + xx + 1, y + yy])
+                                // two in a row in centre should give higher score
+                                return true;
+                        }
+                }
+            return false;
+        }
+        // FIND VERTICAL GAP BETWEEN TWO IN A ROW
+        public bool FindTwoInARowWithAVerticalGap(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us && board[x, y] == board[x + xx, y + yy - 1])
+                                // two in a row in centre should give higher score
+                                return true;
+                        }
+                }
+            return false;
+        }
+        // IS CENTRE OF THREE IN A ROW
+        public static Tuple<int, int> IsCentreOfThree(GameBoard_TPL<counters> board, counters us)
+        {
+            int x = 0; int xx = 0; int y = 0; int yy = 0;
+            for (x = 1; x <= 7; x++)
+                for (y = 1; y <= 7; y++)
+
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    for (xx = 0; xx <= 1; xx++)
+                        for (yy = 0; yy <= 1; yy++)
+
+
+                            if (yy == 0 && xx == 0)
+                                continue;
+            if (board[x, y] == us &&
+            board[x, y] == board[x + xx, y + yy] &&
+            board[x, y] == board[x - xx, y - yy])
+            {
+                return new Tuple<int, int>(x - xx, y - yy);
+            }
+
+
+            return new Tuple<int, int>(x - xx, y - yy);
+        }
+        // IS CENTRE OF THREE IN A ROW
+        public static Tuple<int, int> IsLeftOfThree(GameBoard_TPL<counters> board, counters us)
+        {
+            int x = 0; int xx = 0; int y = 0; int yy = 0;
+            for (x = 1; x <= 7; x++)
+                for (y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    for (xx = 0; xx <= 1; xx++)
+                        for (yy = 0; yy <= 1; yy++)
+                        {
+
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us &&
+                            board[x, y] == board[x + xx, y + yy] &&
+                            board[x, y] == board[x - xx, y - yy])
+                            {
+                                return new Tuple<int, int>(x - 1, y + 1);
+                            }
+                        }
+                }
+            return new Tuple<int, int>(x - 3, y - 1);
+        }
+        // IS CENTRE OF THREE IN A ROW
+        public static Tuple<int, int> IsRightOfThree(GameBoard_TPL<counters> board, counters us)
+        {
+            int x = 0; int xx = 0; int y = 0; int yy = 0;
+            for (x = 1; x <= 7; x++)
+                for (y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    for (xx = 0; xx <= 1; xx++)
+                        for (yy = 0; yy <= 1; yy++)
+                        {
+
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            if (board[x, y] == us &&
+                            board[x, y] == board[x + xx, y + yy] &&
+                            board[x, y] == board[x - xx, y - yy])
+                            {
+                                return new Tuple<int, int>(x - 1, y - 3);
+                            }
+                        }
+                }
+            return new Tuple<int, int>(x - 1, y - 3);
+        }
+		
+	    // -----------------------------------------------------------------------------
+	    // HWL: don't think you need any of the below; should just be calling PlayGame recursively here
+            if (IsOver(board, currentPlayer))
+            {
+                if (currentPlayer.Win(board, currentPlayer.counter))
+                {
+                    board.DisplayBoard();
+
+
+                    if (currentPlayer.GetType() == typeof(AIPlayer_TPL))
+                    {
+                        int score = 0;
+                        if (AIPlayer_TPL.FindThreeInARow(board, currentPlayer.counter) == true)
+                        {
+
+                            score = 1000;
+
+
+                        }
+
+                        Console.WriteLine("========================================================================================================================"
+                          + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
+                            "------------------------------------------------------------------------------------------------------------------------" +
+                            "Winner: " + currentPlayer.counter
+                            + Environment.NewLine + "Score: " + score + Environment.NewLine +
+                            "Positions visited: " + AIPlayer_TPL.cont + Environment.NewLine +
+                            "Coordinations of winning three-in-a-row at: "
+                             + Environment.NewLine + "Cell 1: " + AIPlayer_TPL.IsLeftOfThree(board, currentPlayer.counter)
+                             + Environment.NewLine + "Cell 2: " + AIPlayer_TPL.IsCentreOfThree(board, currentPlayer.counter)
+                             + Environment.NewLine + "Cell 3: " + AIPlayer_TPL.IsRightOfThree(board, currentPlayer.counter));
+
+
+                    }
+                    else
+                    {
+                        int score = 0;
+                        if (AIPlayer_TPL.FindThreeInARow(board, otherPlayer.counter) == true)
+                        {
+                            score = -1000;
+                        }
+
+
+                        Console.WriteLine("======================================================================================================================"
+                               + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
+                                 "------------------------------------------------------------------------------------------------------------------------" +
+                                 "Winner: " + otherPlayer.counter
+                                 + Environment.NewLine + "Score: " + score
+                                 + Environment.NewLine + "Coordinations of winning three-in-a-row at: "
+                                 + Environment.NewLine
+                                 + "Cell 1: " + AIPlayer_TPL.IsLeftOfThree(board, otherPlayer.counter) + Environment.NewLine
+                                 + "Cell 2: " + AIPlayer_TPL.IsCentreOfThree(board, otherPlayer.counter) + Environment.NewLine
+                                 + "Cell 3: " + AIPlayer_TPL.IsRightOfThree(board, otherPlayer.counter));
+                    }
+                    // Stop timing.
+                    stopwatch_minimax.Stop();
+
+                    if (AIPlayer_TPL.error_confirm == 1)
+                    {
+
+                        ErrorSkip(board, currentPlayer, otherPlayer);
+                    }
+                    else
+                    {
+                        ReRun(board, currentPlayer, otherPlayer);
+                    }
+                    // Write result.
+                    Console.WriteLine("Total elapsed for Minimax over full game execution: " + stopwatch_minimax.Elapsed + Environment.NewLine +
+                            "========================================================================================================================");
+                    Console.ReadLine();
+                    Program.Main();
+                }
+                Console.WriteLine("The game is a draw.");
+                Program.Main();
+
+                if (stopMe)
+                {
+                    stopwatch_minimax.Stop();
+                    Console.WriteLine("**HWL One move made. ");
+                    Console.WriteLine("**HWL elapsed time for one move: " + stopwatch_minimax.Elapsed + Environment.NewLine + "-------------------------------------------------------");
+                }
+                else
+                {
+                    stopMe = true;
+                }
+            }
+            PlayGame(otherPlayer, currentPlayer, ref cntr);

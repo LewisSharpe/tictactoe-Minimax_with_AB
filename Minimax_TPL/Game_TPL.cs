@@ -12,6 +12,7 @@ namespace Minimax_TPL
     // GAME EXECUTION CLASS
     class Game_TPL
     {
+        // PUBLIC DECS
         public static int cntr = 1;
         public static int nowcount = 0;
         bool stopMe = false;
@@ -19,16 +20,15 @@ namespace Minimax_TPL
         public static GameBoard_TPL<int> scoreBoard = new GameBoard_TPL<int>(21);
         static counters counter = counters.X;
         counters us = Flip(counter);
-
+        /* 
+-------------------------------------------------------------------------------------------------------------------------
+* Game constructor -
+--------------------------------------------------------------------------------------------------------------------------
+*/
         public Game_TPL(Player_TPL _xPlayer, Player_TPL _oPlayer)
         {
             if (cntr == 1)
             {
-	      /* HWL
-                File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/intboards.txt", string.Empty);
-                File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/finboards.txt", string.Empty);
-                File.WriteAllText(@"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/scoreboards.txt", string.Empty);
-	      */
                 File.WriteAllText(@"data/intboards.txt", string.Empty);
                 File.WriteAllText(@"data/finboards.txt", string.Empty);
                 File.WriteAllText(@"data/scoreboards.txt", string.Empty);
@@ -38,6 +38,13 @@ namespace Minimax_TPL
             PlayGame(_xPlayer, _oPlayer, ref cntr);
         }
 
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* PlayGame -
+--------------------------------------------------------------------------------------------------------------------------
+The method runs the execution of the entire game, iterating the starting board each time. 
+--------------------------------------------------------------------------------------------------------------------------
+*/
         public void PlayGame(Player_TPL currentPlayer, Player_TPL otherPlayer, ref int cntr)
         {
             // Create new stopwatch.
@@ -435,101 +442,27 @@ namespace Minimax_TPL
 	    cntr++;
             PlayGame(otherPlayer, currentPlayer, ref cntr);
 	    return;
-	    // -----------------------------------------------------------------------------
-	    // HWL: don't think you need any of the below; should just be calling PlayGame recursively here
-            if (IsOver(board, currentPlayer))
-            {
-                if (currentPlayer.Win(board, currentPlayer.counter))
-                {
-                    board.DisplayBoard();
-
-
-                    if (currentPlayer.GetType() == typeof(AIPlayer_TPL))
-                    {
-                        int score = 0;
-                        if (AIPlayer_TPL.FindThreeInARow(board, currentPlayer.counter) == true)
-                        {
-
-                            score = 1000;
-
-
-                        }
-
-                        Console.WriteLine("========================================================================================================================"
-                          + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
-                            "------------------------------------------------------------------------------------------------------------------------" +
-                            "Winner: " + currentPlayer.counter
-                            + Environment.NewLine + "Score: " + score + Environment.NewLine +
-                            "Positions visited: " + AIPlayer_TPL.cont + Environment.NewLine +
-                            "Coordinations of winning three-in-a-row at: "
-                             + Environment.NewLine + "Cell 1: " + AIPlayer_TPL.IsLeftOfThree(board, currentPlayer.counter)
-                             + Environment.NewLine + "Cell 2: " + AIPlayer_TPL.IsCentreOfThree(board, currentPlayer.counter)
-                             + Environment.NewLine + "Cell 3: " + AIPlayer_TPL.IsRightOfThree(board, currentPlayer.counter));
-
-
-                    }
-                    else
-                    {
-                        int score = 0;
-                        if (AIPlayer_TPL.FindThreeInARow(board, otherPlayer.counter) == true)
-                        {
-                            score = -1000;
-                        }
-
-
-                        Console.WriteLine("======================================================================================================================"
-                               + Environment.NewLine + "GAME OVER! " + Environment.NewLine +
-                                 "------------------------------------------------------------------------------------------------------------------------" +
-                                 "Winner: " + otherPlayer.counter
-                                 + Environment.NewLine + "Score: " + score
-                                 + Environment.NewLine + "Coordinations of winning three-in-a-row at: "
-                                 + Environment.NewLine
-                                 + "Cell 1: " + AIPlayer_TPL.IsLeftOfThree(board, otherPlayer.counter) + Environment.NewLine
-                                 + "Cell 2: " + AIPlayer_TPL.IsCentreOfThree(board, otherPlayer.counter) + Environment.NewLine
-                                 + "Cell 3: " + AIPlayer_TPL.IsRightOfThree(board, otherPlayer.counter));
-                    }
-                    // Stop timing.
-                    stopwatch_minimax.Stop();
-
-                    if (AIPlayer_TPL.error_confirm == 1)
-                    {
-
-                        ErrorSkip(board, currentPlayer, otherPlayer);
-                    }
-                    else
-                    {
-                        ReRun(board, currentPlayer, otherPlayer);
-                    }
-                    // Write result.
-                    Console.WriteLine("Total elapsed for Minimax over full game execution: " + stopwatch_minimax.Elapsed + Environment.NewLine +
-                            "========================================================================================================================");
-                    Console.ReadLine();
-                    Program.Main();
-                }
-                Console.WriteLine("The game is a draw.");
-                Program.Main();
-
-                if (stopMe)
-                {
-                    stopwatch_minimax.Stop();
-                    Console.WriteLine("**HWL One move made. ");
-                    Console.WriteLine("**HWL elapsed time for one move: " + stopwatch_minimax.Elapsed + Environment.NewLine + "-------------------------------------------------------");
-                }
-                else
-                {
-                    stopMe = true;
-                }
-            }
-            PlayGame(otherPlayer, currentPlayer, ref cntr);
         }
+        /* 
+      ----------------------------------------------------------------------------------------------------------------
+      * IsOver -
+      --------------------------------------------------------------------------------------------------------------------------
+      This boolean dictates wherever if there is win on the current board, and if not the search will continue.
+      --------------------------------------------------------------------------------------------------------------------------
+      */
         public bool IsOver(GameBoard_TPL<counters> board, Player_TPL currentPlayer)
         {
             if (currentPlayer.Win(board, currentPlayer.counter) || board.IsFull())
                 return true;
             return false;
         }
-
-        // WHICH SIDE IS IN PLAY?
+        /* 
+              ----------------------------------------------------------------------------------------------------------------
+              * Flip -
+              --------------------------------------------------------------------------------------------------------------------------
+              Construct flips the counter have each turn of play.
+              --------------------------------------------------------------------------------------------------------------------------
+              */
         public static counters Flip(counters counter)
         {
             if (counter == counters.O)
@@ -541,6 +474,13 @@ namespace Minimax_TPL
                 return counters.O;
             }
         }
+        /* 
+ ----------------------------------------------------------------------------------------------------------------
+ * ErrorSkip -
+ --------------------------------------------------------------------------------------------------------------------------
+ This method moves the search onto the next board, if errors or problems are found on the current board.
+ --------------------------------------------------------------------------------------------------------------------------
+ */
         public void ErrorSkip(GameBoard_TPL<counters> board, Player_TPL currentPlayer, Player_TPL otherPlayer)
         {
             nowcount = cntr;
@@ -553,6 +493,13 @@ namespace Minimax_TPL
                 }
             }
         }
+        /* 
+ ----------------------------------------------------------------------------------------------------------------
+ * ReRun -
+ --------------------------------------------------------------------------------------------------------------------------
+ Continue the search onto the next board in the switch statement.
+ --------------------------------------------------------------------------------------------------------------------------
+ */
         public void ReRun(GameBoard_TPL<counters> board, Player_TPL currentPlayer, Player_TPL otherPlayer)
         {
             nowcount = cntr;
