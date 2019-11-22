@@ -6,21 +6,31 @@ using System.Threading.Tasks;
 
 namespace Minimax_TPL
 {
-    // GAME BOARD STRUCTURE CLASS
+    /* 
+    ----------------------------------------------------------------------------------------------------------------
+     * GameBoard_TPL.CS -
+    --------------------------------------------------------------------------------------------------------------------------
+    Struct class controls all constructs of GameBoard including printing.
+    --------------------------------------------------------------------------------------------------------------------------
+    */
     struct GameBoard_TPL <T> where T: IComparable
     {
-        // cell ids
+   // PUBLIC DECLARATIONS
         public T s1, s2, s3, s4, s5, s6, s7,
                          s8, s9, s10, s11, s12, s13, s14,
                          s15, s16, s17, s18, s19, s20, s21,
                          s22, s23, s24, s25, s26, s27, s28,
                          s29, s30, s31, s32, s33, s34, s35,
                          s36, s37, s38, s39, s40, s41, s42,
-                         s43, s44, s45, s46, s47, s48, s49;
+                         s43, s44, s45, s46, s47, s48, s49;      // cell ids on board
         public T filler; // empty filler space for cell
-        private static Object thisLock = new Object();
-
-        // 1 BLANK BOARD
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* GameBoard_TPL constructor -
+--------------------------------------------------------------------------------------------------------------------------
+Constructs initial blank board.
+--------------------------------------------------------------------------------------------------------------------------
+*/
         public GameBoard_TPL(T _filler)
         {
             filler = _filler; // blank filler
@@ -32,13 +42,16 @@ namespace Minimax_TPL
             s36 = filler; s37 = filler; s38 = filler; s39 = filler; s40 = filler; s41 = filler; s42 = filler; // row 6
             s43 = filler; s44 = filler; s45 = filler; s46 = filler; s47 = filler; s48 = filler; s49 = filler; // row 7
         }
-        /// <summary>
-        /// // change so takes in int and counters 
-        /// </summary>
-        // DISPLAY GameBoard_TPL AS FOLLOWS
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* DisplayBoard -
+--------------------------------------------------------------------------------------------------------------------------
+This method constructs current board with the counter symbols in string format which will then be printed to the Console window.
+--------------------------------------------------------------------------------------------------------------------------
+*/
         public void DisplayBoard()
         {
-        //  Console.Clear();
+            //  Console.Clear();
             for (int x = 1; x <= 7; x++)
                 Console.Write("  " + x + " ");
             Console.WriteLine();
@@ -47,1347 +60,52 @@ namespace Minimax_TPL
                 Console.Write(y + " ");
                 for (int x = 1; x <= 7; x++)
                 {
-		  /*
-		  if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-		      Console.Write(" "); // HWL: Console.Write(filler); 
-                    else
-		      Console.Write(this[x, y].CompareTo(counters.e)==0 ? " " : this[x, y].ToString());
-		  */
 		  Console.Write(this[x, y].CompareTo(counters.e)==0 ? " " : this[x, y].ToString());
-		  Console.Write(" | ");
+                    Console.Write(" | ");
                 }
                 Console.WriteLine();
                 Console.WriteLine("  -   -   -   -   -   -   - ");
             }
             Console.WriteLine();
         }
-        // DISPLAY GAMEBOARD AS FOLLOWS - IN DEVELOPMENT
-        public void DisplayIntBoardToFile()
-        {
-            string path = @"data/intboards.txt";
-            int number = Game_TPL.cntr;
-            // ... Cases may not be duplicated.
-            File.WriteAllText(@"data/intboards.txt", string.Empty);
 
-            using (StreamWriter sw = new StreamWriter(path, true))
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* DisplayScoreBoard -
+--------------------------------------------------------------------------------------------------------------------------
+This method constructs current board with the counter symbols represented in integer format which will then be printed to the Console window.
+--------------------------------------------------------------------------------------------------------------------------
+*/
+        public void DisplayScoreBoard()
+        {
+            //  Console.Clear();
+            for (int x = 1; x <= 7; x++)
+                Console.Write("  " + x + " ");
+            Console.WriteLine();
+            for (int y = 1; y <= 7; y++)
             {
-                switch (number)
+                Console.Write(y + " ");
+                for (int x = 1; x <= 7; x++)
                 {
-                    case 0:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e | X | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | e | O | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | e | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e  | e | e |  O     | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 1:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e | X | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | e | O | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | e | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e  | e | e |  O     | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 2:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | X | X | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | X | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 3:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | X | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2 | X | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 4:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | e | X | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e | e | e | X | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 5:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | X | X | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2 | O | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | O | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | e | X | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 6:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e | e |   X | X    | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e | e | e | X | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 7:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | e | e | O | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 8:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | e | X | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e | e | O | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 9:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | X | e | X |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e | e | O |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e | e | O |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e | e | O |");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 10:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | e | X | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e | e | e | X | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e | e | e | O | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e | e | O | O | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e | e | e | X | X  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e | e | e | X | e | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 11:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | e | e | O | e | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e | e | O | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | X | e |  e  | e | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 12:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | X | e  | e | e | X | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3 | X | e | O | e | O | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | e | e | O | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5 | O | e | e | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e | e | X | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e | e | X | e |  e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 13:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | X | X | O | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e | e | e | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e | e |   X | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e | e | X | e |  e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 14:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | e | e | O | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e | e | e | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6 | X | e | X | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | X | e | X | e |  e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 15:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e | X | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | O | X | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 16:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | O | X | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 17:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | X | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2 | X | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 18:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | X | e |  e  | e |  e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 19:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | X | O | O | e | O | e | X |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2 | O | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | X | O | X | O | X | O | X |");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 20:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | X | O | O | e | O | e | X |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2 | O | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | X | O | X | O | X | O | X |");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 21:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | O | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 22:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | O |  O  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | O | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 23:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 24:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e | X | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | e | O | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | e | e | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e | e | e | O | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 25:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | O | O | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2 | X | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | O | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | e | X | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 26:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | O | e | O |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 27:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | e | e | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e | e | O | O | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e | e | e | O | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 28:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | e | e | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | e | e | X | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 29:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | e | X | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | e | O | e | e | X | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e | e | X | e | e | O | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 30:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | e | e | X | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e | e | O | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e | e | O | e |  e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 31:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | e | e | X | e | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e | e | X | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | O | e |  e  | e | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 32:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | O | e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3 | O | e | X | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | e | e | X | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5 | X | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e | e | O | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e | e | O | e |  e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 33:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | O | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e | e | X | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | O | O | X | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e | e | O | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e | e | O | e |  e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 34:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e | e | O | e | e | ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e | e | O | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e | e | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e | e | e | X | X | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5 | O | e | e | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e | e | O | O | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | O | e | O | e |  e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 35:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e | O | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | X | O | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 36:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | X | O | e |  e  | e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 37:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e | e | e | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e | e | e | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 38:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | O | e |  e  | e |  e  | e | e |  ");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 39:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | O | X | X  | e | X | e | O |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2 | X | e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | O | X |O  | X | O | X | O |");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    case 40:
-                        sw.Write("see below");
-                        sw.Write(Environment.NewLine);  sw.Write("  1   2   3   4   5   6   7  "); 
-                        sw.Write(Environment.NewLine);
-                        sw.Write("1 | O | X | X | O | X | O | O  |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("2 | X | e  | e |  e  | e | e | O |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("3 | O | e |  e  | e | e | e | X |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("4 | X | e |  e  | e | e | e | O |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("5 | O | e |  e  | e | e | e | X |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("- - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("6 | X | e |  e  | e | e | e | X |");
-                        sw.Write(Environment.NewLine);
-                        sw.Write(" - - - - - - -");
-                        sw.Write(Environment.NewLine);
-                        sw.Write("7 | O | X |O  | X | O | X | O |");
-                    sw.Write(Environment.NewLine);     sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
-                        sw.Write(Environment.NewLine);
-                        return;
-                    default:
-                        Environment.Exit(99);
-                        break;
+                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
+                        Console.Write(filler);
+                    else
+                        Console.Write(this[x, y]);
+                    Console.Write(" | ");
+
                 }
+                Console.WriteLine();
+                Console.WriteLine("  -   -   -   -   -   -   - ");
             }
+            Console.WriteLine();
         }
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* DisplayFinBoardToFile -
+--------------------------------------------------------------------------------------------------------------------------
+This method constructs current finished board ending in Win or Draw and then prints it to a file.
+--------------------------------------------------------------------------------------------------------------------------
+*/
         public void DisplayFinBoardToFile()
         {
 	  // string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/finboards.txt";
@@ -1421,6 +139,13 @@ namespace Minimax_TPL
                 sw.WriteLine();
             }
         }
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* DisplayFinBoardToFile -
+--------------------------------------------------------------------------------------------------------------------------
+This method constructs current finished score board ending in Win or Draw and then prints it to a file.
+--------------------------------------------------------------------------------------------------------------------------
+*/
         public void DisplayScoreBoardToFile()
         {
 	  // string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/scoreboards.txt";
@@ -1455,7 +180,13 @@ namespace Minimax_TPL
                 sw.WriteLine();
             }
         }
-
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* IsFull -
+--------------------------------------------------------------------------------------------------------------------------
+This boolean method returns a true or false value confirming if the current board in play is full with no empty cells remaining.
+--------------------------------------------------------------------------------------------------------------------------
+*/
         // IF GameBoard_TPL IS FULL
         public bool IsFull()
         {
@@ -1465,8 +196,13 @@ namespace Minimax_TPL
                         return false;
             return true;
         }
-
-        // IF GameBoard_TPL IS FULL
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* IsEmpty -
+--------------------------------------------------------------------------------------------------------------------------
+This boolean method returns a true or false value confirming if there any remaining empty cells in play on the current board.
+--------------------------------------------------------------------------------------------------------------------------
+*/
         public bool IsEmpty()
         {
             for (int x = 1; x <= 7; x++)
@@ -1476,759 +212,14 @@ namespace Minimax_TPL
             return true;
         }
 
-        // IS MIDDLE CELL EMPTY
-        public bool IsMiddleEmpty() {
-            for (int x = 4; x <= 4; x++)
-                for (int y = 4; y <= 4; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return true;
-            return false;
-        }
-
-        // IS TOP LEFT CELL EMPTY
-        public bool IsTopLeftEmpty()
-        {
-            for (int x = 1; x <= 1; x++)
-                for (int y = 1; y <= 1; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return true;
-            return false;
-        }
-
-        // IS TOP RIGHT CELL EMPTY
-        public bool IsTopRightEmpty()
-        {
-            for (int x = 1; x <= 1; x++)
-                for (int y = 7; y <= 7; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return true;
-            return false;
-        }
-
-        // IS BOTTOM LEFT EMPTY
-        public bool IsBottomLeftEmpty()
-        {
-            for (int x = 7; x <= 7; x++)
-                for (int y = 1; y <= 1; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return true;
-            return false;
-        }
-
-        // IS BOTTOM RIGHT EMPTY
-        public bool IsBottomRightEmpty()
-        {
-            for (int x = 7; x <= 7; x++)
-                for (int y = 7; y <= 7; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool IsLeftEdgesEmpty()
-        {
-            for (int x = 1; x <= 1; x++)
-                for (int y = 2; y <= 6; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool IsRightEdgesEmpty()
-        {
-            for (int x = 7; x <= 7; x++)
-                for (int y = 2; y <= 6; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool IsTopEdgesEmpty()
-        {
-            for (int x = 2; x <= 6; x++)
-                for (int y = 1; y <= 1; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS CENTRE BLOCK EMPTY
-        public bool IsCentreBlockEmpty()
-        {
-            for (int x = 3; x <= 6; x++)
-                for (int y = 3; y <= 6; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool AreBottomEdgesEmpty()
-        {
-            for (int x = 2; x <= 6; x++)
-                for (int y = 7; y <= 7; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool AreTopEdgesEmpty()
-        {
-            for (int x = 2; x <= 6; x++)
-                for (int y = 1; y <= 1; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool AreLeftEdgesEmpty()
-        {
-            for (int x = 1; x <= 1; x++)
-                for (int y = 2; y <= 6; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool AreRightEdgesEmpty()
-        {
-            for (int x = 7; x <= 7; x++)
-                for (int y = 2; y <= 6; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-        
-        // IS EDGES EMPTY
-        public bool AreInnerBottomEdgesEmpty()
-        {
-            for (int x = 2; x <= 6; x++)
-                for (int y = 6; y <= 6; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool AreInnerTopEdgesEmpty()
-        {
-            for (int x = 2; x <= 6; x++)
-                for (int y = 6; y <= 6; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool AreInnerLeftEdgesEmpty()
-        {
-            for (int x = 2; x <= 6; x++)
-                for (int y = 6; y <= 6; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // IS EDGES EMPTY
-        public bool AreInnerRightEdgesEmpty()
-        {
-            for (int x = 2; x <= 6; x++)
-                for (int y = 6; y <= 6; y++)
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                        return false;
-            return true;
-        }
-
-        // PLACE ON EDGES
-        public int PlaceAtBottomEdges(GameBoard_TPL<T> copy, T counter)
-        {
-            int x = 0;
-            int y = 0;
-            for (x = 2; x <= 6; x++)
-            for (y = 7; y <= 7; y++)
-                this[x, y] = counter;
-                    if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-                    {
-                        
-                        return -45;
-                    }
-                        return 25;
-        }
-
-        // PLACE ON EDGES
-        public int PlaceAtTopEdges(GameBoard_TPL<T> copy, T counter)
-        {
-            int x = 0;
-            int y = 0;
-            for (x = 2; x <= 6; x++)
-                for (y = 1; y <= 1; y++)
-                    this[x, y] = counter;
-            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-            {
-
-                return -45;
-            }
-            return 25;
-        }
-
-        // PLACE ON EDGES
-        public int PlaceAtLeftEdges(GameBoard_TPL<T> copy, T counter)
-        {
-            int x = 0;
-            int y = 0;
-            for (x = 1; x <= 1; x++)
-                for (y = 2; y <= 6; y++)
-                    this[x, y] = counter;
-            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-            {
-
-                return -45;
-            }
-            return 25;
-        }
-
-        // PLACE ON EDGES
-        public int PlaceAtRightEdges(GameBoard_TPL<T> copy, T counter)
-        {
-            int x = 0;
-            int y = 0;
-            for (x = 7; x <= 7; x++)
-                for (y = 2; y <= 6; y++)
-                    this[x, y] = counter;
-            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-            {
-
-                return -45;
-            }
-            return 25;
-        }
-
-        // PLACE ON EDGES
-        public int PlaceAtInnerBottomEdges(GameBoard_TPL<T> copy, T counter)
-        {
-            int x = 0;
-            int y = 0;
-            for (x = 2; x <= 6; x++)
-                for (y = 6; y <= 6; y++)
-                    this[x, y] = counter;
-            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-            {
-
-                return -15;
-            }
-            return 25;
-        }
-
-        // PLACE ON EDGES
-        public int PlaceAtInnerTopEdges(GameBoard_TPL<T> copy, T counter)
-        {
-            int x = 0;
-            int y = 0;
-            for (x = 2; x <= 6; x++)
-                for (y = 6; y <= 6; y++)
-                    this[x, y] = counter;
-            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-            {
-                return -15;
-            }
-            return 25;
-        }
-
-        // PLACE ON EDGES
-        public int PlaceAtInnerLeftEdges(GameBoard_TPL<T> copy, T counter)
-        {
-            int x = 0;
-            int y = 0;
-            for (x = 1; x <= 1; x++)
-                for (y = 2; y <= 6; y++)
-                    this[x, y] = counter;
-            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-            {
-                return -15;
-            }
-            return 25;
-        }
-
-        // PLACE ON EDGES
-        public int PlaceAtInnerRightEdges(GameBoard_TPL<T> copy, T counter)
-        {
-            int x = 0;
-            int y = 0;
-            for (x = 7; x <= 7; x++)
-                for (y = 2; y <= 6; y++)
-                    this[x, y] = counter;
-            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-            {
-
-                return -15;
-            }
-            return 25;
-        }
-
-        // PLACE ON EDGES
-        public int PlaceAtCentreBlock(GameBoard_TPL<T> copy, T counter)
-        {
-            int x = 0;
-            int y = 0;
-            for (x = 3; x <= 6; x++)
-                for (y = 3; y <= 6; y++)
-                    this[x, y] = counter;
-            if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
-            {
-
-                return 80;
-            }
-            return 25;
-        }
-        // IS LEFT CELL BESIDE TWO IN ROW EMPTY
-        public bool IsTwoLeftNeighbourEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == counters.NOUGHTS || us == counters.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
-                            return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT LEFT EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoLeftNeighbour(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
-                                    return new Tuple<int, int>(x - xx, y);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-        // IS RIGHT CELL BESIDE TWO IN ROW EMPTY
-        public bool IsTwoRightNeighbourEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x + xx + 1, y], filler))
-                            return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT RIGHT EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoRightNeighbour(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
-                                    return new Tuple<int, int>(x + xx + 1, y);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-        // IS TOP CELL BESIDE TWO IN ROW EMPTY
-        public bool IsTwoTopNeighbourEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x, y + yy], filler))
-                            return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT TOP EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoTopNeighbour(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x, y + yy], filler))
-                                    return new Tuple<int, int>(x, y + yy);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-        // IS BOTTOM CELL BESIDE TWO IN ROW EMPTY
-        public bool IsTwoBottomNeighbourEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x, y - yy], filler))
-                            return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT BOTTOM EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoBottomNeighbour(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x, y - yy], filler))
-                            return new Tuple<int, int>(x, y - yy);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-        // IS LEFT CELL BESIDE TWO IN ROW EMPTY
-        public bool IsOneLeftNeighbourEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
-                                    return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT LEFT EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintOneLeftNeighbour(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
-                                    return new Tuple<int, int>(x - xx, y);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-        // IS RIGHT CELL BESIDE TWO IN ROW EMPTY
-        public bool IsOneRightNeighbourEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x + xx + 1, y], filler))
-                                    return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT RIGHT EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintOneRightNeighbour(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x - xx, y], filler))
-                                    return new Tuple<int, int>(x + xx + 1, y);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-        // IS TOP CELL BESIDE TWO IN ROW EMPTY
-        public bool IsOneTopNeighbourEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x, y + yy], filler))
-                                    return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT TOP EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintOneTopNeighbour(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x, y + yy], filler))
-                                    return new Tuple<int, int>(x, y + yy);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-        // IS BOTTOM CELL BESIDE TWO IN ROW EMPTY
-        public bool IsOneBottomNeighbourEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us))
-                                    // two in a row in centre should give higher score
-                                    if (EqualityComparer<T>.Default.Equals(board[x, y - yy], filler))
-                                    return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT BOTTOM EMPTY CELL BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintOneBottomNeighbour(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                           if (EqualityComparer<T>.Default.Equals(board[x, y], us))
-                                    // two in a row in centre should give higher score
-                                    if (EqualityComparer<T>.Default.Equals(board[x, y - yy], filler))
-                                    return new Tuple<int, int>(x, y - yy);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-
-        // IS THEIR GAP BETWEEN TWO IN ROW EMPTY
-        public bool IsTwoWithHorziGapEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx - 1, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x + xx, y + yy], filler))
-                                    return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT GAP BETWEEN TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoWithHorziGap(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx - 1, y + yy]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x + xx, y + yy], filler))
-                                    return new Tuple<int, int>(x + xx, y + yy);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-        // IS GAP CELL BETWEEN VERTICAL TWO IN ROW EMPTY
-        public bool IsTwoWithVerticalGapEmpty(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy - 1]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x + xx, y + yy], filler))
-                                    return true;
-                        }
-                }
-            return false;
-        }
-        // PRINT VERTICAL GAP BESIDE TWO IN ROW EMPTY
-        public Tuple<int, int> PrintTwoWithVerticalGap(GameBoard_TPL<T> board, T us)
-        {
-            // Debug.Assert(us == T.NOUGHTS || us == T.CROSSES);
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    // Debug.Assert(board[x, y] == T.NOUGHTS || board[x, y] == T.CROSSES);
-                    for (int xx = -1; xx <= 7; xx++)
-                        for (int yy = -1; yy <= 7; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (EqualityComparer<T>.Default.Equals(board[x, y], us) && EqualityComparer<T>.Default.Equals(board[x, y], board[x + xx, y + yy - 1]))
-                                // two in a row in centre should give higher score
-                                if (EqualityComparer<T>.Default.Equals(board[x + xx, y + yy], filler))
-                                    return new Tuple<int, int>(x + xx, y + yy);
-                        }
-                }
-            return new Tuple<int, int>(0, 0);
-        }
-
         // CLONE A board OF THE CURRENT GAME BOARD
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* Clone -
+--------------------------------------------------------------------------------------------------------------------------
+This method makes a clone of the current board, either playing board (string) or score board (int).
+--------------------------------------------------------------------------------------------------------------------------
+*/
         public GameBoard_TPL<T> Clone()
         {
             GameBoard_TPL<T> g = new GameBoard_TPL<T>();
@@ -2238,8 +229,13 @@ namespace Minimax_TPL
             return g;
             
         }
-
-        // CELL ID'S AND COORDS ASSIGN
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* board[x,y] -> this[x,y] -
+--------------------------------------------------------------------------------------------------------------------------
+The method returns a coordinate position in an <int,int> format existing in the current board. 
+--------------------------------------------------------------------------------------------------------------------------
+*/
         public T this[int x, int y]
         {
             get
@@ -2443,7 +439,1341 @@ namespace Minimax_TPL
                 if (x == 6 && y == 7)
                     s48 = value;
                 if (x == 7 && y == 7)
-                    s49  = value;
+                    s49 = value;
+            }
+        }
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* DisplayIntBoardToFile -
+--------------------------------------------------------------------------------------------------------------------------
+This method constructs the initial state of the board of the current board with the counter symbols
+in string format, which is then printed to a text file. 
+--------------------------------------------------------------------------------------------------------------------------
+*/
+        public void DisplayIntBoardToFile()
+        {
+            string path = @"data/intboards.txt";
+            int number = Game_TPL.cntr;
+            // ... Cases may not be duplicated.
+            File.WriteAllText(@"data/intboards.txt", string.Empty);
+
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                switch (number)
+                {
+                    case 0:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e | X | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | e | O | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | e | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e  | e | e |  O     | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 1:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e | X | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | e | O | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | e | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e  | e | e |  O     | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 2:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | X | X | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | X | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 3:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | X | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2 | X | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 4:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | e | X | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e | e | e | X | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 5:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | X | X | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2 | O | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | O | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | e | X | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 6:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e | e |   X | X    | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e | e | e | X | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 7:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | e | e | O | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 8:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | e | X | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e | e | O | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 9:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | X | e | X |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e | e | O |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e | e | O |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e | e | O |");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 10:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | e | X | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e | e | e | X | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e | e | e | O | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e | e | O | O | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e | e | e | X | X  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e | e | e | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 11:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | e | e | O | e | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e | e | O | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | X | e |  e  | e | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 12:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | X | e  | e | e | X | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3 | X | e | O | e | O | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | e | e | O | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5 | O | e | e | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e | e | X | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e | e | X | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 13:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | X | X | O | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e | e | e | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e | e |   X | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e | e | X | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 14:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | e | e | O | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e | e | e | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6 | X | e | X | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | X | e | X | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 15:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e | X | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | O | X | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 16:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | O | X | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 17:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | X | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2 | X | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 18:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 19:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | X | O | O | e | O | e | X |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2 | O | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | X | O | X | O | X | O | X |");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 20:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | X | O | O | e | O | e | X |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2 | O | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | X | O | X | O | X | O | X |");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 21:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | O | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 22:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | O |  O  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | O | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 23:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 24:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e | X | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | e | O | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | e | e | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e | e | e | O | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 25:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | O | O | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2 | X | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | O | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | e | X | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 26:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | O | e | O |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 27:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | e | e | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e | e | O | O | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e | e | e | O | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 28:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | e | e | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | e | e | X | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 29:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | e | X | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | e | O | e | e | X | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e | e | X | e | e | O | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 30:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | e | e | X | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e | e | O | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e | e | O | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 31:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | e | e | X | e | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e | e | X | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | O | e |  e  | e | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 32:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | O | e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3 | O | e | X | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | e | e | X | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5 | X | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e | e | O | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e | e | O | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 33:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | O | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e | e | X | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | O | O | X | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e | e | O | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e | e | O | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 34:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e | e | O | e | e | ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e | e | O | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e | e | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e | e | e | X | X | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5 | O | e | e | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e | e | O | O | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | O | e | O | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 35:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e | O | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | X | O | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 36:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | X | O | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 37:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e | e | e | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e | e | e | X | e | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 38:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2   | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5  | e |  e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 39:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | O | X | X  | e | X | e | O |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2 | X | e  | e |  e  | e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5 | O | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6 | X | e |  e  | e |  e  | e | e |  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | O | X |O  | X | O | X | O |");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    case 40:
+                        sw.Write("see below");
+                        sw.Write(Environment.NewLine); sw.Write("  1   2   3   4   5   6   7  ");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("1 | O | X | X | O | X | O | O  |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("2 | X | e  | e |  e  | e | e | O |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("3 | O | e |  e  | e | e | e | X |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("4 | X | e |  e  | e | e | e | O |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("5 | O | e |  e  | e | e | e | X |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("- - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("6 | X | e |  e  | e | e | e | X |");
+                        sw.Write(Environment.NewLine);
+                        sw.Write(" - - - - - - -");
+                        sw.Write(Environment.NewLine);
+                        sw.Write("7 | O | X |O  | X | O | X | O |");
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine);
+                        return;
+                    default:
+                        Environment.Exit(99);
+                        break;
+                }
             }
         }
     }
