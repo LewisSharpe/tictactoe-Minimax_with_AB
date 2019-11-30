@@ -7,15 +7,31 @@ using System.Threading.Tasks;
 // MINIMAX
 namespace Minimax_TPL
 {
-    // HUMAN Player_TPL INHERITS QUALITIES OF Player_TPL
+    /* 
+    ----------------------------------------------------------------------------------------------------------------
+     * HumanPlayer_TPL.CS -
+    --------------------------------------------------------------------------------------------------------------------------
+    Class controls all behaviour from all HumanPlayer_TPL instances. Class inherits behaviour from Player_TPL.
+    --------------------------------------------------------------------------------------------------------------------------
+    */
     class HumanPlayer_TPL : Player_TPL
     {
+        /* 
+         ----------------------------------------------------------------------------------------------------------------
+          * HumanPlayer constructor -
+         --------------------------------------------------------------------------------------------------------------------------
+         */
         public HumanPlayer_TPL(string _name, counters _counter) : base(_counter)
         {
             name = _name;
         }
-
-   // GET MOVE: ASK FOR USER INPUT
+        /* 
+         ----------------------------------------------------------------------------------------------------------------
+          * GetMove -
+         --------------------------------------------------------------------------------------------------------------------------
+         Asks user for x,y coords for next move and then places their counter in that coordinate position.
+         --------------------------------------------------------------------------------------------------------------------------
+         */
         public override Tuple<int, int> GetMove(GameBoard_TPL<counters> board, counters counter, GameBoard_TPL<int> scoreBoard)
         {
             int x; // x axis
@@ -33,8 +49,13 @@ namespace Minimax_TPL
             } while (!CheckValidMove(board, x, y));
             return new Tuple<int, int>(x, y); // ask for valid coords
         } // end do loop
-
-        // CHECK IF MOVE IS VALID
+        /* 
+         ----------------------------------------------------------------------------------------------------------------
+          * CheckValidMove -
+         --------------------------------------------------------------------------------------------------------------------------
+         Valisates if user-entered x,y cooordinate position is a valid position on the board.
+         --------------------------------------------------------------------------------------------------------------------------
+         */
         public bool CheckValidMove(GameBoard_TPL<counters> board, int x, int y)
         {
             if (board[x, y] == counters.e) // if move coords match e cell

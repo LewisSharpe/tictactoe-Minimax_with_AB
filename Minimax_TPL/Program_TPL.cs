@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Minimax_TPL
 {
-    // STATIC CONSTANTS USED TO INFORM Game_TPLPLAY
+    /* 
+----------------------------------------------------------------------------------------------------------------
+ * Program.CS -
+--------------------------------------------------------------------------------------------------------------------------
+*/
+    /*
+--------------------------------------------------------------------------------------------------------------------------
+Consts -
+--------------------------------------------------------------------------------------------------------------------------
+Static class that creates constant variables that are used to inform search in other classes.
+--------------------------------------------------------------------------------------------------------------------------
+*/
     static class Consts
     {
         public const int MAX_SCORE = 1001;
@@ -14,16 +25,28 @@ namespace Minimax_TPL
         public const int NO_OF_DIRS = 3;
         public static readonly int[] DIRECTIONS = { 1, 9, 10 };
     }
-
-    // COUNTER TYPES - ABLE TO PLACE OF BOARD
+    /*
+--------------------------------------------------------------------------------------------------------------------------
+counters -
+--------------------------------------------------------------------------------------------------------------------------
+This enum creates instances of counters to be used to board in gameplay.
+--------------------------------------------------------------------------------------------------------------------------
+*/
     public enum counters
     {
         O,
         X,
         BORDER,
-        e
+        N,
+        e,
     }
-
+    /*
+--------------------------------------------------------------------------------------------------------------------------
+Program -
+--------------------------------------------------------------------------------------------------------------------------
+Main program handles exection and chooses mode of game selected, i.e. 1 - PLAYER V PC, 2 - PC V PC, etc.
+--------------------------------------------------------------------------------------------------------------------------
+*/
     // MAIN EXECUTION
     class Program
     {
@@ -98,27 +121,17 @@ namespace Minimax_TPL
             // SELECTION 4 EXIT
             Environment.Exit(0);
         }
-
-        // DISPLAY MENU OPTIONS TO USER
+        /*
+--------------------------------------------------------------------------------------------------------------------------
+DisplayMenu -
+--------------------------------------------------------------------------------------------------------------------------
+A method that displays the menu options to console.
+--------------------------------------------------------------------------------------------------------------------------
+*/
         static void DisplayMenu()
         {
-            
             // menu centered
             Console.Clear();
-            /*
-            string welcome = "Welcome to Tic Tac Toe! HWL TEST VERSION";
-            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (welcome.Length / 2)) + "}", welcome));
-            string menu = "Menu:";
-            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (menu.Length / 2)) + "}", menu));
-            string o1 = "1.Play against the computer";
-            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o1.Length / 2)) + "}", o1));
-            string o2 = "2. Play AI against itself";
-            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o2.Length / 2)) + "}", o2));
-            string o3 = "3. Play against another Player_TPL";
-            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o3.Length / 2)) + "}", o3));
-            string o4 = "4. Exit";
-            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (o4.Length / 2)) + "}", o4));
-            */
       }
     }
 }
