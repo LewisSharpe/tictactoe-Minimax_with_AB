@@ -21,13 +21,16 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
        // BOARD DIMENSIONS 
         public int COORD_X = 3; // x coord
         public int COORD_Y = 3; // y coord
+        public static int _COORD_X = 3; // x coord
+        public static int _COORD_Y = 3; // y coord
         // BOARD ADJUSTMENT VARIABLES
         int SEGM_BOARD = 1;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
+        static int _SEGM_BOARD = 1;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
         int EXECPRINT_SCOREBOARD_ON = 0; // 1 on, 0 off - TURN SCORE BOARD PRINT ON CONSOLE ON AND OFF
         int EXECPRINT_GAMEBOARD_ON = 1;  // 1 on, 0 off - TURN GAME BOARD PRINT ON CONSOLE ON AND OFF
         // PUBLIC DECS
         public static int ply = 0;    // start depth for search (should be 0)
-        public const int maxPly = 1; // max depth for search
+        public const int maxPly = 3; // max depth for search: 0 = only immediate move; 1 = also next opponent move; 2 = also own next move etc
         public int alpha = Consts.MIN_SCORE; // set alpha to -1001
         public int beta = Consts.MAX_SCORE; // set beta to 1001
         public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
@@ -91,7 +94,7 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
         public override Tuple<int, int> GetMove(GameBoard_TPL<counters> board, counters counter, GameBoard_TPL<int> scoreBoard)
         {
             int score = Consts.MIN_SCORE;
-            bool mmax = true;
+            bool mmax = false;
             // Begin timing.
             stopwatch.Start();
             // Do work
@@ -266,28 +269,52 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
   A bool which returns true or false of the presence of a three counters of the same symbol placed side by side on the board
  --------------------------------------------------------------------------------------------------------------------------
  */
-        public static bool FindThreeInARow(GameBoard_TPL<counters> board, counters us)
-        {
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
-                {
-                    // check whether position piece at [x,y] has the same piece as neighbour
-                    for (int xx = 0; xx <= 1; xx++)
-                        for (int yy = 0; yy <= 1; yy++)
-                        {
-                            if (yy == 0 && xx == 0)
-                                continue;
-                            if (board[x, y] == us &&
-                            board[x, y] == board[x + xx, y + yy] &&
-                            board[x, y] == board[x - xx, y - yy])
-                            {
-                                //   System.Console.WriteLine("Centre of 3-in-a-row: {0}{1}{2}\n", x,",",y);
-                                return true;
-                            }
-                        }
-                }
-            return false;
-        }
+ public static bool FindThreeInARow(GameBoard_TPL<counters> board, counters us)
+ {
+   for (int x = 1; x <= ((_SEGM_BOARD==1) ? 3 : 7); x++)
+     for (int y = 1; y <= ((_SEGM_BOARD==1) ? 3 : 7); y++)
+       {
+	 // check whether position piece at [x,y] has the same piece as both neighbours
+	 for (int xx = 0; xx <= 1; xx++)
+	   for (int yy = 0; yy <= 1; yy++)
+	     {
+	       if (yy == 0 && xx == 0)
+		 continue;
+
+	       // check that all coordinates tested are on the board
+	       // TOCHECK: if the border uses a BORDER, this shouldn't be necessary
+	       if (x + xx <= 0 ||
+		   x + xx > _COORD_X ||
+		   y + yy <= 0 ||
+		   y + yy >  _COORD_Y ||
+		   x - xx <= 0 ||
+		   x - xx > _COORD_X ||
+		   y - yy <= 0 ||
+		   y - yy > _COORD_Y)
+		 continue;
+
+	       if (board[x, y] == us &&
+		   board[x, y] == board[x + xx, y + yy] &&
+		   board[x, y] == board[x - xx, y - yy]) // checks for top-left to bottom-right diag
+		 {
+		   // Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x,",",y,x + xx, y + yy, x - xx, y - yy);
+		   // board.DisplayBoard();
+		   return true;
+		 }
+
+	       if (yy == 1 && xx == 1 &&
+		   board[x, y] == us &&
+		   board[x, y] == board[x + xx, y - yy] &&
+		   board[x, y] == board[x - xx, y + yy]) // checks for bottom-left to top-right diag
+		 {
+		   // Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x, ",", y, x + xx, y - yy, x - xx, y + yy);
+		   // board.DisplayBoard();
+		   return true;
+		 }
+	     }
+       }
+   return false;
+ }
         /*
         ----------------------------------------------------------------------------------------------------------------
          EvalCurrentBoard -
@@ -323,10 +350,10 @@ This method executes the Minimax search on the current board being vi and return
 Tuple<int,int> construct.
 --------------------------------------------------------------------------------------------------------------------------
 */
-        public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
-{
-            // decs
-	    counters us = Flip(counter); // HWL: why flip counter here? should only be flipped when calling SeqSearch recursively
+  public Tuple<int, Tuple<int, int>> SeqSearch(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
+  {
+    // decs
+            counters us = counter /* Flip(counter) */; // HWL: why flip counter here? should only be flipped when calling SeqSearch recursively
             List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>();
             if (SEGM_BOARD == 0)
             {
@@ -336,9 +363,10 @@ Tuple<int,int> construct.
             {
                 availableMoves = getAvailableSegmentedMoves(board, positions); // HWL: <==== change to only return indices betwee 1-3
             }
-                // create new list of Tuple<int,int>
-            int bestScore = mmax ? -1001 : 1001;
-            int score = Consts.MIN_SCORE; // current score of move
+	    // create new list of Tuple<int,int>
+	    mmax = true;
+            int bestScore = mmax ? -1002 : 1002;
+            int score; // Consts.MIN_SCORE; // current score of move
             Tuple<int, int> Move = new Tuple<int, int>(0, 0);
             Tuple<int, int> bestMove = new Tuple<int, int>(8, 1);  // best move with score// THRESHOLD <=============
             GameBoard_TPL<counters> copy = board.Clone();
@@ -346,7 +374,11 @@ Tuple<int,int> construct.
             // check win
             if (availableMoves.Count == 0)
             {
-                return new Tuple<int, Tuple<int, int>>(10, positions);
+	      int score_ = EvalCurrentBoard(board, scoreBoard, Flip(counter) /* us */);
+	      Console.WriteLine(".. HWL: no moves on following board (ply={1}, counter={2}); static eval = {0}", score_, ply, counter);
+	      // board.DisplayBoard();
+	      return new Tuple<int, Tuple<int, int>>(score_, positions);
+	      // return new Tuple<int, Tuple<int, int>>(10, positions);
             }
 	    // CHECK DEPTH: if deeper than maxPly, don't search further just return the current score
 	    if (ply > maxPly) {
@@ -354,7 +386,8 @@ Tuple<int,int> construct.
 		// Console.WriteLine("== HWL: static eval: {0}", score);
 		return new Tuple<int, Tuple<int, int>>(score, positions);
 	    }
-	    int end = (ply==0) || (ply == 1) ? 1 : availableMoves.Count;
+	    // int end = (ply==0) || (ply == 1) ? 1 : availableMoves.Count;
+	    int end = availableMoves.Count;
             for (int i = 0; i < end /* availableMoves.Count */; i++)
 	      { // for
                 Move = availableMoves[i]; // current move
@@ -365,7 +398,14 @@ Tuple<int,int> construct.
                                                         // GameBoard board0 = MakeMove(board, move); // copies board - parallel ready
 
                 // HWL: move the check for Win in here <======
-
+		if (FindThreeInARow(copy, us)) {
+		  Console.WriteLine("          3-in-a-row found at {3} for player {0} (ply={1}, positions={2})", counter, ply, positions.ToString(), Move.ToString());
+		  // copy.DisplayBoard();
+		  // scoreBoard.DisplayScoreBoard();
+		  copy[Move.Item1, Move.Item2] = counters.e;		// blank the field again
+		  return new Tuple<int, Tuple<int, int>>(1000, Move); // return win-in-1-move
+		}
+		
                 // list defined in Minimax declarations
                 // HWL: in the initial parallel version you should NOT generate parallelism recursively; the only place where you use parallelism constructs should be in ParSearchWrapper!
                 //result = ParallelChoice(copy, Flip(counter), ply + 1, Move, !mmax, scoreBoard, alpha, beta); /* swap Player_TPL */ // RECURSIVE call  
@@ -380,8 +420,11 @@ Tuple<int,int> construct.
                 positions = result.Item2; // present position (x,y)
 
                 // assign score to correct cell in score
-                scoreBoard[result.Item2.Item1, result.Item2.Item2] = score;
+                scoreBoard[Move.Item1, Move.Item2] = score;
          
+		if (ply==1) // HWL: DEBUGGING only
+		  Console.WriteLine(".... {1} at {0} (ply={2}); score = {3}", Move.ToString(), counter, ply, score); /* , positions.ToString() */
+
                 if (ply == 0)
                 {
                     // assign score to correct cell in score
@@ -396,13 +439,15 @@ Tuple<int,int> construct.
                         scoreBoard.DisplayScoreBoard();
                     }
                 }
-                if (Game_TPL.cntr >=40)
+		/*
+                if (Game_TPL.cntr >= 40 ) // 40 // ?????????????????
                 {
                     Environment.Exit(99);
                 }
+		*/
                 Object my_object = new Object();
                 // if maximising                  
-                if (/* true HWL || */ mmax)  // TOCHECK
+                if (/* true || */  mmax)  // TOCHECK
                 {
                     alpha = score;
                     if (score > bestScore)
@@ -412,24 +457,27 @@ Tuple<int,int> construct.
                             // Move = bestMove; // HWL: wrong way around
                             bestMove = Move;
                             bestScore = score;
-                            if (ply == 0)
+                            if (ply >= 1)
                             {
-                                Console.WriteLine("== HWL: new best score {0} at {1}", bestScore, bestMove);
+			      Console.WriteLine("        maximising: player {4} new best score {0} at {1} (ply={2}, positions={3})", bestScore, bestMove, ply, positions.ToString(), counter);
+			      // scoreBoard.DisplayScoreBoard();
                             }
                         }
                     }
+		    /* HWL: disabling alpha-beta for now
                     if (alpha > bestScore)
                     {
                         lock (my_object)
                         {
                             bestMove = Move;
                             bestScore = alpha;
-                            if (ply == 0)
+                            if (ply == 1)
                             {
-                                Console.WriteLine("-- HWL: new best score {0} at {1}", bestScore, bestMove);
+			      // Console.WriteLine("-- HWL: new best score {0} at {1} (ply={2})", bestScore, bestMove, ply);
                             }
                         }
                     }
+		    */
                 }
                 // if minimising
                 else
@@ -441,8 +489,14 @@ Tuple<int,int> construct.
                             // Move = bestMove; // HWL: wrong way around
                             bestMove = Move;
                             bestScore = score;
+                            if (ply >= 1)
+                            {
+			      Console.WriteLine("        minimising: player {4} new best score {0} at {1} (ply={2}, positions={3})", bestScore, bestMove, ply, positions.ToString(), counter);
+			      // scoreBoard.DisplayScoreBoard();
+                            }
                         }
                     }
+		    /* HWL: disabling alpha-beta for now
                     if (beta <= alpha)
                         lock (my_object)
                         {
@@ -452,15 +506,17 @@ Tuple<int,int> construct.
                                 Console.WriteLine("-- HWL: new best score {0} at {1}", bestScore, bestMove);
                             }
                         }
+		    */
                 }
                 PrintCSVHeadRow();
                 if (result.Item2 != new Tuple<int, int>(0, 0)) { 
-            //    Console.Write(result.Item2);
-                PrintCSVFailRow(board, scoreBoard);
-            }
+		  //    Console.Write(result.Item2);
+		  PrintCSVFailRow(board, scoreBoard);
+		}
 		continue; // BAD BAD BAD BAD BAD BAD BAD BAD BAD BAD BAD
-            }
+	      }
             // HWL was: return new Tuple<int, Tuple<int, int>>(score, positions); // return
+	    if (ply==1) Console.WriteLine("      best move at ply={0} for {1} is {2} with score {3}", ply, counter, bestMove, bestScore);
             return new Tuple<int, Tuple<int, int>>(bestScore, bestMove); // return
         }
         /*
@@ -473,7 +529,7 @@ Thread 2, Thread 3 is processed by (1,3), etc. Each task takes a clone of the cu
 cloning is needed.
 --------------------------------------------------------------------------------------------------------------------------
 */
-        public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, counters counter, int numTasks, GameBoard_TPL<int> scoreBoard)
+   public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, counters counter, int numTasks, GameBoard_TPL<int> scoreBoard, ref int move)
         {
             List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>();
             if (SEGM_BOARD == 0)
@@ -484,17 +540,20 @@ cloning is needed.
             {
                 availableMoves = getAvailableSegmentedMoves(board, positions); // HWL: <==== change to only return indices betwee 1-3
             }
-            int score = Consts.MIN_SCORE;
+            int score = Consts.MIN_SCORE; // HWL TESTING; TODO REVERT
 
             // compute the maximum over all results
             Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(score, positions); ; // , res1, res2, res3, res4;
             Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, positions);
+            Tuple<int, Tuple<int, int>> worstRes = new Tuple<int, Tuple<int, int>>(Consts.MIN_SCORE, positions);
 
             GameBoard_TPL<counters> board1 = board.Clone();
             GameBoard_TPL<counters> board2 = board.Clone();
             GameBoard_TPL<counters> board3 = board.Clone();
             GameBoard_TPL<counters> board4 = board.Clone();
 
+            Console.WriteLine("*** Move {0}", move);
+	    
             // start and synchronise 4 parallel tasks
             /* HWL: try a sequential version first, to test strided iteration (below):
                 Parallel.Invoke(() => { ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 1); },
@@ -511,25 +570,27 @@ cloning is needed.
             else if (SEGM_BOARD == 1)
             {
                 unconsideredMoves = getAvailableSegmentedMoves(board, positions); // HWL: <==== change to only return indices betwee 1-3
-            }        
+            }
+	    int len = unconsideredMoves.Count;
             ress[0] = ParSearchWork(board1, counter, ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves /* for DEBUGGING only */);
-            ress[1] = ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves /* for DEBUGGING only */);
-            ress[2] = ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves /* for DEBUGGING only */);
-            ress[3] = ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves /* for DEBUGGING only */);   
-	    bestRes = res = result;
-	    Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread 0: {2}", Game_TPL.cntr, Flip(counter), bestRes.ToString());
+            ress[1] = (len <= 1) ? worstRes : ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves /* for DEBUGGING only */);
+            ress[2] = (len <= 2) ? worstRes : ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves /* for DEBUGGING only */);
+            ress[3] = (len <= 3) ? worstRes : ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves /* for DEBUGGING only */);   
+	    // bestRes = res = result;
+	    bestRes = res = ress[0]; 
+	    Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread 0: {2}", Game_TPL.cntr, counter /* Flip(counter) */, bestRes.ToString());
 
             for (int j = 1; j < ress.Length; j++)
             { 
-	      Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread {2}: {3}", Game_TPL.cntr, Flip(counter), j, ress[j].ToString());
+	      Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread {2}: {3}", Game_TPL.cntr, counter /* Flip(counter) */, j, ress[j].ToString());
 	      res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // result: <score, <position>>
             }
             Console.WriteLine("======================================================================================================");
             Console.WriteLine("-- OVERALL " + ":");
             Console.WriteLine("======================================================================================================");
-            Console.WriteLine("__ HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, Flip(counter), result.ToString());
+            Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, counter /*Flip(counter)*/, res.ToString());
             Console.WriteLine("======================================================================================================");
-            board[result.Item2.Item1, result.Item2.Item2] = Flip(counter);
+            // board[res.Item2.Item1, res.Item2.Item2] = counter /* Flip(counter) */;
             if (EXECPRINT_GAMEBOARD_ON == 1)
             {
                 board.DisplayBoard();
@@ -551,12 +612,18 @@ cloning is needed.
                             scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                         }
             }
-       while (!Win(board, Flip(counter))) {
-                ParSearchWrap(board, Flip(counter), numTasks, scoreBoard); // return
+
+            return res;
+
+	    // HWL: NO: this is the end of the current move, so return here; Play should Flip and search for the next move
+	    Console.WriteLine("^^ HWL: kicking of next move from within ParSearchWrap ...");
+	    while (!Win(board, Flip(counter)) && !board.IsFull(COORD_X)) {
+	      move++;
+	      ParSearchWrap(board, Flip(counter), numTasks, scoreBoard, ref move); // return
             
                 break;
             }
-                // return overall maximum
+	    // return overall maximum
             return res;
         }
         /*
@@ -568,7 +635,7 @@ cloning is needed.
      --------------------------------------------------------------------------------------------------------------------------
      */
         public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, int stride, int id, Tuple<int,Tuple<int,int>> bestRes, int thread_no, List<Tuple<int, int>> unconsideredMoves /* for DEBUGGING only */)
-{
+	{
             Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(999, new Tuple<int, int>(9,9));
             List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>();
             if (SEGM_BOARD == 0)
@@ -580,17 +647,21 @@ cloning is needed.
                 availableMoves = getAvailableSegmentedMoves(board, positions); // HWL: <==== change to only return indices betwee 1-3
             }
             List<Tuple<int, int>> consideredMoves = new List<Tuple<int, int>>();
+	    Tuple<int, int> Move;
             int score = Consts.MIN_SCORE; // current score of move
             // stride = 1; // ???
             // int cnt = stride, offset = id; // HWL BUG: cnt needs to start with 0 (my bad!)
             int cnt = 0, offset = id; // HWL BUG: cnt needs to start with 0 (my bad!)
 	    // ASSERT: 0 <= id < stride
 	    Debug.Assert(0 <= id && id < stride);
-            counters us = Flip(counter); // HWL: TOCHECK: I don't think you should flip at this point, rather at the call to SeqSearch
+            counters us = counter; /* Flip(counter); */ // HWL: DONE: I don't think you should flip at this point, rather at the call to SeqSearch
             Console.WriteLine("======================================================================================================");
             Console.WriteLine("-- THREAD " + id + ":");
             Console.WriteLine("======================================================================================================");
-            Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, counter.ToString(), id);
+            Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, us.ToString(), id);
+            Console.WriteLine("__ HWL:   stride={0}, id={1}, thread_no={2}  ", stride,  id, thread_no);
+	    System.Console.WriteLine("__ HWL:   Input board: ");
+	    board.DisplayBoard();
             if (SEGM_BOARD == 1)
             {
                 for (int x = COORD_X+1; x <= 7; x++)
@@ -623,12 +694,32 @@ cloning is needed.
 		  {
 		    // HWL: this is a move for the current thread to process; remember it (for debugging)
 		    if (ply == 0 ) {
-            consideredMoves.Add(availableMoves[i]); } // HWL DEBUGGING
-            res = SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
-            bestRes = (res.Item1 > bestRes.Item1) ? res : bestRes;
+		      consideredMoves.Add(availableMoves[i]);
+		    } // HWL DEBUGGING
+		    // pick next available move for this thread to consider
+		    Move = availableMoves[i]; // current move
+		    Console.WriteLine(".. HWL: ParSearchWork: considering move {0}", Move.ToString());
+		    Console.WriteLine(".. {0} at {1} ", counter, Move.ToString());
+		    // make the move
+		    board[Move.Item1, Move.Item2] = us; // place counter
+		    // check for an immediate win
+		    if (FindThreeInARow(board, us)) {
+		      Console.WriteLine("          3-in-a-row found at {3} for player {0} (ply={1}, positions={2})", counter, ply, positions.ToString(), Move.ToString());
+		      // board.DisplayBoard();
+		      // scoreBoard.DisplayScoreBoard();
+		      board[Move.Item1, Move.Item2] = counters.e;		// blank the field again
+		      return new Tuple<int, Tuple<int, int>>(1000, Move); // return win-in-1-move
+		    }
+		    // do a regular, sequential search to get the score for this move
+		    res = SeqSearch(board, Flip(counter), ply+1, positions, false, scoreBoard, alpha, beta);
+		    // undo the move
+		    board[Move.Item1, Move.Item2] = counters.e;
+		    bestRes = (-res.Item1 > bestRes.Item1) ? new Tuple<int, Tuple<int,int>>(-res.Item1, Move) : bestRes;
+		    // bestRes = new Tuple<int, Tuple<int,int>>(-res.Item1, Move);
+		    cnt = stride-1;
 		  }
 		else
-		  {
+		  { 
 		    if (offset == 0) { cnt--; } else { offset--; }
 		  }
 		cont++;
@@ -636,8 +727,8 @@ cloning is needed.
 	      if (false /* HWL: prevent file access for now */&& ply == 0)
                 {
 		    // HWL: print the moves considered by current thread; they must not overlap!
-		    Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, id, showList(consideredMoves));
-		    Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
+		    Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2}", consideredMoves.Count, id, showList(consideredMoves));
+		    Console.WriteLine("__ HWL: ALL {0} available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
                     Console.WriteLine("board " + Game_TPL.cntr + " processed by thread id: " + thread_no + " :");
                     if (SEGM_BOARD == 1)
                     {
@@ -667,6 +758,7 @@ cloning is needed.
 	      foreach (var mv in consideredMoves) {
 		unconsideredMoves.Remove(mv);
 	      }
+	      Console.WriteLine("__ HWL: best res so far: {0} ", bestRes.ToString());
 	    }
 	    return bestRes;
 }
@@ -677,25 +769,26 @@ cloning is needed.
  A string method that returns a list of vacant positions (represented in a Tuple<int,int> format) left on the board.
 --------------------------------------------------------------------------------------------------------------------------
 */
-        public static string showList(List<Tuple<int,int>> xs) {
-  string str = "";
-  foreach (Tuple<int,int> t in xs) {
-    str += t.ToString() + ", ";
+  public static string showList(List<Tuple<int,int>> xs) {
+    string str = "";
+    foreach (Tuple<int,int> t in xs) {
+      str += t.ToString() + ", ";
+    }
+    return str;
   }
-  return str;
-}
-        /*
-        ----------------------------------------------------------------------------------------------------------------
-         ParallelChoice -
-        --------------------------------------------------------------------------------------------------------------------------
-         A method that choices to execute Minimax either in Parallel or Sequentially based on the current depth of the search.
-        --------------------------------------------------------------------------------------------------------------------------
-        */
-        public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
+/*
+----------------------------------------------------------------------------------------------------------------
+ ParallelChoice -
+--------------------------------------------------------------------------------------------------------------------------
+ A method that choices to execute Minimax either in Parallel or Sequentially based on the current depth of the search.
+--------------------------------------------------------------------------------------------------------------------------
+*/
+public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
 {
             // decs
-            counters us = Flip(counter);
+            counters us = counter /*Flip(counter) */;
             // create new list of Tuple<int,int>
+	    int move = 1;
             int numTasks = 1;
             int bestScore = mmax ? -1001 : 1001;
             int score = Consts.MIN_SCORE; // current score of move
@@ -708,15 +801,15 @@ cloning is needed.
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
 
-                if (ply == 0 || ply == 1)
-                {
-                    return ParSearchWrap(board, Flip(counter), numTasks, scoreBoard); // return
-                }
-                else if (ply > 1)
-                {
-                    return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
-                }
-            return new Tuple<int, Tuple<int, int>>(bestScore, bestMove);
+	    if (ply == 0 || ply == 1)
+		return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard, ref move); // return
+	    else if (ply > 1)
+		return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
+	    else // should never be reached!
+	      {
+		Environment.Exit(97);
+		return new Tuple<int, Tuple<int, int>>(bestScore, bestMove);
+	      }
         }
     }
 }

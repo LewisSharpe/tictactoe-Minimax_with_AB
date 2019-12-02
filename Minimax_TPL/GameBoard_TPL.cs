@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -188,10 +189,10 @@ This boolean method returns a true or false value confirming if the current boar
 --------------------------------------------------------------------------------------------------------------------------
 */
         // IF GameBoard_TPL IS FULL
-        public bool IsFull()
+        public bool IsFull(int size)
         {
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
+            for (int x = 1; x <= size; x++)
+                for (int y = 1; y <= size; y++)
                     if (EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
@@ -203,10 +204,10 @@ This boolean method returns a true or false value confirming if the current boar
 This boolean method returns a true or false value confirming if there any remaining empty cells in play on the current board.
 --------------------------------------------------------------------------------------------------------------------------
 */
-        public bool IsEmpty()
+        public bool IsEmpty(int size)
         {
-            for (int x = 1; x <= 7; x++)
-                for (int y = 1; y <= 7; y++)
+            for (int x = 1; x <= size; x++)
+                for (int y = 1; y <= size; y++)
                     if (!EqualityComparer<T>.Default.Equals(this[x, y], filler))
                         return false;
             return true;
@@ -240,6 +241,14 @@ The method returns a coordinate position in an <int,int> format existing in the 
         {
             get
             {
+	      // Debug.Assert(1 <= x && x <= 3 && 1 <= y && y <= 3);
+	      /*
+	      if (!(1 <= x && x <= 7 && 1 <= y && y <= 7)) {
+		Console.WriteLine("ERROR: illegal position on board: {0},{1}", x, y);
+		Environment.Exit(98);
+		// return counters.BORDER;
+	      }
+	      */
                 if (x == 1 && y == 1)
                     return s1;
                 if (x == 2 && y == 1)

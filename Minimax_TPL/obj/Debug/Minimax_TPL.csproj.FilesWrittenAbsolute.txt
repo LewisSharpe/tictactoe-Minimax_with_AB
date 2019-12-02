@@ -1,0 +1,6 @@
+/home/hwloidl/Workspace/Projects/ttt_csharp/Minimax_TPL/obj/Debug/.NETFramework,Version=v4.6.1.AssemblyAttribute.cs
+/home/hwloidl/Workspace/Projects/ttt_csharp/Minimax_TPL/bin/Debug/Minimax_TPL.exe.config
+/home/hwloidl/Workspace/Projects/ttt_csharp/Minimax_TPL/bin/Debug/Minimax_TPL.pdb
+/home/hwloidl/Workspace/Projects/ttt_csharp/Minimax_TPL/bin/Debug/Minimax_TPL.exe
+/home/hwloidl/Workspace/Projects/ttt_csharp/Minimax_TPL/obj/Debug/Minimax_TPL.exe
+/home/hwloidl/Workspace/Projects/ttt_csharp/Minimax_TPL/obj/Debug/Minimax_TPL.pdb
