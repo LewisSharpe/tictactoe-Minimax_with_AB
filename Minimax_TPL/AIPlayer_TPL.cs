@@ -590,7 +590,7 @@ cloning is needed.
             Console.WriteLine("======================================================================================================");
             Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, counter /*Flip(counter)*/, res.ToString());
             Console.WriteLine("======================================================================================================");
-            // board[res.Item2.Item1, res.Item2.Item2] = counter /* Flip(counter) */;
+            board[res.Item2.Item1, res.Item2.Item2] = counter /* Flip(counter) */;
             if (EXECPRINT_GAMEBOARD_ON == 1)
             {
                 board.DisplayBoard();
@@ -661,10 +661,9 @@ cloning is needed.
             Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, us.ToString(), id);
             Console.WriteLine("__ HWL:   stride={0}, id={1}, thread_no={2}  ", stride,  id, thread_no);
 	    System.Console.WriteLine("__ HWL:   Input board: ");
-	    board.DisplayBoard();
             if (SEGM_BOARD == 1)
             {
-                for (int x = COORD_X+1; x <= 7; x++)
+                for (int x = COORD_X + 1; x <= 7; x++)
                     for (int y = 1; y <= 7; y++)
                         if (board[x, y] != counters.N)
                         {
@@ -672,17 +671,15 @@ cloning is needed.
                             scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                         }
                 for (int x = 1; x <= COORD_X; x++)
-                    for (int y = COORD_Y+1; y <= 7; y++)
+                    for (int y = COORD_Y + 1; y <= 7; y++)
                         if (board[x, y] != counters.N)
                         {
                             board[x, y] = counters.N;
                             scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                         }
             }
-            if (ply == 0)
-            {
-             //   scoreBoard.DisplayScoreBoardToFile();
-            }
+            board.DisplayBoard();
+
             if (ply > maxPly)
             {
                 score = EvalCurrentBoard(board, scoreBoard, us); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
@@ -746,8 +743,7 @@ cloning is needed.
                                     board[x, y] = counters.N;
                                     scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                                 }
-                    }
-         
+                    }  
                 }
             }         
 	    /* HWL: here, after the loop, print the considered moves; do you want to print to file in each loop iteration, or just at the end after the loop!? */
@@ -776,19 +772,19 @@ cloning is needed.
     }
     return str;
   }
-/*
-----------------------------------------------------------------------------------------------------------------
- ParallelChoice -
---------------------------------------------------------------------------------------------------------------------------
- A method that choices to execute Minimax either in Parallel or Sequentially based on the current depth of the search.
---------------------------------------------------------------------------------------------------------------------------
-*/
-public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
-{
+        /*
+        ----------------------------------------------------------------------------------------------------------------
+         ParallelChoice -
+        --------------------------------------------------------------------------------------------------------------------------
+         A method that choices to execute Minimax either in Parallel or Sequentially based on the current depth of the search.
+        --------------------------------------------------------------------------------------------------------------------------
+        */
+        public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
+        {
             // decs
             counters us = counter /*Flip(counter) */;
             // create new list of Tuple<int,int>
-	    int move = 1;
+            int move = 1;
             int numTasks = 1;
             int bestScore = mmax ? -1001 : 1001;
             int score = Consts.MIN_SCORE; // current score of move
@@ -801,10 +797,10 @@ public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board,
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
 
-	    if (ply == 0 || ply == 1)
-		return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard, ref move); // return
-	    else if (ply > 1)
-		return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
+            if (ply == 0 || ply == 1)
+                return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard, ref move); // return
+            else if (ply > 1)
+                return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
 	    else // should never be reached!
 	      {
 		Environment.Exit(97);

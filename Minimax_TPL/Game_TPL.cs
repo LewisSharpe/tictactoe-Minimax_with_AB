@@ -78,7 +78,7 @@ The method runs the execution of the entire game, iterating the starting board e
 		    currentPlayer.counter = counters.X; // HWL: set the current player here as well
 		    expectedMove = new Tuple<int, int>(2,3);
                     // choose win
-                    board[1, 1] = counters.O; board[2, 1] = counters.e; board[3, 1] = counters.N; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
+                    board[1, 1] = counters.O; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
                     board[1, 2] = counters.e; board[2, 2] = counters.X; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
                     board[1, 3] = counters.e; board[2, 3] = counters.e; board[3, 3] = counters.X; board[4, 3] = counters.e; board[5, 3] = counters.e; board[6, 3] = counters.e; board[7, 3] = counters.e;
                     board[1, 4] = counters.e; board[2, 4] = counters.e; board[3, 4] = counters.e; board[4, 4] = counters.O; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
@@ -122,18 +122,6 @@ The method runs the execution of the entire game, iterating the starting board e
                     board[1, 6] = counters.e; board[2, 6] = counters.e; board[3, 6] = counters.e; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.e; board[7, 6] = counters.e;
                     board[1, 7] = counters.e; board[2, 7] = counters.e; board[3, 7] = counters.e; board[4, 7] = counters.e; board[5, 7] = counters.e; board[6, 7] = counters.e; board[7, 7] = counters.e;
                     break;
-		    /*
-	      case 2: // win in 1; not very interesting
-		    currentPlayer.counter = counters.X; // HWL: set the current player here as well
-                    board[1, 1] = counters.e; board[2, 1] = counters.X; board[3, 1] = counters.X; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
-                    board[1, 2] = counters.e; board[2, 2] = counters.e; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
-                    board[1, 3] = counters.e; board[2, 3] = counters.X; board[3, 3] = counters.e; board[4, 3] = counters.e; board[5, 3] = counters.e; board[6, 3] = counters.e; board[7, 3] = counters.e;
-                    board[1, 4] = counters.e; board[2, 4] = counters.e; board[3, 4] = counters.e; board[4, 4] = counters.e; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
-                    board[1, 5] = counters.e; board[2, 5] = counters.e; board[3, 5] = counters.e; board[4, 5] = counters.e; board[5, 5] = counters.e; board[6, 5] = counters.e; board[7, 5] = counters.e;
-                    board[1, 6] = counters.e; board[2, 6] = counters.e; board[3, 6] = counters.e; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.e; board[7, 6] = counters.e;
-                    board[1, 7] = counters.e; board[2, 7] = counters.e; board[3, 7] = counters.e; board[4, 7] = counters.e; board[5, 7] = counters.e; board[6, 7] = counters.e; board[7, 7] = counters.e;
-                    break;
-		    */
                 case 3:
                     // choose win
                     board[1, 1] = counters.X; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
@@ -176,7 +164,7 @@ The method runs the execution of the entire game, iterating the starting board e
 		    currentPlayer.counter = counters.X; // HWL: set the current player here as well
 		    expectedMove = new Tuple<int, int>(3,1); // (3,3) is also a winning move, but comes later
                     // choose win
-                    board[1, 1] = counters.N; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
+                    board[1, 1] = counters.e; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
                     board[1, 2] = counters.e; board[2, 2] = counters.X; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
                     board[1, 3] = counters.e; board[2, 3] = counters.e; board[3, 3] = counters.e; board[4, 3] = counters.e; board[5, 3] = counters.e; board[6, 3] = counters.e; board[7, 3] = counters.e;
                     board[1, 4] = counters.e; board[2, 4] = counters.e; board[3, 4] = counters.e; board[4, 4] = counters.O; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
@@ -184,17 +172,6 @@ The method runs the execution of the entire game, iterating the starting board e
                     board[1, 6] = counters.e; board[2, 6] = counters.e; board[3, 6] = counters.e; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.O; board[7, 6] = counters.e;
                     board[1, 7] = counters.e; board[2, 7] = counters.e; board[3, 7] = counters.e; board[4, 7] = counters.e; board[5, 7] = counters.e; board[6, 7] = counters.e; board[7, 7] = counters.e;
                     break;
-		    /*
-                case 7:
-                    board[1, 1] = counters.e; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.O; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
-                    board[1, 2] = counters.e; board[2, 2] = counters.e; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
-                    board[1, 3] = counters.e; board[2, 3] = counters.e; board[3, 3] = counters.e; board[4, 3] = counters.O; board[5, 3] = counters.O; board[6, 3] = counters.e; board[7, 3] = counters.e;
-                    board[1, 4] = counters.e; board[2, 4] = counters.e; board[3, 4] = counters.e; board[4, 4] = counters.e; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
-                    board[1, 5] = counters.e; board[2, 5] = counters.e; board[3, 5] = counters.e; board[4, 5] = counters.e; board[5, 5] = counters.O; board[6, 5] = counters.e; board[7, 5] = counters.e;
-                    board[1, 6] = counters.e; board[2, 6] = counters.e; board[3, 6] = counters.e; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.e; board[7, 6] = counters.e;
-                    board[1, 7] = counters.e; board[2, 7] = counters.e; board[3, 7] = counters.e; board[4, 7] = counters.e; board[5, 7] = counters.e; board[6, 7] = counters.e; board[7, 7] = counters.e;
-                    break;
-		    */
                 case 8:
                     board[1, 1] = counters.e; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
                     board[1, 2] = counters.e; board[2, 2] = counters.e; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
@@ -519,7 +496,6 @@ The method runs the execution of the entire game, iterating the starting board e
 	      Console.WriteLine("** HWL: Running board {0} "  , cntr);
 	      Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 	      board.DisplayBoard();
-
 	      counter = currentPlayer.counter;
 	      do {
 		move++;
@@ -533,22 +509,30 @@ The method runs the execution of the entire game, iterating the starting board e
 		board[bestMove.Item1, bestMove.Item2] = counter;
 		// opponent's turn
 		counter = Flip(counter);
-	      } while (!currentPlayer.Win(board, Flip(counter)) && !otherPlayer.Win(board, counter) && !board.IsFull(3));
+                    if (IsOver(board, currentPlayer)) {
+                        cntr++;
+                        if (cntr > 2) return;
+                        PlayGame(currentPlayer, otherPlayer, ref cntr);
+                    }
+                }
+                while (!currentPlayer.Win(board, Flip(counter)) && !otherPlayer.Win(board, counter) && !board.IsFull(3));
+                // TODO: print message who actually won; check this against expected result
 
-	      // TODO: print message who actually won; check this against expected result
-	      
-	      // Tuple<int, int> selectedMove = currentPlayer.GetMove(board, currentPlayer.counter, scoreBoard);
-	      // board[selectedMove.Item1, selectedMove.Item2] = currentPlayer.counter;
-	      // Tuple<int, int> centreof3inarow = new Tuple<int, int>(0, 0);
+                // Tuple<int, int> selectedMove = currentPlayer.GetMove(board, currentPlayer.counter, scoreBoard);
+                // board[selectedMove.Item1, selectedMove.Item2] = currentPlayer.counter;
+                // Tuple<int, int> centreof3inarow = new Tuple<int, int>(0, 0);
 
-	      /*
+                /*
+                // cntr = (cntr==1) ? 7 : cntr+1;
+                  
 	      // cntr = (cntr==1) ? 7 : cntr+1;
 	      cntr++;
 	      if (cntr > 2) return;
 	      PlayGame(currentPlayer, otherPlayer, ref cntr);
-	      */
-	    }
-	    return;
+	      
+                */
+            }
+            return;
         }
         /* 
       ----------------------------------------------------------------------------------------------------------------
@@ -559,18 +543,23 @@ The method runs the execution of the entire game, iterating the starting board e
       */
         public bool IsOver(GameBoard_TPL<counters> board, Player_TPL currentPlayer)
         {
-	  if (currentPlayer.Win(board, currentPlayer.counter) || board.IsFull(3))
+            if (currentPlayer.Win(board, currentPlayer.counter) || board.IsFull(3))
+            {
                 return true;
-            return false;
+            }
+            else
+            {
+                return false;
+            }
         }
-        /* 
-              ----------------------------------------------------------------------------------------------------------------
-              * Flip -
-              --------------------------------------------------------------------------------------------------------------------------
-              Construct flips the counter have each turn of play.
-              --------------------------------------------------------------------------------------------------------------------------
-              */
-        public static counters Flip(counters counter)
+            /* 
+                  ----------------------------------------------------------------------------------------------------------------
+                  * Flip -
+                  --------------------------------------------------------------------------------------------------------------------------
+                  Construct flips the counter have each turn of play.
+                  --------------------------------------------------------------------------------------------------------------------------
+                  */
+            public static counters Flip(counters counter)
         {
             if (counter == counters.O)
             {
@@ -579,44 +568,6 @@ The method runs the execution of the entire game, iterating the starting board e
             else
             {
                 return counters.O;
-            }
-        }
-        /* 
- ----------------------------------------------------------------------------------------------------------------
- * ErrorSkip -
- --------------------------------------------------------------------------------------------------------------------------
- This method moves the search onto the next board, if errors or problems are found on the current board.
- --------------------------------------------------------------------------------------------------------------------------
- */
-        public void ErrorSkip(GameBoard_TPL<counters> board, Player_TPL currentPlayer, Player_TPL otherPlayer)
-        {
-            nowcount = cntr;
-            if (AIPlayer_TPL.error_confirm == 1 & AIPlayer_TPL.positions == new Tuple<int, int>(2, 2))
-            {
-                ++cntr;
-                if (cntr > nowcount)
-                {
-                    PlayGame(currentPlayer, otherPlayer, ref cntr);
-                }
-            }
-        }
-        /* 
- ----------------------------------------------------------------------------------------------------------------
- * ReRun -
- --------------------------------------------------------------------------------------------------------------------------
- Continue the search onto the next board in the switch statement.
- --------------------------------------------------------------------------------------------------------------------------
- */
-        public void ReRun(GameBoard_TPL<counters> board, Player_TPL currentPlayer, Player_TPL otherPlayer)
-        {
-            nowcount = cntr;
-            if (IsOver(board, currentPlayer))
-            {
-                ++cntr;
-                if (cntr > nowcount)
-                {
-                    PlayGame(currentPlayer, otherPlayer, ref cntr);
-                }
             }
         }
     }
