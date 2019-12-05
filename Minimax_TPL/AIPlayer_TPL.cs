@@ -19,18 +19,18 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
     class AIPlayer_TPL : Player_TPL
     {
        // BOARD DIMENSIONS 
-        public int COORD_X = 3; // x coord
-        public int COORD_Y = 3; // y coord
-        public static int _COORD_X = 3; // x coord
-        public static int _COORD_Y = 3; // y coord
+        public int COORD_X = 7; // x coord
+        public int COORD_Y = 7; // y coord
+        public static int _COORD_X = 7; // x coord
+        public static int _COORD_Y = 7; // y coord
         // BOARD ADJUSTMENT VARIABLES
-        int SEGM_BOARD = 1;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
-        static int _SEGM_BOARD = 1;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
+        int SEGM_BOARD = 0;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
+        static int _SEGM_BOARD = 0;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
         int EXECPRINT_SCOREBOARD_ON = 0; // 1 on, 0 off - TURN SCORE BOARD PRINT ON CONSOLE ON AND OFF
         int EXECPRINT_GAMEBOARD_ON = 1;  // 1 on, 0 off - TURN GAME BOARD PRINT ON CONSOLE ON AND OFF
         // PUBLIC DECS
         public static int ply = 0;    // start depth for search (should be 0)
-        public const int maxPly = 3; // max depth for search: 0 = only immediate move; 1 = also next opponent move; 2 = also own next move etc
+        public const int maxPly = 2; // max depth for search: 0 = only immediate move; 1 = also next opponent move; 2 = also own next move etc
         public int alpha = Consts.MIN_SCORE; // set alpha to -1001
         public int beta = Consts.MAX_SCORE; // set beta to 1001
         public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
@@ -57,7 +57,7 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
             List<Tuple<int, int>> moves = new List<Tuple<int, int>>();
             for (int x = 1; x <= 7; x++)
                 for (int y = 1; y <= 7; y++)
-                    if (board[x, y] == counters.e)
+		  if (board[x, y] == counters.e )
                     {
                         Tuple<int, int> coords = new Tuple<int, int>(x, y);
                         moves.Add(coords);
@@ -356,6 +356,53 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
        }
    return false;
  }
+
+ public static bool FindTwoWithGap(GameBoard_TPL<counters> board, counters us)
+ {
+   for (int x = 1; x <= ((_SEGM_BOARD==1) ? 3 : 7); x++)
+     for (int y = 1; y <= ((_SEGM_BOARD==1) ? 3 : 7); y++)
+       {
+	 // check whether position piece at [x,y] has the same piece as both neighbours
+	 for (int xx = 0; xx <= 1; xx++)
+	   for (int yy = 0; yy <= 1; yy++)
+	     {
+	       if (yy == 0 && xx == 0)
+		 continue;
+
+	       // check that all coordinates tested are on the board
+	       // TOCHECK: if the border uses a BORDER, this shouldn't be necessary
+	       if (x + xx <= 0 ||
+		   x + xx > _COORD_X ||
+		   y + yy <= 0 ||
+		   y + yy >  _COORD_Y ||
+		   x - xx <= 0 ||
+		   x - xx > _COORD_X ||
+		   y - yy <= 0 ||
+		   y - yy > _COORD_Y)
+		 continue;
+
+	       if (board[x, y] == counters.e &&    // middle spot needs to be empty
+		   us == board[x + xx, y + yy] &&  // other spots need to be the current player
+		   us == board[x - xx, y - yy])    // checks for top-left to bottom-right diag
+		 {
+		   // Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x,",",y,x + xx, y + yy, x - xx, y - yy);
+		   // board.DisplayBoard();
+		   return true;
+		 }
+
+	       if (yy == 1 && xx == 1 &&
+		   board[x, y] == counters.e &&   // middle spot needs to be empty
+		   us == board[x + xx, y - yy] && // other spots need to be the current player
+		   us == board[x - xx, y + yy])   // checks for bottom-left to top-right diag
+		 {
+		   // Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x, ",", y, x + xx, y - yy, x - xx, y + yy);
+		   // board.DisplayBoard();
+		   return true;
+		 }
+	     }
+       }
+   return false;
+ }
         /*
         ----------------------------------------------------------------------------------------------------------------
          EvalCurrentBoard -
@@ -372,18 +419,23 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
         return score = 1000; // Player_TPL win confirmed
     else if (FindThreeInARow(board, us + 1)) // opponent win?
         return score = -1000; // opp win confirmed
-    else if (FindTwoInARow(board, us)) // Player_TPL win?
-         return score = 100; // Player_TPL win confirmed
-    else if (FindTwoInARow(board, us + 1)) // opponent win?
-        return score = -100; // opp win confirmed 
-    else if (FindOneInARow(board, us)) // Player_TPL win?
+    else if (FindTwoInARow(board, us)) // TODO: distinguish by number of free ends: 100 only if both ends free
+         return score = 100; 
+    else if (FindTwoInARow(board, us + 1)) 
+        return score = -100; 
+    else if (FindTwoWithGap(board, us)) // check for own 2-in-a-row with a gap in the middle
+        return score = 40;              // value between 1-with-free-N-neighbours and 2-in-a-row
+    else if (FindTwoWithGap(board, us + 1)) // check for opponent 2-in-a-row with a gap in the middle
+        return score = -40;                 // value between 1-with-free-N-neighbours and 2-in-a-row
+    else if (FindOneInARow(board, us)) // after move 1 there will always be at least 1 1-in-a-row; count number of free neighbours and assign e.g. 3*NUM as value
         return score = 10; // Player_TPL win confirmed
     else if (FindOneInARow(board, us + 1)) // opponent win?
         return score = -10; // opp win confirmed
     else
         return score = 23; // dummy value
 }
-        /*
+
+  /*
 ----------------------------------------------------------------------------------------------------------------
  SeqSearch (Minimax) -
 --------------------------------------------------------------------------------------------------------------------------

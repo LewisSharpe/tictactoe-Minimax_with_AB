@@ -44,7 +44,7 @@ namespace Minimax_TPL
 		Console.WriteLine(" -*- outline -*- ");
 		Console.WriteLine("* LOG ");
             }
-	    // if (cntr==1) cntr=7; // HWL: jump to board 7
+	    if (cntr==1) cntr=7; // HWL: jump to board 7
             PlayGame(_xPlayer, _oPlayer, ref cntr);
         }
 
