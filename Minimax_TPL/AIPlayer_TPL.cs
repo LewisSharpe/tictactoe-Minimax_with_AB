@@ -136,7 +136,6 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
             Object thisCSVLock = new Object();
             /* HWL: omit for now */
             // write to file
-            // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
             var file = "data/TPLTST_Report.csv";
             var date = DateTime.Now.ToShortDateString();
             var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
@@ -262,14 +261,56 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
                 }
             return false;
         }
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* FindTwoInARowWithAGap -
+--------------------------------------------------------------------------------------------------------------------------
+ A bool which returns true or false of the presence of a two counters of the same symbol with an empty gap inbetween which 
+ has potential to be turned into a three in a row.
+--------------------------------------------------------------------------------------------------------------------------
+*/
+        public bool FindTwoInARowWithAGap(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= 7; x++)
+                for (int y = 1; y <= 7; y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as neighbour
+                    for (int xx = -1; xx <= 7; xx++)
+                        for (int yy = -1; yy <= 7; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+                            // horiziontal
+                            if (board[x, y] == us && board[x+2, y] == us)
+                                return true;
+                            // veritcal
+                            if (board[x, y] == us && board[x, y+2] == us)
+                                return true;
+                            // upper right diagonal
+                            if (board[x, y] == us && board[x+2, y+2] == us)
+                                return true;
+                            // bottom right diagonal
+                            if (board[x, y] == us && board[x+2, y-2] == us)
+                                return true;
+                            // upper left diagonal
+                            if (board[x, y] == us && board[x-2, y+2] == us)
+                                return true;
+                            // bottom left diagonal
+                            if (board[x, y] == us && board[x-2, y-2] == us)
+                                return true;
+                            // two in a row in centre should give higher score
+                        }
+                }
+            return false;
+        }
         /*
  ----------------------------------------------------------------------------------------------------------------
-  FindTwoInARow -
+  FindThreeInARow -
  --------------------------------------------------------------------------------------------------------------------------
   A bool which returns true or false of the presence of a three counters of the same symbol placed side by side on the board
  --------------------------------------------------------------------------------------------------------------------------
  */
- public static bool FindThreeInARow(GameBoard_TPL<counters> board, counters us)
+        public static bool FindThreeInARow(GameBoard_TPL<counters> board, counters us)
  {
    for (int x = 1; x <= ((_SEGM_BOARD==1) ? 3 : 7); x++)
      for (int y = 1; y <= ((_SEGM_BOARD==1) ? 3 : 7); y++)
@@ -332,10 +373,10 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
     else if (FindThreeInARow(board, us + 1)) // opponent win?
         return score = -1000; // opp win confirmed
     else if (FindTwoInARow(board, us)) // Player_TPL win?
-        return score = 100; // Player_TPL win confirmed
+         return score = 100; // Player_TPL win confirmed
     else if (FindTwoInARow(board, us + 1)) // opponent win?
-        return score = -100; // opp win confirmed
-    if (FindOneInARow(board, us)) // Player_TPL win?
+        return score = -100; // opp win confirmed 
+    else if (FindOneInARow(board, us)) // Player_TPL win?
         return score = 10; // Player_TPL win confirmed
     else if (FindOneInARow(board, us + 1)) // opponent win?
         return score = -10; // opp win confirmed
@@ -439,12 +480,7 @@ Tuple<int,int> construct.
                         scoreBoard.DisplayScoreBoard();
                     }
                 }
-		/*
-                if (Game_TPL.cntr >= 40 ) // 40 // ?????????????????
-                {
-                    Environment.Exit(99);
-                }
-		*/
+
                 Object my_object = new Object();
                 // if maximising                  
                 if (/* true || */  mmax)  // TOCHECK
@@ -492,7 +528,7 @@ Tuple<int,int> construct.
                             if (ply >= 1)
                             {
 			      Console.WriteLine("        minimising: player {4} new best score {0} at {1} (ply={2}, positions={3})", bestScore, bestMove, ply, positions.ToString(), counter);
-			      // scoreBoard.DisplayScoreBoard();
+			      //scoreBoard.DisplayScoreBoard();
                             }
                         }
                     }
@@ -590,11 +626,7 @@ cloning is needed.
             Console.WriteLine("======================================================================================================");
             Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, counter /*Flip(counter)*/, res.ToString());
             Console.WriteLine("======================================================================================================");
-            // board[res.Item2.Item1, res.Item2.Item2] = counter /* Flip(counter) */;
-            if (EXECPRINT_GAMEBOARD_ON == 1)
-            {
-                board.DisplayBoard();
-            }
+            board[res.Item2.Item1, res.Item2.Item2] = counter /* Flip(counter) */;
             if (SEGM_BOARD == 1)
             {
                 for (int x = COORD_X + 1; x <= 7; x++)
@@ -612,7 +644,11 @@ cloning is needed.
                             scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                         }
             }
-
+            if (EXECPRINT_GAMEBOARD_ON == 1)
+            {
+                board.DisplayBoard();
+            }
+           
             return res;
 
 	    // HWL: NO: this is the end of the current move, so return here; Play should Flip and search for the next move
@@ -661,10 +697,9 @@ cloning is needed.
             Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, us.ToString(), id);
             Console.WriteLine("__ HWL:   stride={0}, id={1}, thread_no={2}  ", stride,  id, thread_no);
 	    System.Console.WriteLine("__ HWL:   Input board: ");
-	    board.DisplayBoard();
             if (SEGM_BOARD == 1)
             {
-                for (int x = COORD_X+1; x <= 7; x++)
+                for (int x = COORD_X + 1; x <= 7; x++)
                     for (int y = 1; y <= 7; y++)
                         if (board[x, y] != counters.N)
                         {
@@ -672,17 +707,15 @@ cloning is needed.
                             scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                         }
                 for (int x = 1; x <= COORD_X; x++)
-                    for (int y = COORD_Y+1; y <= 7; y++)
+                    for (int y = COORD_Y + 1; y <= 7; y++)
                         if (board[x, y] != counters.N)
                         {
                             board[x, y] = counters.N;
                             scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                         }
             }
-            if (ply == 0)
-            {
-             //   scoreBoard.DisplayScoreBoardToFile();
-            }
+            board.DisplayBoard();
+
             if (ply > maxPly)
             {
                 score = EvalCurrentBoard(board, scoreBoard, us); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
@@ -710,7 +743,7 @@ cloning is needed.
 		      board[Move.Item1, Move.Item2] = counters.e;		// blank the field again
 		      return new Tuple<int, Tuple<int, int>>(1000, Move); // return win-in-1-move
 		    }
-		    // do a regular, sequential search to get the score for this move
+		    // do a regular, sequential search to get tovhe score for this move
 		    res = SeqSearch(board, Flip(counter), ply+1, positions, false, scoreBoard, alpha, beta);
 		    // undo the move
 		    board[Move.Item1, Move.Item2] = counters.e;
@@ -746,8 +779,7 @@ cloning is needed.
                                     board[x, y] = counters.N;
                                     scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                                 }
-                    }
-         
+                    }  
                 }
             }         
 	    /* HWL: here, after the loop, print the considered moves; do you want to print to file in each loop iteration, or just at the end after the loop!? */
@@ -776,19 +808,19 @@ cloning is needed.
     }
     return str;
   }
-/*
-----------------------------------------------------------------------------------------------------------------
- ParallelChoice -
---------------------------------------------------------------------------------------------------------------------------
- A method that choices to execute Minimax either in Parallel or Sequentially based on the current depth of the search.
---------------------------------------------------------------------------------------------------------------------------
-*/
-public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
-{
+        /*
+        ----------------------------------------------------------------------------------------------------------------
+         ParallelChoice -
+        --------------------------------------------------------------------------------------------------------------------------
+         A method that choices to execute Minimax either in Parallel or Sequentially based on the current depth of the search.
+        --------------------------------------------------------------------------------------------------------------------------
+        */
+        public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
+        {
             // decs
             counters us = counter /*Flip(counter) */;
             // create new list of Tuple<int,int>
-	    int move = 1;
+            int move = 1;
             int numTasks = 1;
             int bestScore = mmax ? -1001 : 1001;
             int score = Consts.MIN_SCORE; // current score of move
@@ -801,10 +833,10 @@ public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board,
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
 
-	    if (ply == 0 || ply == 1)
-		return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard, ref move); // return
-	    else if (ply > 1)
-		return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
+            if (ply == 0 || ply == 1)
+                return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard, ref move); // return
+            else if (ply > 1)
+                return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
 	    else // should never be reached!
 	      {
 		Environment.Exit(97);
