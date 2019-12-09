@@ -24,20 +24,21 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
         public static int _COORD_X = 3; // x coord
         public static int _COORD_Y = 3; // y coord
         // BOARD ADJUSTMENT VARIABLES
-        int SEGM_BOARD = 1;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
-        static int _SEGM_BOARD = 1;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
+        int SEGM_BOARD = 0;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
+        static int _SEGM_BOARD = 0;  // SEGMENT BOARD TO 3X3 COUNTER - 0 for off, 1 for yes, blanks out non active cells in 3x3 on 7x7 with 'N'
         int EXECPRINT_SCOREBOARD_ON = 0; // 1 on, 0 off - TURN SCORE BOARD PRINT ON CONSOLE ON AND OFF
         int EXECPRINT_GAMEBOARD_ON = 1;  // 1 on, 0 off - TURN GAME BOARD PRINT ON CONSOLE ON AND OFF
+        int TPL_PARALLELINVOKE_ON = 0;
+        private static Object TPL_THREADSYNC_LOCK = new Object(); // lock to protect Move and score from accidential updates
         // PUBLIC DECS
         public static int ply = 0;    // start depth for search (should be 0)
-        public const int maxPly = 3; // max depth for search: 0 = only immediate move; 1 = also next opponent move; 2 = also own next move etc
+        public const int maxPly = 2; // max depth for search: 0 = only immediate move; 1 = also next opponent move; 2 = also own next move etc
         public int alpha = Consts.MIN_SCORE; // set alpha to -1001
         public int beta = Consts.MAX_SCORE; // set beta to 1001
         public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
         public static int error_confirm = 0; // if positive moves to next board in case
-	    public const int stride = 4;  // fixed stride interation; never changes
-        private static Object thisLock = new Object(); // lock to protect Move and score from accidential updates
+	    public const int stride = 4;  // fixed stride interation; never changess
         Tuple<int, Tuple<int, int>>[] ress = new Tuple<int, Tuple<int, int>>[4]; // set array for 4 calls of ParSearchWork
         public static int thread_no_track = 0; // thread track int variable
         Tuple<int, Tuple<int, int>> result; // return Tuple which returns score and position of Move from Minimax
@@ -136,7 +137,6 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
             Object thisCSVLock = new Object();
             /* HWL: omit for now */
             // write to file
-            // var file = @"C://Users//Lewis//Desktop//files_150819//ttt_csharp_270719//Minimax_TPL//TPLTST_Report.csv";
             var file = "data/TPLTST_Report.csv";
             var date = DateTime.Now.ToShortDateString();
             var time = DateTime.Now.ToString("HH:mm:ss"); //result 22:11:45
@@ -262,14 +262,384 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
                 }
             return false;
         }
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* FindTwoWithAGap -
+--------------------------------------------------------------------------------------------------------------------------
+ A bool which returns true or false of the presence of a two counters of the same symbol with an empty gap inbetween which 
+ has potential to be turned into a three in a row.
+--------------------------------------------------------------------------------------------------------------------------
+*/
+        public static bool FindTwoWithGap(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++)
+                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as both neighbours
+                    for (int xx = 0; xx <= 1; xx++)
+                        for (int yy = 0; yy <= 1; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+
+                            // check that all coordinates tested are on the board
+                            // TOCHECK: if the border uses a BORDER, this shouldn't be necessary
+                            if (x + xx <= 0 ||
+                            x + xx > _COORD_X ||
+                            y + yy <= 0 ||
+                            y + yy > _COORD_Y ||
+                            x - xx <= 0 ||
+                            x - xx > _COORD_X ||
+                            y - yy <= 0 ||
+                            y - yy > _COORD_Y)
+                                continue;
+
+                            if (board[x, y] == counters.e &&
+                            board[x + xx, y + yy] == us &&
+                            board[x - xx, y - yy] == us) // checks for top-left to bottom-right diag
+                            {
+                                // Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x,",",y,x + xx, y + yy, x - xx, y - yy);
+                                // board.DisplayBoard();
+                                return true;
+                            }
+
+                            if (yy == 1 && xx == 1 &&
+                            board[x, y] == us &&
+                            board[x + xx, y - yy] == us &&
+                            board[x - xx, y + yy] == us) // checks for bottom-left to top-right diag
+                            {
+                                // Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x, ",", y, x + xx, y - yy, x - xx, y + yy);
+                                // board.DisplayBoard();
+                                return true;
+                            }
+                        }
+                }
+            return false;
+        }
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* FindTwoWithRightBuild -
+--------------------------------------------------------------------------------------------------------------------------
+A bool which returns true or false of the presence of a two counters of the same symbol which has potential 
+to be turned into a three-in-a-row with an empty cell available to the right of the existing two-in-a-row.
+--------------------------------------------------------------------------------------------------------------------------
+*/
+        public static bool FindTwoWithRightBuild(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++)
+                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as both neighbours
+                    for (int xx = 0; xx <= 1; xx++)
+                        for (int yy = 0; yy <= 1; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+
+                            // check that all coordinates tested are on the board
+                            // TOCHECK: if the border uses a BORDER, this shouldn't be necessary
+                            if (x + xx <= 0 ||
+                            x + xx > _COORD_X ||
+                            y + yy <= 0 ||
+                            y + yy > _COORD_Y ||
+                            x - xx <= 0 ||
+                            x - xx > _COORD_X ||
+                            y - yy <= 0 ||
+                            y - yy > _COORD_Y)
+                                continue;
+
+                            if (board[x, y] == us &&
+                            board[x + xx, y + yy] == counters.e &&
+                            board[x - xx, y - yy] == us) // checks for top-left to bottom-right diag
+                            {
+                                // Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x,",",y,x + xx, y + yy, x - xx, y - yy);
+                                // board.DisplayBoard();
+                                return true;
+                            }
+
+                            if (yy == 1 && xx == 1 &&
+                            board[x, y] == us &&
+                            board[x + xx, y - yy] == counters.e &&
+                            board[x - xx, y + yy] == us) // checks for bottom-left to top-right diag
+                            {
+                                // Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x, ",", y, x + xx, y - yy, x - xx, y + yy);
+                                // board.DisplayBoard();
+                                return true;
+                            }
+                        }
+                }
+            return false;
+        }
+        /* 
+----------------------------------------------------------------------------------------------------------------
+* FindTwoWithLeftBuild -
+--------------------------------------------------------------------------------------------------------------------------
+A bool which returns true or false of the presence of a two counters of the same symbol which has potential 
+to be turned into a three-in-a-row with an empty cell available to the left of the existing two-in-a-row.
+--------------------------------------------------------------------------------------------------------------------------
+*/
+        public static bool FindTwoWithLeftBuild(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++)
+                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as both neighbours
+                    for (int xx = 0; xx <= 1; xx++)
+                        for (int yy = 0; yy <= 1; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+
+                            // check that all coordinates tested are on the board
+                            // TOCHECK: if the border uses a BORDER, this shouldn't be necessary
+                            if (x + xx <= 0 ||
+                            x + xx > _COORD_X ||
+                            y + yy <= 0 ||
+                            y + yy > _COORD_Y ||
+                            x - xx <= 0 ||
+                            x - xx > _COORD_X ||
+                            y - yy <= 0 ||
+                            y - yy > _COORD_Y)
+                                continue;
+
+                            if (board[x, y] == us &&
+                            board[x + xx, y + yy] == us &&
+                            board[x - xx, y - yy] == counters.e) // checks for top-left to bottom-right diag
+                            {
+                                // board.DisplayBoard();
+                                return true;
+                            }
+
+                            if (yy == 1 && xx == 1 &&
+                            board[x, y] == us &&
+                            board[x + xx, y - yy] == us &&
+                            board[x - xx, y + yy] == counters.e) // checks for bottom-left to top-right diag
+                            {
+                                // board.DisplayBoard();
+                                return true;
+                            }
+                        }
+                }
+            return false;
+        }
+        /* 
+        ----------------------------------------------------------------------------------------------------------------
+        * FindTwoWithBothBuild -
+        --------------------------------------------------------------------------------------------------------------------------
+        A bool which returns true or false of the presence of a two counters of the same symbol which has potential 
+        to be turned into a three-in-a-row with an empty cells available to the left and to the right of the
+        existing two-in-a-row.
+        --------------------------------------------------------------------------------------------------------------------------
+        */
+        public static bool FindTwoWithBothBuild(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++)
+                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as both neighbours
+                    for (int xx = 0; xx <= 1; xx++)
+                        for (int yy = 0; yy <= 1; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+
+                            // check that all coordinates tested are on the board
+                            // TOCHECK: if the border uses a BORDER, this shouldn't be necessary
+                            if (x + xx <= 0 ||
+                            x + xx > _COORD_X ||
+                            y + yy <= 0 ||
+                            y + yy > _COORD_Y ||
+                            x - xx <= 0 ||
+                            x - xx > _COORD_X ||
+                            y - yy <= 0 ||
+                            y - yy > _COORD_Y)
+                                continue;
+
+                            if (board[x, y] == us &&
+                            board[x + xx, y + yy] == us &&
+                            board[x+xx+xx,y+yy+yy] == counters.e &&
+                            board[x - xx, y - yy] == counters.e) // checks for top-left to bottom-right diag
+                            {
+                                //Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x,",",y,x + xx, y + yy, x - xx, y - yy);
+                                //Console.WriteLine("!! next adjacent cell: {0}{1}{2})\n", x + xx + xx, ",", y + yy + yy);
+                                /*
+                                 !! HWL: Centre of 3-in-a-row: 3,2 (with 3,3 and 3,1)
+                                 !! next adjacent cell: 3,4)
+                                */
+                                return true;
+                            }
+
+                            if (yy == 1 && xx == 1 &&
+                            board[x, y] == us &&
+                            board[x + xx, y - yy] == us &&
+                            board[x+xx+xx, y-yy-yy] == us &&
+                            board[x - xx, y + yy] == counters.e) // checks for bottom-left to top-right diag
+                            {
+                                //Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x, ",", y, x + xx, y - yy, x - xx, y + yy);
+                                //Console.WriteLine("-- next adjacent cell: {0}{1}{2})\n", x + xx + xx, ",", y - yy - yy);
+                                /*
+                                 ! HWL: Centre of 3-in-a-row: 2,2 (with 3,1 and 1,3)
+                                 -- next adjacent cell: 4,0)
+                                 */
+                                return true;
+                            }
+                        }
+                }
+            return false;
+        }
+        /* 
+        ----------------------------------------------------------------------------------------------------------------
+        * FindTwoInARowWithNoBuild -
+        --------------------------------------------------------------------------------------------------------------------------
+        A bool which returns true or false of the presence of a two counters of the same symbol which has no potential 
+        to be turned into a three-in-a-row with no empty cells available to the left of the existing two-in-a-row.
+        --------------------------------------------------------------------------------------------------------------------------
+        */
+        public static bool FindTwoWithNoBuild(GameBoard_TPL<counters> board, counters us)
+        {
+            for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++)
+                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as both neighbours
+                    for (int xx = 0; xx <= 1; xx++)
+                        for (int yy = 0; yy <= 1; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+
+                            // check that all coordinates tested are on the board
+                            // TOCHECK: if the border uses a BORDER, this shouldn't be necessary
+                            if (x + xx <= 0 ||
+                            x + xx > _COORD_X ||
+                            y + yy <= 0 ||
+                            y + yy > _COORD_Y ||
+                            x - xx <= 0 ||
+                            x - xx > _COORD_X ||
+                            y - yy <= 0 ||
+                            y - yy > _COORD_Y)
+                                continue;
+
+                            if (board[x, y] == us &&
+                            board[x + xx, y + yy] == us &&
+                            board[x + xx + xx, y + yy + yy] == us &&
+                            board[x - xx, y - yy] == us) // checks for top-left to bottom-right diag
+                            {
+                                //Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x,",",y,x + xx, y + yy, x - xx, y - yy);
+                                //Console.WriteLine("!! next adjacent cell: {0}{1}{2})\n", x + xx + xx, ",", y + yy + yy);
+                                /*
+                                 !! HWL: Centre of 3-in-a-row: 3,2 (with 3,3 and 3,1)
+                                 !! next adjacent cell: 3,4)
+                                */
+                                return true;
+                            }
+
+                            if (yy == 1 && xx == 1 &&
+                            board[x, y] == us &&
+                            board[x + xx, y - yy] == us &&
+                            board[x + xx + xx, y - yy - yy] == us &&
+                            board[x - xx, y + yy] == us) // checks for bottom-left to top-right diag
+                            {
+                                //Console.WriteLine("!! HWL: Centre of 3-in-a-row: {0}{1}{2} (with {3},{4} and {5},{6})\n", x, ",", y, x + xx, y - yy, x - xx, y + yy);
+                                //Console.WriteLine("-- next adjacent cell: {0}{1}{2})\n", x + xx + xx, ",", y - yy - yy);
+                                /*
+                                 ! HWL: Centre of 3-in-a-row: 2,2 (with 3,1 and 1,3)
+                                 -- next adjacent cell: 4,0)
+                                 */
+                                return true;
+                            }
+                        }
+                }
+            return false;
+        }
+
+        public static Tuple<int,int,int> EmptySpacesAroundCounter(GameBoard_TPL<counters> board, counters us)
+        {
+            int const_val = 2;
+            int cell_sum = 0;
+            int final = const_val * cell_sum ;
+            for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++)
+                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++)
+                {
+                    // check whether position piece at [x,y] has the same piece as both neighbours
+                    for (int xx = 0; xx <= 1; xx++)
+                        for (int yy = 0; yy <= 1; yy++)
+                        {
+                            if (yy == 0 && xx == 0)
+                                continue;
+
+                            /*
+                            Console.WriteLine("!! CURRENT CELL: {0}{1}{2})\n", x, ",", y);
+                            Console.WriteLine("!! above: {0}{1}{2})\n", x, ",", y - yy);
+                            Console.WriteLine("!! above right diagonal: {0}{1}{2})\n", x + 1, ",", y - yy);
+                            Console.WriteLine("!! above left diagonal: {0}{1}{2})\n", x - 1, ",", y - yy);
+                            Console.WriteLine("!! left: {0}{1}{2})\n", x + 1, ",", y);
+                            Console.WriteLine("!! right: {0}{1}{2})\n", x - 1, ",", y);
+                            Console.WriteLine("!! below: {0}{1}{2})\n", x, ",", y + yy);
+                            Console.WriteLine("!! below right diagonal: {0}{1}{2})\n", x + 1, ",", y + yy);
+                            Console.WriteLine("!! below left diagonal: {0}{1}{2})\n", x - 1, ",", y + yy);
+                            */
+
+                            // above right
+                            if (board[x, y] == us &&
+                            board[x + 1, y - yy] == counters.e)
+                            {
+                                cell_sum = cell_sum + 1;
+                            }
+                            // above left
+                            else if (board[x, y] == us &&
+                            board[x - 1, y - yy] == counters.e)
+                            {
+                                cell_sum = cell_sum + 1;
+                            }
+                            // above
+                            else if (board[x, y] == us &&
+                            board[x, y - yy] == counters.e) // checks for top-left to bottom-right diag
+                            {
+                                cell_sum = cell_sum + 1;
+                            }
+                            //left
+                           else if (board[x, y] == us &&
+                           board[x - 1, y] == counters.e) // checks for top-left to bottom-right diag
+                            {
+                                cell_sum = cell_sum + 1;
+                            }
+                            // right
+                           else if (board[x, y] == us &&
+                           board[x + 1, y] == counters.e) // checks for top-left to bottom-right diag
+                            {
+                                cell_sum = cell_sum + 1;
+                            }
+                            // below
+                           else if (board[x, y] == us &&
+                           board[x, y + yy] == counters.e)
+                            {
+                                cell_sum = cell_sum + 1;
+                            }
+                            // below right
+                           else if (board[x, y] == us &&
+                            board[x + 1, y + yy] == counters.e)
+                            {
+                                cell_sum = cell_sum + 1;
+                            }
+                            // below left
+                            else if (board[x, y] == us &&
+                            board[x - 1, y + yy] == counters.e) // checks for top-left to bottom-right diag
+                            {
+                                cell_sum = cell_sum + 1;
+                            }
+                       
+                        }
+                                }
+            return new Tuple<int, int, int>(const_val, cell_sum, const_val * cell_sum);
+        }
         /*
- ----------------------------------------------------------------------------------------------------------------
-  FindTwoInARow -
- --------------------------------------------------------------------------------------------------------------------------
-  A bool which returns true or false of the presence of a three counters of the same symbol placed side by side on the board
- --------------------------------------------------------------------------------------------------------------------------
- */
- public static bool FindThreeInARow(GameBoard_TPL<counters> board, counters us)
+         ----------------------------------------------------------------------------------------------------------------
+          FindThreeInARow -
+         --------------------------------------------------------------------------------------------------------------------------
+          A bool which returns true or false of the presence of a three counters of the same symbol placed side by side on the board
+         --------------------------------------------------------------------------------------------------------------------------
+         */
+        public static bool FindThreeInARow(GameBoard_TPL<counters> board, counters us)
  {
    for (int x = 1; x <= ((_SEGM_BOARD==1) ? 3 : 7); x++)
      for (int y = 1; y <= ((_SEGM_BOARD==1) ? 3 : 7); y++)
@@ -323,23 +693,39 @@ Class controls all behaviour from all AIPlayer_TPL instances. Class inherits beh
          greater scores assigned to combinational placement of counters of the same symbol.
         --------------------------------------------------------------------------------------------------------------------------
         */
-  public int EvalCurrentBoard(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard, counters us)
+        public int EvalCurrentBoard(GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard, counters us)
 {
     int score;
-    // eval if move is win draw or loss
-    if (FindThreeInARow(board, us)) // Player_TPL win?
-        return score = 1000; // Player_TPL win confirmed
-    else if (FindThreeInARow(board, us + 1)) // opponent win?
-        return score = -1000; // opp win confirmed
-    else if (FindTwoInARow(board, us)) // Player_TPL win?
-        return score = 100; // Player_TPL win confirmed
-    else if (FindTwoInARow(board, us + 1)) // opponent win?
-        return score = -100; // opp win confirmed
-    if (FindOneInARow(board, us)) // Player_TPL win?
-        return score = 10; // Player_TPL win confirmed
+            // eval if move is win draw or loss
+            if (FindThreeInARow(board, us)) // Player_TPL win?
+                return score = 1000; // Player_TPL win confirmed
+            else if (FindThreeInARow(board, us + 1)) // opponent win?
+                return score = -1000; // opp win confirmed
+            else if (FindTwoWithBothBuild(board, us)) // Player_TPL win?
+                return score = 110 + EmptySpacesAroundCounter(board,us).Item3; // Player_TPL win confirmed
+            else if (FindTwoWithBothBuild(board, us + 1)) // opponent win?
+                return score = -110 + -EmptySpacesAroundCounter(board, us).Item3; // opp win confirmed
+            else if (FindTwoWithNoBuild(board, us)) // Player_TPL win?
+                return score = 15 + EmptySpacesAroundCounter(board, us).Item3; // Player_TPL win confirmed
+            else if (FindTwoWithNoBuild(board, us + 1)) // opponent win?
+                return score = -15 + -EmptySpacesAroundCounter(board, us).Item3; // opp win confirmed
+            else if (FindTwoWithGap(board, us)) // Player_TPL win?
+                return score = 50 + EmptySpacesAroundCounter(board, us).Item3; // Player_TPL win confirmed
+            else if (FindTwoWithGap(board, us + 1)) // opponent win?
+                return score = -50 + -EmptySpacesAroundCounter(board, us).Item3; // opp win confirmed
+            else if (FindTwoWithRightBuild(board, us)) // Player_TPL win?
+                return score = 55 + EmptySpacesAroundCounter(board, us).Item3; // Player_TPL win confirmed
+            else if (FindTwoWithRightBuild(board, us + 1)) // opponent win?
+                return score = -55 + -EmptySpacesAroundCounter(board, us).Item3; // opp win confirmed
+            else if (FindTwoWithLeftBuild(board, us)) // Player_TPL win?
+                return score = 65 + EmptySpacesAroundCounter(board, us).Item3; // Player_TPL win confirmed
+            else if (FindTwoWithLeftBuild(board, us + 1)) // opponent win?
+                return score = -65; // opp win confirmed 
+            else if (FindOneInARow(board, us)) // Player_TPL win?
+         return score = 10 + EmptySpacesAroundCounter(board, us).Item3; // Player_TPL win confirmed
     else if (FindOneInARow(board, us + 1)) // opponent win?
-        return score = -10; // opp win confirmed
-    else
+        return score = -10 + -EmptySpacesAroundCounter(board, us).Item3; // opp win confirmed
+            else
         return score = 23; // dummy value
 }
         /*
@@ -421,10 +807,12 @@ Tuple<int,int> construct.
 
                 // assign score to correct cell in score
                 scoreBoard[Move.Item1, Move.Item2] = score;
-         
-		if (ply==1) // HWL: DEBUGGING only
-		  Console.WriteLine(".... {1} at {0} (ply={2}); score = {3}", Move.ToString(), counter, ply, score); /* , positions.ToString() */
 
+             //    Console.WriteLine("-- for Board {0} with Empty cell score {1} with const {2} and no of empty cells {3}",Game_TPL.cntr, EmptySpacesAroundCounter(board,us).Item3, EmptySpacesAroundCounter(board,us).Item1, EmptySpacesAroundCounter(board,us).Item2);
+                // const, cell, final
+                if (ply==1) // HWL: DEBUGGING only
+		  Console.WriteLine(".... {1} at {0} (ply={2}); score = {3}", Move.ToString(), counter, ply, score); /* , positions.ToString() */
+           
                 if (ply == 0)
                 {
                     // assign score to correct cell in score
@@ -439,12 +827,7 @@ Tuple<int,int> construct.
                         scoreBoard.DisplayScoreBoard();
                     }
                 }
-		/*
-                if (Game_TPL.cntr >= 40 ) // 40 // ?????????????????
-                {
-                    Environment.Exit(99);
-                }
-		*/
+
                 Object my_object = new Object();
                 // if maximising                  
                 if (/* true || */  mmax)  // TOCHECK
@@ -492,7 +875,7 @@ Tuple<int,int> construct.
                             if (ply >= 1)
                             {
 			      Console.WriteLine("        minimising: player {4} new best score {0} at {1} (ply={2}, positions={3})", bestScore, bestMove, ply, positions.ToString(), counter);
-			      // scoreBoard.DisplayScoreBoard();
+			      //scoreBoard.DisplayScoreBoard();
                             }
                         }
                     }
@@ -529,7 +912,7 @@ Thread 2, Thread 3 is processed by (1,3), etc. Each task takes a clone of the cu
 cloning is needed.
 --------------------------------------------------------------------------------------------------------------------------
 */
-   public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, counters counter, int numTasks, GameBoard_TPL<int> scoreBoard, ref int move)
+        public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, counters counter, int numTasks, GameBoard_TPL<int> scoreBoard, ref int move)
         {
             List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>();
             if (SEGM_BOARD == 0)
@@ -547,22 +930,24 @@ cloning is needed.
             Tuple<int, Tuple<int, int>> bestRes = new Tuple<int, Tuple<int, int>>(score, positions);
             Tuple<int, Tuple<int, int>> worstRes = new Tuple<int, Tuple<int, int>>(Consts.MIN_SCORE, positions);
 
-            GameBoard_TPL<counters> board1 = board.Clone();
-            GameBoard_TPL<counters> board2 = board.Clone();
-            GameBoard_TPL<counters> board3 = board.Clone();
-            GameBoard_TPL<counters> board4 = board.Clone();
+                GameBoard_TPL<counters> board1 = board.Clone();
+                GameBoard_TPL<counters> board2 = board.Clone();
+                GameBoard_TPL<counters> board3 = board.Clone();
+                GameBoard_TPL<counters> board4 = board.Clone();
 
-            Console.WriteLine("*** Move {0}", move);
-	    
-            // start and synchronise 4 parallel tasks
-            /* HWL: try a sequential version first, to test strided iteration (below):
-                Parallel.Invoke(() => { ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 1); },
-                        () => { ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 2); },
-                        () => { ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 3); },
-                        () => { ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, id, bestRes, 4); });
-            */
+                Console.WriteLine("*** Move {0}", move);
 
             List<Tuple<int, int>> unconsideredMoves = new List<Tuple<int, int>>();
+            if (TPL_PARALLELINVOKE_ON == 1)
+            {
+                // start and synchronise 4 parallel tasks
+                // HWL: try a sequential version first, to test strided iteration (below):
+                Parallel.Invoke(() => { ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, 1, bestRes, 1, unconsideredMoves); },
+                        () => { ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves); },
+                        () => { ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves); },
+                        () => { ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves); });
+            }
+
             if (SEGM_BOARD == 0)
             {
                 unconsideredMoves = getAvailableMoves(board, positions);
@@ -571,59 +956,52 @@ cloning is needed.
             {
                 unconsideredMoves = getAvailableSegmentedMoves(board, positions); // HWL: <==== change to only return indices betwee 1-3
             }
-	    int len = unconsideredMoves.Count;
+            int len = unconsideredMoves.Count;
             ress[0] = ParSearchWork(board1, counter, ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves /* for DEBUGGING only */);
             ress[1] = (len <= 1) ? worstRes : ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves /* for DEBUGGING only */);
             ress[2] = (len <= 2) ? worstRes : ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves /* for DEBUGGING only */);
-            ress[3] = (len <= 3) ? worstRes : ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves /* for DEBUGGING only */);   
-	    // bestRes = res = result;
-	    bestRes = res = ress[0]; 
-	    Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread 0: {2}", Game_TPL.cntr, counter /* Flip(counter) */, bestRes.ToString());
-
+            ress[3] = (len <= 3) ? worstRes : ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves /* for DEBUGGING only */);
+            // bestRes = res = result;
+            bestRes = res = ress[0];
+            Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread 0: {2}", Game_TPL.cntr, counter /* Flip(counter) */, bestRes.ToString());
+            // ****  ⌵  ⌵  ⌵  ⌵  ADD LOCK BELOW HERE FOR TPL PARALLEL VARIANT  ⌵  ⌵  ⌵  ⌵  ****
             for (int j = 1; j < ress.Length; j++)
-            { 
-	      Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread {2}: {3}", Game_TPL.cntr, counter /* Flip(counter) */, j, ress[j].ToString());
-	      res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // result: <score, <position>>
-            }
-            Console.WriteLine("======================================================================================================");
-            Console.WriteLine("-- OVERALL " + ":");
-            Console.WriteLine("======================================================================================================");
-            Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, counter /*Flip(counter)*/, res.ToString());
-            Console.WriteLine("======================================================================================================");
-            // board[res.Item2.Item1, res.Item2.Item2] = counter /* Flip(counter) */;
-            if (EXECPRINT_GAMEBOARD_ON == 1)
             {
-                board.DisplayBoard();
-            }
-            if (SEGM_BOARD == 1)
-            {
-                for (int x = COORD_X + 1; x <= 7; x++)
-                    for (int y = 1; y <= 7; y++)
-                        if (board[x, y] != counters.N)
-                        {
-                            board[x, y] = counters.N;
-                            scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
-                        }
-                for (int x = 1; x <= COORD_X; x++)
-                    for (int y = COORD_Y + 1; y <= 7; y++)
-                        if (board[x, y] != counters.N)
-                        {
-                            board[x, y] = counters.N;
-                            scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
-                        }
-            }
+                lock (TPL_THREADSYNC_LOCK)
+                {
+                    Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread {2}: {3}", Game_TPL.cntr, counter /* Flip(counter) */, j, ress[j].ToString());
+                    res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // result: <score, <position>>
 
-            return res;
+                    Console.WriteLine("======================================================================================================");
+                    Console.WriteLine("-- OVERALL " + ":");
+                    Console.WriteLine("======================================================================================================");
+                    Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, counter /*Flip(counter)*/, res.ToString());
+                    Console.WriteLine("======================================================================================================");
 
-	    // HWL: NO: this is the end of the current move, so return here; Play should Flip and search for the next move
-	    Console.WriteLine("^^ HWL: kicking of next move from within ParSearchWrap ...");
-	    while (!Win(board, Flip(counter)) && !board.IsFull(COORD_X)) {
-	      move++;
-	      ParSearchWrap(board, Flip(counter), numTasks, scoreBoard, ref move); // return
-            
-                break;
-            }
-	    // return overall maximum
+                    board[res.Item2.Item1, res.Item2.Item2] = counter /* Flip(counter) */;
+                }
+                    if (SEGM_BOARD == 1)
+                {
+                    for (int x = COORD_X + 1; x <= 7; x++)
+                        for (int y = 1; y <= 7; y++)
+                            if (board[x, y] != counters.N)
+                            {
+                                board[x, y] = counters.N;
+                                scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
+                            }
+                    for (int x = 1; x <= COORD_X; x++)
+                        for (int y = COORD_Y + 1; y <= 7; y++)
+                            if (board[x, y] != counters.N)
+                            {
+                                board[x, y] = counters.N;
+                                scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
+                            }
+                }
+                if (EXECPRINT_GAMEBOARD_ON == 1)
+                {
+                    board.DisplayBoard();
+                }
+            }  // end if thread sync
             return res;
         }
         /*
@@ -661,10 +1039,9 @@ cloning is needed.
             Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, us.ToString(), id);
             Console.WriteLine("__ HWL:   stride={0}, id={1}, thread_no={2}  ", stride,  id, thread_no);
 	    System.Console.WriteLine("__ HWL:   Input board: ");
-	    board.DisplayBoard();
             if (SEGM_BOARD == 1)
             {
-                for (int x = COORD_X+1; x <= 7; x++)
+                for (int x = COORD_X + 1; x <= 7; x++)
                     for (int y = 1; y <= 7; y++)
                         if (board[x, y] != counters.N)
                         {
@@ -672,17 +1049,15 @@ cloning is needed.
                             scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                         }
                 for (int x = 1; x <= COORD_X; x++)
-                    for (int y = COORD_Y+1; y <= 7; y++)
+                    for (int y = COORD_Y + 1; y <= 7; y++)
                         if (board[x, y] != counters.N)
                         {
                             board[x, y] = counters.N;
                             scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                         }
             }
-            if (ply == 0)
-            {
-             //   scoreBoard.DisplayScoreBoardToFile();
-            }
+            board.DisplayBoard();
+
             if (ply > maxPly)
             {
                 score = EvalCurrentBoard(board, scoreBoard, us); // call stat evaluation func - takes board and Player_TPL and gives score to that Player_TPL
@@ -710,7 +1085,7 @@ cloning is needed.
 		      board[Move.Item1, Move.Item2] = counters.e;		// blank the field again
 		      return new Tuple<int, Tuple<int, int>>(1000, Move); // return win-in-1-move
 		    }
-		    // do a regular, sequential search to get the score for this move
+		    // do a regular, sequential search to get tovhe score for this move
 		    res = SeqSearch(board, Flip(counter), ply+1, positions, false, scoreBoard, alpha, beta);
 		    // undo the move
 		    board[Move.Item1, Move.Item2] = counters.e;
@@ -746,8 +1121,7 @@ cloning is needed.
                                     board[x, y] = counters.N;
                                     scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                                 }
-                    }
-         
+                    }  
                 }
             }         
 	    /* HWL: here, after the loop, print the considered moves; do you want to print to file in each loop iteration, or just at the end after the loop!? */
@@ -776,19 +1150,19 @@ cloning is needed.
     }
     return str;
   }
-/*
-----------------------------------------------------------------------------------------------------------------
- ParallelChoice -
---------------------------------------------------------------------------------------------------------------------------
- A method that choices to execute Minimax either in Parallel or Sequentially based on the current depth of the search.
---------------------------------------------------------------------------------------------------------------------------
-*/
-public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
-{
+        /*
+        ----------------------------------------------------------------------------------------------------------------
+         ParallelChoice -
+        --------------------------------------------------------------------------------------------------------------------------
+         A method that choices to execute Minimax either in Parallel or Sequentially based on the current depth of the search.
+        --------------------------------------------------------------------------------------------------------------------------
+        */
+        public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positions, bool mmax, GameBoard_TPL<int> scoreBoard, int alpha, int beta)
+        {
             // decs
             counters us = counter /*Flip(counter) */;
             // create new list of Tuple<int,int>
-	    int move = 1;
+            int move = 1;
             int numTasks = 1;
             int bestScore = mmax ? -1001 : 1001;
             int score = Consts.MIN_SCORE; // current score of move
@@ -801,10 +1175,10 @@ public Tuple<int, Tuple<int, int>> ParallelChoice(GameBoard_TPL<counters> board,
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY);
 
-	    if (ply == 0 || ply == 1)
-		return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard, ref move); // return
-	    else if (ply > 1)
-		return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
+            if (ply == 0 || ply == 1)
+                return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard, ref move); // return
+            else if (ply > 1)
+                return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta);
 	    else // should never be reached!
 	      {
 		Environment.Exit(97);
