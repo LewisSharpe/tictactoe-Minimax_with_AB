@@ -142,14 +142,13 @@ This method constructs current finished board ending in Win or Draw and then pri
         }
         /* 
 ----------------------------------------------------------------------------------------------------------------
-* DisplayFinBoardToFile -
+* DisplayScoreBoardToFile -
 --------------------------------------------------------------------------------------------------------------------------
 This method constructs current finished score board ending in Win or Draw and then prints it to a file.
 --------------------------------------------------------------------------------------------------------------------------
 */
         public void DisplayScoreBoardToFile()
         {
-	  // string path = @"C:/Users/Lewis/Desktop/files_150819/ttt_csharp_270719/Minimax_TPL/boards/scoreboards.txt";
             string path = @"data/scoreboards.txt";
             // This text is added only once to the file.
             // Create a file to write to.

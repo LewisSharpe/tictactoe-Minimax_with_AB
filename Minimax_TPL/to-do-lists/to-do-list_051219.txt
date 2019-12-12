@@ -1,0 +1,10 @@
+﻿Build on each side - +50 each
+No build on each side in 2inrow +15
+Give 2inrow with gap +50
+Empty piece around playing piece (constant x empty cells around counter)
+
+Define test boards
+NULL cells
+
+stopwatch
+score board
