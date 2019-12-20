@@ -1,17 +1,17 @@
 
   1   2   3   4   5   6   7 
-1 O | X | X | N | N | N | N | 
+1 e | N | O | e | e | e | e | 
   -   -   -   -   -   -   - 
-2 e | e | e | N | N | N | N | 
+2 X | N | X | e | e | e | e | 
   -   -   -   -   -   -   - 
-3 e | X | e | N | N | N | N | 
+3 e | N | e | e | e | e | e | 
   -   -   -   -   -   -   - 
-4 N | N | N | N | N | N | N | 
+4 e | N | e | e | e | e | e | 
   -   -   -   -   -   -   - 
-5 N | N | N | N | N | N | N | 
+5 N | e | e | e | e | e | e | 
   -   -   -   -   -   -   - 
-6 N | N | N | N | N | N | N | 
+6 e | e | e | e | e | e | e | 
   -   -   -   -   -   -   - 
-7 N | N | N | N | N | N | N | 
+7 e | e | e | e | e | e | e | 
   -   -   -   -   -   -   - 
-^^ FIN BOARD FOR BOARD 2
+^^ FIN BOARD FOR BOARD 3
