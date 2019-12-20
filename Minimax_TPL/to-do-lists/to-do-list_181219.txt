@@ -1,0 +1,20 @@
+﻿TO DO 
+- test run on cantor
+- debug case where choosing win in two moves over win in one move (both score of -1000)
+- install vm
+
+ mcs -out:hello.exe AIPlayer_TPL.cs GameBoard_TPL.cs Game_TPL.cs HumanPlayer_TPL.cs Player_TPL.cs Program_TPL.cs 
+
+
+ DONE
+- continued run of execution of boards
+- Build on each side - +50 each
+- No build on each side in 2inrow +15
+- Give 2inrow with gap +50
+- Empty piece around playing piece (constant x empty cells around counter)
+- timing of moves and game execution
+- fix score board 
+- define test boards with NULL cells
+- locks to protect score update and file overwriting
+- enable/disable csv printing
+- limited debug print option
