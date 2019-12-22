@@ -1,0 +1,19 @@
+﻿to do
+lock board (release when printing)
+valid result - check that parallel result is the same as sequential, hit all paths in tree
+lower score for no build
+check strided iteration is as expected (no duplicated move - correctness)
+noMoveHasBeenCheckedTwice() function (check 4 lists)
+check performance --> in directory with source code --> xbuild --> mono bin/Debug/Minimax_TPL.exe
+which mcs /opt/mono/bin/mcs
+# mono FLAG for no of cores/threads used
+status of cores --> top, htop
+revised timeplan
+timestamp elapsed time, timestamp for threads and work done
+Enterprise version --> look at parallel tools
+performance measuring
+performance tuning
+
+in progress
+
+done
