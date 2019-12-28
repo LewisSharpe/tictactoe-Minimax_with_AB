@@ -1223,10 +1223,12 @@ cloning is needed.
                                 }
                     }
                 }
+                //
             }
             /* HWL: here, after the loop, print the considered moves; do you want to print to file in each loop iteration, or just at the end after the loop!? */
             if (ply == 0)
             {
+                
                 Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, id, showList(consideredMoves));
                 Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
                 // HWL: remove all cosideredMoves from the global list unconsideredMoves, to check that all moves are considered at the end
@@ -1236,75 +1238,100 @@ cloning is needed.
                 }
                 Console.WriteLine("__ HWL: best res so far: {0} ", bestRes.ToString());
                 Console.WriteLine("-- LS Elapsed time for move: " + sw_move.Elapsed);
-
+            }
+                /*
+                 * 
+--------------------------------------------------------------------------------------------------------------------------
+No move is visited twice by more than one thread -
+--------------------------------------------------------------------------------------------------------------------------
+The code below creates lists of visited moves for each thread and check them against each other to check
+for any moves duplicated and visited more than one thread - this is inefficient. Any existing moves that 
+have been considered by more than one thread, that position will added to list of duplicated moves and 
+elements of this list will be printed to console. If there are no visited moves more than once then a
+console message will be displayed confirming there are no duplicated moves.
+--------------------------------------------------------------------------------------------------------------------------
+               */
+          // Initalise lists to hold considered moves for each thread and summarising list hold any duplicates 
                 List<Tuple<int, int>> thr1_conMoves = new List<Tuple<int, int>>();
                 List<Tuple<int, int>> thr2_conMoves = new List<Tuple<int, int>>();
                 List<Tuple<int, int>> thr3_conMoves = new List<Tuple<int, int>>();
                 List<Tuple<int, int>> thr4_conMoves = new List<Tuple<int, int>>();
                 List<Tuple<int, int>> duplicateMoves = new List<Tuple<int, int>>();
-                
-                if (id == 1)
+
+                // If current thread is thread 1
+                if (id == 0)
                 {
                     thr1_conMoves = consideredMoves.ToList();
-                    Console.WriteLine(showList(thr1_conMoves));
                 }
-                if (id == 2)
+                // If current thread is thread 2
+                else if (id == 1)
                 {
                     thr2_conMoves = consideredMoves.ToList();
-                    thr2_conMoves.Add(new Tuple<int, int>(1, 2));
-                    Console.WriteLine(showList(thr2_conMoves));
                 }
-                if (id == 3)
+                // If current thread is thread 3
+                else if (id == 2)
                 {
                     thr3_conMoves = consideredMoves.ToList();
-                    Console.WriteLine(showList(thr3_conMoves));
                 }
-                if (id == 4)
+                // If current thread is thread 4
+                else if (id == 3)
                 {
                     thr4_conMoves = consideredMoves.ToList();
-                    Console.WriteLine(showList(thr4_conMoves));
                 }
-                foreach (Tuple<int, int> r in thr1_conMoves.Intersect(thr2_conMoves))
+                if (ply == 0)
                 {
-                    duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    Console.Write("Thread 1: " + thr1_conMoves.Count +
+                           "Thread 2: " + thr2_conMoves.Count +
+                           "Thread 3: " + thr3_conMoves.Count +
+                           "Thread 4: " + thr4_conMoves.Count);
                 }
-                foreach (Tuple<int, int> r in thr1_conMoves.Intersect(thr3_conMoves))
-                {
-                    duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
-                }
-                foreach (Tuple<int, int> r in thr1_conMoves.Intersect(thr4_conMoves)) { 
-                    duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
-                }
-                foreach (Tuple<int, int> r in thr2_conMoves.Intersect(thr3_conMoves)) { 
-                    duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
-                }
-                foreach (Tuple<int, int> r in thr2_conMoves.Intersect(thr4_conMoves)) { 
-                    duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
-                }
-                foreach (Tuple<int, int> r in thr3_conMoves.Intersect(thr4_conMoves)) { 
-                    duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
-                }
-                bool isEmpty = !duplicateMoves.Any();
-                if (isEmpty)
-                {
-                    Console.WriteLine("++ LS: NO DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
-                }
-
-
-            }
-        
+                    foreach (Tuple<int, int> r in thr1_conMoves.Intersect(thr2_conMoves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr1_conMoves.Intersect(thr3_conMoves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr1_conMoves.Intersect(thr4_conMoves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr2_conMoves.Intersect(thr3_conMoves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr2_conMoves.Intersect(thr4_conMoves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr3_conMoves.Intersect(thr4_conMoves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    bool isEmpty = !duplicateMoves.Any();
+                    if (isEmpty)
+                    {
+                        Console.WriteLine("++ LS: NO DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                /*
+--------------------------------------------------------------------------------------------------------------------------
+END: No move is visited twice by more than one thread -
+--------------------------------------------------------------------------------------------------------------------------
+                */
+            
             return bestRes;
         }
         /*
