@@ -1,22 +1,27 @@
 ﻿to do from meeting on 20/12/19
+
+TO DO FOR PARALLEL VERSION
 valid result - check that parallel result is the same as sequential, hit all paths in tree
-check strided iteration is as expected (no duplicated move - correctness)
-noMoveHasBeenCheckedTwice() function (check 4 lists)
 # mono FLAG for no of cores/threads used --> see: https://www.mono-project.com/docs/debug+profile/profile/profiler/ 
-revised timeplan
-amount of work done in each thread
-Enterprise version --> look at parallel tools
+
+IN PROGRESS FOR PARALLEL - PARTIAL
+check strided iteration is as expected (no duplicated move - correctness) -->> noMoveHasBeenCheckedTwice() function (check 4 lists)
+
+TO DO FOR PERFORMANCE 
 performance measuring
 performance tuning
 
-in progress
-
-done
+DONE
 lock board (release when printing)
 lower score for no build
 timestamp elapsed time, timestamp for threads
+revised timeplan
+amount of work done in each thread
 
-info
+INFO
 which mcs /opt/mono/bin/mcs
 status of cores --> top, htop
 check performance --> in directory with source code --> xbuild --> mono bin/Debug/Minimax_TPL.exe
+
+EMAIL
+Enterprise version --> look at parallel tools --> ian after break regarding hw vs enterprise licence
