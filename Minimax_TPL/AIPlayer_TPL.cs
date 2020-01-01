@@ -47,10 +47,18 @@ namespace Minimax_TPL
         public static int thread_no_track = 0; // thread track int variable
         Tuple<int, Tuple<int, int>> result; // return Tuple which returns score and position of Move from Minimax
         Stopwatch sw_move = new Stopwatch(); // timer for current move
+        Stopwatch sw_thr0 = new Stopwatch(); // timer for thread 0 total execution time
         Stopwatch sw_thr1 = new Stopwatch(); // timer for thread 1 total execution time
         Stopwatch sw_thr2 = new Stopwatch(); // timer for thread 2 total execution time
         Stopwatch sw_thr3 = new Stopwatch(); // timer for thread 3 total execution time
-        Stopwatch sw_thr4 = new Stopwatch(); // timer for thread 4 total execution time
+        List<Tuple<int, int>> thr0_moves = new List<Tuple<int, int>>();
+        List<Tuple<int, int>> thr1_moves = new List<Tuple<int, int>>();
+        List<Tuple<int, int>> thr2_moves = new List<Tuple<int, int>>();
+        List<Tuple<int, int>> thr3_moves = new List<Tuple<int, int>>();
+        List<Tuple<int, int>> thr0_storemoves = new List<Tuple<int, int>>();
+        List<Tuple<int, int>> thr1_storemoves = new List<Tuple<int, int>>();
+        List<Tuple<int, int>> thr2_storemoves = new List<Tuple<int, int>>();
+        List<Tuple<int, int>> thr3_storemoves = new List<Tuple<int, int>>();
 
         public AIPlayer_TPL(counters _counter) : base(_counter) {
         }
@@ -109,7 +117,7 @@ namespace Minimax_TPL
             sw_move = Stopwatch.StartNew();
             // Do work
             Tuple<int, Tuple<int, int>> result = new Tuple<int, Tuple<int, int>>(score, positions);
-            result = ParallelChoice(board, counter, ply, positions, mmax, scoreBoard, alpha, beta); // return         
+            result = ParallelChoice(board, counter, ply, positions, mmax, scoreBoard, alpha, beta); // return      
             // Stop timing.
             sw_move.Stop();
             sw_move.Reset();
@@ -999,27 +1007,27 @@ cloning is needed.
                 // HWL: try a sequential version first, to test strided iteration (below):
                 Parallel.Invoke(() =>
                 {
-                    sw_thr1.Start();
+                    sw_thr0.Start();
                     ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, 1, bestRes, 1, unconsideredMoves);
+                    sw_thr0.Stop();
+                },
+                () =>
+                {
+                    sw_thr1.Start();
+                    ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves);
                     sw_thr1.Stop();
                 },
                 () =>
                 {
                     sw_thr2.Start();
-                    ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves);
+                    ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves);
                     sw_thr2.Stop();
                 },
                 () =>
                 {
                     sw_thr3.Start();
-                    ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves);
-                    sw_thr3.Stop();
-                },
-                () =>
-                {
-                    sw_thr4.Start();
                     ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves);
-                    sw_thr4.Start();
+                    sw_thr3.Start();
                 });
             }
 
@@ -1034,18 +1042,18 @@ cloning is needed.
             int len = unconsideredMoves.Count;
             if (TPL_PARALLELINVOKE_ON == 0)
             {
-                sw_thr1.Start();
+                sw_thr0.Start();
                 ress[0] = ParSearchWork(board1, counter, ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves /* for DEBUGGING only */);
+                sw_thr0.Stop();
+                sw_thr1.Start();
+                ress[1] = (len <= 1) ? worstRes : ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves /* for DEBUGGING only */);
                 sw_thr1.Stop();
                 sw_thr2.Start();
-                ress[1] = (len <= 1) ? worstRes : ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves /* for DEBUGGING only */);
+                ress[2] = (len <= 2) ? worstRes : ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves /* for DEBUGGING only */);
                 sw_thr2.Stop();
                 sw_thr3.Start();
-                ress[2] = (len <= 2) ? worstRes : ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves /* for DEBUGGING only */);
-                sw_thr3.Stop();
-                sw_thr4.Start();
                 ress[3] = (len <= 3) ? worstRes : ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves /* for DEBUGGING only */);
-                sw_thr4.Stop();
+                sw_thr3.Stop();
             }
             // bestRes = res = result;
             bestRes = res = ress[0];
@@ -1065,6 +1073,16 @@ cloning is needed.
                     Console.WriteLine("======================================================================================================");
 
                     board[res.Item2.Item1, res.Item2.Item2] = counter /* Flip(counter) */;
+
+                    thr0_moves.Clear();
+                    Console.WriteLine("thr 0 is cleared");
+                    thr1_moves.Clear();
+                    Console.WriteLine("thr 1 is cleared");
+                    thr2_moves.Clear();
+                    Console.WriteLine("thr 2 is cleared");
+                    thr3_moves.Clear();
+                    Console.WriteLine("thr 3 is cleared");
+                
                 }
                 if (SEGM_BOARD == 1)
                 {
@@ -1091,17 +1109,19 @@ cloning is needed.
                         board.DisplayFinBoardToFile();
                     }
                 }
+
                 if (Win(board, counter) || Win(board, otherCounter))
                 {
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine("-- Thread Running Times " + ":");
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("#### Thread 1: " + sw_thr1.Elapsed);
-                    Console.WriteLine("#### Thread 2: " + sw_thr2.Elapsed);
-                    Console.WriteLine("#### Thread 3: " + sw_thr3.Elapsed);
-                    Console.WriteLine("#### Thread 4: " + sw_thr4.Elapsed);
+                    Console.WriteLine("#### Thread 0 execution time: " + sw_thr0.Elapsed + ", with " + thr0_storemoves.Count + " positions visited.");
+                    Console.WriteLine("#### Thread 1 execution time: " + sw_thr1.Elapsed + ", with " + thr1_storemoves.Count + " positions visited.");
+                    Console.WriteLine("#### Thread 2 execution time: " + sw_thr2.Elapsed + ", with " + thr2_storemoves.Count + " positions visited.");
+                    Console.WriteLine("#### Thread 3 execution time: " + sw_thr3.Elapsed + ", with " + thr3_storemoves.Count + " positions visited.");
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                 }
+
             }  // end if thread sync
             return res;
         }
@@ -1126,6 +1146,7 @@ cloning is needed.
                 availableMoves = getAvailableSegmentedMoves(board, positions); // HWL: <==== change to only return indices betwee 1-3
             }
             List<Tuple<int, int>> consideredMoves = new List<Tuple<int, int>>();
+            List<Tuple<int, int>> duplicateMoves = new List<Tuple<int, int>>();
             Tuple<int, int> Move;
             int score = Consts.MIN_SCORE; // current score of move
             // stride = 1; // ???
@@ -1171,8 +1192,29 @@ cloning is needed.
                         if (ply == 0)
                         {
                             consideredMoves.Add(availableMoves[i]);
-                        } // HWL DEBUGGING
-                          // pick next available move for this thread to consider
+                            if (id == 0)
+                            {
+                                thr0_moves.Add(availableMoves[i]);
+                                thr0_storemoves.Add(availableMoves[i]);
+                            }
+                            if (id == 1)
+                            {
+                                thr1_moves.Add(availableMoves[i]);
+                                thr1_storemoves.Add(availableMoves[i]);
+                            }
+                            if (id == 2)
+                            {
+                                thr2_moves.Add(availableMoves[i]);
+                                thr2_storemoves.Add(availableMoves[i]);
+                            }
+                            if (id == 3)
+                            {
+                                thr3_moves.Add(availableMoves[i]);
+                                thr3_storemoves.Add(availableMoves[i]);
+                            }
+                        }
+                        // HWL DEBUGGING
+                        // pick next available move for this thread to consider
                         Move = availableMoves[i]; // current move
                         Console.WriteLine(".. HWL: ParSearchWork: considering move {0}", Move.ToString());
                         Console.WriteLine(".. {0} at {1} ", counter, Move.ToString());
@@ -1223,12 +1265,14 @@ cloning is needed.
                                 }
                     }
                 }
+                //
             }
             /* HWL: here, after the loop, print the considered moves; do you want to print to file in each loop iteration, or just at the end after the loop!? */
             if (ply == 0)
-            {
+            {            
                 Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, id, showList(consideredMoves));
                 Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
+                Console.WriteLine("thr0 " + thr0_moves.Count + " thr1 " + thr1_moves.Count + " thr2 " + thr2_moves.Count + " thr3 " + thr3_moves.Count);
                 // HWL: remove all cosideredMoves from the global list unconsideredMoves, to check that all moves are considered at the end
                 foreach (var mv in consideredMoves)
                 {
@@ -1236,75 +1280,71 @@ cloning is needed.
                 }
                 Console.WriteLine("__ HWL: best res so far: {0} ", bestRes.ToString());
                 Console.WriteLine("-- LS Elapsed time for move: " + sw_move.Elapsed);
+               
 
-                List<Tuple<int, int>> thr1_conMoves = new List<Tuple<int, int>>();
-                List<Tuple<int, int>> thr2_conMoves = new List<Tuple<int, int>>();
-                List<Tuple<int, int>> thr3_conMoves = new List<Tuple<int, int>>();
-                List<Tuple<int, int>> thr4_conMoves = new List<Tuple<int, int>>();
-                List<Tuple<int, int>> duplicateMoves = new List<Tuple<int, int>>();
-                
-                if (id == 1)
-                {
-                    thr1_conMoves = consideredMoves.ToList();
-                    Console.WriteLine(showList(thr1_conMoves));
-                }
-                if (id == 2)
-                {
-                    thr2_conMoves = consideredMoves.ToList();
-                    thr2_conMoves.Add(new Tuple<int, int>(1, 2));
-                    Console.WriteLine(showList(thr2_conMoves));
-                }
-                if (id == 3)
-                {
-                    thr3_conMoves = consideredMoves.ToList();
-                    Console.WriteLine(showList(thr3_conMoves));
-                }
-                if (id == 4)
-                {
-                    thr4_conMoves = consideredMoves.ToList();
-                    Console.WriteLine(showList(thr4_conMoves));
-                }
-                foreach (Tuple<int, int> r in thr1_conMoves.Intersect(thr2_conMoves))
+                /*
+   --------------------------------------------------------------------------------------------------------------------------
+   Check that strided iteration is correct:
+   No move is visited twice by more than one thread -
+   --------------------------------------------------------------------------------------------------------------------------
+   The code below creates lists of visited moves for each thread and check them against each other to check
+   for any moves duplicated and visited more than one thread - this is inefficient. Any existing moves that 
+   have been considered by more than one thread, that position will added to list of duplicated moves and 
+   elements of this list will be printed to console. If there are no visited moves more than once then a
+   console message will be displayed confirming there are no duplicated moves.
+   --------------------------------------------------------------------------------------------------------------------------
+                  */
+                foreach (Tuple<int, int> r in thr0_moves.Intersect(thr1_moves))
                 {
                     duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
                 }
-                foreach (Tuple<int, int> r in thr1_conMoves.Intersect(thr3_conMoves))
+                foreach (Tuple<int, int> r in thr0_moves.Intersect(thr2_moves))
                 {
                     duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
                 }
-                foreach (Tuple<int, int> r in thr1_conMoves.Intersect(thr4_conMoves)) { 
+                foreach (Tuple<int, int> r in thr0_moves.Intersect(thr3_moves))
+                {
                     duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
                 }
-                foreach (Tuple<int, int> r in thr2_conMoves.Intersect(thr3_conMoves)) { 
+                foreach (Tuple<int, int> r in thr1_moves.Intersect(thr2_moves))
+                {
                     duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
                 }
-                foreach (Tuple<int, int> r in thr2_conMoves.Intersect(thr4_conMoves)) { 
+                foreach (Tuple<int, int> r in thr1_moves.Intersect(thr3_moves))
+                {
                     duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
                 }
-                foreach (Tuple<int, int> r in thr3_conMoves.Intersect(thr4_conMoves)) { 
+                foreach (Tuple<int, int> r in thr2_moves.Intersect(thr3_moves))
+                {
                     duplicateMoves.Add(r);
-                    Console.WriteLine(r);
-                    Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
                 }
                 bool isEmpty = !duplicateMoves.Any();
                 if (isEmpty)
                 {
                     Console.WriteLine("++ LS: NO DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    Console.WriteLine("++ LS: Visited moves for thread 0: " + showList(thr0_moves));
+                    Console.WriteLine("++ LS: Visited moves for thread 1: " + showList(thr1_moves));
+                    Console.WriteLine("++ LS: Visited moves for thread 2: " + showList(thr2_moves));
+                    Console.WriteLine("++ LS: Visited moves for thread 3: " + showList(thr3_moves));
+                    Console.WriteLine("++ LS: Duplicate moves: " + showList(duplicateMoves));
                 }
-
-
+                if (!isEmpty)
+                {
+                    Console.WriteLine("++ LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    Console.WriteLine("++ LS: Visited moves for thread 0: " + showList(thr0_moves));
+                    Console.WriteLine("++ LS: Visited moves for thread 1: " + showList(thr1_moves));
+                    Console.WriteLine("++ LS: Visited moves for thread 2: " + showList(thr2_moves));
+                    Console.WriteLine("++ LS: Visited moves for thread 3: " + showList(thr3_moves));
+                    Console.WriteLine("++ LS: Duplicate moves: " + showList(duplicateMoves));
+                }
+                /*
+--------------------------------------------------------------------------------------------------------------------------
+END: Check that strided iteration is correct:
+No move is visited twice by more than one thread -
+--------------------------------------------------------------------------------------------------------------------------
+*/
             }
-        
+
             return bestRes;
         }
         /*
@@ -1357,13 +1397,6 @@ cloning is needed.
                 Environment.Exit(97);
                 return new Tuple<int, Tuple<int, int>>(bestScore, bestMove);
             }
-        }
-    }
-    static class Extensions
-    {
-        public static IList<T> Clone<T>(this IList<T> list) where T : ICloneable
-        {
-            return list.Select(i => (T)i.Clone()).ToList();
         }
     }
 }
