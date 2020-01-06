@@ -1,22 +1,33 @@
 ﻿to do from meeting on 20/12/19
-valid result - check that parallel result is the same as sequential, hit all paths in tree
-check strided iteration is as expected (no duplicated move - correctness)
-noMoveHasBeenCheckedTwice() function (check 4 lists)
-# mono FLAG for no of cores/threads used --> see: https://www.mono-project.com/docs/debug+profile/profile/profiler/ 
-revised timeplan
-amount of work done in each thread
-Enterprise version --> look at parallel tools
+
+TO DO FOR PARALLEL VERSION
+1. valid result - check that parallel result is the same as sequential, hit all paths in tree 
+2. # mono FLAG for no of cores/threads used --> 
+- see: http://www.cbs.dtu.dk/cgi-bin/nph-runsafe?man=mono , https://www.mono-project.com/docs/debug+profile/profile/profiler/ 
+- Like others have already said, you can run .NET applications on Mono. If your applications use Platform Invocation (P/Invoke) 
+to call native code, you may run into some trouble if there is no Mono implementation of the native library. To check whether 
+your application does that (or uses APIs that haven't been implemented in Mono yet),you can use the Mono Migration Analyzer (MoMA).
+(https://stackoverflow.com/questions/950360/how-to-run-c-sharp-project-under-linux)
+
+TO DO FOR PERFORMANCE 
 performance measuring
 performance tuning
 
-in progress
-
-done
+COMPLETED
 lock board (release when printing)
 lower score for no build
 timestamp elapsed time, timestamp for threads
+revised timeplan
+amount of work done in each thread
+check strided iteration is as expected (no duplicated move - correctness) -->> noMoveHasBeenCheckedTwice() function (check 4 lists)
+quad core windows 10 with 4 cores and 8 threads
+more commenting
 
-info
+EMAIL
+Enterprise version --> look at parallel tools --> ian after break regarding hw vs enterprise licence
+
+INFO
 which mcs /opt/mono/bin/mcs
 status of cores --> top, htop
 check performance --> in directory with source code --> xbuild --> mono bin/Debug/Minimax_TPL.exe
+
