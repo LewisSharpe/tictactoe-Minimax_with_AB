@@ -1,0 +1,62 @@
+﻿  /*
+                
+--------------------------------------------------------------------------------------------------------------------------
+No move is visited twice by more than one thread -
+--------------------------------------------------------------------------------------------------------------------------
+The code below creates lists of visited moves for each thread and check them against each other to check
+for any moves duplicated and visited more than one thread - this is inefficient. Any existing moves that 
+have been considered by more than one thread, that position will added to list of duplicated moves and 
+elements of this list will be printed to console. If there are no visited moves more than once then a
+console message will be displayed confirming there are no duplicated moves.
+--------------------------------------------------------------------------------------------------------------------------
+               */
+          // Initalise lists to hold considered moves for each thread and summarising list hold any duplicates 
+                List<Tuple<int, int>> duplicateMoves = new List<Tuple<int, int>>();
+
+                    foreach (Tuple<int, int> r in thr1_moves.Intersect(thr2_moves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr1_moves.Intersect(thr3_moves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr1_moves.Intersect(thr4_moves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr2_moves.Intersect(thr3_moves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr2_moves.Intersect(thr4_moves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    foreach (Tuple<int, int> r in thr3_moves.Intersect(thr4_moves))
+                    {
+                        duplicateMoves.Add(r);
+                        Console.WriteLine(r);
+                        Console.WriteLine("-- LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                    bool isEmpty = !duplicateMoves.Any();
+                    if (isEmpty)
+                    {
+                        Console.WriteLine("++ LS: NO DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                    }
+                /*
+--------------------------------------------------------------------------------------------------------------------------
+END: No move is visited twice by more than one thread -
+--------------------------------------------------------------------------------------------------------------------------
+                */
+            
