@@ -1,0 +1,14 @@
+﻿to do from meeting on 10.12.19
+1. compile and execute mono command
+Compile: ~/OPT/x86_64-unknown-linux/bin/dmcs  -optimize+ -out:ParSort.exe ParSort.cs
+Execute: time ~/OPT/x86_64-unknown-linux/bin/mono ParSort.exe 2 2000000 8
+2. move validation comparison tables between seq and tpl
+--> for ply 2 (about 20 boards):
+        seq                                                 tpl
+board | move | score | time | depth level        board | move | score | time | depth level  
+--> for ply 3 (a few boards):  
+        seq                                                 tpl
+board | move | score | time | depth level        board | move | score | time | depth level  
+3. ParallelOptions C#
+4. install software on quad-core
+5. move timer

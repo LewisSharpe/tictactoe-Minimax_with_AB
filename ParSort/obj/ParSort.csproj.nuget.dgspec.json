@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj": {}
+    "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\ParSort.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj": {
+    "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\ParSort.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj",
+        "projectUniqueName": "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\ParSort.csproj",
         "projectName": "ParSort",
-        "projectPath": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\ParSort.csproj",
-        "packagesPath": "C:\\Users\\Lewis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lewis\\Desktop\\files_150819\\ttt_csharp_270719\\ParSort\\obj\\",
+        "projectPath": "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\ParSort.csproj",
+        "packagesPath": "C:\\Users\\LATITUDE\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Lewis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LATITUDE\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -42,16 +39,23 @@
         "netcoreapp2.1": {
           "dependencies": {
             "Microsoft.NETCore.App": {
+              "suppressParent": "All",
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

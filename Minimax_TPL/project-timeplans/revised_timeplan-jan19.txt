@@ -1,0 +1,33 @@
+﻿REVISED TIMESCALE FOR PHD IN COMPUTER SCIENCE 						
+LEWIS SHARPE - JANUARY 2020						
+MILESTONES		PHASE	TASK NO.	TASK	START	END
+PHASE 1 (MPHIL)						
+		1	1	Design and build rewrite of seq. MiniMax	
+		1	2	Implement TPL parallel variant of seq. Minimax	12/1/2019	1/27/2020
+		1	3	Measure performance between par. and seq. variants 	1/27/2020	2/10/2020
+		1	4	Identify defects giving +VE or -VE eect on performance	2/5/2020	2/10/2020
+		1	5	Perform tuning phase and design solutions 	2/10/2020	2/24/2020
+		1	6	Implement fix solution(s) gathered in tuning phase	2/24/2020	2/29/2020
+		1	7	Iterate over tasks T3 and T4 for T6 re-factored algorithm	2/29/2020	3/4/2020
+		1	8	Produce performance graphs for re-factored implementation	3/4/2020	3/6/2020
+		1	9	Write performance analysis for re-factored parallel variant	3/6/2020	3/16/2020
+*M	*P	1	10	Write paper summarising process and results of phase	3/16/2020	4/20/2020
+PHASE 2 (PHD STAGE 1)						
+		2	1	Decide extended game scenario to embed Minimax variants	3/16/2020	3/23/2020
+		2	2	Design/build game-model + embed Minimax variants within	3/16/2020	6/22/2020
+		2	3	Testing and refinement of Minimax in new scenario	6/22/2020	7/1/2020
+		2	4	Performance testing for both variants	7/1/2020	7/10/2020
+		2	5	Performance tuning based on initial results	7/10/2020	7/24/2020
+		2	6	Re-run performance measuring for tuned variant	7/24/2020	7/31/2020
+		2	7	Write performance analysis summary with speed-up graphs	7/31/2020	8/14/2020
+	*P	2	8	Write paper summarising process and results of phase	8/17/2020	9/21/2020
+PHASE 3 (PHD STAGE 2)						
+		3	1	User Profling and Recruitment	8/17/2020	10/19/2020
+		3	2	Design Qualitative experiment set-up for views on engagement 	8/17/2020	10/19/2020
+		3	3	Design Quantitative experiment set-up (activity logging)	9/21/2020	10/28/2020
+		3	4	Conduct experiment	11/1/2020	11/19/2020
+		3	5	Map performance (speedup) + engagement (act. logs) 	11/19/2020	12/20/2020
+		3	6	Evaluate data between performance + engagement and cogent argument on degree of correlation with correlative value	1/4/2021	2/22/2021
+	*P	3	7	Write paper summarising process and results of phase 	2/8/2021	2/22/2021
+PHASE 4 (PHD WRITE-UP)						
+*M	*P	4	1	Write PhD Thesis	2/8/2021	9/6/2021
