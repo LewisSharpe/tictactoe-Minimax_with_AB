@@ -31,12 +31,12 @@ namespace Minimax_TPL
         int EXECPRINT_GAMEBOARD_ON = 1;  // 1 on, 0 off - TURN on/off GAME BOARD PRINT ON CONSOLE ON AND OFF
         int DEBUGPRINT_ON = 0;  // 1 on, 0 off - TURN on/off FULL DEBUGGING PRINTING ON CONSOLE ON AND OFF
         int CSVWRITE_ON = 0;  // 1 on, 0 off - turn on/off tried move CSV file printing 
-        int TPL_PARALLELINVOKE_ON = 0;  // 1 on, 0 off - turn parallel invoke on and off
+        int TPL_PARALLELINVOKE_ON = 1;  // 1 on, 0 off - turn parallel invoke on and off
         private static Object TPL_THREADSYNC_LOCK = new Object(); // lock to protect Move and score from accidential updates
         private static Object TPL_FILESYNC_LOCK = new Object(); // lock to protect file update
         // PUBLIC DECS
         public static int ply = 0;    // start depth for search (should be 0)
-        public const int maxPly = 2; // max depth for search: 0 = only immediate move; 1 = also next opponent move; 2 = also own next move etc
+        public const int maxPly = 3; // max depth for search: 0 = only immediate move; 1 = also next opponent move; 2 = also own next move etc
         public int alpha = Consts.MIN_SCORE; // set alpha to -1001
         public int beta = Consts.MAX_SCORE; // set beta to 1001
         public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
@@ -979,39 +979,28 @@ cloning is needed.
                 // HWL: try a sequential version first, to test strided iteration (below):
                 Parallel.Invoke(() =>
                 {
-                    lock (TPL_THREADSYNC_LOCK)
-                    {
+                    Console.WriteLine("+++++++ PARALLELISM ON");
                         sw_thr0.Start();
                         ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves);
                         sw_thr0.Stop();
-                    }
                 },
                 () =>
                 {
-                    lock (TPL_THREADSYNC_LOCK)
-                    {
                         sw_thr1.Start();
                         ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves);
                         sw_thr1.Stop();
-                    }
                 },
                 () =>
                 {
-                    lock (TPL_THREADSYNC_LOCK)
-                    {
                         sw_thr2.Start();
                         ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves);
                         sw_thr2.Stop();
-                    }
                 },
                 () =>
                 {
-                    lock (TPL_THREADSYNC_LOCK)
-                    {
                         sw_thr3.Start();
                         ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves);
                         sw_thr3.Stop();
-                    }
                 });
             }
             bestRes = res = ress[0]; // assign best result to res to the result of thread 0

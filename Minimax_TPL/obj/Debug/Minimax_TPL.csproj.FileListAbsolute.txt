@@ -116,3 +116,9 @@ C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\bin\Debug\Minimax_TPL.pd
 C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
 C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\obj\Debug\Minimax_TPL.exe
 C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb

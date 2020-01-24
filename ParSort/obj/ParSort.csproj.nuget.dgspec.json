@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\ParSort.csproj": {}
+    "C:\\Users\\New User\\Desktop\\ttt_csharp\\ParSort\\ParSort.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\ParSort.csproj": {
+    "C:\\Users\\New User\\Desktop\\ttt_csharp\\ParSort\\ParSort.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\ParSort.csproj",
+        "projectUniqueName": "C:\\Users\\New User\\Desktop\\ttt_csharp\\ParSort\\ParSort.csproj",
         "projectName": "ParSort",
-        "projectPath": "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\ParSort.csproj",
-        "packagesPath": "C:\\Users\\LATITUDE\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LATITUDE\\Desktop\\ttt_csharp-241219\\ParSort\\obj\\",
+        "projectPath": "C:\\Users\\New User\\Desktop\\ttt_csharp\\ParSort\\ParSort.csproj",
+        "packagesPath": "C:\\Users\\New User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\New User\\Desktop\\ttt_csharp\\ParSort\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\LATITUDE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\New User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
