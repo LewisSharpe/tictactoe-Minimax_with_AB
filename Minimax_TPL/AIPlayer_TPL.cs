@@ -31,7 +31,7 @@ namespace Minimax_TPL
         int EXECPRINT_GAMEBOARD_ON = 1;  // 1 on, 0 off - TURN on/off GAME BOARD PRINT ON CONSOLE ON AND OFF
         int DEBUGPRINT_ON = 0;  // 1 on, 0 off - TURN on/off FULL DEBUGGING PRINTING ON CONSOLE ON AND OFF
         int CSVWRITE_ON = 0;  // 1 on, 0 off - turn on/off tried move CSV file printing 
-        int TPL_PARALLELINVOKE_ON = 1;  // 1 on, 0 off - turn parallel invoke on and off
+        const int TPL_PARALLELINVOKE_ON = 1;  // 1 on, 0 off - turn parallel invoke on and off
         private static Object TPL_THREADSYNC_LOCK = new Object(); // lock to protect Move and score from accidential updates
         private static Object TPL_FILESYNC_LOCK = new Object(); // lock to protect file update
         // PUBLIC DECS
@@ -62,6 +62,7 @@ namespace Minimax_TPL
         List<Tuple<int, int>> all_conmoves = new List<Tuple<int, int>>(); // all considered moves in game cycle
         public static List<Tuple<int, int>> all_Xplacedmoves = new List<Tuple<int, int>>(); // all placed moves in game cycle
         public static List<Tuple<int, int>> all_Oplacedmoves = new List<Tuple<int, int>>(); // all placed moves in game cycle
+        int move = 1; // move number
         public AIPlayer_TPL(counters _counter) : base(_counter) {
         }
         /* 
@@ -121,6 +122,7 @@ namespace Minimax_TPL
             // Stop timing.
             sw_move.Stop(); // stop timer for move
             sw_move.Reset(); // reset timer for next move
+            move++; // increment move number counter
             // Return positions
             return result.Item2; // return coordinate position from search
         }
@@ -922,7 +924,7 @@ Thread 2, Thread 3 is processed by (1,3), etc. Each task takes a clone of the cu
 cloning is needed.
 --------------------------------------------------------------------------------------------------------------------------
 */
-        public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, counters counter, int numTasks, GameBoard_TPL<int> scoreBoard, ref int move)
+        public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, counters counter, int numTasks, GameBoard_TPL<int> scoreBoard)
         {
             List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>();  // intialise blank list for available moves 
             // if board is a standard 7x7, set available moves to 49
@@ -983,24 +985,28 @@ cloning is needed.
                         sw_thr0.Start();
                         ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves);
                         sw_thr0.Stop();
+                    Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value);
                 },
                 () =>
                 {
                         sw_thr1.Start();
                         ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves);
                         sw_thr1.Stop();
+                    Console.WriteLine("#### THREAD 1 - StartAt: {0}, EndAt: {1}", sw_thr1.StartAt.Value, sw_thr1.EndAt.Value);
                 },
                 () =>
                 {
                         sw_thr2.Start();
                         ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves);
                         sw_thr2.Stop();
+                    Console.WriteLine("#### THREAD 2 - StartAt: {0}, EndAt: {1}", sw_thr2.StartAt.Value, sw_thr2.EndAt.Value);
                 },
                 () =>
                 {
                         sw_thr3.Start();
                         ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves);
                         sw_thr3.Stop();
+                    Console.WriteLine("#### THREAD 3 - StartAt: {0}, EndAt: {1}", sw_thr3.StartAt.Value, sw_thr3.EndAt.Value);
                 });
             }
             bestRes = res = ress[0]; // assign best result to res to the result of thread 0
@@ -1021,16 +1027,38 @@ cloning is needed.
                   Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread {2}: {3}", Game_TPL.cntr, counter /* Flip(counter) */, j, ress[j].ToString());
                   res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // res is equal to: the score of current thread returned position if it is greater than the score of current val of res then.... (result display format: <score, <position>>)
                   board[res.Item2.Item1, res.Item2.Item2] = counter /* Flip(counter) */; // place res val on board with counter                    
-                  Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2} with score {3}", Game_TPL.cntr, counter /*Flip(counter)*/, res.ToString(), res.Item1.ToString());
-                  if (!Win(board, counter) || !Win(board, otherCounter))
+                 
+                    if (!Win(board, counter) || !Win(board, otherCounter))
+                    {
+                        if (DEBUGPRINT_ON == 1)
                         {
                             Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
-                            Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));                       
-                        }
+                            Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
+                        }                     
+                    }
+                    if (j == 3)
+                    {
+                        Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, counter /*Flip(counter)*/, res.ToString());
+                        Console.WriteLine("-- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration       
+                    }
                     thr0_movesWithClear.Clear(); // clear list of positions considered by thread 0 for each move made (list is cleared after each move is made)  
                     thr1_movesWithClear.Clear(); // clear list of positions considered by thread 1 for each move made (list is cleared after each move is made)  
                     thr2_movesWithClear.Clear(); // clear list of positions considered by thread 2 for each move made (list is cleared after each move is made)  
                     thr3_movesWithClear.Clear(); // clear list of positions considered by thread 3 for each move made (list is cleared after each move is made)               
+                                                 // if Win is detected, display thread running times (threads' 0 to 3)
+                    if (Win(board, counter) || Win(board, otherCounter))
+                    {
+                        move = 0; // set move number counter to 0 - reset when board is over
+                        Console.WriteLine("#### Thread 0 execution time: " + sw_thr0.Elapsed + ", with " + thr0_storemoves.Count + " positions visited.");
+                        Console.WriteLine("#### Thread 1 execution time: " + sw_thr1.Elapsed + ", with " + thr1_storemoves.Count + " positions visited.");
+                        Console.WriteLine("#### Thread 2 execution time: " + sw_thr2.Elapsed + ", with " + thr2_storemoves.Count + " positions visited.");
+                        Console.WriteLine("#### Thread 3 execution time: " + sw_thr3.Elapsed + ", with " + thr3_storemoves.Count + " positions visited.");
+                        if (DEBUGPRINT_ON == 1)
+                        {
+                            Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
+                            Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
+                        }
+                    }
                 }
                 // if board is a standard 3x3, set available moves to 9
                 if (SEGM_BOARD == 1)
@@ -1050,45 +1078,18 @@ cloning is needed.
                                 scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
                             }
                 }
-                // if game board print is turned on then
-                if (EXECPRINT_GAMEBOARD_ON == 1)
-                { 
-                    lock (TPL_FILESYNC_LOCK) // lock to protect file synchronisation
-                    {
-                        Console.WriteLine("++ Current board state: ");
-                        board.DisplayBoard(); // display board to console
-                        board.DisplayFinBoardToFile();
-                    }
-                }
-                // if Win is detected, display thread running times (threads' 0 to 3)
-                if (Win(board, counter) || Win(board, otherCounter))
+               
+            }
+            // if game board print is turned on then
+            if (EXECPRINT_GAMEBOARD_ON == 1)
+            {
+                lock (TPL_FILESYNC_LOCK) // lock to protect file synchronisation
                 {
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("-- Thread Running Times " + ":");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("#### Thread 0 execution time: " + sw_thr0.Elapsed + ", with " + thr0_storemoves.Count + " positions visited.");
-                    Console.WriteLine("#### Thread 1 execution time: " + sw_thr1.Elapsed + ", with " + thr1_storemoves.Count + " positions visited.");
-                    Console.WriteLine("#### Thread 2 execution time: " + sw_thr2.Elapsed + ", with " + thr2_storemoves.Count + " positions visited.");
-                    Console.WriteLine("#### Thread 3 execution time: " + sw_thr3.Elapsed + ", with " + thr3_storemoves.Count + " positions visited.");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("-- Thread Timestamps (Start and End) " + ":");
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value);
-                    Console.WriteLine("#### THREAD 1 - StartAt: {0}, EndAt: {1}", sw_thr1.StartAt.Value, sw_thr1.EndAt.Value);
-                    Console.WriteLine("#### THREAD 2 - StartAt: {0}, EndAt: {1}", sw_thr2.StartAt.Value, sw_thr2.EndAt.Value);
-                    Console.WriteLine("#### THREAD 3 - StartAt: {0}, EndAt: {1}", sw_thr3.StartAt.Value, sw_thr3.EndAt.Value);
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-                    /*
-                       Console.WriteLine("++LS Thread 1 considered moves: " + showList(thr0_storemoves));
-                       Console.WriteLine("++LS Thread 2 considered moves: " + showList(thr1_storemoves));
-                       Console.WriteLine("++LS Thread 3 considered moves: " + showList(thr2_storemoves));
-                       Console.WriteLine("++LS Thread 4 considered moves: " + showList(thr3_storemoves));
-                    */
-                    Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
-                    Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
+
+                    board.DisplayBoard(); // display board to console
+                    board.DisplayFinBoardToFile();
                 }
-            }  
+            }
             return res; // function return score and position of move selected
         }
         /*
@@ -1120,13 +1121,16 @@ cloning is needed.
             int cnt = 0, offset = id; // set cnt to 0 and offset to thread id
             Debug.Assert(0 <= id && id < stride);  // Assertion: 0 <= id < stride
             counters us = counter; /* Flip(counter); */ // HWL: DONE: I don't think you should flip at this point, rather at the call to SeqSearch
-            Console.WriteLine("======================================================================================================");
-            Console.WriteLine("-- THREAD " + id + ":");
-            Console.WriteLine("======================================================================================================");
-            Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, us.ToString(), id);
-            Console.WriteLine("__ HWL:   stride={0}, id={1}, thread_no={2}  ", stride, id, thread_no);
-            System.Console.WriteLine("__ HWL:   Input board: ");
-            // if board is a standard 3x3, set available moves to 9
+            if (DEBUGPRINT_ON == 1)
+            {
+                Console.WriteLine("======================================================================================================");
+                Console.WriteLine("-- THREAD " + id + ":");
+                Console.WriteLine("======================================================================================================");
+                Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Game_TPL.cntr, us.ToString(), id);
+                Console.WriteLine("__ HWL:   stride={0}, id={1}, thread_no={2}  ", stride, id, thread_no);
+                System.Console.WriteLine("__ HWL:   Input board: ");
+            }
+                // if board is a standard 3x3, set available moves to 9
             if (SEGM_BOARD == 1)
             {
                 for (int x = COORD_X + 1; x <= 7; x++)
@@ -1191,14 +1195,20 @@ cloning is needed.
                             }
                         }
                         Move = availableMoves[i]; // current move to pick the next available move for this thread to consider
-                        Console.WriteLine(".. HWL: ParSearchWork: considering move {0}", Move.ToString());
-                        Console.WriteLine(".. {0} at {1} ", counter, Move.ToString());
+                        if (DEBUGPRINT_ON == 1)
+                        {
+                            Console.WriteLine(".. HWL: ParSearchWork: considering move {0}", Move.ToString());
+                            Console.WriteLine(".. {0} at {1} ", counter, Move.ToString());
+                        }
                         // make the move
                         board[Move.Item1, Move.Item2] = us; // place counter
                         // check for an immediate win
                         if (FindThreeInARow(board, us))
                         {
-                            Console.WriteLine("          3-in-a-row found at {3} for player {0} (ply={1}, positions={2})", counter, ply, positions.ToString(), Move.ToString());
+                            if (DEBUGPRINT_ON == 1)
+                            {
+                                Console.WriteLine("          3-in-a-row found at {3} for player {0} (ply={1}, positions={2})", counter, ply, positions.ToString(), Move.ToString());
+                            }
                             board[Move.Item1, Move.Item2] = counters.e;     // blank the field again
                             return new Tuple<int, Tuple<int, int>>(1000, Move); // return win-in-1-move
                         }
@@ -1218,11 +1228,14 @@ cloning is needed.
                 // if false and depth level is 0
                 if (false /* HWL: prevent file access for now */&& ply == 0)
                 {
-                    // HWL: print the moves considered by current thread; they must not overlap!
-                    Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2}", consideredMoves.Count, id, showList(consideredMoves));
-                    Console.WriteLine("__ HWL: ALL {0} available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
-                    Console.WriteLine("board " + Game_TPL.cntr + " processed by thread id: " + thread_no + " :");
-                    // if board is a standard 3x3, set available moves to 9
+                    if (DEBUGPRINT_ON == 1)
+                    {
+                        // HWL: print the moves considered by current thread; they must not overlap!
+                        Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2}", consideredMoves.Count, id, showList(consideredMoves));
+                        Console.WriteLine("__ HWL: ALL {0} available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
+                        Console.WriteLine("board " + Game_TPL.cntr + " processed by thread id: " + thread_no + " :");
+                    }
+                        // if board is a standard 3x3, set available moves to 9
                     if (SEGM_BOARD == 1)
                     {
                         for (int x = COORD_X + 1; x <= 7; x++)
@@ -1245,17 +1258,22 @@ cloning is needed.
             /* HWL: here, after the loop, print the considered moves; do you want to print to file in each loop iteration, or just at the end after the loop!? */
            // if depth level isr 0
             if (ply == 0)
-            {            
-                Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, id, showList(consideredMoves));
-                Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
-                Console.WriteLine("thr0 " + thr0_movesWithClear.Count + " thr1 " + thr1_movesWithClear.Count + " thr2 " + thr2_movesWithClear.Count + " thr3 " + thr3_movesWithClear.Count);
-                // HWL: remove all considered moves from the global list unconsideredMoves, to check that all moves are considered at the end
+            {
+                if (DEBUGPRINT_ON == 1)
+                {
+                    Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, id, showList(consideredMoves));
+                    Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
+                    Console.WriteLine("thr0 " + thr0_movesWithClear.Count + " thr1 " + thr1_movesWithClear.Count + " thr2 " + thr2_movesWithClear.Count + " thr3 " + thr3_movesWithClear.Count);
+                }
+                    // HWL: remove all considered moves from the global list unconsideredMoves, to check that all moves are considered at the end
                 foreach (var mv in consideredMoves)
                 {
                     unconsideredMoves.Remove(mv);
                 }
-                Console.WriteLine("__ HWL: best res so far: {0} ", bestRes.ToString()); // display best result
-                Console.WriteLine("-- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration
+                if (DEBUGPRINT_ON == 1)
+                {
+                    Console.WriteLine("__ HWL: best res so far: {0} ", bestRes.ToString()); // display best result
+                }
                 /*
    --------------------------------------------------------------------------------------------------------------------------
    Check that strided iteration is correct:
@@ -1297,23 +1315,28 @@ cloning is needed.
                 // if duplicate list is not, then message to console confirming no duplicate positions visited by threads
                 if (isEmpty)
                 {
-                    Console.WriteLine("++ LS: NO DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
-                    Console.WriteLine("++ LS: Visited moves for thread 0: " + showList(thr0_movesWithClear));
-                    Console.WriteLine("++ LS: Visited moves for thread 1: " + showList(thr1_movesWithClear));
-                    Console.WriteLine("++ LS: Visited moves for thread 2: " + showList(thr2_movesWithClear));
-                    Console.WriteLine("++ LS: Visited moves for thread 3: " + showList(thr3_movesWithClear));
-                    Console.WriteLine("++ LS: Duplicate moves: " + showList(duplicateMoves));
+                    if (DEBUGPRINT_ON == 1)
+                    {
+                        Console.WriteLine("++ LS: NO DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                        Console.WriteLine("++ LS: Visited moves for thread 0: " + showList(thr0_movesWithClear));
+                        Console.WriteLine("++ LS: Visited moves for thread 1: " + showList(thr1_movesWithClear));
+                        Console.WriteLine("++ LS: Visited moves for thread 2: " + showList(thr2_movesWithClear));
+                        Console.WriteLine("++ LS: Visited moves for thread 3: " + showList(thr3_movesWithClear));
+                        Console.WriteLine("++ LS: Duplicate moves: " + showList(duplicateMoves));
+                    }
                 }
                 // if duplicate list is not empty, then display elements of existing duplicate positions visited by threads to console
                 if (!isEmpty)
                 {
-                    Console.WriteLine("++ LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
-                    Console.WriteLine("++ LS: Visited moves for thread 0: " + showList(thr0_movesWithClear));
-                    Console.WriteLine("++ LS: Visited moves for thread 1: " + showList(thr1_movesWithClear));
-                    Console.WriteLine("++ LS: Visited moves for thread 2: " + showList(thr2_movesWithClear));
-                    Console.WriteLine("++ LS: Visited moves for thread 3: " + showList(thr3_movesWithClear));
-                    Console.WriteLine("++ LS: Duplicate moves: " + showList(duplicateMoves));
-
+                    if (DEBUGPRINT_ON == 1)
+                    {
+                        Console.WriteLine("++ LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
+                        Console.WriteLine("++ LS: Visited moves for thread 0: " + showList(thr0_movesWithClear));
+                        Console.WriteLine("++ LS: Visited moves for thread 1: " + showList(thr1_movesWithClear));
+                        Console.WriteLine("++ LS: Visited moves for thread 2: " + showList(thr2_movesWithClear));
+                        Console.WriteLine("++ LS: Visited moves for thread 3: " + showList(thr3_movesWithClear));
+                        Console.WriteLine("++ LS: Duplicate moves: " + showList(duplicateMoves));
+                    }
                 }
                 /*
 --------------------------------------------------------------------------------------------------------------------------
@@ -1364,7 +1387,7 @@ No move is visited twice by more than one thread -
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY); // initialise random coordinate position
             // if depth level is 0 or 1
             if (ply == 0 || ply == 1)
-                return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard, ref move); // return result from parallel search
+                return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard); // return result from parallel search
             // if ply is greater than 1
             else if (ply > 1)
                 return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta); // return result from sequential search

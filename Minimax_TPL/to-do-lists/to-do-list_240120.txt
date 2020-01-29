@@ -1,0 +1,5 @@
+﻿run with print statements off 
+check timestamp 
+check use of cores
+pre-processor variable - ParallelInvoke
+Seq vs Par for various boards

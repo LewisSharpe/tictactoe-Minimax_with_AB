@@ -65,6 +65,7 @@
     <Content Include="to-do-lists\to-do-list_100120.txt" />
     <Content Include="to-do-lists\to-do-list_181219.txt" />
     <Content Include="to-do-lists\to-do-list_201219.txt" />
+    <Content Include="to-do-lists\to-do-list_240120.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
