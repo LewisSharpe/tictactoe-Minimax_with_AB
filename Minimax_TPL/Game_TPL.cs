@@ -45,6 +45,7 @@ namespace Minimax_TPL
 		// HWL: header for output to console
 		Console.WriteLine(" -*- outline -*- ");
 		Console.WriteLine("* LOG ");
+                Console.WriteLine("#### GAME START TIME: {0} ", DateTime.Now);
             }
             /// jump to board x on start-up
 	     if (cntr==1) cntr=1; // HWL: jump to board 7
