@@ -751,7 +751,7 @@ Tuple<int,int> construct.
                 if (FindThreeInARow(copy, us))
                 {
                     // add deeper debugging printing
-                    if (DEBUGPRINT_ON == 1)
+                    if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection    // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection   // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                     {
                         Console.WriteLine("          3-in-a-row found at {3} for player {0} (ply={1}, positions={2})", counter, ply, positions.ToString(), Move.ToString());
                     }
@@ -780,7 +780,7 @@ Tuple<int,int> construct.
                 // if depth level is 1
                 if (ply == 1) // HWL: DEBUGGING only
                     // if detailed debugging printing is turned on
-                    if (DEBUGPRINT_ON == 1)
+                    if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                     {
                         Console.WriteLine(".... {1} at {0} (ply={2}); score = {3}", Move.ToString(), counter, ply, score); /* , positions.ToString() */
                     }
@@ -807,7 +807,7 @@ Tuple<int,int> construct.
                             if (ply >= 1)
                             {
                                 // if detailed debugging printing is turned on
-                                if (DEBUGPRINT_ON == 1)
+                                if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                                 {
                                     Console.WriteLine("        maximising: player {4} new best score {0} at {1} (ply={2}, positions={3})", bestScore, bestMove, ply, positions.ToString(), counter);
                                 }
@@ -851,7 +851,7 @@ Tuple<int,int> construct.
                             if (ply >= 1)
                             {
                                 // if detailed debugging printing is turned on
-                                if (DEBUGPRINT_ON == 1)
+                                if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                                 {
                                     Console.WriteLine("        minimising: player {4} new best score {0} at {1} (ply={2}, positions={3})", bestScore, bestMove, ply, positions.ToString(), counter);
                                 }
@@ -876,7 +876,7 @@ Tuple<int,int> construct.
                             if (ply == 0)
                             {
                                 // if detailed debugging printing is turned on
-                                if (DEBUGPRINT_ON == 1)
+                                if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                                 {
                                     Console.WriteLine("-- HWL: new best score {0} at {1}", bestScore, bestMove);
                                 }
@@ -908,7 +908,7 @@ Tuple<int,int> construct.
             // if the depth level is equal to 1
             if (ply == 1)
                 // if detailed debugging printing is turned on
-                if (DEBUGPRINT_ON == 1)
+                if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                 {
                     Console.WriteLine("--      best move at ply={0} for {1} is {2} with score {3}", ply, counter, bestMove, bestScore);
                 }
@@ -985,28 +985,28 @@ cloning is needed.
                         sw_thr0.Start();
                         ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves);
                         sw_thr0.Stop();
-                    Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value);
+                    Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value); // timestamp to identify level of thread distribution representation
                 },
                 () =>
                 {
                         sw_thr1.Start();
                         ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves);
                         sw_thr1.Stop();
-                    Console.WriteLine("#### THREAD 1 - StartAt: {0}, EndAt: {1}", sw_thr1.StartAt.Value, sw_thr1.EndAt.Value);
+                    Console.WriteLine("#### THREAD 1 - StartAt: {0}, EndAt: {1}", sw_thr1.StartAt.Value, sw_thr1.EndAt.Value); // timestamp to identify level of thread distribution representation
                 },
                 () =>
                 {
                         sw_thr2.Start();
                         ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves);
                         sw_thr2.Stop();
-                    Console.WriteLine("#### THREAD 2 - StartAt: {0}, EndAt: {1}", sw_thr2.StartAt.Value, sw_thr2.EndAt.Value);
+                    Console.WriteLine("#### THREAD 2 - StartAt: {0}, EndAt: {1}", sw_thr2.StartAt.Value, sw_thr2.EndAt.Value); // timestamp to identify level of thread distribution representation 
                 },
                 () =>
                 {
                         sw_thr3.Start();
                         ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves);
                         sw_thr3.Stop();
-                    Console.WriteLine("#### THREAD 3 - StartAt: {0}, EndAt: {1}", sw_thr3.StartAt.Value, sw_thr3.EndAt.Value);
+                    Console.WriteLine("#### THREAD 3 - StartAt: {0}, EndAt: {1}", sw_thr3.StartAt.Value, sw_thr3.EndAt.Value); // timestamp to identify level of thread distribution representation
                 });
             }
             bestRes = res = ress[0]; // assign best result to res to the result of thread 0
@@ -1030,7 +1030,7 @@ cloning is needed.
                  
                     if (!Win(board, counter) || !Win(board, otherCounter))
                     {
-                        if (DEBUGPRINT_ON == 1)
+                        if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                         {
                             Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
                             Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
@@ -1053,7 +1053,7 @@ cloning is needed.
                         Console.WriteLine("#### Thread 1 execution time: " + sw_thr1.Elapsed + ", with " + thr1_storemoves.Count + " positions visited.");
                         Console.WriteLine("#### Thread 2 execution time: " + sw_thr2.Elapsed + ", with " + thr2_storemoves.Count + " positions visited.");
                         Console.WriteLine("#### Thread 3 execution time: " + sw_thr3.Elapsed + ", with " + thr3_storemoves.Count + " positions visited.");
-                        if (DEBUGPRINT_ON == 1)
+                        if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                         {
                             Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
                             Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
@@ -1121,7 +1121,7 @@ cloning is needed.
             int cnt = 0, offset = id; // set cnt to 0 and offset to thread id
             Debug.Assert(0 <= id && id < stride);  // Assertion: 0 <= id < stride
             counters us = counter; /* Flip(counter); */ // HWL: DONE: I don't think you should flip at this point, rather at the call to SeqSearch
-            if (DEBUGPRINT_ON == 1)
+            if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
             {
                 Console.WriteLine("======================================================================================================");
                 Console.WriteLine("-- THREAD " + id + ":");
@@ -1195,7 +1195,7 @@ cloning is needed.
                             }
                         }
                         Move = availableMoves[i]; // current move to pick the next available move for this thread to consider
-                        if (DEBUGPRINT_ON == 1)
+                        if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                         {
                             Console.WriteLine(".. HWL: ParSearchWork: considering move {0}", Move.ToString());
                             Console.WriteLine(".. {0} at {1} ", counter, Move.ToString());
@@ -1205,7 +1205,7 @@ cloning is needed.
                         // check for an immediate win
                         if (FindThreeInARow(board, us))
                         {
-                            if (DEBUGPRINT_ON == 1)
+                            if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                             {
                                 Console.WriteLine("          3-in-a-row found at {3} for player {0} (ply={1}, positions={2})", counter, ply, positions.ToString(), Move.ToString());
                             }
@@ -1228,7 +1228,7 @@ cloning is needed.
                 // if false and depth level is 0
                 if (false /* HWL: prevent file access for now */&& ply == 0)
                 {
-                    if (DEBUGPRINT_ON == 1)
+                    if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                     {
                         // HWL: print the moves considered by current thread; they must not overlap!
                         Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2}", consideredMoves.Count, id, showList(consideredMoves));
@@ -1259,7 +1259,7 @@ cloning is needed.
            // if depth level isr 0
             if (ply == 0)
             {
-                if (DEBUGPRINT_ON == 1)
+                if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                 {
                     Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, id, showList(consideredMoves));
                     Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
@@ -1270,7 +1270,7 @@ cloning is needed.
                 {
                     unconsideredMoves.Remove(mv);
                 }
-                if (DEBUGPRINT_ON == 1)
+                if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                 {
                     Console.WriteLine("__ HWL: best res so far: {0} ", bestRes.ToString()); // display best result
                 }
@@ -1315,7 +1315,7 @@ cloning is needed.
                 // if duplicate list is not, then message to console confirming no duplicate positions visited by threads
                 if (isEmpty)
                 {
-                    if (DEBUGPRINT_ON == 1)
+                    if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                     {
                         Console.WriteLine("++ LS: NO DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
                         Console.WriteLine("++ LS: Visited moves for thread 0: " + showList(thr0_movesWithClear));
@@ -1328,7 +1328,7 @@ cloning is needed.
                 // if duplicate list is not empty, then display elements of existing duplicate positions visited by threads to console
                 if (!isEmpty)
                 {
-                    if (DEBUGPRINT_ON == 1)
+                    if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                     {
                         Console.WriteLine("++ LS: DUPLICATES FOUND IN THREAD CONSIDERED MOVES LIST");
                         Console.WriteLine("++ LS: Visited moves for thread 0: " + showList(thr0_movesWithClear));

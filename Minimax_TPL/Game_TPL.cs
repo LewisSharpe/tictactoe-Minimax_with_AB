@@ -45,7 +45,7 @@ namespace Minimax_TPL
 		// HWL: header for output to console
 		Console.WriteLine(" -*- outline -*- ");
 		Console.WriteLine("* LOG ");
-                Console.WriteLine("#### GAME START TIME: {0} ", DateTime.Now);
+                Console.WriteLine("#### GAME START TIME: {0} ", DateTime.Now); // display start of game execution on the current board in play
             }
             /// jump to board x on start-up
 	     if (cntr==1) cntr=1; // HWL: jump to board 7
@@ -109,11 +109,11 @@ The method runs the execution of the entire game, iterating the starting board e
                 case 4:
                     startingCounter = counters.X; // state starting counter of gameplay
                     board[1, 1] = counters.X; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.X; board[7, 1] = counters.e;
-                    board[1, 2] = counters.e; board[2, 2] = counters.e; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
-                    board[1, 3] = counters.e; board[2, 3] = counters.e; board[3, 3] = counters.X; board[4, 3] = counters.e; board[5, 3] = counters.e; board[6, 3] = counters.X; board[7, 3] = counters.e;
-                    board[1, 4] = counters.e; board[2, 4] = counters.e; board[3, 4] = counters.X; board[4, 4] = counters.e; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
-                    board[1, 5] = counters.e; board[2, 5] = counters.e; board[3, 5] = counters.e; board[4, 5] = counters.e; board[5, 5] = counters.e; board[6, 5] = counters.e; board[7, 5] = counters.e;
-                    board[1, 6] = counters.e; board[2, 6] = counters.e; board[3, 6] = counters.e; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.e; board[7, 6] = counters.e;
+                    board[1, 2] = counters.e; board[2, 2] = counters.O; board[3, 2] = counters.O; board[4, 2] = counters.e; board[5, 2] = counters.O; board[6, 2] = counters.O; board[7, 2] = counters.e;
+                    board[1, 3] = counters.e; board[2, 3] = counters.e; board[3, 3] = counters.X; board[4, 3] = counters.O; board[5, 3] = counters.e; board[6, 3] = counters.X; board[7, 3] = counters.e;
+                    board[1, 4] = counters.X; board[2, 4] = counters.e; board[3, 4] = counters.X; board[4, 4] = counters.e; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
+                    board[1, 5] = counters.O; board[2, 5] = counters.e; board[3, 5] = counters.O; board[4, 5] = counters.e; board[5, 5] = counters.e; board[6, 5] = counters.e; board[7, 5] = counters.e;
+                    board[1, 6] = counters.X; board[2, 6] = counters.e; board[3, 6] = counters.e; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.e; board[7, 6] = counters.e;
                     board[1, 7] = counters.e; board[2, 7] = counters.e; board[3, 7] = counters.e; board[4, 7] = counters.e; board[5, 7] = counters.e; board[6, 7] = counters.e; board[7, 7] = counters.e;
                     break;
                 case 5:

@@ -56,6 +56,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="project-timeplans\thr_distribution_ttt_290119.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="code-snippets\old_code_snippets.txt" />
@@ -67,8 +68,6 @@
     <Content Include="to-do-lists\to-do-list_201219.txt" />
     <Content Include="to-do-lists\to-do-list_240120.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="project-timeplans\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
