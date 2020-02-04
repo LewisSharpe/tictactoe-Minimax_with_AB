@@ -31,10 +31,13 @@ namespace Minimax_TPL
         int EXECPRINT_GAMEBOARD_ON = 1;  // 1 on, 0 off - TURN on/off GAME BOARD PRINT ON CONSOLE ON AND OFF
         int DEBUGPRINT_ON = 0;  // 1 on, 0 off - TURN on/off FULL DEBUGGING PRINTING ON CONSOLE ON AND OFF
         int CSVWRITE_ON = 0;  // 1 on, 0 off - turn on/off tried move CSV file printing 
-        const int TPL_PARALLELINVOKE_ON = 1;  // 1 on, 0 off - turn parallel invoke on and off
-        private static Object TPL_THREADSYNC_LOCK = new Object(); // lock to protect Move and score from accidential updates
         private static Object TPL_FILESYNC_LOCK = new Object(); // lock to protect file update
-        // PUBLIC DECS
+        // ******** PARALLELISM ADJUSTMENT VARIABLES ********
+        const int TPL_PARALLELINVOKE_ON = 1;  // 1 on, 0 off - turn parallel invoke on and off
+        const int no_of_cores_for_parallelism = 4; // specify number of cores to utilise parallelism in TPL variant
+        private static Object TPL_THREADSYNC_LOCK = new Object(); // lock to protect Move and score from accidential updates
+       // ****************************************************
+       // PUBLIC DECS
         public static int ply = 0;    // start depth for search (should be 0)
         public const int maxPly = 3; // max depth for search: 0 = only immediate move; 1 = also next opponent move; 2 = also own next move etc
         public int alpha = Consts.MIN_SCORE; // set alpha to -1001
@@ -977,11 +980,13 @@ cloning is needed.
             }
             if (TPL_PARALLELINVOKE_ON == 1) // if TPL parallel invoking is turned on
             {
-                // start and synchronise 4 parallel tasks
-                // HWL: try a sequential version first, to test strided iteration (below):
-                Parallel.Invoke(() =>
+                 // number of cores for parallelism 
+                 ParallelOptions po = new ParallelOptions();
+                 po.MaxDegreeOfParallelism = no_of_cores_for_parallelism; // specify to number of cores to const value 
+                Parallel.Invoke(po,
+                    () =>
                 {
-                    Console.WriteLine("+++++++ PARALLELISM ON");
+                    Console.WriteLine("+++++++ PARALLELISM ON with " + po.MaxDegreeOfParallelism + " cores");
                         sw_thr0.Start();
                         ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves);
                         sw_thr0.Stop();
@@ -1040,6 +1045,7 @@ cloning is needed.
                     {
                         Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, counter /*Flip(counter)*/, res.ToString());
                         Console.WriteLine("-- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration       
+                        Console.WriteLine("-");
                     }
                     thr0_movesWithClear.Clear(); // clear list of positions considered by thread 0 for each move made (list is cleared after each move is made)  
                     thr1_movesWithClear.Clear(); // clear list of positions considered by thread 1 for each move made (list is cleared after each move is made)  
