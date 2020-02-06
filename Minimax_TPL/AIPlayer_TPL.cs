@@ -237,7 +237,7 @@ namespace Minimax_TPL
         public bool FindOneInARow(GameBoard_TPL<counters> board, counters us)
         {
             for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
-                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
+                       for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
                     for (int xx = 0; xx <= 1; xx++)
@@ -263,7 +263,7 @@ namespace Minimax_TPL
         public bool FindTwoInARow(GameBoard_TPL<counters> board, counters us)
         {
             for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
-                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
+                       for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
                 {
                     // check whether position piece at [x,y] has the same piece as neighbour
                     for (int xx = 0; xx <= 1; xx++)
@@ -290,7 +290,7 @@ namespace Minimax_TPL
         public static bool FindTwoWithGap(GameBoard_TPL<counters> board, counters us)
         {
             for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
-                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
+                       for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
                 {
                     // check whether position piece at [x,y] has the same piece as both neighbours
                     for (int xx = 0; xx <= 1; xx++)
@@ -338,7 +338,7 @@ to be turned into a three-in-a-row with an empty cell available to the right of 
         public static bool FindTwoWithRightBuild(GameBoard_TPL<counters> board, counters us)
         {
             for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
-                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
+                       for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
                 {
                     // check whether position piece at [x,y] has the same piece as both neighbours
                     for (int xx = 0; xx <= 1; xx++)
@@ -385,7 +385,7 @@ to be turned into a three-in-a-row with an empty cell available to the left of t
         public static bool FindTwoWithLeftBuild(GameBoard_TPL<counters> board, counters us)
         {
             for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
-                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
+                       for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
                 {
                     // check whether position piece at [x,y] has the same piece as both neighbours
                     for (int xx = 0; xx <= 1; xx++)
@@ -434,7 +434,7 @@ to be turned into a three-in-a-row with an empty cell available to the left of t
         public static bool FindTwoWithBothBuild(GameBoard_TPL<counters> board, counters us)
         {
             for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
-                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
+                       for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
                 {
                     // check whether position piece at [x,y] has the same piece as both neighbours
                     for (int xx = 0; xx <= 1; xx++)
@@ -484,7 +484,7 @@ to be turned into a three-in-a-row with an empty cell available to the left of t
         public static bool FindTwoWithNoBuild(GameBoard_TPL<counters> board, counters us)
         {
             for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
-                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
+                       for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
                 {
                     // check whether position piece at [x,y] has the same piece as both neighbours
                     for (int xx = 0; xx <= 1; xx++)
@@ -537,7 +537,7 @@ to be turned into a three-in-a-row with an empty cell available to the left of t
             int const_val = 2; // const value is set to 2
             int cell_sum = 0; // number of empty cells around the current counter
             for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
-                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
+                       for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
                 {
                     // check whether position piece at [x,y] has the same piece as both neighbours
                     for (int xx = 0; xx <= 1; xx++)
@@ -613,7 +613,7 @@ to be turned into a three-in-a-row with an empty cell available to the left of t
         public static bool FindThreeInARow(GameBoard_TPL<counters> board, counters us)
         {
             for (int x = 1; x <= ((_SEGM_BOARD == 1) ? 3 : 7); x++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
-                for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
+                       for (int y = 1; y <= ((_SEGM_BOARD == 1) ? 3 : 7); y++) // 1 <=3 for segemented 3x3, or 1 <=7 for original 7x7 board
                 {
                     // check whether position piece at [x,y] has the same piece as both neighbours
                     for (int xx = 0; xx <= 1; xx++)

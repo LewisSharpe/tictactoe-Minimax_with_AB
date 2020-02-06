@@ -96,25 +96,25 @@ The method runs the execution of the entire game, iterating the starting board e
                 case 3:
                     startingCounter = counters.X; // state starting counter of gameplay
                     currentPlayer.counter = counters.X; // HWL: set the current player here as well
-                    expectedMove = new Tuple<int, int>(1, 2);
+                    expectedMove = new Tuple<int, int>(2, 3);
                     // choose win
-                    board[1, 1] = counters.e; board[2, 1] = counters.N; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
-                    board[1, 2] = counters.X; board[2, 2] = counters.e; board[3, 2] = counters.O; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
-                    board[1, 3] = counters.e; board[2, 3] = counters.X; board[3, 3] = counters.N; board[4, 3] = counters.e; board[5, 3] = counters.e; board[6, 3] = counters.e; board[7, 3] = counters.e;
-                    board[1, 4] = counters.e; board[2, 4] = counters.N; board[3, 4] = counters.O; board[4, 4] = counters.N; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
-                    board[1, 5] = counters.N; board[2, 5] = counters.e; board[3, 5] = counters.e; board[4, 5] = counters.e; board[5, 5] = counters.e; board[6, 5] = counters.e; board[7, 5] = counters.e;
-                    board[1, 6] = counters.e; board[2, 6] = counters.e; board[3, 6] = counters.e; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.e; board[7, 6] = counters.e;
+                    board[1, 1] = counters.O; board[2, 1] = counters.e; board[3, 1] = counters.N; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
+                    board[1, 2] = counters.e; board[2, 2] = counters.X; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
+                    board[1, 3] = counters.e; board[2, 3] = counters.e; board[3, 3] = counters.X; board[4, 3] = counters.e; board[5, 3] = counters.e; board[6, 3] = counters.e; board[7, 3] = counters.e;
+                    board[1, 4] = counters.e; board[2, 4] = counters.e; board[3, 4] = counters.e; board[4, 4] = counters.O; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
+                    board[1, 5] = counters.e; board[2, 5] = counters.e; board[3, 5] = counters.e; board[4, 5] = counters.e; board[5, 5] = counters.X; board[6, 5] = counters.e; board[7, 5] = counters.e;
+                    board[1, 6] = counters.e; board[2, 6] = counters.e; board[3, 6] = counters.e; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.O; board[7, 6] = counters.e;
                     board[1, 7] = counters.e; board[2, 7] = counters.e; board[3, 7] = counters.e; board[4, 7] = counters.e; board[5, 7] = counters.e; board[6, 7] = counters.e; board[7, 7] = counters.e;
                     break;
                 case 4:
                     startingCounter = counters.O; // state starting counter of gameplay
-                    board[1, 1] = counters.X; board[2, 1] = counters.O; board[3, 1] = counters.X; board[4, 1] = counters.O; board[5, 1] = counters.e; board[6, 1] = counters.X; board[7, 1] = counters.e;
+                    board[1, 1] = counters.X; board[2, 1] = counters.O; board[3, 1] = counters.X; board[4, 1] = counters.O; board[5, 1] = counters.e; board[6, 1] = counters.X; board[7, 1] = counters.N;
                     board[1, 2] = counters.N; board[2, 2] = counters.O; board[3, 2] = counters.O; board[4, 2] = counters.e; board[5, 2] = counters.O; board[6, 2] = counters.O; board[7, 2] = counters.e;
                     board[1, 3] = counters.N; board[2, 3] = counters.X; board[3, 3] = counters.X; board[4, 3] = counters.O; board[5, 3] = counters.e; board[6, 3] = counters.X; board[7, 3] = counters.e;
-                    board[1, 4] = counters.X; board[2, 4] = counters.N; board[3, 4] = counters.X; board[4, 4] = counters.e; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
-                    board[1, 5] = counters.O; board[2, 5] = counters.e; board[3, 5] = counters.O; board[4, 5] = counters.e; board[5, 5] = counters.e; board[6, 5] = counters.e; board[7, 5] = counters.e;
-                    board[1, 6] = counters.X; board[2, 6] = counters.e; board[3, 6] = counters.N; board[4, 6] = counters.e; board[5, 6] = counters.e; board[6, 6] = counters.e; board[7, 6] = counters.e;
-                    board[1, 7] = counters.N; board[2, 7] = counters.e; board[3, 7] = counters.N; board[4, 7] = counters.e; board[5, 7] = counters.e; board[6, 7] = counters.e; board[7, 7] = counters.e;
+                    board[1, 4] = counters.X; board[2, 4] = counters.N; board[3, 4] = counters.X; board[4, 4] = counters.N; board[5, 4] = counters.N; board[6, 4] = counters.N; board[7, 4] = counters.N;
+                    board[1, 5] = counters.O; board[2, 5] = counters.N; board[3, 5] = counters.O; board[4, 5] = counters.N; board[5, 5] = counters.N; board[6, 5] = counters.N; board[7, 5] = counters.N;
+                    board[1, 6] = counters.X; board[2, 6] = counters.e; board[3, 6] = counters.N; board[4, 6] = counters.N; board[5, 6] = counters.N; board[6, 6] = counters.N; board[7, 6] = counters.N;
+                    board[1, 7] = counters.N; board[2, 7] = counters.N; board[3, 7] = counters.N; board[4, 7] = counters.N; board[5, 7] = counters.N; board[6, 7] = counters.N; board[7, 7] = counters.N;
                     break;
                 case 5:
                     startingCounter = counters.O; // state starting counter of gameplay
@@ -131,7 +131,7 @@ The method runs the execution of the entire game, iterating the starting board e
                     break;
                 case 6:
                     startingCounter = counters.X; // state starting counter of gameplay
-                    board[1, 1] = counters.e; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.O; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
+                    board[1, 1] = counters.e; board[2, 1] = counters.e; board[3, 1] = counters.O; board[4, 1] = counters.O; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
                     board[1, 2] = counters.e; board[2, 2] = counters.e; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
                     board[1, 3] = counters.e; board[2, 3] = counters.e; board[3, 3] = counters.e; board[4, 3] = counters.e; board[5, 3] = counters.e; board[6, 3] = counters.e; board[7, 3] = counters.e;
                     board[1, 4] = counters.e; board[2, 4] = counters.e; board[3, 4] = counters.e; board[4, 4] = counters.e; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
@@ -144,7 +144,7 @@ The method runs the execution of the entire game, iterating the starting board e
                     currentPlayer.counter = counters.X; // HWL: set the current player here as well
 		            expectedMove = new Tuple<int, int>(3,1); // (3,3) is also a winning move, but comes later
                     // choose win
-                    board[1, 1] = counters.e; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
+                    board[1, 1] = counters.O; board[2, 1] = counters.e; board[3, 1] = counters.e; board[4, 1] = counters.e; board[5, 1] = counters.e; board[6, 1] = counters.e; board[7, 1] = counters.e;
                     board[1, 2] = counters.e; board[2, 2] = counters.X; board[3, 2] = counters.e; board[4, 2] = counters.e; board[5, 2] = counters.e; board[6, 2] = counters.e; board[7, 2] = counters.e;
                     board[1, 3] = counters.e; board[2, 3] = counters.e; board[3, 3] = counters.e; board[4, 3] = counters.e; board[5, 3] = counters.e; board[6, 3] = counters.e; board[7, 3] = counters.e;
                     board[1, 4] = counters.e; board[2, 4] = counters.e; board[3, 4] = counters.e; board[4, 4] = counters.O; board[5, 4] = counters.e; board[6, 4] = counters.e; board[7, 4] = counters.e;
