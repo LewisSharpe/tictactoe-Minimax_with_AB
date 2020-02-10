@@ -22,6 +22,7 @@ namespace Minimax_TPL
         public static int cntr = 1;
         public static int nowcount = 0;
         bool stopMe = false;
+        public static Stopwatch game_timer;
         public static GameBoard_TPL<counters> board = new GameBoard_TPL<counters>(counters.e);
         public static GameBoard_TPL<int> scoreBoard = new GameBoard_TPL<int>(21);
         public static GameBoard_TPL<counters> initial_board;
@@ -532,7 +533,7 @@ The method runs the execution of the entire game, iterating the starting board e
             }
 
             { // HWL: main loop of running the game now here, rather than in GetMove()
-                var game_timer = Stopwatch.StartNew();
+                game_timer = Stopwatch.StartNew();
                 int move = 0;
                 int numTasks = 4;
                 Tuple<int, Tuple<int, int>> bestRes;
