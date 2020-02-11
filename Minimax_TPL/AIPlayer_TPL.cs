@@ -31,6 +31,7 @@ namespace Minimax_TPL
         int EXECPRINT_GAMEBOARD_ON = 1;  // 1 on, 0 off - TURN on/off GAME BOARD PRINT ON CONSOLE ON AND OFF
         int DEBUGPRINT_ON = 0;  // 1 on, 0 off - TURN on/off FULL DEBUGGING PRINTING ON CONSOLE ON AND OFF
         int CSVWRITE_ON = 0;  // 1 on, 0 off - turn on/off tried move CSV file printing 
+        int PRUNE_ON = 1;// 1 on, 0 off - turn on/off alpha-beta pruning to Minimax function
         private static Object TPL_FILESYNC_LOCK = new Object(); // lock to protect file update
         // ******** PARALLELISM ADJUSTMENT VARIABLES ********
         const int TPL_PARALLELINVOKE_ON = 1;  // 1 on, 0 off - turn parallel invoke on and off
@@ -799,7 +800,10 @@ Tuple<int,int> construct.
                 Object my_object = new Object(); // initialise object lock to protect updating of bestMove and bestScore               
                 if (/* true || */  mmax)                  // if maximising   
                 {
-                    alpha = score; // assign alpha to score
+                    if (PRUNE_ON == 1)  // turn on alpha-beta pruning
+                    {
+                        alpha = score; // assign alpha to score
+                    }
                     if (score > bestScore) // if score is greater than best score
                     {
                         lock (my_object) // lock of move update between threads
@@ -826,17 +830,20 @@ Tuple<int,int> construct.
                             }
                         }
                     }
-                    // if alpha is greater than best score
-                    if (alpha > bestScore)
+                    if (PRUNE_ON == 1)
                     {
-                        lock (my_object) // lock of move update between threads
+                        // if alpha is greater than best score
+                        if (alpha > bestScore)
                         {
-                            bestMove = Move; // assign bestMove to the current move
-                            bestScore = alpha; // assign bestScore to alpha
-                            // if the depth level is equal to 1
-                            if (ply == 1)
+                            lock (my_object) // lock of move update between threads
                             {
-                                // Console.WriteLine("-- HWL: new best score {0} at {1} (ply={2})", bestScore, bestMove, ply);
+                                bestMove = Move; // assign bestMove to the current move
+                                bestScore = alpha; // assign bestScore to alpha
+                                                   // if the depth level is equal to 1
+                                if (ply == 1)
+                                {
+                                    // Console.WriteLine("-- HWL: new best score {0} at {1} (ply={2})", bestScore, bestMove, ply);
+                                }
                             }
                         }
                     }
@@ -870,21 +877,24 @@ Tuple<int,int> construct.
                             }
                         }
                     }
-                    // if beta is less than or equal to alpha
-                    if (beta <= alpha)
-                        lock (my_object) // lock of move update between threads
-                        {
-                            bestScore = alpha; // assign bestScore to alpha
-                            // if the depth level is 0
-                            if (ply == 0)
+                    if (PRUNE_ON == 1)
+                    {
+                        // if beta is less than or equal to alpha
+                        if (beta <= alpha)
+                            lock (my_object) // lock of move update between threads
                             {
-                                // if detailed debugging printing is turned on
-                                if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
+                                bestScore = alpha; // assign bestScore to alpha
+                                                   // if the depth level is 0
+                                if (ply == 0)
                                 {
-                                    Console.WriteLine("-- HWL: new best score {0} at {1}", bestScore, bestMove);
+                                    // if detailed debugging printing is turned on
+                                    if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
+                                    {
+                                        Console.WriteLine("-- HWL: new best score {0} at {1}", bestScore, bestMove);
+                                    }
                                 }
                             }
-                        }
+                    }
                 }
                 // if csv printing is turned on
                 if (CSVWRITE_ON == 1)
@@ -1153,7 +1163,7 @@ cloning is needed.
                     board.DisplayFinBoardToFile();
                 }
             }
-            return res; // function return score and position of move selected
+                return res; // function return score and position of move selected
         }
         /*
      --------------------------------------------------------------------------------------------------------------------------
@@ -1448,6 +1458,11 @@ No move is visited twice by more than one thread -
             int randMoveX = rnd.Next(1, 7); // creates a number between 1 and 7
             int randMoveY = rnd.Next(1, 7); // creates a number between 1 and 7
             Tuple<int, int> randMove = new Tuple<int, int>(randMoveX, randMoveY); // initialise random coordinate position
+            // print statement to confirm alpha-beta pruning is turne don
+            if (PRUNE_ON == 1)
+            {
+                Console.WriteLine("++++ PRUNING ON");
+            }
             // if depth level is 0 or 1
             if (ply == 0 || ply == 1)
                 return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard); // return result from parallel search
