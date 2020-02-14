@@ -62,6 +62,7 @@
     <Content Include="code-snippets\old_code_snippets.txt" />
     <Content Include="code-snippets\stridedint_snippet.txt" />
     <Content Include="performance_testing\revised_timeplan-jan19.txt" />
+    <Content Include="to-do-lists\TextFile1.txt" />
     <Content Include="to-do-lists\to-do-list_041219.txt" />
     <Content Include="to-do-lists\to-do-list_100120.txt" />
     <Content Include="to-do-lists\to-do-list_181219.txt" />

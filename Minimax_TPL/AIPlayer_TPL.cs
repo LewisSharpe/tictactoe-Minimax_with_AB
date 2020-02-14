@@ -31,8 +31,10 @@ namespace Minimax_TPL
         int EXECPRINT_GAMEBOARD_ON = 1;  // 1 on, 0 off - TURN on/off GAME BOARD PRINT ON CONSOLE ON AND OFF
         int DEBUGPRINT_ON = 0;  // 1 on, 0 off - TURN on/off FULL DEBUGGING PRINTING ON CONSOLE ON AND OFF
         int CSVWRITE_ON = 0;  // 1 on, 0 off - turn on/off tried move CSV file printing 
-        int PRUNE_ON = 1;// 1 on, 0 off - turn on/off alpha-beta pruning to Minimax function
         private static Object TPL_FILESYNC_LOCK = new Object(); // lock to protect file update
+        // ******** PRUNING ADJUSTMENT VARIABLES ********
+        int PRUNE_ON = 1;// 1 on, 0 off - turn on/off alpha-beta pruning to Minimax function
+        // ****************************************************
         // ******** PARALLELISM ADJUSTMENT VARIABLES ********
         const int TPL_PARALLELINVOKE_ON = 1;  // 1 on, 0 off - turn parallel invoke on and off
         const int no_of_cores_for_parallelism = 4; // specify number of cores to utilise parallelism in TPL variant
