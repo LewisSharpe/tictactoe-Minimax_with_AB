@@ -1079,54 +1079,63 @@ cloning is needed.
                         Console.WriteLine("#### Thread 1 execution time: " + sw_thr1.Elapsed + ", with " + thr1_storemoves.Count + " positions visited.");
                         Console.WriteLine("#### Thread 2 execution time: " + sw_thr2.Elapsed + ", with " + thr2_storemoves.Count + " positions visited.");
                         Console.WriteLine("#### Thread 3 execution time: " + sw_thr3.Elapsed + ", with " + thr3_storemoves.Count + " positions visited.");
+                        var thr0_gamepercent = 0; var thr1_gamepercent = 0; var thr2_gamepercent = 0; var thr3_gamepercent = 0;
                         // percentage utilisation of threads over entire game execution
-                        if (thr_times.Max() == thr0)
+                        try
                         {
-                            var thr0_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
-                            var thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
-                            var thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
-                            var thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
-                            Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
-                            Console.WriteLine("THR 0: " + thr0_gamepercent * 100 + " %");
-                            Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
-                            Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
-                            Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                            if (thr_times.Max() == thr0)
+                            {
+                                thr0_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
+                                thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
+                                thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
+                                thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
+                                Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
+                                Console.WriteLine("THR 0: " + thr0_gamepercent * 100 + " %");
+                                Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
+                                Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
+                                Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                            }
+                            if (thr_times.Max() == thr1)
+                            {
+                                thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
+                                thr1_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
+                                thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
+                                thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
+                                Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
+                                Console.WriteLine("THR 0: " + (100 - thr0_gamepercent) + " %");
+                                Console.WriteLine("THR 1: " + thr1_gamepercent * 100 + " %");
+                                Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
+                                Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                            }
+                            if (thr_times.Max() == thr2)
+                            {
+                                thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
+                                thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
+                                thr2_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
+                                thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
+                                Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
+                                Console.WriteLine("THR 0: " + (100 - thr0_gamepercent) + " %");
+                                Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
+                                Console.WriteLine("THR 2: " + thr2_gamepercent * 100 + " %");
+                                Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                            }
+                            if (thr_times.Max() == thr3)
+                            {
+                                thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
+                                thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
+                                thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
+                                thr3_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
+                                Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
+                                Console.WriteLine("THR 0: " + (100 - thr0_gamepercent) + " %");
+                                Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
+                                Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
+                                Console.WriteLine("THR 3: " + thr3_gamepercent * 100 + " %");
+                            }
                         }
-                        if (thr_times.Max() == thr1)
+                        catch (Exception ex)
                         {
-                            var thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
-                            var thr1_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
-                            var thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
-                            var thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
-                            Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
-                            Console.WriteLine("THR 0: " + (100-thr0_gamepercent) + " %");
-                            Console.WriteLine("THR 1: " + thr1_gamepercent * 100 + " %");
-                            Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
-                            Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
-                        }
-                        if (thr_times.Max() == thr2)
-                        {
-                            var thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
-                            var thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
-                            var thr2_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
-                            var thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
-                            Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
-                            Console.WriteLine("THR 0: " + (100-thr0_gamepercent) + " %");
-                            Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
-                            Console.WriteLine("THR 2: " + thr2_gamepercent * 100 + " %");
-                            Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
-                        }
-                        if (thr_times.Max() == thr3)
-                        {
-                            var thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
-                            var thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
-                            var thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
-                            var thr3_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
-                            Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
-                            Console.WriteLine("THR 0: " + (100-thr0_gamepercent) + " %");
-                            Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
-                            Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
-                            Console.WriteLine("THR 3: " + thr3_gamepercent * 100 + " %");
+                            // handle exception here
+                            Console.WriteLine("Thread percentages not available: Could not divide any number by 0.");
                         }
                         if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                         {
