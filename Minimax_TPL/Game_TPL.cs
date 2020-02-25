@@ -55,7 +55,7 @@ namespace Minimax_TPL
 Jump to board x on start-up if Game board cntr is 1.
 --------------------------------------------------------------------------------------------------------------------------
 */
-            if (cntr == 1) cntr = 1; // HWL: jump to board 7
+            if (cntr == 1) cntr = 2; // HWL: jump to board 7
             PlayGame(_xPlayer, _oPlayer, ref cntr);
         }
         /* 
@@ -581,11 +581,12 @@ The method runs the execution of the entire game, iterating the starting board e
                             Console.WriteLine("--------------------------------------------------------------------------------------------------------");
                             Console.WriteLine("========================================================================================================" + Environment.NewLine);
         
-                            /* //.
+                            /*
          ----------------------------------------------------------------------------------------------------------------
          if current board is finished, move on to next board in case sequence until no boards are left existing
          --------------------------------------------------------------------------------------------------------------------------
          */
+         
                             i++;
                             if (i > 2 && i< 40) return;
                             cntr++;
@@ -593,6 +594,7 @@ The method runs the execution of the entire game, iterating the starting board e
                            AIPlayer_TPL.all_Xplacedmoves.Clear();
                             PlayGame(currentPlayer, otherPlayer, ref cntr);
                             Console.WriteLine("========================================================================================================" + Environment.NewLine);
+        
         /* 
         ----------------------------------------------------------------------------------------------------------------
         --------------------------------------------------------------------------------------------------------------------------
