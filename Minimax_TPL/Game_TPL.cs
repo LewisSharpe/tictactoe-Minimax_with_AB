@@ -580,7 +580,7 @@ The method runs the execution of the entire game, iterating the starting board e
                             Game_TPL.initial_board.DisplayBoard();
                             Console.WriteLine("--------------------------------------------------------------------------------------------------------");
                             Console.WriteLine("========================================================================================================" + Environment.NewLine);
-        
+
                             /*
          ----------------------------------------------------------------------------------------------------------------
          if current board is finished, move on to next board in case sequence until no boards are left existing
@@ -590,8 +590,9 @@ The method runs the execution of the entire game, iterating the starting board e
                             i++;
                             if (i > 2 && i< 40) return;
                             cntr++;
-                           AIPlayer_TPL.all_Oplacedmoves.Clear();
-                           AIPlayer_TPL.all_Xplacedmoves.Clear();
+                            AIPlayer_TPL.move_addition.Clear(); // clear the list of made moves on current board
+                            AIPlayer_TPL.all_Oplacedmoves.Clear();
+                            AIPlayer_TPL.all_Xplacedmoves.Clear();
                             PlayGame(currentPlayer, otherPlayer, ref cntr);
                             Console.WriteLine("========================================================================================================" + Environment.NewLine);
         

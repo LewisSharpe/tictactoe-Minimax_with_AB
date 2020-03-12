@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
@@ -68,6 +69,7 @@ namespace Minimax_TPL
         List<Tuple<int, int>> all_conmoves = new List<Tuple<int, int>>(); // all considered moves in game cycle
         public static List<Tuple<int, int>> all_Xplacedmoves = new List<Tuple<int, int>>(); // all placed moves in game cycle
         public static List<Tuple<int, int>> all_Oplacedmoves = new List<Tuple<int, int>>(); // all placed moves in game cycle
+        public static ArrayList move_addition = new ArrayList(); // list of moves made for board
         int move = 1; // move number
         public AIPlayer_TPL(counters _counter) : base(_counter) {
         }
@@ -1059,88 +1061,94 @@ cloning is needed.
                         Console.WriteLine("-- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration       
                         Console.WriteLine("Total number of considered positions:" + all_conmoves.Count);
                         Console.WriteLine("-"); // BP 
-                    }
+                        move_addition.Add("## Move " + move + " for Board " + Game_TPL.cntr + ", position selected: " + res.ToString() + ",counter used: " + counter + ", with a score of: " + score + ", number of moves considered: " + all_conmoves.Count + ", with elapsed time: " + sw_move.Elapsed); // add move to list of made moves                   
                     thr0_movesWithClear.Clear(); // clear list of positions considered by thread 0 for each move made (list is cleared after each move is made)  
                     thr1_movesWithClear.Clear(); // clear list of positions considered by thread 1 for each move made (list is cleared after each move is made)  
                     thr2_movesWithClear.Clear(); // clear list of positions considered by thread 2 for each move made (list is cleared after each move is made)  
                     thr3_movesWithClear.Clear(); // clear list of positions considered by thread 3 for each move made (list is cleared after each move is made)               
                                                  // if Win is detected, display thread running times (threads' 0 to 3)
-                    if (Win(board, counter) || Win(board, otherCounter))
-                    {
-                        TimeSpan thr0 = sw_thr0.Elapsed;
-                        TimeSpan thr1 = sw_thr1.Elapsed;
-                        TimeSpan thr2 = sw_thr2.Elapsed;
-                        TimeSpan thr3 = sw_thr3.Elapsed;
-                        TimeSpan[] thr_times = new TimeSpan[] { thr0, thr1, thr2, thr3 };
-                        TimeSpan maxthread_time = thr_times.Max();
-                        move = 0; // set move number counter to 0 - reset when board is over
-                        // display exec time for each time
-                        Console.WriteLine("#### Thread 0 execution time: " + sw_thr0.Elapsed + ", with " + thr0_storemoves.Count + " positions visited.");
-                        Console.WriteLine("#### Thread 1 execution time: " + sw_thr1.Elapsed + ", with " + thr1_storemoves.Count + " positions visited.");
-                        Console.WriteLine("#### Thread 2 execution time: " + sw_thr2.Elapsed + ", with " + thr2_storemoves.Count + " positions visited.");
-                        Console.WriteLine("#### Thread 3 execution time: " + sw_thr3.Elapsed + ", with " + thr3_storemoves.Count + " positions visited.");
-                        var thr0_gamepercent = 0; var thr1_gamepercent = 0; var thr2_gamepercent = 0; var thr3_gamepercent = 0;
-                        // percentage utilisation of threads over entire game execution
-                        try
+                        if (Win(board, counter) || Win(board, otherCounter))
                         {
-                            if (thr_times.Max() == thr0)
+                            TimeSpan thr0 = sw_thr0.Elapsed;
+                            TimeSpan thr1 = sw_thr1.Elapsed;
+                            TimeSpan thr2 = sw_thr2.Elapsed;
+                            TimeSpan thr3 = sw_thr3.Elapsed;
+                            TimeSpan[] thr_times = new TimeSpan[] { thr0, thr1, thr2, thr3 };
+                            TimeSpan maxthread_time = thr_times.Max(); // find longest running thread out of the available four threads 
+                            move = 0; // set move number counter to 0 - reset when board is over
+                                      // display exec time for each time
+                            Console.WriteLine("#### Thread 0 execution time: " + sw_thr0.Elapsed + ", with " + thr0_storemoves.Count + " positions visited.");
+                            Console.WriteLine("#### Thread 1 execution time: " + sw_thr1.Elapsed + ", with " + thr1_storemoves.Count + " positions visited.");
+                            Console.WriteLine("#### Thread 2 execution time: " + sw_thr2.Elapsed + ", with " + thr2_storemoves.Count + " positions visited.");
+                            Console.WriteLine("#### Thread 3 execution time: " + sw_thr3.Elapsed + ", with " + thr3_storemoves.Count + " positions visited.");
+                            var thr0_gamepercent = 0; var thr1_gamepercent = 0; var thr2_gamepercent = 0; var thr3_gamepercent = 0; // initialise thread utilisation percentage rate variables
+                            Console.WriteLine("**** ALL Moves made for Board " + Game_TPL.cntr + " in ascending order:");
+                            foreach (object i in move_addition)
                             {
-                                thr0_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
-                                thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
-                                thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
-                                thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
-                                Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
-                                Console.WriteLine("THR 0: " + thr0_gamepercent * 100 + " %");
-                                Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
-                                Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
-                                Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                                Console.WriteLine(i); // display all moves on current thread
                             }
-                            if (thr_times.Max() == thr1)
+                            // calculate and display percentage utilisation of threads over entire game execution
+                            try
                             {
-                                thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
-                                thr1_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
-                                thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
-                                thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
-                                Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
-                                Console.WriteLine("THR 0: " + (100 - thr0_gamepercent) + " %");
-                                Console.WriteLine("THR 1: " + thr1_gamepercent * 100 + " %");
-                                Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
-                                Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                                if (thr_times.Max() == thr0)
+                                {
+                                    thr0_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
+                                    thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
+                                    thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
+                                    thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
+                                    Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
+                                    Console.WriteLine("THR 0: " + thr0_gamepercent * 100 + " %");
+                                    Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
+                                    Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
+                                    Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                                }
+                                if (thr_times.Max() == thr1)
+                                {
+                                    thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
+                                    thr1_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
+                                    thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
+                                    thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
+                                    Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
+                                    Console.WriteLine("THR 0: " + (100 - thr0_gamepercent) + " %");
+                                    Console.WriteLine("THR 1: " + thr1_gamepercent * 100 + " %");
+                                    Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
+                                    Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                                }
+                                if (thr_times.Max() == thr2)
+                                {
+                                    thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
+                                    thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
+                                    thr2_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
+                                    thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
+                                    Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
+                                    Console.WriteLine("THR 0: " + (100 - thr0_gamepercent) + " %");
+                                    Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
+                                    Console.WriteLine("THR 2: " + thr2_gamepercent * 100 + " %");
+                                    Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                                }
+                                if (thr_times.Max() == thr3)
+                                {
+                                    thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
+                                    thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
+                                    thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
+                                    thr3_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
+                                    Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
+                                    Console.WriteLine("THR 0: " + (100 - thr0_gamepercent) + " %");
+                                    Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
+                                    Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
+                                    Console.WriteLine("THR 3: " + thr3_gamepercent * 100 + " %");
+                                }
                             }
-                            if (thr_times.Max() == thr2)
+                            catch (Exception ex)
                             {
-                                thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
-                                thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
-                                thr2_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
-                                thr3_gamepercent = maxthread_time.Seconds - thr3.Seconds;
-                                Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
-                                Console.WriteLine("THR 0: " + (100 - thr0_gamepercent) + " %");
-                                Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
-                                Console.WriteLine("THR 2: " + thr2_gamepercent * 100 + " %");
-                                Console.WriteLine("THR 3: " + (100 - thr3_gamepercent) + " %");
+                                // handle exception here
+                                Console.WriteLine("Thread percentages not available: Could not divide any number by 0.");
                             }
-                            if (thr_times.Max() == thr3)
+                            if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                             {
-                                thr0_gamepercent = maxthread_time.Seconds - thr0.Seconds;
-                                thr1_gamepercent = maxthread_time.Seconds - thr1.Seconds;
-                                thr2_gamepercent = maxthread_time.Seconds - thr2.Seconds;
-                                thr3_gamepercent = maxthread_time.Seconds / maxthread_time.Seconds;
-                                Console.WriteLine("*** Percentage utilisation of threads over entire game execution:");
-                                Console.WriteLine("THR 0: " + (100 - thr0_gamepercent) + " %");
-                                Console.WriteLine("THR 1: " + (100 - thr1_gamepercent) + " %");
-                                Console.WriteLine("THR 2: " + (100 - thr2_gamepercent) + " %");
-                                Console.WriteLine("THR 3: " + thr3_gamepercent * 100 + " %");
+                                Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
+                                Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            // handle exception here
-                            Console.WriteLine("Thread percentages not available: Could not divide any number by 0.");
-                        }
-                        if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
-                        {
-                            Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
-                            Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
                         }
                     }
                 }
