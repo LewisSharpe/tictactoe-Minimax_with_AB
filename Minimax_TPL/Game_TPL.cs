@@ -601,11 +601,13 @@ The method runs the execution of the entire game, iterating the starting board e
         --------------------------------------------------------------------------------------------------------------------------
         */
                         }
-                        game_timer.Stop();
+                
                     }
                     while (!currentPlayer.Win(board, Flip(counter)) && !otherPlayer.Win(board, counter) && !board.IsFull(3));
                 }
+
             }
+            game_timer.Stop();
             return;
         }
         /* 

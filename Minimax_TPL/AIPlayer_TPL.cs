@@ -1058,10 +1058,11 @@ cloning is needed.
                     if (j == 3)
                     {
                         Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2}", Game_TPL.cntr, counter /*Flip(counter)*/, res.ToString());
-                        Console.WriteLine("-- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration       
+                        Console.WriteLine("-- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration  
+                        Console.WriteLine("-- LS Elapsed time for game: " + Game_TPL.game_timer.Elapsed); // display elapsed for move consideration   
                         Console.WriteLine("Total number of considered positions:" + all_conmoves.Count);
                         Console.WriteLine("-"); // BP 
-                        move_addition.Add("## Move " + move + " for Board " + Game_TPL.cntr + ", position selected: " + res.ToString() + ",counter used: " + counter + ", with a score of: " + score + ", number of moves considered: " + all_conmoves.Count + ", with elapsed time: " + sw_move.Elapsed); // add move to list of made moves                   
+                        move_addition.Add("## Move " + move + " for Board " + Game_TPL.cntr + ", position selected: " + res.ToString() + ",counter used: " + counter + ", with a score of: " + score + ", number of moves considered: " + all_conmoves.Count + ", with elapsed time: " + sw_move.Elapsed + " with current elapsed time: " + Game_TPL.game_timer.Elapsed); // add move to list of made moves                   
                     thr0_movesWithClear.Clear(); // clear list of positions considered by thread 0 for each move made (list is cleared after each move is made)  
                     thr1_movesWithClear.Clear(); // clear list of positions considered by thread 1 for each move made (list is cleared after each move is made)  
                     thr2_movesWithClear.Clear(); // clear list of positions considered by thread 2 for each move made (list is cleared after each move is made)  
