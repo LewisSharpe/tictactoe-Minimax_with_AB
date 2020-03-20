@@ -38,7 +38,7 @@ namespace Minimax_TPL
         // ****************************************************
         // ******** PARALLELISM ADJUSTMENT VARIABLES ********
         const int TPL_PARALLELINVOKE_ON = 1;  // 1 on, 0 off - turn parallel invoke on and off
-        const int no_of_cores_for_parallelism = 1; // specify number of cores to utilise parallelism in TPL variant
+        const int no_of_cores_for_parallelism = 4; // specify number of cores to utilise parallelism in TPL variant
         private static Object TPL_THREADSYNC_LOCK = new Object(); // lock to protect Move and score from accidential updates
        // ****************************************************
        // PUBLIC DECS
