@@ -28,3 +28,10 @@ C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\M
 C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.csproj.CoreCompileInputs.cache
 C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.exe
 C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.pdb
+C:\Users\New User\Desktop\ttt_csharp_210320\Minimax_SYSTST\bin\Debug\Minimax_SYSTST.exe.config
+C:\Users\New User\Desktop\ttt_csharp_210320\Minimax_SYSTST\bin\Debug\Minimax_SYSTST.exe
+C:\Users\New User\Desktop\ttt_csharp_210320\Minimax_SYSTST\bin\Debug\Minimax_SYSTST.pdb
+C:\Users\New User\Desktop\ttt_csharp_210320\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_210320\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_210320\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.exe
+C:\Users\New User\Desktop\ttt_csharp_210320\Minimax_SYSTST\obj\Debug\Minimax_SYSTST.pdb

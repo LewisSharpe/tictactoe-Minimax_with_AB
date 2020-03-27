@@ -1,10 +1,10 @@
 
   1   2   3   4   5   6   7 
-1 e | e | e | e | e | e | e | 
+1 X | e | O | e | e | e | e | 
   -   -   -   -   -   -   - 
-2 O | X | e | e | e | e | e | 
+2 O | X | X | e | e | e | e | 
   -   -   -   -   -   -   - 
-3 e | e | e | e | e | e | e | 
+3 e | e | X | e | e | e | e | 
   -   -   -   -   -   -   - 
 4 e | e | e | e | e | e | e | 
   -   -   -   -   -   -   - 
@@ -14,4 +14,4 @@
   -   -   -   -   -   -   - 
 7 e | e | e | e | e | e | e | 
   -   -   -   -   -   -   - 
-^^ FIN BOARD FOR BOARD 6
+^^ FIN BOARD FOR BOARD 4
