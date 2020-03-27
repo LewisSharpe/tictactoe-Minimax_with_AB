@@ -55,7 +55,7 @@ namespace Minimax_TPL
 Jump to board x on start-up if Game board cntr is 1.
 --------------------------------------------------------------------------------------------------------------------------
 */
-            if (cntr == 1) cntr = 6; // HWL: jump to board 7
+            if (cntr == 1) cntr = 4; // HWL: jump to board 7
             PlayGame(_xPlayer, _oPlayer, ref cntr);
         }
         /* 
