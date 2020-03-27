@@ -71,7 +71,11 @@ namespace Minimax_TPL
         public static List<Tuple<int, int>> all_Oplacedmoves = new List<Tuple<int, int>>(); // all placed moves in game cycle
         public static ArrayList move_addition = new ArrayList(); // list of moves made for board
         int move = 1; // move number
-        private IDictionary<String, Int32> NextFreeActionNumbers = null;
+        /* 
+        ----------------------------------------------------------------------------------------------------------------
+       * Cancelling Threads
+        ----------------------------------------------------------------------------------------------------------------
+         */
         static CancellationTokenSource _tokenSource;
         static void CancellingTask()
         {
@@ -1009,11 +1013,7 @@ cloning is needed.
                     var po = new ParallelOptions { CancellationToken = _tokenSource.Token };
                     po.MaxDegreeOfParallelism = no_of_cores_for_parallelism; // specify to number of cores to const value                    
                     var actions = CreateTaskArray(no_of_cores_for_parallelism, board, scoreBoard, res, bestRes, unconsideredMoves);
-                    if (ress[i].Item1 == 1000)
-                    {
-                        actions[i] = CancellingTask;
-                        Console.WriteLine("CANCELLING THREADS");
-                    }
+                    // Parallel Invoke
                     try { Parallel.Invoke(po, actions); }
                     catch (OperationCanceledException) { Console.WriteLine("Cancelled"); }                
                 }
@@ -1364,7 +1364,14 @@ No move is visited twice by more than one thread -
             }
             return str;
         }
-         Action[] CreateTaskArray(int taskCount, GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard, Tuple<int,Tuple<int,int>> res, Tuple<int,Tuple<int,int>> bestRes, List<Tuple<int, int>> unconsideredMoves)
+        /* 
+      ----------------------------------------------------------------------------------------------------------------
+      * CreateTaskArray -
+      --------------------------------------------------------------------------------------------------------------------------
+       Create Task Array for Parallel.Invoke.
+      --------------------------------------------------------------------------------------------------------------------------
+      */
+        Action[] CreateTaskArray(int taskCount, GameBoard_TPL<counters> board, GameBoard_TPL<int> scoreBoard, Tuple<int,Tuple<int,int>> res, Tuple<int,Tuple<int,int>> bestRes, List<Tuple<int, int>> unconsideredMoves)
         {
             
             _tokenSource = new CancellationTokenSource();
@@ -1372,8 +1379,6 @@ No move is visited twice by more than one thread -
             po.MaxDegreeOfParallelism = no_of_cores_for_parallelism; // specify to number of cores to const value 
 
             var actions = new Action[taskCount];
-
-
             var boards = new List<GameBoard_TPL<counters>>();
             var watches = new List<CustomStopwatch>();
             for (int i = 0; i < taskCount; i++)
@@ -1397,7 +1402,7 @@ No move is visited twice by more than one thread -
                         Console.WriteLine("#### THREAD " + current_thread_no + " - StartAt: {0}, EndAt: {1}", watches[sw_index].StartAt.Value, watches[sw_index].EndAt.Value); // timestamp to identify level of thread distribution representation
 
                     }
-                    if (ress[i].Item1 == 1000)
+                    if (ress[i].Item1 == 1000) // if score in current thread is 1000, kill all threads
                     {
                         actions[i] = CancellingTask;
                     }
