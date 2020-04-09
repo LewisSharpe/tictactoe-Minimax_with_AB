@@ -38,7 +38,7 @@ namespace Minimax_TPL
         // ****************************************************
         // ******** PARALLELISM ADJUSTMENT VARIABLES ********
         const int TPL_PARALLELINVOKE_ON = 1;  // 1 on, 0 off - turn parallel invoke on and off
-        const int no_of_cores_for_parallelism = 4; // specify number of cores to utilise parallelism in TPL variant
+        int no_of_cores_for_parallelism = Environment.ProcessorCount; // specify number of cores to utilise parallelism in TPL variant
         private static Object TPL_THREADSYNC_LOCK = new Object(); // lock to protect Move and score from accidential updates
        // ****************************************************
        // PUBLIC DECS
@@ -994,40 +994,21 @@ cloning is needed.
             }
             if (TPL_PARALLELINVOKE_ON == 1) // if TPL parallel invoking is turned on
             {
-                 // number of cores for parallelism 
-                 ParallelOptions po = new ParallelOptions();
-                 po.MaxDegreeOfParallelism = no_of_cores_for_parallelism; // specify to number of cores to const value 
-                Parallel.Invoke(po,
-                    () =>
+                for (int i = 0; i < Environment.ProcessorCount; i++)
                 {
-                    Console.WriteLine("+++++++ PARALLELISM ON with " + po.MaxDegreeOfParallelism + " cores");
-                        sw_thr0.Start();
-                        ress[0] = ParSearchWork(board1, Flip(counter), ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves);
-                        sw_thr0.Stop();
-                    Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value); // timestamp to identify level of thread distribution representation
-                },
-                () =>
-                {
-                        sw_thr1.Start();
-                        ress[1] = ParSearchWork(board2, Flip(counter), ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves);
-                        sw_thr1.Stop();
-                    Console.WriteLine("#### THREAD 1 - StartAt: {0}, EndAt: {1}", sw_thr1.StartAt.Value, sw_thr1.EndAt.Value); // timestamp to identify level of thread distribution representation
-                },
-                () =>
-                {
-                        sw_thr2.Start();
-                        ress[2] = ParSearchWork(board3, Flip(counter), ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves);
-                        sw_thr2.Stop();
-                    Console.WriteLine("#### THREAD 2 - StartAt: {0}, EndAt: {1}", sw_thr2.StartAt.Value, sw_thr2.EndAt.Value); // timestamp to identify level of thread distribution representation 
-                },
-                () =>
-                {
-                        sw_thr3.Start();
-                        ress[3] = ParSearchWork(board4, Flip(counter), ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves);
-                        sw_thr3.Stop();
-                    Console.WriteLine("#### THREAD 3 - StartAt: {0}, EndAt: {1}", sw_thr3.StartAt.Value, sw_thr3.EndAt.Value); // timestamp to identify level of thread distribution representation
-                });
+                    bool mmax = true;
+                    Action[] action;
+                    int num = 0; int result = 0;
+                    counter = 0;
+                    action = Func(board,counter,mmax,scoreBoard,bestRes,unconsideredMoves);
+                    Console.WriteLine("+++++++ PARALLELISM ON with " + Environment.ProcessorCount + " cores");
+                    Parallel.Invoke(action);
+                  //  Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value); // timestamp to identify level of thread distribution representation
+                }
             }
+            
+
+
             bestRes = res = ress[0]; // assign best result to res to the result of thread 0
             Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread 0: {2}", Game_TPL.cntr, counter /* Flip(counter) */, bestRes.ToString());
             if (counter == counters.O)
@@ -1440,6 +1421,20 @@ No move is visited twice by more than one thread -
             }
             return bestRes; // function returns best result with score and position
         }
+        // Method fills arrays with tasks ready to Parallel.Invoke in main
+        static Action[] Func(GameBoard_TPL<counters> board, counters counter, bool mmax, GameBoard_TPL<int> scoreBoard, Tuple<int,Tuple<int,int>> bestRes, List<Tuple<int, int>> unconsideredMoves)
+        {
+            int num = 0;
+            int result = 0;
+            var actions = new Action[Environment.ProcessorCount];
+            GameBoard_TPL<counters> clone = board.Clone();
+            for (int i = 0; i < Environment.ProcessorCount; i++)
+            {
+                // Console.WriteLine(string.Format("This is function #{0} loop. counter - {1}", num, counter));
+                actions[i] = () => ParSearchWork(clone, counter, ply, positions, true, scoreBoard, stride, i, bestRes, i, unconsideredMoves);
+            }
+            return actions;
+        }
         /*
 ----------------------------------------------------------------------------------------------------------------
  showList -
@@ -1456,6 +1451,8 @@ No move is visited twice by more than one thread -
             }
             return str;
         }
+        
+
         /*
         ----------------------------------------------------------------------------------------------------------------
          ParallelChoice -
@@ -1496,4 +1493,5 @@ No move is visited twice by more than one thread -
             }
         }
     }
+    
 }
