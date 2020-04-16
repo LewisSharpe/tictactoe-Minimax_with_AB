@@ -51,6 +51,7 @@
     <Compile Include="Player_TPL.cs" />
     <Compile Include="Program_TPL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TupleInstantiate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -1422,7 +1422,7 @@ No move is visited twice by more than one thread -
             return bestRes; // function returns best result with score and position
         }
         // Method fills arrays with tasks ready to Parallel.Invoke in main
-        static Action[] Func(GameBoard_TPL<counters> board, counters counter, bool mmax, GameBoard_TPL<int> scoreBoard, Tuple<int,Tuple<int,int>> bestRes, List<Tuple<int, int>> unconsideredMoves)
+        public Action[] Func(GameBoard_TPL<counters> board, counters counter, bool mmax, GameBoard_TPL<int> scoreBoard, Tuple<int,Tuple<int,int>> bestRes, List<Tuple<int, int>> unconsideredMoves)
         {
             int num = 0;
             int result = 0;
