@@ -136,7 +136,7 @@ This method constructs current finished board ending in Win or Draw and then pri
                     sw.WriteLine();
                     sw.WriteLine("  -   -   -   -   -   -   - ");
                 }
-                sw.Write("^^ FIN BOARD FOR BOARD " + Game_TPL.cntr);
+                sw.Write("^^ FIN BOARD FOR BOARD " + Program.cntr);
                 sw.WriteLine();
             }
         }
@@ -176,7 +176,7 @@ This method constructs current finished score board ending in Win or Draw and th
                     sw.WriteLine();
                     sw.WriteLine("  -   -   -   -   -   -   - ");
                 }
-                sw.Write("^^ SCORE BOARD FOR BOARD " + Game_TPL.cntr);
+                sw.Write("^^ SCORE BOARD FOR BOARD " + Program.cntr);
                 sw.WriteLine();
             }
         }
@@ -461,7 +461,7 @@ in string format, which is then printed to a text file.
         public void DisplayIntBoardToFile()
         {
             string path = @"data/intboards.txt";
-            int number = Game_TPL.cntr;
+            int number = Program.cntr;
             // ... Cases may not be duplicated.
             File.WriteAllText(@"data/intboards.txt", string.Empty);
 
@@ -498,7 +498,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 1:
@@ -530,7 +530,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 2:
@@ -562,7 +562,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 3:
@@ -593,7 +593,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 4:
@@ -625,7 +625,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 5:
@@ -657,7 +657,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 6:
@@ -689,7 +689,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e | e | e | X | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 7:
@@ -721,7 +721,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 8:
@@ -753,7 +753,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 9:
@@ -785,7 +785,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e | e | O |");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 10:
@@ -816,7 +816,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e | e | e | X | e | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 11:
@@ -848,7 +848,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 12:
@@ -880,7 +880,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e | e | X | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 13:
@@ -912,7 +912,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e | e | X | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 14:
@@ -944,7 +944,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | X | e | X | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 15:
@@ -976,7 +976,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | O | X | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 16:
@@ -1008,7 +1008,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | O | X | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 17:
@@ -1040,7 +1040,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 18:
@@ -1072,7 +1072,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | X | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 19:
@@ -1104,7 +1104,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | X | O | X | O | X | O | X |");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 20:
@@ -1136,7 +1136,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | X | O | X | O | X | O | X |");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 21:
@@ -1167,7 +1167,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 22:
@@ -1199,7 +1199,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 23:
@@ -1231,7 +1231,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 24:
@@ -1263,7 +1263,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 25:
@@ -1295,7 +1295,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 26:
@@ -1327,7 +1327,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 27:
@@ -1359,7 +1359,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e | e | e | O | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 28:
@@ -1391,7 +1391,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 29:
@@ -1423,7 +1423,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 30:
@@ -1455,7 +1455,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e | e | O | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 31:
@@ -1487,7 +1487,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 32:
@@ -1519,7 +1519,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e | e | O | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 33:
@@ -1551,7 +1551,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e | e | O | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 34:
@@ -1583,7 +1583,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | O | e | O | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 35:
@@ -1615,7 +1615,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | X | O | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 36:
@@ -1647,7 +1647,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | X | O | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 37:
@@ -1679,7 +1679,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7  | e |  e  | e |  e  | e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 38:
@@ -1711,7 +1711,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | O | e |  e  | e |  e  | e | e |  ");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 39:
@@ -1743,7 +1743,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | O | X |O  | X | O | X | O |");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     case 40:
@@ -1775,7 +1775,7 @@ in string format, which is then printed to a text file.
                         sw.Write(" - - - - - - -");
                         sw.Write(Environment.NewLine);
                         sw.Write("7 | O | X |O  | X | O | X | O |");
-                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Game_TPL.cntr);
+                        sw.Write(Environment.NewLine); sw.Write("^^ INT BOARD FOR BOARD " + Program.cntr);
                         sw.Write(Environment.NewLine);
                         return;
                     default:

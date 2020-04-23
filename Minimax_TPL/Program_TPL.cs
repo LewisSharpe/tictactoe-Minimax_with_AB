@@ -50,19 +50,32 @@ Main program handles exection and chooses mode of game selected, i.e. 1 - PLAYER
     // MAIN EXECUTION
     class Program
     {
-        public static void Main()
+        public static int no_of_cores_for_parallelism; // specify number of cores to utilise parallelism in TPL variant
+        public static int cntr;
+        public static void Main(string[] args)
         {
             // MENU CHOICE PROMPT
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             DisplayMenu();
             int menuChoice  = 2;  // HWL: hard-wire input so that you can redirect output to a file
-	    /*
-            while (!(int.TryParse(Console.ReadKey().KeyChar.ToString(), out menuChoice) && (menuChoice >= 1 && menuChoice <= 4)))
-                Console.Write("\nInvalid input. Try again: ");
-            Console.WriteLine();
-	    */
-	    
+           /*
+           --------------------------------------------------------------------------------------------------------------------------
+           Command line arguments for program -
+           --------------------------------------------------------------------------------------------------------------------------
+           */
+            for (int i = 0; i < args.Length; i++)
+            {
+                Console.WriteLine($"Argument [{i}] = [{args[i]}]");
+                cntr = int.Parse(args[0]);
+                no_of_cores_for_parallelism = int.Parse(args[1]);            
+            }
+            Console.WriteLine("board: " + args[0] + " cores: " + args[1]);
+            /*
+          --------------------------------------------------------------------------------------------------------------------------
+          End of command line arguments
+          --------------------------------------------------------------------------------------------------------------------------
+          */
             // SELECTION 1 HUMAN V AI
             if (menuChoice == 1)
             {

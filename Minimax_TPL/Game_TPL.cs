@@ -18,8 +18,7 @@ namespace Minimax_TPL
     */
     class Game_TPL
     {
-        // PUBLIC DECS
-        public static int cntr = 1;
+        // PUBLIC DECS       
         public static int nowcount = 0;
         bool stopMe = false;
         public static Stopwatch game_timer;
@@ -36,7 +35,7 @@ namespace Minimax_TPL
 */
         public Game_TPL(Player_TPL _xPlayer, Player_TPL _oPlayer)
         {
-            if (cntr == 1)
+            if (Program.cntr == 1)
             {
                 File.WriteAllText(@"data/intboards.txt", string.Empty);
                 File.WriteAllText(@"data/finboards.txt", string.Empty);
@@ -52,11 +51,11 @@ namespace Minimax_TPL
 ----------------------------------------------------------------------------------------------------------------
 * skip to board x -
 --------------------------------------------------------------------------------------------------------------------------
-Jump to board x on start-up if Game board cntr is 1.
+Jump to board x on start-up if Game board Program.cntr is 1.
 --------------------------------------------------------------------------------------------------------------------------
 */
-            if (cntr == 1) cntr = 3; // HWL: jump to board 7
-            PlayGame(_xPlayer, _oPlayer, ref cntr);
+    //        if (Program.cntr == 1) Program.cntr = 3; // HWL: jump to board 7
+             PlayGame(_xPlayer, _oPlayer, ref Program.cntr);
         }
         /* 
 ----------------------------------------------------------------------------------------------------------------
@@ -72,7 +71,7 @@ The method runs the execution of the entire game, iterating the starting board e
             Stopwatch stopwatch_minimax = new Stopwatch();
             // Begin timing.
             stopwatch_minimax.Start();
-            switch (cntr)
+            switch (Program.cntr)
             {
                 case 1:
             startingCounter = counters.X; // state starting counter of gameplay
@@ -544,9 +543,9 @@ The method runs the execution of the entire game, iterating the starting board e
                 Tuple<int, int> bestMove;
                 int bestScore;
                 Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                Console.WriteLine("** HWL: Running board {0} ", cntr);
+                Console.WriteLine("** HWL: Running board {0} ", Program.cntr);
                 Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                Console.WriteLine("++LS Starting counter of game on Board " + cntr + " was: " + startingCounter);
+                Console.WriteLine("++LS Starting counter of game on Board " + Program.cntr + " was: " + startingCounter);
                 initial_board = board.Clone();
                 board.DisplayBoard();
                 counter = currentPlayer.counter;
@@ -567,14 +566,14 @@ The method runs the execution of the entire game, iterating the starting board e
                         counter = Flip(counter);
                         if (IsOver(board, currentPlayer))
                         {
-                            Console.WriteLine("++LS Starting counter of game on Board " + cntr + " was: " + startingCounter);
+                            Console.WriteLine("++LS Starting counter of game on Board " + Program.cntr + " was: " + startingCounter);
                             Console.WriteLine("=========================================================================================================");
-                            Console.WriteLine("-- Winning notification for Board " + Game_TPL.cntr + " :");
+                            Console.WriteLine("-- Winning notification for Board " + Program.cntr + " :");
                             Console.WriteLine("=========================================================================================================");
-                            Console.WriteLine("-- Game result: WINNER on Board " + Game_TPL.cntr + " is: counter " + currentPlayer.counter + " with winning position " + new Tuple<int, int>(bestMove.Item1, bestMove.Item2));
+                            Console.WriteLine("-- Game result: WINNER on Board " + Program.cntr + " is: counter " + currentPlayer.counter + " with winning position " + new Tuple<int, int>(bestMove.Item1, bestMove.Item2));
                             Console.WriteLine("-- LS Elapsed game time: " + game_timer.Elapsed);
                             Console.WriteLine("--------------------------------------------------------------------------------------------------------");
-                            Console.WriteLine("-- Expected result on Board " + Game_TPL.cntr + " is: " + expectedMove + " with counter " + currentPlayer.counter);
+                            Console.WriteLine("-- Expected result on Board " + Program.cntr + " is: " + expectedMove + " with counter " + currentPlayer.counter);
                             Console.WriteLine("--------------------------------------------------------------------------------------------------------");
                             Console.WriteLine("++ Initial starting board: ");
                             Game_TPL.initial_board.DisplayBoard();
@@ -589,11 +588,11 @@ The method runs the execution of the entire game, iterating the starting board e
          
                             i++;
                             if (i > 2 && i< 40) return;
-                            cntr++;
+                            Program.cntr++;
                             AIPlayer_TPL.move_addition.Clear(); // clear the list of made moves on current board
                             AIPlayer_TPL.all_Oplacedmoves.Clear();
                             AIPlayer_TPL.all_Xplacedmoves.Clear();
-                            PlayGame(currentPlayer, otherPlayer, ref cntr);
+                            PlayGame(currentPlayer, otherPlayer, ref Program.cntr);
                             Console.WriteLine("========================================================================================================" + Environment.NewLine);
         
         /* 
