@@ -979,16 +979,16 @@ cloning is needed.
             if (TPL_PARALLELINVOKE_ON == 0) // if TPL parallel invoking is turned off
             {
                 sw_thr0.Start();
-                ress[0] = ParSearchWork(board1, counter, ply, positions, true, scoreBoard, stride, 0, bestRes, 1, unconsideredMoves /* for DEBUGGING only */);
+                ress[0] = ParSearchWork(board1, counter, ply, positions, true, scoreBoard, new Tuple<int, int>(stride, 0), bestRes, unconsideredMoves /* for DEBUGGING only */);
                 sw_thr0.Stop();
                 sw_thr1.Start();
-                ress[1] = (len <= 1) ? worstRes : ParSearchWork(board2, counter, ply, positions, true, scoreBoard, stride, 1, bestRes, 2, unconsideredMoves /* for DEBUGGING only */);
+                ress[1] = (len <= 1) ? worstRes : ParSearchWork(board2, counter, ply, positions, true, scoreBoard, new Tuple<int, int>(stride, 1), bestRes, unconsideredMoves /* for DEBUGGING only */);
                 sw_thr1.Stop();
                 sw_thr2.Start();
-                ress[2] = (len <= 2) ? worstRes : ParSearchWork(board3, counter, ply, positions, true, scoreBoard, stride, 2, bestRes, 3, unconsideredMoves /* for DEBUGGING only */);
+                ress[2] = (len <= 2) ? worstRes : ParSearchWork(board3, counter, ply, positions, true, scoreBoard, new Tuple<int, int>(stride, 2), bestRes, unconsideredMoves /* for DEBUGGING only */);
                 sw_thr2.Stop();
                 sw_thr3.Start();
-                ress[3] = (len <= 3) ? worstRes : ParSearchWork(board4, counter, ply, positions, true, scoreBoard, stride, 3, bestRes, 4, unconsideredMoves /* for DEBUGGING only */);
+                ress[3] = (len <= 3) ? worstRes : ParSearchWork(board4, counter, ply, positions, true, scoreBoard, new Tuple<int, int>(stride, 3), bestRes, unconsideredMoves /* for DEBUGGING only */);
                 sw_thr3.Stop();
             }
             if (TPL_PARALLELINVOKE_ON == 1) // if TPL parallel invoking is turned on
@@ -1173,7 +1173,7 @@ cloning is needed.
      together in a culminative summary.
      --------------------------------------------------------------------------------------------------------------------------
      */
-        public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, int stride, int id, Tuple<int, Tuple<int, int>> bestRes, int thread_no, List<Tuple<int, int>> unconsideredMoves /* for DEBUGGING only */)
+        public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, Tuple<int,int> stride_id, Tuple<int, Tuple<int, int>> bestRes, List<Tuple<int, int>> unconsideredMoves /* for DEBUGGING only */)
         {
             Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(999, new Tuple<int, int>(9, 9)); // initialise res return value
             List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>(); // intialise blank list for available moves 
@@ -1191,17 +1191,17 @@ cloning is needed.
             List<Tuple<int, int>> duplicateMoves = new List<Tuple<int, int>>(); // intialise blank list for duplicate moves 
             Tuple<int, int> Move; // intialise current move tuple variant
             int score = Consts.MIN_SCORE; // current score of move set the min score constant
-            int cnt = 0, offset = id; // set cnt to 0 and offset to thread id
+            int cnt = 0, offset = stride_id.Item2; // set cnt to 0 and offset to thread id
             // ISSUE EXISTING BELOW 23.04.20
-            Debug.Assert(0 <= id && id < stride);  // Assertion: 0 <= id < stride
+            Debug.Assert(0 <= stride_id.Item2 && stride_id.Item2 < stride);  // Assertion: 0 <= id < stride
             counters us = counter; /* Flip(counter); */ // HWL: DONE: I don't think you should flip at this point, rather at the call to SeqSearch
             if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
             {
                 Console.WriteLine("======================================================================================================");
-                Console.WriteLine("-- THREAD " + id + ":");
+                Console.WriteLine("-- THREAD " + stride_id.Item2 + ":");
                 Console.WriteLine("======================================================================================================");
-                Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Program.cntr, us.ToString(), id);
-                Console.WriteLine("__ HWL:   stride={0}, id={1}, thread_no={2}  ", stride, id, thread_no);
+                Console.WriteLine("__ HWL: ParSearchWork called on board {0} with player {1} and thread id {2}", Program.cntr, us.ToString(), stride_id.Item2);
+                Console.WriteLine("__ HWL:   stride={0}, id={1}  ", stride, stride_id.Item2);
                 System.Console.WriteLine("__ HWL:   Input board: ");
             }
                 // if board is a standard 3x3, set available moves to 9
@@ -1278,9 +1278,9 @@ cloning is needed.
                     if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                     {
                         // HWL: print the moves considered by current thread; they must not overlap!
-                        Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2}", consideredMoves.Count, id, showList(consideredMoves));
-                        Console.WriteLine("__ HWL: ALL {0} available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
-                        Console.WriteLine("board " + Program.cntr + " processed by thread id: " + thread_no + " :");
+                        Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2}", consideredMoves.Count, stride_id.Item2, showList(consideredMoves));
+                        Console.WriteLine("__ HWL: ALL {0} available Moves (thread {1}): {2} ", availableMoves.Count, stride_id.Item2, showList(availableMoves));
+                        Console.WriteLine("board " + Program.cntr + " processed by thread id: " + " :");
                     }
                         // if board is a standard 3x3, set available moves to 9
                     if (SEGM_BOARD == 1)
@@ -1308,8 +1308,8 @@ cloning is needed.
             {
                 if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                 {
-                    Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, id, showList(consideredMoves));
-                    Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, id, showList(availableMoves));
+                    Console.WriteLine("__ HWL: {0} consideredMoves so far (thread {1}): {2} ", consideredMoves.Count, stride_id.Item2, showList(consideredMoves));
+                    Console.WriteLine("__ HWL: {0} ALL available Moves (thread {1}): {2} ", availableMoves.Count, stride_id.Item2, showList(availableMoves));
                     Console.WriteLine("thr0 " + thr0_movesWithClear.Count + " thr1 " + thr1_movesWithClear.Count + " thr2 " + thr2_movesWithClear.Count + " thr3 " + thr3_movesWithClear.Count);
                 }
                     // HWL: remove all considered moves from the global list unconsideredMoves, to check that all moves are considered at the end
@@ -1401,10 +1401,11 @@ No move is visited twice by more than one thread -
             int result = 0;
             var actions = new Action[Program.no_of_cores_for_parallelism];
             GameBoard_TPL<counters> clone = board.Clone();
-            for (int i = 0; i < Program.no_of_cores_for_parallelism; i++)
+            for (int i = 0; i < stride; i++)
             {
-                // Console.WriteLine(string.Format("This is function #{0} loop. counter - {1}", num, counter));
-                actions[i] = () => ParSearchWork(clone, counter, ply, positions, true, scoreBoard, stride, i, Tuple.Create(bestRes.Item1, bestRes.Item2), i, unconsideredMoves);
+              //  Console.WriteLine(string.Format("This is function #{0} loop. counter - {1}", num, i));
+                Tuple<int,int> stride_id = TupleInstantiate.Create(stride, i);
+                actions[i] = () => ParSearchWork(clone, counter, ply, positions, true, scoreBoard, stride_id, bestRes, unconsideredMoves);
             }
             return actions;
         }
@@ -1424,8 +1425,6 @@ No move is visited twice by more than one thread -
             }
             return str;
         }
-        
-
         /*
         ----------------------------------------------------------------------------------------------------------------
          ParallelChoice -
