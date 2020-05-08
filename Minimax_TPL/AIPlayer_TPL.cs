@@ -994,17 +994,24 @@ cloning is needed.
             }
             if (TPL_PARALLELINVOKE_ON == 1) // if TPL parallel invoking is turned on
             {
-                for (int i = 0; i < Program.no_of_cores_for_parallelism; i++) 
+	      // for (int i = 0; i < Program.no_of_cores_for_parallelism; i++) 
                 {
                     bool mmax = true;
                     Action[] action;
                     int num = 0; int result = 0;
                     counter = 0;
-                    action = Func(board,counter,mmax,scoreBoard,bestRes,unconsideredMoves);
+                    action = Func(board,counter,mmax,scoreBoard,bestRes,unconsideredMoves); // gives array of thread-bodies
+		    Debug.Assert(action.Length == stride);  // Assertion: number of threads to launch (in action) is same as number of threads specified from the command line
                     Console.WriteLine("+++++++ PARALLELISM ON with " + Program.no_of_cores_for_parallelism + " cores");
-                    Parallel.Invoke(action);
+                    Parallel.Invoke(action); // launches all the threads defined inside the array
                   //  Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value); // timestamp to identify level of thread distribution representation
                 }
+		// HWL (*)
+		bestRes = ress[0];
+		for (int j = 1; j < ress.length /* == stride */; j++) 
+                {
+		  bestRes = (ress[j].Item1>bestRes.Item1) ? ress[j] : bestRes;
+		}
             }
             if (res == null || bestRes == null)
             {
@@ -1025,6 +1032,8 @@ cloning is needed.
                 all_Xplacedmoves.Add(res.Item2);
             }
             // begin for loop
+	    // HWL: this code should do the same thing as the code above (*): compute overall best result base on per-thread results, in essence computing a max over all scores in the area
+	    // HWL: TOCHECK is this part reached? if so, the overall best is computed twice (shoujld be ok but redundant)
             for (int j = 1; j < ress.Length; j++)
             {              
                 lock (TPL_THREADSYNC_LOCK) // lock for thread synchronisation
@@ -1399,22 +1408,32 @@ No move is visited twice by more than one thread -
 --------------------------------------------------------------------------------------------------------------------------
 */
             }
-            return bestRes; // function returns best result with score and position
+            if (TPL_PARALLELINVOKE_ON == 0) // if TPL parallel invoking is turned off
+	      {
+		return bestRes; // function returns best result with score and position
+	      }
+	    else
+	      {
+		lock (lock_obj) {
+                 ress[stride_id.Item2] = bestRes;
+		}
+	      }
+	      
         }
         // Method fills arrays with tasks ready to Parallel.Invoke in main
-        public Action[] Func(GameBoard_TPL<counters> board, counters counter, bool mmax, GameBoard_TPL<int> scoreBoard, Tuple<int,Tuple<int,int>> bestRes, List<Tuple<int, int>> unconsideredMoves)
+        public Action[] Func(GameBoard_TPL<counters> board, counters counter, bool mmax, GameBoard_TPL<int> scoreBoard, Tuple<int,Tuple<int,int>> bestRes, List<Tuple<int, int>> unconsideredMoves, int stride /* number of threads chosen for this execution */)
         {
             int num = 0;
             int result = 0;
-            var actions = new Action[Program.no_of_cores_for_parallelism];
+            var actions = new Action[stride /*Program.no_of_cores_for_parallelism*/];
             GameBoard_TPL<counters> clone = board.Clone();
             for (int i = 0; i < stride; i++)
             {
               //  Console.WriteLine(string.Format("This is function #{0} loop. counter - {1}", num, i));
                 Tuple<int,int> stride_id = TupleInstantiate.Create(stride, i);
-                actions[i] = () => ParSearchWork(clone, counter, ply, positions, true, scoreBoard, stride_id, bestRes, unconsideredMoves);
+                actions[i] = () => { /* Alternative version for passing back the result of a thread: ress[i] = */ ParSearchWork(clone, counter, ply, positions, true, scoreBoard, stride_id, bestRes, unconsideredMoves) };
             }
-            return actions;
+            return actions; // should return an array of size: number of threads, as passed from the commandline
         }
         /*
 ----------------------------------------------------------------------------------------------------------------
