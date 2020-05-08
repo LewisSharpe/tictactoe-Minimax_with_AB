@@ -588,7 +588,7 @@ The method runs the execution of the entire game, iterating the starting board e
          
                             i++;
                             if (i > 2 && i< 40) return;
-                            Program.cntr++;
+                      //      Program.cntr++;
                             AIPlayer_TPL.move_addition.Clear(); // clear the list of made moves on current board
                             AIPlayer_TPL.all_Oplacedmoves.Clear();
                             AIPlayer_TPL.all_Xplacedmoves.Clear();

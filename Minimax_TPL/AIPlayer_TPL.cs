@@ -49,7 +49,7 @@ namespace Minimax_TPL
         public static int cont = 0; // counter for number of nodes visited
         public static int error_confirm = 0; // if positive moves to next board in case
         public const int stride = 4;  // fixed stride interation; never changess
-        Tuple<int, Tuple<int, int>>[] ress = new Tuple<int, Tuple<int, int>>[4]; // set array for 4 calls of ParSearchWork
+        Tuple<int, Tuple<int, int>>[] ress = new Tuple<int, Tuple<int, int>>[Program.no_of_cores_for_parallelism]; // set array for 4 calls of ParSearchWork
         public static int thread_no_track = 0; // thread track int variable
         Tuple<int, Tuple<int, int>> result; // return Tuple which returns score and position of Move from Minimax
         Stopwatch sw_move = new Stopwatch(); // timer for current move
@@ -942,6 +942,7 @@ cloning is needed.
 */
         public Tuple<int, Tuple<int, int>> ParSearchWrap(GameBoard_TPL<counters> board, counters counter, int numTasks, GameBoard_TPL<int> scoreBoard)
         {
+            Tuple<int,int> stride_id = new Tuple<int, int>(stride, 0);
             List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>();  // intialise blank list for available moves 
             // if board is a standard 7x7, set available moves to 49
             if (SEGM_BOARD == 0)
@@ -1005,12 +1006,17 @@ cloning is needed.
                   //  Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value); // timestamp to identify level of thread distribution representation
                 }
             }
-            
-
-
-            bestRes = res = ress[0]; // assign best result to res to the result of thread 0
-            Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread 0: {2}", Program.cntr, counter /* Flip(counter) */, bestRes.ToString());
-            if (counter == counters.O)
+            if (res == null || bestRes == null)
+            {
+                Console.Write("res was null.");
+            }
+            else if (res != null)
+            {
+                Console.Write("{0}, {1}, {2}, {3}",ress[0], ress[1], ress[2], ress[3]);
+                bestRes = res = ress[0]; // assign best result to res to the result of thread 0
+                Console.WriteLine("__ HWL: best result on board {0} and player {1} from thread 0: {2}", Program.cntr, counter /* Flip(counter) */, bestRes.ToString());
+            }
+                if (counter == counters.O)
             {
                 all_Oplacedmoves.Add(res.Item2);
             }
@@ -1035,7 +1041,7 @@ cloning is needed.
                             Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
                         }                     
                     }
-                    if (j == 3)
+                    if (j == stride-1)
                     {
                         Console.WriteLine("**** HWL: OVERALL best result on board {0} and player {1}: {2}", Program.cntr, counter /*Flip(counter)*/, res.ToString());
                         Console.WriteLine("-- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration  
@@ -1175,6 +1181,7 @@ cloning is needed.
      */
         public Tuple<int, Tuple<int, int>> ParSearchWork(GameBoard_TPL<counters> board, counters counter, int ply, Tuple<int, int> positons, bool mmax, GameBoard_TPL<int> scoreBoard, Tuple<int,int> stride_id, Tuple<int, Tuple<int, int>> bestRes, List<Tuple<int, int>> unconsideredMoves /* for DEBUGGING only */)
         {
+            stride_id = new Tuple<int, int>(stride, stride_id.Item2);
             Tuple<int, Tuple<int, int>> res = new Tuple<int, Tuple<int, int>>(999, new Tuple<int, int>(9, 9)); // initialise res return value
             List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>(); // intialise blank list for available moves 
             // if board is a standard 7x7, set available moves to 49
