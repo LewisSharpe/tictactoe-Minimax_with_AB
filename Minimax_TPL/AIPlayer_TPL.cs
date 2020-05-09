@@ -33,6 +33,7 @@ namespace Minimax_TPL
         int DEBUGPRINT_ON = 0;  // 1 on, 0 off - TURN on/off FULL DEBUGGING PRINTING ON CONSOLE ON AND OFF
         int CSVWRITE_ON = 0;  // 1 on, 0 off - turn on/off tried move CSV file printing 
         private static Object TPL_FILESYNC_LOCK = new Object(); // lock to protect file update
+        private static Object ID_LOCK = new Object(); // lock to protect file update
         // ******** PRUNING ADJUSTMENT VARIABLES ********
         int PRUNE_ON = 1;// 1 on, 0 off - turn on/off alpha-beta pruning to Minimax function
         // ****************************************************
@@ -1000,7 +1001,7 @@ cloning is needed.
                     Action[] action;
                     int num = 0; int result = 0;
                     counter = 0;
-                    action = Func(board,counter,mmax,scoreBoard,bestRes,unconsideredMoves); // gives array of thread-bodies
+                    action = Func(board,counter,mmax,scoreBoard,bestRes,unconsideredMoves,stride); // gives array of thread-bodies
 		    Debug.Assert(action.Length == stride);  // Assertion: number of threads to launch (in action) is same as number of threads specified from the command line
                     Console.WriteLine("+++++++ PARALLELISM ON with " + Program.no_of_cores_for_parallelism + " cores");
                     Parallel.Invoke(action); // launches all the threads defined inside the array
@@ -1008,7 +1009,7 @@ cloning is needed.
                 }
 		// HWL (*)
 		bestRes = ress[0];
-		for (int j = 1; j < ress.length /* == stride */; j++) 
+		for (int j = 1; j < ress.Length /* == stride */; j++) 
                 {
 		  bestRes = (ress[j].Item1>bestRes.Item1) ? ress[j] : bestRes;
 		}
@@ -1408,17 +1409,17 @@ No move is visited twice by more than one thread -
 --------------------------------------------------------------------------------------------------------------------------
 */
             }
-            if (TPL_PARALLELINVOKE_ON == 0) // if TPL parallel invoking is turned off
+        if (TPL_PARALLELINVOKE_ON == 0) // if TPL parallel invoking is turned off
 	      {
 		return bestRes; // function returns best result with score and position
 	      }
 	    else
 	      {
-		lock (lock_obj) {
+		lock (ID_LOCK) {
                  ress[stride_id.Item2] = bestRes;
 		}
 	      }
-	      
+            return bestRes;
         }
         // Method fills arrays with tasks ready to Parallel.Invoke in main
         public Action[] Func(GameBoard_TPL<counters> board, counters counter, bool mmax, GameBoard_TPL<int> scoreBoard, Tuple<int,Tuple<int,int>> bestRes, List<Tuple<int, int>> unconsideredMoves, int stride /* number of threads chosen for this execution */)
@@ -1431,7 +1432,7 @@ No move is visited twice by more than one thread -
             {
               //  Console.WriteLine(string.Format("This is function #{0} loop. counter - {1}", num, i));
                 Tuple<int,int> stride_id = TupleInstantiate.Create(stride, i);
-                actions[i] = () => { /* Alternative version for passing back the result of a thread: ress[i] = */ ParSearchWork(clone, counter, ply, positions, true, scoreBoard, stride_id, bestRes, unconsideredMoves) };
+                actions[i] = () => /* Alternative version for passing back the result of a thread: ress[i] = */ ParSearchWork(clone, counter, ply, positions, true, scoreBoard, stride_id, bestRes, unconsideredMoves);
             }
             return actions; // should return an array of size: number of threads, as passed from the commandline
         }
