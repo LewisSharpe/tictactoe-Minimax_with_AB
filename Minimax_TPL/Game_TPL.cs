@@ -570,10 +570,10 @@ The method runs the execution of the entire game, iterating the starting board e
                             Console.WriteLine("=========================================================================================================");
                             Console.WriteLine("-- Winning notification for Board " + Program.cntr + " :");
                             Console.WriteLine("=========================================================================================================");
-                            Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES-- Game result: WINNER on Board " + Program.cntr + " is: counter " + currentPlayer.counter + " with winning position " + new Tuple<int, int>(bestMove.Item1, bestMove.Item2));
+                            Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES-- Game result: WINNER on Board " + Program.cntr + " is: counter " + counter + " with winning position " + new Tuple<int, int>(bestMove.Item1, bestMove.Item2));
                             Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES-- LS Elapsed game time: " + game_timer.Elapsed);
                             Console.WriteLine("--------------------------------------------------------------------------------------------------------");
-                            Console.WriteLine("-- Expected result on Board " + Program.cntr + " is: " + expectedMove + " with counter " + currentPlayer.counter);
+                            Console.WriteLine("-- Expected result on Board " + Program.cntr + " is: " + expectedMove + " with counter " + counter);
                             Console.WriteLine("--------------------------------------------------------------------------------------------------------");
                             Console.WriteLine("++ Initial starting board: ");
                             Game_TPL.initial_board.DisplayBoard();

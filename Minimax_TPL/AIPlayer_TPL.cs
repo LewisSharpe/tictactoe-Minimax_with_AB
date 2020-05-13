@@ -995,7 +995,7 @@ cloning is needed.
                     int num = 0; int result = 0;
                     counter = 0;
                     action = Func(board,counter,mmax,scoreBoard,bestRes,unconsideredMoves,stride); // gives array of thread-bodies
-		    Debug.Assert(action.Length == stride);  // Assertion: number of threads to launch (in action) is same as number of threads specified from the command line
+	         	    Debug.Assert(action.Length == stride);  // Assertion: number of threads to launch (in action) is same as number of threads specified from the command line
                     Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES +++++++ PARALLELISM ON with " + Program.no_of_cores_for_parallelism + " cores");
                     Parallel.Invoke(action); // launches all the threads defined inside the array
                   //  Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value); // timestamp to identify level of thread distribution representation
@@ -1015,7 +1015,7 @@ cloning is needed.
             {
               //  Console.Write("{0}, {1}, {2}, {3}",ress[0], ress[1], ress[2], ress[3]);
                 bestRes = res = ress[0]; // assign best result to res to the result of thread 0
-                Console.WriteLine("{0}**CORES__ HWL: best result on board {1} and player {2} from thread 0: {3}", Program.no_of_cores_for_parallelism, Program.cntr, Flip(counter) /* Flip(counter) */, bestRes.ToString());
+                Console.WriteLine("{0}**CORES__ HWL: best result on board {1} and player {2} from thread 0: {3}", Program.no_of_cores_for_parallelism, Program.cntr, counter /* Flip(counter) */, bestRes.ToString());
             }
                 if (counter == counters.O)
             {
@@ -1032,9 +1032,9 @@ cloning is needed.
             {              
                 lock (TPL_THREADSYNC_LOCK) // lock for thread synchronisation
                 {
-                  Console.WriteLine("{0}**CORES__ HWL: best result on board {1} and player {2} from thread {3}: {4}", Program.no_of_cores_for_parallelism, Program.cntr, Flip(counter) /* Flip(counter) */, j, ress[j].ToString());
+                  Console.WriteLine("{0}**CORES__ HWL: best result on board {1} and player {2} from thread {3}: {4}", Program.no_of_cores_for_parallelism, Program.cntr, counter /* Flip(counter) */, j, ress[j].ToString());
                   res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // res is equal to: the score of current thread returned position if it is greater than the score of current val of res then.... (result display format: <score, <position>>)
-                  board[res.Item2.Item1, res.Item2.Item2] =  Flip(counter) ; // place res val on board with counter                    
+                  board[res.Item2.Item1, res.Item2.Item2] = counter; // place res val on board with counter                    
                  
                     if (!Win(board, counter) || !Win(board, otherCounter))
                     {
@@ -1046,13 +1046,13 @@ cloning is needed.
                     }
                     if (j == stride-1)
                     {
-                        Console.WriteLine("{0}**CORES **** HWL: OVERALL best result on board {1} and player {2}: {3}", Program.no_of_cores_for_parallelism, Program.cntr, Flip(counter) /*Flip(counter)*/, res.ToString());
+                        Console.WriteLine("{0}**CORES **** HWL: OVERALL best result on board {1} and player {2}: {3}", Program.no_of_cores_for_parallelism, Program.cntr, counter /*Flip(counter)*/, res.ToString());
                         Console.WriteLine(Program.no_of_cores_for_parallelism +"**CORES -- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration  
                         Console.WriteLine(Program.no_of_cores_for_parallelism +"**CORES -- LS Elapsed time for game: " + Game_TPL.game_timer.Elapsed); // display elapsed for move consideration   
                       
                         Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES Total number of considered positions for entire game cycle:" + all_conmoves.Count);
                             Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES Move Summary"); // BP 
-                            move_addition.Add(Program.no_of_cores_for_parallelism + "**CORES ## Move " + move + " for Board " + Program.cntr + ", position selected: " + res.ToString() + ",counter used: " + Flip(counter) + ", with a score of: " + score + ", number of moves considered: " + all_conmoves.Count + ", with elapsed time: " + sw_move.Elapsed + " with current elapsed time: " + Game_TPL.game_timer.Elapsed); // add move to list of made moves                   
+                            move_addition.Add(Program.no_of_cores_for_parallelism + "**CORES ## Move " + move + " for Board " + Program.cntr + ", position selected: " + res.ToString() + ",counter used: " + counter + ", with a score of: " + score + ", number of moves considered: " + all_conmoves.Count + ", with elapsed time: " + sw_move.Elapsed + " with current elapsed time: " + Game_TPL.game_timer.Elapsed); // add move to list of made moves                   
                             foreach (object i in move_addition)
                             {
                                 Console.WriteLine(i); // display all moves on current thread
@@ -1350,7 +1350,7 @@ No move is visited twice by more than one thread -
             }
             // if depth level is 0 or 1
             if (ply == 0 || ply == 1)
-                return ParSearchWrap(board, counter /*Flip(counter)*/, numTasks, scoreBoard); // return result from parallel search
+                return ParSearchWrap(board, Flip(counter) /*Flip(counter)*/, numTasks, scoreBoard); // return result from parallel search
             // if ply is greater than 1
             else if (ply > 1)
                 return SeqSearch(board, Flip(counter), ply, positions, true, scoreBoard, alpha, beta); // return result from sequential search
