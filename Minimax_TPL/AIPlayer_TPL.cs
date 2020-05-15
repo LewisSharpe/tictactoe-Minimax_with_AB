@@ -1034,8 +1034,10 @@ cloning is needed.
                 {
                   Console.WriteLine("{0}**CORES__ HWL: best result on board {1} and player {2} from thread {3}: {4}", Program.no_of_cores_for_parallelism, Program.cntr, counter /* Flip(counter) */, j, ress[j].ToString());
                   res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // res is equal to: the score of current thread returned position if it is greater than the score of current val of res then.... (result display format: <score, <position>>)
-                  board[res.Item2.Item1, res.Item2.Item2] = counter; // place res val on board with counter                    
-                 
+                    lock (ID_LOCK)
+                    {
+                        board[res.Item2.Item1, res.Item2.Item2] = counter; // place res val on board with counter                    
+                    }
                     if (!Win(board, counter) || !Win(board, otherCounter))
                     {
                         if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
