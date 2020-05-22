@@ -561,6 +561,7 @@ The method runs the execution of the entire game, iterating the starting board e
                         // bestScore = bestRes.Item1;
                         // bestMove  = bestRes.Item2;
                         // place the current piece
+                 //     Debug.Assert(board[bestMove.Item1, bestMove.Item2] == counters.X || board[bestMove.Item1, bestMove.Item2] == counters.O);
                         board[bestMove.Item1, bestMove.Item2] = counter;
                         // opponent's turn
                         counter = Flip(counter);

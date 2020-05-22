@@ -988,127 +988,144 @@ cloning is needed.
             }
             if (TPL_PARALLELINVOKE_ON == 1) // if TPL parallel invoking is turned on
             {
-	      // for (int i = 0; i < Program.no_of_cores_for_parallelism; i++) 
+                   CustomStopwatch new_timer = new CustomStopwatch();
+                for (int i = 0; i < Program.no_of_cores_for_parallelism; i++)
                 {
                     bool mmax = true;
-                    Action[] action;
+                    Action[] action = new Action[Program.no_of_cores_for_parallelism];
                     int num = 0; int result = 0;
                     counter = 0;
-                    action = Func(board,counter,mmax,scoreBoard,bestRes,unconsideredMoves,stride); // gives array of thread-bodies
-	         	    Debug.Assert(action.Length == stride);  // Assertion: number of threads to launch (in action) is same as number of threads specified from the command line
+                 
+                    foreach (Action mv in action)
+                    {
+                        new_timer.Start();
+                        action = Func(board, counter, mmax, scoreBoard, bestRes, unconsideredMoves, stride); // gives array of thread-bodies
+                        new_timer.Stop();
+                        i++;
+                        Console.WriteLine("#### THREAD" + i + " - StartAt: {0}, EndAt: {1}", new_timer.StartAt.Value, new_timer.EndAt.Value); // timestamp to identify level of thread distribution representation
+                    }
+                    Debug.Assert(action.Length == stride);  // Assertion: number of threads to launch (in action) is same as number of threads specified from the command line
                     Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES +++++++ PARALLELISM ON with " + Program.no_of_cores_for_parallelism + " cores");
                     Parallel.Invoke(action); // launches all the threads defined inside the array
-                  //  Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value); // timestamp to identify level of thread distribution representation
-                }
-		// HWL (*)
-		bestRes = ress[0];
-		for (int j = 1; j < ress.Length /* == stride */; j++) 
-                {
-		  bestRes = (ress[j].Item1>bestRes.Item1) ? ress[j] : bestRes;
-		}
-            }
-            if (res == null || bestRes == null)
-            {
-                Console.Write("res was null.");
-            }
-            else if (res != null)
-            {
-              //  Console.Write("{0}, {1}, {2}, {3}",ress[0], ress[1], ress[2], ress[3]);
-                bestRes = res = ress[0]; // assign best result to res to the result of thread 0
-                Console.WriteLine("{0}**CORES__ HWL: best result on board {1} and player {2} from thread 0: {3}", Program.no_of_cores_for_parallelism, Program.cntr, counter /* Flip(counter) */, bestRes.ToString());
-            }
-                if (counter == counters.O)
-            {
-                all_Oplacedmoves.Add(res.Item2);
-            }
-            if (counter == counters.X)
-            {
-                all_Xplacedmoves.Add(res.Item2);
-            }
-            // begin for loop
-	    // HWL: this code should do the same thing as the code above (*): compute overall best result base on per-thread results, in essence computing a max over all scores in the area
-	    // HWL: TOCHECK is this part reached? if so, the overall best is computed twice (shoujld be ok but redundant)
-            for (int j = 1; j < ress.Length; j++)
-            {              
-                lock (TPL_THREADSYNC_LOCK) // lock for thread synchronisation
-                {
-                  Console.WriteLine("{0}**CORES__ HWL: best result on board {1} and player {2} from thread {3}: {4}", Program.no_of_cores_for_parallelism, Program.cntr, counter /* Flip(counter) */, j, ress[j].ToString());
-                  res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // res is equal to: the score of current thread returned position if it is greater than the score of current val of res then.... (result display format: <score, <position>>)
-                    lock (ID_LOCK)
-                    {
-                        board[res.Item2.Item1, res.Item2.Item2] = counter; // place res val on board with counter                    
-                    }
-                    if (!Win(board, counter) || !Win(board, otherCounter))
-                    {
-                        if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
-                        {
-                            Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
-                            Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
-                        }                     
-                    }
-                    if (j == stride-1)
-                    {
-                        Console.WriteLine("{0}**CORES **** HWL: OVERALL best result on board {1} and player {2}: {3}", Program.no_of_cores_for_parallelism, Program.cntr, counter /*Flip(counter)*/, res.ToString());
-                        Console.WriteLine(Program.no_of_cores_for_parallelism +"**CORES -- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration  
-                        Console.WriteLine(Program.no_of_cores_for_parallelism +"**CORES -- LS Elapsed time for game: " + Game_TPL.game_timer.Elapsed); // display elapsed for move consideration   
-                      
-                        Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES Total number of considered positions for entire game cycle:" + all_conmoves.Count);
-                            Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES Move Summary"); // BP 
-                            move_addition.Add(Program.no_of_cores_for_parallelism + "**CORES ## Move " + move + " for Board " + Program.cntr + ", position selected: " + res.ToString() + ",counter used: " + counter + ", with a score of: " + score + ", number of moves considered: " + all_conmoves.Count + ", with elapsed time: " + sw_move.Elapsed + " with current elapsed time: " + Game_TPL.game_timer.Elapsed); // add move to list of made moves                   
-                            foreach (object i in move_addition)
-                            {
-                                Console.WriteLine(i); // display all moves on current thread
-                            }
-                        
-                 
-                       
-                                                 // if Win is detected, display thread running times (threads' 0 to 3)
-                        if (Win(board, counter) || Win(board, otherCounter))
-                        {
-                            
-                            move = 0; // set move number counter to 0 - reset when board is over
-                                      // display exec time for each time
-                           
-                            Console.WriteLine("**** ALL Moves made for Board " + Program.cntr + " in ascending order:");
-                          
-                            // calculate and display percentage utilisation of threads over entire game execution
+                                             //  Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value); // timestamp to identify level of thread distribution representation
 
+                 
+
+
+                    // HWL (*)
+                    bestRes = ress[0];
+                    for (int j = 1; j < ress.Length /* == stride */; j++)
+                    {
+                        bestRes = (ress[j].Item1 > bestRes.Item1) ? ress[j] : bestRes;
+                    }
+
+                if (res == null || bestRes == null)
+                {
+                    Console.Write("res was null.");
+                }
+                else if (res != null)
+                {
+                    //  Console.Write("{0}, {1}, {2}, {3}",ress[0], ress[1], ress[2], ress[3]);
+                    bestRes = res = ress[0]; // assign best result to res to the result of thread 0
+                    Console.WriteLine("{0}**CORES__ HWL: best result on board {1} and player {2} from thread 0: {3}", Program.no_of_cores_for_parallelism, Program.cntr, counter /* Flip(counter) */, bestRes.ToString());
+                }
+                if (counter == counters.O)
+                {
+                    all_Oplacedmoves.Add(res.Item2);
+                }
+                if (counter == counters.X)
+                {
+                    all_Xplacedmoves.Add(res.Item2);
+                }
+
+                // begin for loop
+                // HWL: this code should do the same thing as the code above (*): compute overall best result base on per-thread results, in essence computing a max over all scores in the area
+                // HWL: TOCHECK is this part reached? if so, the overall best is computed twice (shoujld be ok but redundant)
+                for (int j = 1; j < ress.Length; j++)
+                {
+                    lock (TPL_THREADSYNC_LOCK) // lock for thread synchronisation
+                    {
+                        Console.WriteLine("{0}**CORES__ HWL: best result on board {1} and player {2} from thread {3}: {4}", Program.no_of_cores_for_parallelism, Program.cntr, counter /* Flip(counter) */, j, ress[j].ToString());
+                        res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // res is equal to: the score of current thread returned position if it is greater than the score of current val of res then.... (result display format: <score, <position>>)
+                        lock (ID_LOCK)
+                        {
+                            board[res.Item2.Item1, res.Item2.Item2] = counter; // place res val on board with counter                    
+                                move_addition.Add(Program.no_of_cores_for_parallelism + "**CORES ## Move " + move + " for Board " + Program.cntr + ", position selected: " + res.ToString() + ",counter used: " + counter + ", with a score of: " + score + ", number of moves considered: " + all_conmoves.Count + ", with elapsed time: " + sw_move.Elapsed + " with current elapsed time: " + Game_TPL.game_timer.Elapsed); // add move to list of made moves                   
+                            }
+                        if (!Win(board, counter) || !Win(board, otherCounter))
+                        {
                             if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
                             {
                                 Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
                                 Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
                             }
                         }
-                    }
-                }
-                // if board is a standard 3x3, set available moves to 9
-                if (SEGM_BOARD == 1)
-                {
-                    for (int x = COORD_X + 1; x <= 7; x++)
-                        for (int y = 1; y <= 7; y++)
-                            if (board[x, y] != counters.N)
-                            {
-                                board[x, y] = counters.N;
-                                scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
-                            }
-                    for (int x = 1; x <= COORD_X; x++)
-                        for (int y = COORD_Y + 1; y <= 7; y++)
-                            if (board[x, y] != counters.N)
-                            {
-                                board[x, y] = counters.N;
-                                scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
-                            }
-                }
-               
-            }
-            // if game board print is turned on then
-            if (EXECPRINT_GAMEBOARD_ON == 1)
-            {
-                lock (TPL_FILESYNC_LOCK) // lock to protect file synchronisation
-                {
+                      
+                        if (j == stride - 1)
+                        {
+                            Console.WriteLine("{0}**CORES **** HWL: OVERALL best result on board {1} and player {2}: {3}", Program.no_of_cores_for_parallelism, Program.cntr, counter /*Flip(counter)*/, res.ToString());
+                            Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES -- LS Elapsed time for move: " + sw_move.Elapsed); // display elapsed for move consideration  
+                            Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES -- LS Elapsed time for game: " + Game_TPL.game_timer.Elapsed); // display elapsed for move consideration   
 
-                    board.DisplayBoard(); // display board to console
-                    board.DisplayFinBoardToFile();
+                            Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES Total number of considered positions for entire game cycle:" + all_conmoves.Count);
+                            Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES Move Summary"); // BP 
+
+                            foreach (object t in move_addition)
+                            {
+                                Console.WriteLine(t); // display all moves on current thread
+                            }
+
+
+                               
+                            }
+                            // if Win is detected, display thread running times (threads' 0 to 3)
+                            if (Win(board, counter) || Win(board, otherCounter))
+                            {
+
+                                move = 0; // set move number counter to 0 - reset when board is over
+                                          // display exec time for each time
+
+                                Console.WriteLine("**** ALL Moves made for Board " + Program.cntr + " in ascending order:");
+
+                                // calculate and display percentage utilisation of threads over entire game execution
+
+                                if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
+                                {
+                                    Console.WriteLine("++LS X PLACED MOVES:" + showList(all_Xplacedmoves));
+                                    Console.WriteLine("++LS O PLACED MOVES:" + showList(all_Oplacedmoves));
+                                }
+                            }
+                        }
+                    }
+                    // if board is a standard 3x3, set available moves to 9
+                    if (SEGM_BOARD == 1)
+                    {
+                        for (int x = COORD_X + 1; x <= 7; x++)
+                            for (int y = 1; y <= 7; y++)
+                                if (board[x, y] != counters.N)
+                                {
+                                    board[x, y] = counters.N;
+                                    scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
+                                }
+                        for (int x = 1; x <= COORD_X; x++)
+                            for (int y = COORD_Y + 1; y <= 7; y++)
+                                if (board[x, y] != counters.N)
+                                {
+                                    board[x, y] = counters.N;
+                                    scoreBoard[x, y] = 77; // 77 indicates blanked out cell on 3x3
+                                }
+                    }
+
+                }
+                // if game board print is turned on then
+                if (EXECPRINT_GAMEBOARD_ON == 1)
+                {
+                    lock (TPL_FILESYNC_LOCK) // lock to protect file synchronisation
+                    {
+
+                        board.DisplayBoard(); // display board to console
+                        board.DisplayFinBoardToFile();
+                    }
                 }
             }
                 return res; // function return score and position of move selected
