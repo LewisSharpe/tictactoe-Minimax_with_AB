@@ -988,7 +988,7 @@ cloning is needed.
             }
             if (TPL_PARALLELINVOKE_ON == 1) // if TPL parallel invoking is turned on
             {
-                   CustomStopwatch new_timer = new CustomStopwatch();
+                CustomStopwatch new_timer = new CustomStopwatch();
                 for (int i = 0; i < Program.no_of_cores_for_parallelism; i++)
                 {
                     bool mmax = true;
@@ -1000,13 +1000,16 @@ cloning is needed.
                     {
                         new_timer.Start();
                         action = Func(board, counter, mmax, scoreBoard, bestRes, unconsideredMoves, stride); // gives array of thread-bodies
+                        Parallel.Invoke(action); // launches all the threads defined inside the array
                         new_timer.Stop();
                         i++;
-                        Console.WriteLine("#### THREAD" + i + " - StartAt: {0}, EndAt: {1}", new_timer.StartAt.Value, new_timer.EndAt.Value); // timestamp to identify level of thread distribution representation
+                            Console.WriteLine("#### THREAD" + i + " - StartAt: {0}, EndAt: {1}", new_timer.StartAt.Value, new_timer.EndAt.Value); // timestamp to identify level of thread distribution representation
+                   
                     }
+                    Debug.Assert(board[res.Item2.Item1, res.Item2.Item2] == counters.O || board[res.Item2.Item1, res.Item2.Item2] == counters.X);
                     Debug.Assert(action.Length == stride);  // Assertion: number of threads to launch (in action) is same as number of threads specified from the command line
                     Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES +++++++ PARALLELISM ON with " + Program.no_of_cores_for_parallelism + " cores");
-                    Parallel.Invoke(action); // launches all the threads defined inside the array
+                    
                                              //  Console.WriteLine("#### THREAD 0 - StartAt: {0}, EndAt: {1}", sw_thr0.StartAt.Value, sw_thr0.EndAt.Value); // timestamp to identify level of thread distribution representation
 
                  
@@ -1049,9 +1052,8 @@ cloning is needed.
                         res = (ress[j].Item1 > res.Item1) ? ress[j] : res;  // res is equal to: the score of current thread returned position if it is greater than the score of current val of res then.... (result display format: <score, <position>>)
                         lock (ID_LOCK)
                         {
-                            board[res.Item2.Item1, res.Item2.Item2] = counter; // place res val on board with counter                    
-                                move_addition.Add(Program.no_of_cores_for_parallelism + "**CORES ## Move " + move + " for Board " + Program.cntr + ", position selected: " + res.ToString() + ",counter used: " + counter + ", with a score of: " + score + ", number of moves considered: " + all_conmoves.Count + ", with elapsed time: " + sw_move.Elapsed + " with current elapsed time: " + Game_TPL.game_timer.Elapsed); // add move to list of made moves                   
-                            }
+                            board[res.Item2.Item1, res.Item2.Item2] = counter; // place res val on board with counter                        
+                        }
                         if (!Win(board, counter) || !Win(board, otherCounter))
                         {
                             if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
@@ -1097,6 +1099,7 @@ cloning is needed.
                             }
                         }
                     }
+                    move_addition.Add(Program.no_of_cores_for_parallelism + "**CORES ## Move " + move + " for Board " + Program.cntr + ", position selected: " + res.ToString() + ",counter used: " + counter + ", with a score of: " + score + ", number of moves considered: " + all_conmoves.Count + ", with elapsed time: " + sw_move.Elapsed + " with current elapsed time: " + Game_TPL.game_timer.Elapsed); // add move to list of made moves                   
                     // if board is a standard 3x3, set available moves to 9
                     if (SEGM_BOARD == 1)
                     {
@@ -1161,7 +1164,7 @@ cloning is needed.
             int cnt = 0, offset = stride_id.Item2; // set cnt to 0 and offset to thread id
             // ISSUE EXISTING BELOW 23.04.20
             Debug.Assert(0 <= stride_id.Item2 && stride_id.Item2 < stride);  // Assertion: 0 <= id < stride
-            counters us = counter; /* Flip(counter); */ // HWL: DONE: I don't think you should flip at this point, rather at the call to SeqSearch
+            counters us = Flip(counter);  // HWL: DONE: I don't think you should flip at this point, rather at the call to SeqSearch
             if (DEBUGPRINT_ON == 1)  // enable detailed print statements for debugging of combining of score and the adjacent move selection  
             {
                 Console.WriteLine("======================================================================================================");

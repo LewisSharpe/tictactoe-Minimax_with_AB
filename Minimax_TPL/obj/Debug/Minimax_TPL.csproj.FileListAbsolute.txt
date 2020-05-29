@@ -158,3 +158,17 @@ C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\obj\Debug\Minimax_TPL.pd
 C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
 C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\bin\Debug\Minimax_TPL.exe
 C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
