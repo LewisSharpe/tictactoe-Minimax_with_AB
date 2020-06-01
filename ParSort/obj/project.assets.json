@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\New User\\Desktop\\ttt_csharp_250520\\ParSort\\ParSort.csproj",
+      "projectUniqueName": "C:\\Users\\New User\\Desktop\\ttt_csharp_290520\\ParSort\\ParSort.csproj",
       "projectName": "ParSort",
-      "projectPath": "C:\\Users\\New User\\Desktop\\ttt_csharp_250520\\ParSort\\ParSort.csproj",
+      "projectPath": "C:\\Users\\New User\\Desktop\\ttt_csharp_290520\\ParSort\\ParSort.csproj",
       "packagesPath": "C:\\Users\\New User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\New User\\Desktop\\ttt_csharp_250520\\ParSort\\obj\\",
+      "outputPath": "C:\\Users\\New User\\Desktop\\ttt_csharp_290520\\ParSort\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\New User\\AppData\\Roaming\\NuGet\\NuGet.Config",

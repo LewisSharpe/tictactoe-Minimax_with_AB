@@ -580,7 +580,7 @@ The method runs the execution of the entire game, iterating the starting board e
                             Game_TPL.initial_board.DisplayBoard();
                             Console.WriteLine("--------------------------------------------------------------------------------------------------------");
                             Console.WriteLine("========================================================================================================" + Environment.NewLine);
-
+                            Environment.Exit(99);
                             /*
          ----------------------------------------------------------------------------------------------------------------
          if current board is finished, move on to next board in case sequence until no boards are left existing
