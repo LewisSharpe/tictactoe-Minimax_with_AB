@@ -186,3 +186,10 @@ C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\obj\Debug\Minimax_TPL.cs
 C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
 C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\obj\Debug\Minimax_TPL.exe
 C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_020620\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_020620\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_020620\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_020620\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_020620\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_020620\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_020620\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
