@@ -1,0 +1,64 @@
+Argument [0] = [3]
+Argument [1] = [4]
+board: 3 cores: 4
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+** HWL: Running board 3 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++LS Starting counter of game on Board 3 was: X
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 1
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD4
+START THREAD4
+START THREAD4
+START THREAD4
+END THREAD4
+#### THREAD4 - StartAt: 02/06/2020 19:57:45, EndAt: 02/06/2020 20:46:26
+4**CORES__ HWL: best result on board 3 and player O from thread 0: (-1000, (1, 2))
+4**CORES__ HWL: best result on board 3 and player O from thread 1: (-134, (5, 3))
+4**CORES__ HWL: best result on board 3 and player O from thread 2: (-1000, (1, 4))
+4**CORES__ HWL: best result on board 3 and player O from thread 3: (-134, (1, 5))
+4**CORES **** HWL: OVERALL best result on board 3 and player O: (-134, (5, 3))
+4**CORES -- LS Elapsed time for move: 00:48:40.6610832
+4**CORES -- LS Elapsed time for game: 00:48:40.8499494
+4**CORES Total number of considered positions for entire game cycle:168
+4**CORES Move Summary
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   | O |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 2
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD1
+START THREAD2
+START THREAD3
+START THREAD4

@@ -49,7 +49,7 @@ namespace Minimax_TPL
         public static Tuple<int, int> positions = new Tuple<int, int>(2, 2);
         public static int cont = 0; // counter for number of nodes visited
         public static int error_confirm = 0; // if positive moves to next board in case
-        public const int stride = 4;  // fixed stride interation; never changess
+        public int stride = Program.no_of_cores_for_parallelism;  // fixed stride interation; never changess
         Tuple<int, Tuple<int, int>>[] ress = new Tuple<int, Tuple<int, int>>[Program.no_of_cores_for_parallelism]; // set array for 4 calls of ParSearchWork
         public static int thread_no_track = 0; // thread track int variable
         Tuple<int, Tuple<int, int>> result; // return Tuple which returns score and position of Move from Minimax

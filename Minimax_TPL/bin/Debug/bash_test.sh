@@ -1,0 +1,19 @@
+mono Minimax_TPL.exe 1 seq > LOGseq &
+mono Minimax_TPL.exe 1 1 > LOG1  &
+mono Minimax_TPL.exe 1 2 > LOG2 & 
+mono Minimax_TPL.exe 1 4 > LOG4 &
+mono Minimax_TPL.exe 1 8 > LOG8 &
+mono Minimax_TPL.exe 1 12 > LOG12 &
+mono Minimax_TPL.exe 1 16 > LOG16 &
+mono Minimax_TPL.exe 1 20 > LOG20 &
+mono Minimax_TPL.exe 1 24 > LOG24 &
+mono Minimax_TPL.exe 1 28 > LOG28 &
+mono Minimax_TPL.exe 1 32 > LOG32 &
+mono Minimax_TPL.exe 1 36 > LOG36 &
+mono Minimax_TPL.exe 1 40 > LOG40 &
+mono Minimax_TPL.exe 1 44 > LOG44 &
+mono Minimax_TPL.exe 1 48 > LOG48 &
+mono Minimax_TPL.exe 1 52 > LOG52 &
+mono Minimax_TPL.exe 1 56 > LOG56 &
+mono Minimax_TPL.exe 1 60 > LOG60 &
+mono Minimax_TPL.exe 1 64 > LOG64;

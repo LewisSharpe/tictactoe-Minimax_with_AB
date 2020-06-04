@@ -1,0 +1,227 @@
+mono Minimax_TPL.exe 6 1
+Argument [0] = [6]
+Argument [1] = [1]
+board: 6 cores: 1
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+** HWL: Running board 6 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++LS Starting counter of game on Board 6 was: X
+  1   2   3   4   5   6   7 
+1   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+1**CORES*** Move 1
+1**CORES +++++++ PARALLELISM ON with 1 cores
+START THREAD1
+END THREAD1
+#### THREAD1 - StartAt: 02/06/2020 18:55:41, EndAt: 02/06/2020 19:07:47
+1**CORES__ HWL: best result on board 6 and player O from thread 0: (-114, (2, 4))
+  1   2   3   4   5   6   7 
+1   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+1**CORES*** Move 2
+1**CORES +++++++ PARALLELISM ON with 1 cores
+START THREAD1
+END THREAD1
+#### THREAD1 - StartAt: 02/06/2020 19:07:47, EndAt: 02/06/2020 19:19:01
+1**CORES__ HWL: best result on board 6 and player O from thread 0: (-114, (1, 5))
+  1   2   3   4   5   6   7 
+1   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+1**CORES*** Move 3
+1**CORES +++++++ PARALLELISM ON with 1 cores
+START THREAD1
+END THREAD1
+#### THREAD1 - StartAt: 02/06/2020 19:19:01, EndAt: 02/06/2020 19:29:12
+1**CORES__ HWL: best result on board 6 and player O from thread 0: (-118, (2, 5))
+  1   2   3   4   5   6   7 
+1   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+5 O |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+1**CORES*** Move 4
+1**CORES +++++++ PARALLELISM ON with 1 cores
+START THREAD1
+END THREAD1
+#### THREAD1 - StartAt: 02/06/2020 19:29:12, EndAt: 02/06/2020 19:38:58
+1**CORES__ HWL: best result on board 6 and player O from thread 0: (-118, (1, 6))
+  1   2   3   4   5   6   7 
+1   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+5 O | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+1**CORES*** Move 5
+1**CORES +++++++ PARALLELISM ON with 1 cores
+START THREAD1
+END THREAD1
+#### THREAD1 - StartAt: 02/06/2020 19:38:58, EndAt: 02/06/2020 19:48:12
+1**CORES__ HWL: best result on board 6 and player O from thread 0: (-118, (2, 6))
+  1   2   3   4   5   6   7 
+1   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+5 O | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+6 O |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++LS Starting counter of game on Board 6 was: X
+=========================================================================================================
+-- Winning notification for Board 6 :
+=========================================================================================================
+1**CORES-- Game result: WINNER on Board 6 is: counter O with winning position (2, 6)
+1**CORES-- LS Elapsed game time: 00:52:30.8622927
+--------------------------------------------------------------------------------------------------------
+-- Expected result on Board 6 is: (2, 2) with counter O
+--------------------------------------------------------------------------------------------------------
+++ Initial starting board: 
+  1   2   3   4   5   6   7 
+1   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+--------------------------------------------------------------------------------------------------------
+========================================================================================================
+
+core-number-1: 3151 secondsmono Minimax_TPL.exe 6 2
+Argument [0] = [6]
+Argument [1] = [2]
+board: 6 cores: 2
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+** HWL: Running board 6 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++LS Starting counter of game on Board 6 was: X
+  1   2   3   4   5   6   7 
+1   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+2**CORES*** Move 1
+2**CORES +++++++ PARALLELISM ON with 2 cores
+START THREAD2
+START THREAD2
+END THREAD2
+#### THREAD2 - StartAt: 02/06/2020 19:48:13, EndAt: 02/06/2020 19:56:07
+2**CORES__ HWL: best result on board 6 and player O from thread 0: (-114, (2, 4))
+2**CORES__ HWL: best result on board 6 and player O from thread 1: (-61, (7, 4))
+2**CORES **** HWL: OVERALL best result on board 6 and player O: (-61, (7, 4))
+2**CORES -- LS Elapsed time for move: 00:07:54.4645598
+2**CORES -- LS Elapsed time for game: 00:07:54.4977403
+2**CORES Total number of considered positions for entire game cycle:98
+2**CORES Move Summary
+  1   2   3   4   5   6   7 
+1   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   |   |   |   | O | 
+  -   -   -   -   -   -   - 
+5   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+2**CORES*** Move 2
+2**CORES +++++++ PARALLELISM ON with 2 cores
+START THREAD1
+START THREAD2

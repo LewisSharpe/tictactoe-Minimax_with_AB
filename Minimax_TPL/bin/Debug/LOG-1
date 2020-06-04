@@ -1,0 +1,337 @@
+Argument [0] = [3]
+Argument [1] = [4]
+board: 3 cores: 4
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+** HWL: Running board 3 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++LS Starting counter of game on Board 3 was: X
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 1
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD4
+START THREAD4
+START THREAD4
+START THREAD4
+END THREAD4
+#### THREAD4 - StartAt: 02/06/2020 19:40:47, EndAt: 02/06/2020 19:43:12
+4**CORES__ HWL: best result on board 3 and player O from thread 0: (-132, (2, 4))
+4**CORES__ HWL: best result on board 3 and player O from thread 1: (-130, (4, 1))
+4**CORES__ HWL: best result on board 3 and player O from thread 2: (-132, (5, 4))
+4**CORES__ HWL: best result on board 3 and player O from thread 3: (-134, (1, 5))
+4**CORES **** HWL: OVERALL best result on board 3 and player O: (-130, (4, 1))
+4**CORES -- LS Elapsed time for move: 00:02:24.9719554
+4**CORES -- LS Elapsed time for game: 00:02:24.9986296
+4**CORES Total number of considered positions for entire game cycle:168
+4**CORES Move Summary
+  1   2   3   4   5   6   7 
+1 O |   | N | O |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 2
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD1
+START THREAD2
+START THREAD3
+START THREAD4
+END THREAD4
+#### THREAD4 - StartAt: 02/06/2020 19:43:12, EndAt: 02/06/2020 19:45:24
+4**CORES__ HWL: best result on board 3 and player O from thread 0: (-132, (4, 6))
+4**CORES__ HWL: best result on board 3 and player O from thread 1: (-130, (5, 4))
+4**CORES__ HWL: best result on board 3 and player O from thread 2: (-134, (4, 3))
+4**CORES__ HWL: best result on board 3 and player O from thread 3: (-130, (1, 5))
+4**CORES **** HWL: OVERALL best result on board 3 and player O: (-130, (5, 4))
+4**CORES -- LS Elapsed time for move: 00:02:11.7031251
+4**CORES -- LS Elapsed time for game: 00:04:36.7144611
+4**CORES Total number of considered positions for entire game cycle:332
+4**CORES Move Summary
+4**CORES ## Move 1 for Board 3, position selected: (-130, (4, 1)),counter used: O, with a score of: -1001, number of moves considered: 168, with elapsed time: 00:02:24.9758058 with current elapsed time: 00:02:24.9992915
+  1   2   3   4   5   6   7 
+1 O |   | N | X |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O | O |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 3
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD1
+START THREAD2
+START THREAD3
+START THREAD4
+END THREAD4
+#### THREAD4 - StartAt: 02/06/2020 19:45:24, EndAt: 02/06/2020 19:47:17
+4**CORES__ HWL: best result on board 3 and player O from thread 0: (-138, (4, 6))
+4**CORES__ HWL: best result on board 3 and player O from thread 1: (-138, (2, 5))
+4**CORES__ HWL: best result on board 3 and player O from thread 2: (-138, (3, 5))
+4**CORES__ HWL: best result on board 3 and player O from thread 3: (-138, (1, 5))
+4**CORES **** HWL: OVERALL best result on board 3 and player O: (-138, (4, 6))
+4**CORES -- LS Elapsed time for move: 00:01:53.0089311
+4**CORES -- LS Elapsed time for game: 00:06:29.7287109
+4**CORES Total number of considered positions for entire game cycle:492
+4**CORES Move Summary
+4**CORES ## Move 1 for Board 3, position selected: (-130, (4, 1)),counter used: O, with a score of: -1001, number of moves considered: 168, with elapsed time: 00:02:24.9758058 with current elapsed time: 00:02:24.9992915
+4**CORES ## Move 2 for Board 3, position selected: (-130, (5, 4)),counter used: O, with a score of: -1001, number of moves considered: 332, with elapsed time: 00:02:11.7042821 with current elapsed time: 00:04:36.7155901
+  1   2   3   4   5   6   7 
+1 O |   | N | X |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O | O |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   | O |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 4
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD1
+START THREAD2
+START THREAD3
+START THREAD4
+END THREAD4
+#### THREAD4 - StartAt: 02/06/2020 19:47:17, EndAt: 02/06/2020 19:49:07
+4**CORES__ HWL: best result on board 3 and player O from thread 0: (-138, (3, 7))
+4**CORES__ HWL: best result on board 3 and player O from thread 1: (-138, (3, 4))
+4**CORES__ HWL: best result on board 3 and player O from thread 2: (-138, (2, 6))
+4**CORES__ HWL: best result on board 3 and player O from thread 3: (-138, (1, 5))
+4**CORES **** HWL: OVERALL best result on board 3 and player O: (-138, (3, 7))
+4**CORES -- LS Elapsed time for move: 00:01:50.1636428
+4**CORES -- LS Elapsed time for game: 00:08:19.8976662
+4**CORES Total number of considered positions for entire game cycle:648
+4**CORES Move Summary
+4**CORES ## Move 1 for Board 3, position selected: (-130, (4, 1)),counter used: O, with a score of: -1001, number of moves considered: 168, with elapsed time: 00:02:24.9758058 with current elapsed time: 00:02:24.9992915
+4**CORES ## Move 2 for Board 3, position selected: (-130, (5, 4)),counter used: O, with a score of: -1001, number of moves considered: 332, with elapsed time: 00:02:11.7042821 with current elapsed time: 00:04:36.7155901
+4**CORES ## Move 3 for Board 3, position selected: (-138, (4, 6)),counter used: O, with a score of: -1001, number of moves considered: 492, with elapsed time: 00:01:53.0090559 with current elapsed time: 00:06:29.7287955
+  1   2   3   4   5   6   7 
+1 O |   | N | X |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O | O |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   | X |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   | O |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 5
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD1
+START THREAD2
+START THREAD3
+START THREAD4
+END THREAD4
+#### THREAD4 - StartAt: 02/06/2020 19:49:07, EndAt: 02/06/2020 19:50:39
+4**CORES__ HWL: best result on board 3 and player O from thread 0: (-144, (1, 6))
+4**CORES__ HWL: best result on board 3 and player O from thread 1: (-144, (3, 4))
+4**CORES__ HWL: best result on board 3 and player O from thread 2: (-142, (6, 2))
+4**CORES__ HWL: best result on board 3 and player O from thread 3: (-144, (3, 6))
+4**CORES **** HWL: OVERALL best result on board 3 and player O: (-142, (6, 2))
+4**CORES -- LS Elapsed time for move: 00:01:31.8782037
+4**CORES -- LS Elapsed time for game: 00:09:51.7806331
+4**CORES Total number of considered positions for entire game cycle:800
+4**CORES Move Summary
+4**CORES ## Move 1 for Board 3, position selected: (-130, (4, 1)),counter used: O, with a score of: -1001, number of moves considered: 168, with elapsed time: 00:02:24.9758058 with current elapsed time: 00:02:24.9992915
+4**CORES ## Move 2 for Board 3, position selected: (-130, (5, 4)),counter used: O, with a score of: -1001, number of moves considered: 332, with elapsed time: 00:02:11.7042821 with current elapsed time: 00:04:36.7155901
+4**CORES ## Move 3 for Board 3, position selected: (-138, (4, 6)),counter used: O, with a score of: -1001, number of moves considered: 492, with elapsed time: 00:01:53.0090559 with current elapsed time: 00:06:29.7287955
+4**CORES ## Move 4 for Board 3, position selected: (-138, (3, 7)),counter used: O, with a score of: -1001, number of moves considered: 648, with elapsed time: 00:01:50.1637570 with current elapsed time: 00:08:19.8977553
+  1   2   3   4   5   6   7 
+1 O |   | N | X |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O | O |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6 O |   |   | X |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   | O |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 6
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD1
+START THREAD2
+START THREAD3
+START THREAD4
+END THREAD4
+#### THREAD4 - StartAt: 02/06/2020 19:50:39, EndAt: 02/06/2020 19:52:12
+4**CORES__ HWL: best result on board 3 and player O from thread 0: (-144, (1, 6))
+4**CORES__ HWL: best result on board 3 and player O from thread 1: (-144, (1, 7))
+4**CORES__ HWL: best result on board 3 and player O from thread 2: (-144, (6, 3))
+4**CORES__ HWL: best result on board 3 and player O from thread 3: (-142, (6, 4))
+4**CORES **** HWL: OVERALL best result on board 3 and player O: (-142, (6, 4))
+4**CORES -- LS Elapsed time for move: 00:01:33.6955245
+4**CORES -- LS Elapsed time for game: 00:11:25.4810359
+4**CORES Total number of considered positions for entire game cycle:948
+4**CORES Move Summary
+4**CORES ## Move 1 for Board 3, position selected: (-130, (4, 1)),counter used: O, with a score of: -1001, number of moves considered: 168, with elapsed time: 00:02:24.9758058 with current elapsed time: 00:02:24.9992915
+4**CORES ## Move 2 for Board 3, position selected: (-130, (5, 4)),counter used: O, with a score of: -1001, number of moves considered: 332, with elapsed time: 00:02:11.7042821 with current elapsed time: 00:04:36.7155901
+4**CORES ## Move 3 for Board 3, position selected: (-138, (4, 6)),counter used: O, with a score of: -1001, number of moves considered: 492, with elapsed time: 00:01:53.0090559 with current elapsed time: 00:06:29.7287955
+4**CORES ## Move 4 for Board 3, position selected: (-138, (3, 7)),counter used: O, with a score of: -1001, number of moves considered: 648, with elapsed time: 00:01:50.1637570 with current elapsed time: 00:08:19.8977553
+4**CORES ## Move 5 for Board 3, position selected: (-142, (6, 2)),counter used: O, with a score of: -1001, number of moves considered: 800, with elapsed time: 00:01:31.8783176 with current elapsed time: 00:09:51.7807247
+**** ALL Moves made for Board 3 in ascending order:
+  1   2   3   4   5   6   7 
+1 O |   | N | X |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   | X |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O | O | O |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6 O |   |   | X |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   | O |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 1
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD1
+START THREAD2
+START THREAD3
+START THREAD4
+END THREAD4
+#### THREAD4 - StartAt: 02/06/2020 19:52:12, EndAt: 02/06/2020 19:53:26
+4**CORES__ HWL: best result on board 3 and player O from thread 0: (-148, (6, 7))
+4**CORES__ HWL: best result on board 3 and player O from thread 1: (-146, (7, 1))
+**** ALL Moves made for Board 3 in ascending order:
+4**CORES__ HWL: best result on board 3 and player O from thread 2: (-150, (3, 5))
+**** ALL Moves made for Board 3 in ascending order:
+4**CORES__ HWL: best result on board 3 and player O from thread 3: (-148, (2, 7))
+4**CORES **** HWL: OVERALL best result on board 3 and player O: (-146, (7, 1))
+4**CORES -- LS Elapsed time for move: 00:01:13.2163322
+4**CORES -- LS Elapsed time for game: 00:12:38.7016399
+4**CORES Total number of considered positions for entire game cycle:1092
+4**CORES Move Summary
+4**CORES ## Move 1 for Board 3, position selected: (-130, (4, 1)),counter used: O, with a score of: -1001, number of moves considered: 168, with elapsed time: 00:02:24.9758058 with current elapsed time: 00:02:24.9992915
+4**CORES ## Move 2 for Board 3, position selected: (-130, (5, 4)),counter used: O, with a score of: -1001, number of moves considered: 332, with elapsed time: 00:02:11.7042821 with current elapsed time: 00:04:36.7155901
+4**CORES ## Move 3 for Board 3, position selected: (-138, (4, 6)),counter used: O, with a score of: -1001, number of moves considered: 492, with elapsed time: 00:01:53.0090559 with current elapsed time: 00:06:29.7287955
+4**CORES ## Move 4 for Board 3, position selected: (-138, (3, 7)),counter used: O, with a score of: -1001, number of moves considered: 648, with elapsed time: 00:01:50.1637570 with current elapsed time: 00:08:19.8977553
+4**CORES ## Move 5 for Board 3, position selected: (-142, (6, 2)),counter used: O, with a score of: -1001, number of moves considered: 800, with elapsed time: 00:01:31.8783176 with current elapsed time: 00:09:51.7807247
+4**CORES ## Move 0 for Board 3, position selected: (-142, (6, 4)),counter used: O, with a score of: -1001, number of moves considered: 948, with elapsed time: 00:01:33.6956339 with current elapsed time: 00:11:25.4811249
+**** ALL Moves made for Board 3 in ascending order:
+  1   2   3   4   5   6   7 
+1 O |   | N | X |   |   | O | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   | X |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O | O | O |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   | X |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   | O |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 1
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD1
+START THREAD2
+START THREAD3
+START THREAD4
+END THREAD4
+#### THREAD4 - StartAt: 02/06/2020 19:53:26, EndAt: 02/06/2020 19:54:26
+4**CORES__ HWL: best result on board 3 and player O from thread 0: (-148, (2, 4))
+4**CORES__ HWL: best result on board 3 and player O from thread 1: (-146, (3, 4))
+**** ALL Moves made for Board 3 in ascending order:
+4**CORES__ HWL: best result on board 3 and player O from thread 2: (-148, (7, 3))
+**** ALL Moves made for Board 3 in ascending order:
+4**CORES__ HWL: best result on board 3 and player O from thread 3: (-148, (7, 4))
+4**CORES **** HWL: OVERALL best result on board 3 and player O: (-146, (3, 4))
+4**CORES -- LS Elapsed time for move: 00:01:00.1046210
+4**CORES -- LS Elapsed time for game: 00:13:38.8097604
+4**CORES Total number of considered positions for entire game cycle:1232
+4**CORES Move Summary
+4**CORES ## Move 1 for Board 3, position selected: (-130, (4, 1)),counter used: O, with a score of: -1001, number of moves considered: 168, with elapsed time: 00:02:24.9758058 with current elapsed time: 00:02:24.9992915
+4**CORES ## Move 2 for Board 3, position selected: (-130, (5, 4)),counter used: O, with a score of: -1001, number of moves considered: 332, with elapsed time: 00:02:11.7042821 with current elapsed time: 00:04:36.7155901
+4**CORES ## Move 3 for Board 3, position selected: (-138, (4, 6)),counter used: O, with a score of: -1001, number of moves considered: 492, with elapsed time: 00:01:53.0090559 with current elapsed time: 00:06:29.7287955
+4**CORES ## Move 4 for Board 3, position selected: (-138, (3, 7)),counter used: O, with a score of: -1001, number of moves considered: 648, with elapsed time: 00:01:50.1637570 with current elapsed time: 00:08:19.8977553
+4**CORES ## Move 5 for Board 3, position selected: (-142, (6, 2)),counter used: O, with a score of: -1001, number of moves considered: 800, with elapsed time: 00:01:31.8783176 with current elapsed time: 00:09:51.7807247
+4**CORES ## Move 0 for Board 3, position selected: (-142, (6, 4)),counter used: O, with a score of: -1001, number of moves considered: 948, with elapsed time: 00:01:33.6956339 with current elapsed time: 00:11:25.4811249
+4**CORES ## Move 0 for Board 3, position selected: (-146, (7, 1)),counter used: O, with a score of: -1001, number of moves considered: 1092, with elapsed time: 00:01:13.2164271 with current elapsed time: 00:12:38.7017096
+**** ALL Moves made for Board 3 in ascending order:
+  1   2   3   4   5   6   7 
+1 O |   | N | X |   |   | X | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   | X |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   | O | O | O | O |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   | X |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   | O |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+++++ PRUNING ON
+4**CORES*** Move 1
+4**CORES +++++++ PARALLELISM ON with 4 cores
+START THREAD1
+START THREAD2
+START THREAD3
+START THREAD4
