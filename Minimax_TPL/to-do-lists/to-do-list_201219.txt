@@ -1,0 +1,38 @@
+﻿to do from meeting on 20/12/19
+----------------------------------------------------------------------------------------------------------
+EXISTING WORK ITEMS FOR PARALLEL VERSION
+1. # mono FLAG for no of cores/threads used --> 
+- see: http://www.cbs.dtu.dk/cgi-bin/nph-runsafe?man=mono , https://www.mono-project.com/docs/debug+profile/profile/profiler/ 
+- Like others have already said, you can run .NET applications on Mono. If your applications use Platform Invocation (P/Invoke) 
+to call native code, you may run into some trouble if there is no Mono implementation of the native library. To check whether 
+your application does that (or uses APIs that haven't been implemented in Mono yet),you can use the Mono Migration Analyzer (MoMA).
+(https://stackoverflow.com/questions/950360/how-to-run-c-sharp-project-under-linux)
+- currently using: ‘nohup mono bin/Debug/Minimax_TPL.exe -MONO_THREADS_PER_CPU=4 > program.out’ --> not sure if this is the correct command?
+EXISTING WORK ITEMS FOR PERFORMANCE
+2. performance measuring
+3. performance tuning
+
+NEEDS APPROVAL AND VERFICATION  
+1. valid result - check that parallel result is the same as sequential, hit all paths in tree 
+
+OTHER
+1. Download software needed on newly purchased quad-core laptop
+2. VS Enterprise version licence --> look at parallel tools
+
+COMPLETED WORK ITEMS
+1. lock board (release when printing)
+2. lower score for no build
+3. timestamp elapsed time, timestamp for threads
+4. revised timeplan
+5. amount of work done in each thread
+6. check strided iteration is as expected (no duplicated move - correctness) -->> noMoveHasBeenCheckedTwice() function (check 4 lists)
+7. quad core windows 10 with 4 cores and 8 threads
+8. more commenting
+9. VS Enterprise version licence from Iain ---->> FTNPY-MC8RH-RJCH8-XFK77-QPG66
+10. move breakdown diagram for board 1 between seq and parallel
+
+USEFUL INFO
+- which mcs /opt/mono/bin/mcs
+- status of cores --> top, htop
+- check performance --> in directory with source code --> xbuild --> mono bin/Debug/Minimax_TPL.exe
+
