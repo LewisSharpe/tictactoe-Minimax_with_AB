@@ -8,8 +8,8 @@
 for i in 1 2 4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64
 do 
 SECONDS=0;
-echo mono Minimax_TPL.exe 1 $i; 
-mono Minimax_TPL.exe 1 $i;
+echo mono Minimax_TPL.exe 10 $i; 
+mono Minimax_TPL.exe 10 $i;
 echo -n "core-number-$i:" $SECONDS "seconds"
 done 
 
