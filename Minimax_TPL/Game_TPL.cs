@@ -28,6 +28,7 @@ namespace Minimax_TPL
         static counters counter = counters.X; // initialise current counter
         static counters startingCounter; // state what was the initial starting counter in gameplay
         counters us = Flip(counter);
+        private static Object ID_LOCK = new Object(); // lock to protect file update
         /* 
 -------------------------------------------------------------------------------------------------------------------------
 * Game constructor -
@@ -42,10 +43,13 @@ namespace Minimax_TPL
                 File.WriteAllText(@"data/scoreboards.txt", string.Empty);
                 File.WriteAllText(@"data/TPLTST_Report.csv", string.Empty);
                 File.WriteAllText(@"data/printresult_stream.txt", string.Empty);
-		// HWL: header for output to console
-		Console.WriteLine(" -*- outline -*- ");
-		Console.WriteLine("* LOG ");
-                Console.WriteLine("#### GAME START TIME: {0} ", DateTime.Now); // display start of game execution on the current board in play
+                // HWL: header for output to console
+                lock (ID_LOCK)
+                {
+                    Console.WriteLine(" -*- outline -*- ");
+                    Console.WriteLine("* LOG ");
+                    Console.WriteLine("#### GAME START TIME: {0} ", DateTime.Now); // display start of game execution on the current board in play
+                }
             }
             /* 
 ----------------------------------------------------------------------------------------------------------------
@@ -542,10 +546,13 @@ The method runs the execution of the entire game, iterating the starting board e
                 Tuple<int, Tuple<int, int>> bestRes;
                 Tuple<int, int> bestMove;
                 int bestScore;
-                Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                Console.WriteLine("** HWL: Running board {0} ", Program.cntr);
-                Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                Console.WriteLine("++LS Starting counter of game on Board " + Program.cntr + " was: " + startingCounter);
+                lock (ID_LOCK)
+                {
+                    Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                    Console.WriteLine("** HWL: Running board {0} ", Program.cntr);
+                    Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                    Console.WriteLine("++LS Starting counter of game on Board " + Program.cntr + " was: " + startingCounter);
+                }
                 initial_board = board.Clone();
                 board.DisplayBoard();
                 counter = currentPlayer.counter;
@@ -567,20 +574,23 @@ The method runs the execution of the entire game, iterating the starting board e
                         counter = Flip(counter);
                         if (IsOver(board, currentPlayer))
                         {
-                            Console.WriteLine("++LS Starting counter of game on Board " + Program.cntr + " was: " + startingCounter);
-                            Console.WriteLine("=========================================================================================================");
-                            Console.WriteLine("-- Winning notification for Board " + Program.cntr + " :");
-                            Console.WriteLine("=========================================================================================================");
-                            Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES-- Game result: WINNER on Board " + Program.cntr + " is: counter " + counter + " with winning position " + new Tuple<int, int>(bestMove.Item1, bestMove.Item2));
-                            Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES-- LS Elapsed game time: " + game_timer.Elapsed);
-                            Console.WriteLine("--------------------------------------------------------------------------------------------------------");
-                            Console.WriteLine("-- Expected result on Board " + Program.cntr + " is: " + expectedMove + " with counter " + counter);
-                            Console.WriteLine("--------------------------------------------------------------------------------------------------------");
-                            Console.WriteLine("++ Initial starting board: ");
-                            Game_TPL.initial_board.DisplayBoard();
-                            Console.WriteLine("--------------------------------------------------------------------------------------------------------");
-                            Console.WriteLine("========================================================================================================" + Environment.NewLine);
-                            Environment.Exit(99);
+                            lock (ID_LOCK)
+                            {
+                                Console.WriteLine("++LS Starting counter of game on Board " + Program.cntr + " was: " + startingCounter);
+                                Console.WriteLine("=========================================================================================================");
+                                Console.WriteLine("-- Winning notification for Board " + Program.cntr + " :");
+                                Console.WriteLine("=========================================================================================================");
+                                Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES-- Game result: WINNER on Board " + Program.cntr + " is: counter " + counter + " with winning position " + new Tuple<int, int>(bestMove.Item1, bestMove.Item2));
+                                Console.WriteLine(Program.no_of_cores_for_parallelism + "**CORES-- LS Elapsed game time: " + game_timer.Elapsed);
+                                Console.WriteLine("--------------------------------------------------------------------------------------------------------");
+                                Console.WriteLine("-- Expected result on Board " + Program.cntr + " is: " + expectedMove + " with counter " + counter);
+                                Console.WriteLine("--------------------------------------------------------------------------------------------------------");
+                                Console.WriteLine("++ Initial starting board: ");
+                                Game_TPL.initial_board.DisplayBoard();
+                                Console.WriteLine("--------------------------------------------------------------------------------------------------------");
+                                Console.WriteLine("========================================================================================================" + Environment.NewLine);
+                            }
+                                Environment.Exit(99);
                             /*
          ----------------------------------------------------------------------------------------------------------------
          if current board is finished, move on to next board in case sequence until no boards are left existing
@@ -594,8 +604,10 @@ The method runs the execution of the entire game, iterating the starting board e
                             AIPlayer_TPL.all_Oplacedmoves.Clear();
                             AIPlayer_TPL.all_Xplacedmoves.Clear();
                             PlayGame(currentPlayer, otherPlayer, ref Program.cntr);
-                            Console.WriteLine("========================================================================================================" + Environment.NewLine);
-        
+                            lock (ID_LOCK)
+                            {
+                                Console.WriteLine("========================================================================================================" + Environment.NewLine);
+                            }
         /* 
         ----------------------------------------------------------------------------------------------------------------
         --------------------------------------------------------------------------------------------------------------------------
