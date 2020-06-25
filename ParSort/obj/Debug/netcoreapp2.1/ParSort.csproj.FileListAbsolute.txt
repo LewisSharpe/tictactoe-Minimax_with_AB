@@ -1,0 +1,11 @@
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\bin\Debug\netcoreapp2.1\ParSort.deps.json
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\bin\Debug\netcoreapp2.1\ParSort.runtimeconfig.json
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\bin\Debug\netcoreapp2.1\ParSort.runtimeconfig.dev.json
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\bin\Debug\netcoreapp2.1\ParSort.dll
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\bin\Debug\netcoreapp2.1\ParSort.pdb
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\obj\Debug\netcoreapp2.1\ParSort.csprojAssemblyReference.cache
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\obj\Debug\netcoreapp2.1\ParSort.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\obj\Debug\netcoreapp2.1\ParSort.AssemblyInfoInputs.cache
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\obj\Debug\netcoreapp2.1\ParSort.AssemblyInfo.cs
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\obj\Debug\netcoreapp2.1\ParSort.dll
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\ParSort\obj\Debug\netcoreapp2.1\ParSort.pdb
