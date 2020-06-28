@@ -1,0 +1,223 @@
+C:\Users\Owner\Desktop\ttt_020619\ttt_240519\ttt_csharp-240519\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\Owner\Desktop\ttt_020619\ttt_240519\ttt_csharp-240519\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\ttt_020619\ttt_240519\ttt_csharp-240519\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\ttt_020619\ttt_240519\ttt_csharp-240519\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\ttt_020619\ttt_240519\ttt_csharp-240519\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\ttt_020619\ttt_240519\ttt_csharp-240519\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\ttt_020619\ttt_240519\ttt_csharp-240519\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\testing\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\Owner\Desktop\testing\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\testing\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\testing\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\testing\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\testing\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\testing\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\ttt_100619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\Owner\Desktop\current\ttt_140619\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_230719\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\ttt_csharp_230719\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_230719\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_230719\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_230719\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_230719\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_230719\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\Lewis\Desktop\gitcommits\commit14\ttt_csharp_270719\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\Lewis\Desktop\gitcommits\commit14\ttt_csharp_270719\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\Lewis\Desktop\gitcommits\commit14\ttt_csharp_270719\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\Lewis\Desktop\gitcommits\commit14\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\Lewis\Desktop\gitcommits\commit14\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\Desktop\gitcommits\commit14\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\Lewis\Desktop\gitcommits\commit14\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\Lewis\Desktop\files_150819\ttt_csharp_270719\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\Lewis\Desktop\ttt_csharp_250919\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\test\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_261019\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_121119\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\ttt_csharp_121119\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_121119\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp_121119\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_121119\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp_121119\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp_121119\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp-161119\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\ttt_csharp-161119\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp-161119\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp-161119\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp-161119\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp-161119\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp-161119\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp-021219\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\ttt_csharp-021219\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp-021219\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp-021219\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp-021219\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp-021219\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp-021219\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\LATITUDE\Desktop\ttt_csharp-241219\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_110220\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_110220\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_110220\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_110220\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_110220\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_110220\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_110220\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_250220\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_250220\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_250220\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_250220\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_250220\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_250220\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_250220\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_080320\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_080320\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_080320\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_080320\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_080320\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_080320\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_080320\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_060420\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_060420\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_060420\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_060420\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_060420\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_060420\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_060420\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_090520\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_230520\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_250520\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_290520\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_290520\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_290520\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_290520\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_290520\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_290520\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_290520\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_010620\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_040620\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_040620\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_040620\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_040620\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_040620\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_040620\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_040620\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_050620\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_050620\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_050620\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_050620\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_050620\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_050620\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_050620\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_110620\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_110620\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_110620\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_110620\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_110620\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_110620\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_110620\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_200620-amendnodecount\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_200620-amendnodecount\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_200620-amendnodecount\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_200620-amendnodecount\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_200620-amendnodecount\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_200620-amendnodecount\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_200620-amendnodecount\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_240620-amendnodecount-2\Minimax_TPL\bin\Debug\Minimax_TPL.exe.config
+C:\Users\New User\Desktop\ttt_csharp_240620-amendnodecount-2\Minimax_TPL\bin\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_240620-amendnodecount-2\Minimax_TPL\bin\Debug\Minimax_TPL.pdb
+C:\Users\New User\Desktop\ttt_csharp_240620-amendnodecount-2\Minimax_TPL\obj\Debug\Minimax_TPL.csprojAssemblyReference.cache
+C:\Users\New User\Desktop\ttt_csharp_240620-amendnodecount-2\Minimax_TPL\obj\Debug\Minimax_TPL.csproj.CoreCompileInputs.cache
+C:\Users\New User\Desktop\ttt_csharp_240620-amendnodecount-2\Minimax_TPL\obj\Debug\Minimax_TPL.exe
+C:\Users\New User\Desktop\ttt_csharp_240620-amendnodecount-2\Minimax_TPL\obj\Debug\Minimax_TPL.pdb
