@@ -1,0 +1,16 @@
+see below
+  1   2   3   4   5   6   7  
+1 | O | e |  e  | e |  e  | e | e |  
+ - - - - - - -
+2   | e | X | e |  e  | e  | e | e |  
+- - - - - - -
+3  | e | e | O | e |  e  | e | e |  
+ - - - - - - -
+4 | e | e | e | O | e | e | e |  
+ - - - - - - -
+5  | e |  e  | e | e | X | e | e |  
+- - - - - - -
+6  | e |  e  | e  | e | e |  O     | e |  
+ - - - - - - -
+7  | e |  e  | e |  e  | e  | e | e |  
+^^ INT BOARD FOR BOARD 1

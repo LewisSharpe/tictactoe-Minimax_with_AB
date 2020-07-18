@@ -1,0 +1,11 @@
+﻿- creating thread distribution diagrams and speed up graphs FOR BOARD ON QUAD CORE
+- Minor move selection bug fixes
+- board testing to the cantor cluster and start testing on cores 4-48
+- Produce initial thread distribution diagrams and speed up graphs on the 4-48 configurations
+- Start to write some written initial analysis on the results gained for 4-48
+- Review above results and analysis in next meeting with Hans
+- Do you have data on the number of nodes visited?
+- win-in-1, win-in-2, no winning move within search depth.
+- For the "speedup graphs": these aren't really speedup graphs, rather you show discrete points of the 4-process relative and abs speedups.
+- What I'd expect is (for each board): a graph that plots the calculated speedup (Y-axis) over the number of cores (X-axis).
+Do 2 different plots: one using the absolute and one the relative speedup. This then shows how the search behaves over a growing number of processors

@@ -1,0 +1,17 @@
+
+  1   2   3   4   5   6   7 
+1 O | e | N | N | N | N | N | 
+  -   -   -   -   -   -   - 
+2 e | X | O | N | N | N | N | 
+  -   -   -   -   -   -   - 
+3 e | X | X | N | N | N | N | 
+  -   -   -   -   -   -   - 
+4 N | N | N | N | N | N | N | 
+  -   -   -   -   -   -   - 
+5 N | N | N | N | N | N | N | 
+  -   -   -   -   -   -   - 
+6 N | N | N | N | N | N | N | 
+  -   -   -   -   -   -   - 
+7 N | N | N | N | N | N | N | 
+  -   -   -   -   -   -   - 
+^^ FIN BOARD FOR BOARD 1
