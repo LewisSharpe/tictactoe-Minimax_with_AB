@@ -1,0 +1,18 @@
+﻿TO DO LIST - 04.12.19:
+-------------------------------------------------------------------------
+1. print message who actually won; check this against expected result 
+DONE
+2. continue the validation and test boards that should have a win in 2, and a few larger 7x7
+boards, which have a clear best move, i.e. something that you can check. 
+DONE FOR 3X3, NEED TO TAKE THE PRINT STATEMENTS OUT FOR 7X7 - TAKING A LONG TIME
+3. want to improve the static eval fct: EvalCurrentBoard() - 2 in a row are useless if you can't expand on either side. 
+STILL EXISTING
+4. 2 pieces with a gap in the middle, are almost as good as 2 in a row, because that could be a win in 1 move.
+PARTIAL - NEEDS APPROVAL
+5. if validation of these cases is ok, you can move on to the parallel version: enable the Parallel.Invoke
+in ParSearchWrapper
+STILL EXISTING
+6. make sure you use locks when combining the results from the threads.
+STILL EXISTING
+-------------------------------------------------------------------------
+I think the current version is parallel-ready and shouldn't need a lot more changes.
