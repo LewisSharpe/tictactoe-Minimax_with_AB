@@ -1,0 +1,9 @@
+﻿existing
+Seq vs Par for various boards
+
+done
+run with print statements off 
+thr dis diagram
+check timestamp 
+check use of cores ---->> 50%+?
+pre-processor variable - ParallelInvoke

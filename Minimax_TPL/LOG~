@@ -1,0 +1,473 @@
+ -*- outline -*- 
+* LOG 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+** HWL: Running board 1 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+*** Move 1
+======================================================================================================
+-- THREAD 0:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player X and thread id 0
+__ HWL:   stride=4, id=0, thread_no=1  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (1, 2)
+.. X at (1, 2) 
+        maximising: player X new best score -100 at (2, 1) (ply=2, positions=(2, 1))
+          3-in-a-row found at (3, 2) for player X (ply=2, positions=(2, 3))
+.... O at (1, 3) (ply=1); score = -1000
+        maximising: player O new best score -1000 at (1, 3) (ply=1, positions=(3, 2))
+        maximising: player X new best score -100 at (1, 3) (ply=2, positions=(1, 3))
+          3-in-a-row found at (3, 2) for player X (ply=2, positions=(2, 3))
+.... O at (2, 1) (ply=1); score = -1000
+        maximising: player X new best score -100 at (1, 3) (ply=2, positions=(1, 3))
+          3-in-a-row found at (3, 2) for player X (ply=2, positions=(2, 1))
+.... O at (2, 3) (ply=1); score = -1000
+        maximising: player X new best score -100 at (1, 3) (ply=2, positions=(1, 3))
+.... O at (3, 2) (ply=1); score = 100
+        maximising: player O new best score 100 at (3, 2) (ply=1, positions=(1, 3))
+      best move at ply=1 for O is (3, 2) with score 100
+.. HWL: ParSearchWork: considering move (3, 2)
+.. X at (3, 2) 
+        maximising: player X new best score -100 at (1, 3) (ply=2, positions=(1, 3))
+.... O at (1, 2) (ply=1); score = 100
+        maximising: player O new best score 100 at (1, 2) (ply=1, positions=(1, 3))
+          3-in-a-row found at (1, 2) for player X (ply=2, positions=(1, 3))
+.... O at (1, 3) (ply=1); score = -1000
+          3-in-a-row found at (1, 2) for player X (ply=2, positions=(2, 1))
+.... O at (2, 1) (ply=1); score = -1000
+          3-in-a-row found at (1, 2) for player X (ply=2, positions=(2, 3))
+.... O at (2, 3) (ply=1); score = -1000
+      best move at ply=1 for O is (1, 2) with score 100
+__ HWL: 2 consideredMoves so far (thread 0): (1, 2), (3, 2),  
+__ HWL: 5 ALL available Moves (thread 0): (1, 2), (1, 3), (2, 1), (2, 3), (3, 2),  
+__ HWL: best res so far: (-100, (1, 2)) 
+======================================================================================================
+-- THREAD 1:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player X and thread id 1
+__ HWL:   stride=4, id=1, thread_no=2  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (1, 3)
+.. X at (1, 3) 
+        maximising: player X new best score -100 at (2, 1) (ply=2, positions=(2, 1))
+          3-in-a-row found at (2, 3) for player X (ply=2, positions=(2, 1))
+.... O at (1, 2) (ply=1); score = -1000
+        maximising: player O new best score -1000 at (1, 2) (ply=1, positions=(2, 3))
+        maximising: player X new best score -100 at (1, 2) (ply=2, positions=(1, 2))
+          3-in-a-row found at (2, 3) for player X (ply=2, positions=(1, 2))
+.... O at (2, 1) (ply=1); score = -1000
+        maximising: player X new best score -100 at (1, 2) (ply=2, positions=(1, 2))
+.... O at (2, 3) (ply=1); score = 100
+        maximising: player O new best score 100 at (2, 3) (ply=1, positions=(1, 2))
+        maximising: player X new best score -100 at (1, 2) (ply=2, positions=(1, 2))
+          3-in-a-row found at (2, 3) for player X (ply=2, positions=(2, 1))
+.... O at (3, 2) (ply=1); score = -1000
+      best move at ply=1 for O is (2, 3) with score 100
+__ HWL: 1 consideredMoves so far (thread 1): (1, 3),  
+__ HWL: 5 ALL available Moves (thread 1): (1, 2), (1, 3), (2, 1), (2, 3), (3, 2),  
+__ HWL: best res so far: (-100, (1, 3)) 
+======================================================================================================
+-- THREAD 2:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player X and thread id 2
+__ HWL:   stride=4, id=2, thread_no=3  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (2, 1)
+.. X at (2, 1) 
+        maximising: player X new best score -100 at (1, 3) (ply=2, positions=(1, 3))
+          3-in-a-row found at (2, 3) for player X (ply=2, positions=(1, 3))
+.... O at (1, 2) (ply=1); score = -1000
+        maximising: player O new best score -1000 at (1, 2) (ply=1, positions=(2, 3))
+        maximising: player X new best score -100 at (1, 2) (ply=2, positions=(1, 2))
+          3-in-a-row found at (2, 3) for player X (ply=2, positions=(1, 2))
+.... O at (1, 3) (ply=1); score = -1000
+        maximising: player X new best score -100 at (1, 2) (ply=2, positions=(1, 2))
+.... O at (2, 3) (ply=1); score = 100
+        maximising: player O new best score 100 at (2, 3) (ply=1, positions=(1, 2))
+        maximising: player X new best score -100 at (1, 2) (ply=2, positions=(1, 2))
+          3-in-a-row found at (2, 3) for player X (ply=2, positions=(1, 3))
+.... O at (3, 2) (ply=1); score = -1000
+      best move at ply=1 for O is (2, 3) with score 100
+__ HWL: 1 consideredMoves so far (thread 2): (2, 1),  
+__ HWL: 5 ALL available Moves (thread 2): (1, 2), (1, 3), (2, 1), (2, 3), (3, 2),  
+__ HWL: best res so far: (-100, (2, 1)) 
+======================================================================================================
+-- THREAD 3:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player X and thread id 3
+__ HWL:   stride=4, id=3, thread_no=4  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (2, 3)
+.. X at (2, 3) 
+          3-in-a-row found at (1, 3) for player X (ply=2, positions=(1, 2))
+.... O at (1, 2) (ply=1); score = -1000
+        maximising: player O new best score -1000 at (1, 2) (ply=1, positions=(1, 3))
+        maximising: player X new best score -100 at (1, 2) (ply=2, positions=(1, 2))
+          3-in-a-row found at (2, 1) for player X (ply=2, positions=(1, 2))
+.... O at (1, 3) (ply=1); score = -1000
+        maximising: player X new best score -100 at (1, 2) (ply=2, positions=(1, 2))
+          3-in-a-row found at (1, 3) for player X (ply=2, positions=(1, 2))
+.... O at (2, 1) (ply=1); score = -1000
+        maximising: player X new best score -100 at (1, 2) (ply=2, positions=(1, 2))
+          3-in-a-row found at (1, 3) for player X (ply=2, positions=(1, 2))
+.... O at (3, 2) (ply=1); score = -1000
+      best move at ply=1 for O is (1, 2) with score -1000
+__ HWL: 1 consideredMoves so far (thread 3): (2, 3),  
+__ HWL: 5 ALL available Moves (thread 3): (1, 2), (1, 3), (2, 1), (2, 3), (3, 2),  
+__ HWL: best res so far: (1000, (2, 3)) 
+__ HWL: best result on board 1 and player X from thread 0: (-100, (1, 2))
+__ HWL: best result on board 1 and player X from thread 1: (-100, (1, 3))
+__ HWL: best result on board 1 and player X from thread 2: (-100, (2, 1))
+__ HWL: best result on board 1 and player X from thread 3: (1000, (2, 3))
+======================================================================================================
+-- OVERALL :
+======================================================================================================
+**** HWL: OVERALL best result on board 1 and player X: (1000, (2, 3))
+======================================================================================================
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   |   | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+*** Move 1
+======================================================================================================
+-- THREAD 0:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player O and thread id 0
+__ HWL:   stride=4, id=0, thread_no=1  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   | X | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (1, 2)
+.. O at (1, 2) 
+          3-in-a-row found at (1, 3) for player X (ply=1, positions=(2, 2))
+__ HWL: 1 consideredMoves so far (thread 0): (1, 2),  
+__ HWL: 4 ALL available Moves (thread 0): (1, 2), (1, 3), (2, 1), (3, 2),  
+__ HWL: best res so far: (-1000, (1, 2)) 
+======================================================================================================
+-- THREAD 1:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player O and thread id 1
+__ HWL:   stride=4, id=1, thread_no=2  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   | X | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (1, 3)
+.. O at (1, 3) 
+        maximising: player O new best score -100 at (2, 1) (ply=2, positions=(2, 1))
+.... X at (1, 2) (ply=1); score = 100
+        maximising: player X new best score 100 at (1, 2) (ply=1, positions=(2, 1))
+          3-in-a-row found at (2, 1) for player X (ply=1, positions=(2, 1))
+__ HWL: 1 consideredMoves so far (thread 1): (1, 3),  
+__ HWL: 4 ALL available Moves (thread 1): (1, 2), (1, 3), (2, 1), (3, 2),  
+__ HWL: best res so far: (-1000, (1, 3)) 
+======================================================================================================
+-- THREAD 2:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player O and thread id 2
+__ HWL:   stride=4, id=2, thread_no=3  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   | X | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (2, 1)
+.. O at (2, 1) 
+        maximising: player O new best score -100 at (1, 3) (ply=2, positions=(1, 3))
+.... X at (1, 2) (ply=1); score = 100
+        maximising: player X new best score 100 at (1, 2) (ply=1, positions=(1, 3))
+          3-in-a-row found at (1, 3) for player X (ply=1, positions=(1, 3))
+__ HWL: 1 consideredMoves so far (thread 2): (2, 1),  
+__ HWL: 4 ALL available Moves (thread 2): (1, 2), (1, 3), (2, 1), (3, 2),  
+__ HWL: best res so far: (-1000, (2, 1)) 
+======================================================================================================
+-- THREAD 3:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player O and thread id 3
+__ HWL:   stride=4, id=3, thread_no=4  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   | X | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (3, 2)
+.. O at (3, 2) 
+        maximising: player O new best score -100 at (1, 3) (ply=2, positions=(1, 3))
+.... X at (1, 2) (ply=1); score = 100
+        maximising: player X new best score 100 at (1, 2) (ply=1, positions=(1, 3))
+          3-in-a-row found at (1, 3) for player X (ply=1, positions=(1, 3))
+__ HWL: 1 consideredMoves so far (thread 3): (3, 2),  
+__ HWL: 4 ALL available Moves (thread 3): (1, 2), (1, 3), (2, 1), (3, 2),  
+__ HWL: best res so far: (-1000, (3, 2)) 
+__ HWL: best result on board 1 and player O from thread 0: (-1000, (1, 2))
+__ HWL: best result on board 1 and player O from thread 1: (-1000, (1, 3))
+__ HWL: best result on board 1 and player O from thread 2: (-1000, (2, 1))
+__ HWL: best result on board 1 and player O from thread 3: (-1000, (3, 2))
+======================================================================================================
+-- OVERALL :
+======================================================================================================
+**** HWL: OVERALL best result on board 1 and player O: (-1000, (1, 2))
+======================================================================================================
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2   | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   | X | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+*** Move 1
+======================================================================================================
+-- THREAD 0:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player X and thread id 0
+__ HWL:   stride=4, id=0, thread_no=1  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2 O | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   | X | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (1, 3)
+.. X at (1, 3) 
+          3-in-a-row found at (1, 3) for player X (ply=0, positions=(2, 2))
+======================================================================================================
+-- THREAD 1:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player X and thread id 1
+__ HWL:   stride=4, id=1, thread_no=2  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2 O | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   | X | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (2, 1)
+.. X at (2, 1) 
+          3-in-a-row found at (2, 1) for player X (ply=0, positions=(2, 2))
+======================================================================================================
+-- THREAD 2:
+======================================================================================================
+__ HWL: ParSearchWork called on board 1 with player X and thread id 2
+__ HWL:   stride=4, id=2, thread_no=3  
+__ HWL:   Input board: 
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2 O | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   | X | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
+.. HWL: ParSearchWork: considering move (3, 2)
+.. X at (3, 2) 
+          3-in-a-row found at (1, 3) for player O (ply=1, positions=(2, 2))
+__ HWL: 1 consideredMoves so far (thread 2): (3, 2),  
+__ HWL: 3 ALL available Moves (thread 2): (1, 3), (2, 1), (3, 2),  
+__ HWL: best res so far: (-1000, (3, 2)) 
+__ HWL: best result on board 1 and player X from thread 0: (1000, (1, 3))
+__ HWL: best result on board 1 and player X from thread 1: (1000, (2, 1))
+__ HWL: best result on board 1 and player X from thread 2: (-1000, (3, 2))
+__ HWL: best result on board 1 and player X from thread 3: (-1001, (2, 2))
+======================================================================================================
+-- OVERALL :
+======================================================================================================
+**** HWL: OVERALL best result on board 1 and player X: (1000, (1, 3))
+======================================================================================================
+  1   2   3   4   5   6   7 
+1 O |   | N |   |   |   |   | 
+  -   -   -   -   -   -   - 
+2 O | X |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+3   | X | X |   |   |   |   | 
+  -   -   -   -   -   -   - 
+4   |   |   | O |   |   |   | 
+  -   -   -   -   -   -   - 
+5   |   |   |   | X |   |   | 
+  -   -   -   -   -   -   - 
+6   |   |   |   |   | O |   | 
+  -   -   -   -   -   -   - 
+7   |   |   |   |   |   |   | 
+  -   -   -   -   -   -   - 
+
