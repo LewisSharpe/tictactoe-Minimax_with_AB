@@ -1,0 +1,6 @@
+﻿to do 
+- test run on cantor
+- debug case where choosing win in two moves over win in one move (both score of -1000)
+- install vm
+
+ mcs -out:hello.exe AIPlayer_TPL.cs GameBoard_TPL.cs Game_TPL.cs HumanPlayer_TPL.cs Player_TPL.cs Program_TPL.cs 
